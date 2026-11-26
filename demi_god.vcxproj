@@ -154,6 +154,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="game\threading\ThreadPool.h" />
     <ClInclude Include="basicType.h" />
     <ClInclude Include="game\ai\Goal.h" />
     <ClInclude Include="game\ai\Goal_AttackTarget.h" />
