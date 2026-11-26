@@ -12,8 +12,6 @@
 #include "../common/CFontManager.h"
 #include <map>
 
-class cLua;
-
 class CFontManager;
 class CMainGameGUI;
 class COptionGUI;
@@ -40,8 +38,6 @@ class CGUIManager
 	CPopUpGUI*			m_pPopUpGUI;
 	CWebDialog*			m_pWebDialog;
 
-	cLua*				m_pScript;
-
 	typedef std::map<unsigned int , CGameGUI *> GUIMap;
 	GUIMap	m_pGUIs;
 
@@ -66,11 +62,9 @@ public :
 
 	bool				PostEvent(const SEvent& event);
 
-	void				Interface_Init(cLua* pLua , const char* luafile, CGameGUI* BaseGUI);
+	void				Interface_Init(CGameGUI* BaseGUI);
 
 public :
-
-	bool				init(cLua* pLua);
 
 	bool				GameLoading();
 

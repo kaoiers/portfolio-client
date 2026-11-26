@@ -11,7 +11,6 @@
 
 #include "common/UncopyableUtil.h"
 
-class cLua;
 class CGameObjectManager;
 class CCameraManager;
 class CEventHandler;

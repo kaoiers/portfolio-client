@@ -165,20 +165,6 @@ IGUIObject* CGameGUI::FindElementByID( const s32& eid )
 }
 
 /*======================================================*/
-// 초기화
-/*======================================================*/
-void CGameGUI::Init( cLua* pLua /*= 0*/, const char* filename /*=0*/ )
-{
-	m_pLua = pLua;
-
-	if(filename)
-	{	
-	}
-
-	//GUI_Initialize();
-}
-
-/*======================================================*/
 // 버튼 추가
 /*======================================================*/
 CButtonGUI*CGameGUI::addButton( const position2d<s32> Position, const char* defaultImage, const s32& mID /*= -1 */,std::wstring text /*= 0*/ )

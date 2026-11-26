@@ -13,7 +13,6 @@
 #define CUNIT_CONTROLLER_GUI_H
 
 class CGameGUI;
-class cLua;
 class CUnitGodGUI;
 class CUnitWorkerGUI;
 class CUnitArmyGUI;
@@ -70,10 +69,6 @@ class CControllerGUI
 
 	static	CControllerGUI*	pInstance;
 
-	void					InitRoomGUI(cLua *pLua);
-	
-	void					InitUnitGUI(cLua *pLua);
-
 	
 
 public :
@@ -84,8 +79,6 @@ public :
 	~CControllerGUI();
 
 	static	CControllerGUI*	Instance();
-
-	void					init(cLua *pLua);
 
 	void					setGodGUI(CGameUnitGod* pGod);
 

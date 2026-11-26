@@ -22,7 +22,6 @@
 
 class	CGameObject;
 struct  CAnimation_Info;
-class	cLua;
 class   CBuildingBlock;
 class	CBuildingObject;
 
@@ -64,8 +63,6 @@ class CGameObjectManager
 
 #define NodeObjMap std::map<ISceneNode *, CGameObject *>	
 
-
-	cLua*											m_pLuaState;
 
 
 #define	 DeletionQue	std::list<unsigned int>
@@ -158,8 +155,6 @@ public :
 
 	void				render();
 
-	cLua*				getLua();
-
 	bool				drop();
 
 	void				setController(IBaseController* controller);
@@ -173,8 +168,6 @@ public :
 public :
 
 	void				DispatchMsg(const Telegram& msg);
-
-	bool				Lua_Init( cLua *lua, const char *luafilename );
 
 	bool				Init();
 

@@ -32,49 +32,4 @@ enum GUI_TYPE
 	GUI_TYPE_OBJECT_GOD
 };
 
-
-inline std::string GetLuaFileFromGUIType(int objtype)
-{
-	switch(objtype)
-	{
-	case GUI_TYPE_START:
-
-		return "gui_start";
-
-	case GUI_TYPE_INGAME:
-
-		return "gui_ingame";
-
-	case GUI_TYPE_LOGIN:
-
-		return "gui_login";
-
-	case GUI_TYPE_OBJECT_SOLDIER:
-
-		return "gui_soldier";
-
-	case GUI_TYPE_OBJECT_ARCHER:
-
-		return "gui_archer";
-
-	case GUI_TYPE_OBJECT_MAGICIAN:
-
-		return "gui_magician";
-	
-	case GUI_TYPE_OBJECT_ENEMY:
-
-		return "gui_enemy";
-
-	case GUI_TYPE_OBJECT_GOD:
-
-		return "gui_god";
-
-	default:
-
-		return "Undefined Object!";
-	}
-}
-
-
-
 #endif

@@ -104,27 +104,17 @@ CGameGUI* CGUIManager::FindInterfaceFromID( int cid )
 
 
 /*======================================================*/
-//  인터페이스관련 루아 스크립트 불러와서 초기화
+// Register and initialize the GUI.
 /*======================================================*/
-void CGUIManager::Interface_Init(cLua* pLua , const char* luafile, CGameGUI* BaseGUI )
+void CGUIManager::Interface_Init(CGameGUI* BaseGUI)
 {
 	if(BaseGUI)
 	{
 		RegisterGUIByID(BaseGUI);
-		BaseGUI->Init(pLua , luafile);
 		BaseGUI->GUI_Initialize();	
 	}
 }
 
-
-/*======================================================*/
-// 초기화
-/*======================================================*/
-bool CGUIManager::init(cLua* pLua)
-{
-
-	return true;
-}
 
 
 

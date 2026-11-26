@@ -12,6 +12,7 @@
 #define DEF_GAME_UNIT
 
 
+#include "IBaseGameUnit.h"
 #include "IBaseController.h"
 #include "../attributes/CGameUnitAttribute.h"
 #include "MovingEntity.h"
@@ -28,7 +29,6 @@ class CAttack;
 class Regulator;
 class Goal_Think;
 class CLongTimeRegulator;
-class CGameUnit;
 
 
 typedef enum 
@@ -38,21 +38,6 @@ typedef enum
 	unit_alliance
 
 }AllianceType;
-
-
-class IBaseGameUnit
-{
-public :
-
-	virtual		bool							short_attack(CGameUnit* pTarget) = 0;
-	virtual		void							PrivateInitialize() = 0;
-
-	IBaseGameUnit() {}
-	virtual  ~IBaseGameUnit() {}
-};
-
-
-
 
 
 class CGameUnit : public  IBaseGameUnit,  public MovingEntity, public CGameUnitAttribute, public IBaseController

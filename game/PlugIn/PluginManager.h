@@ -15,7 +15,6 @@
 
 class IPlugin;
 class God_Game;
-class cLua;
 class CSoundManager;
 
 

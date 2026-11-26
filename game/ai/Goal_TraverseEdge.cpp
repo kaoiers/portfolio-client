@@ -17,7 +17,6 @@
 //#include "game/CObjectResourceManager.h"
 // #include "..\constants.h"
 // #include "../navigation/Raven_PathPlanner.h"
-// #include "../lua/Raven_Scriptor.h"
 // #include "debug/DebugConsole.h"
 
 

@@ -11,6 +11,7 @@
 #ifndef GAME_GUI
 #define	GAME_GUI
 
+#include "IBaseGameGUI.h"
 #include "EnumGUITypes.h"
 #include "../objects/CObjectListSet.h"
 
@@ -21,34 +22,14 @@ class CImageGUI;
 class CTextGUI;
 class CGameObject;
 class CEditBoxGUI;
-class cLua;
 class CEventHandler;
 class CGUIManager;
-
-
-class IBaseGameGUI
-{
-public :
-
-	IBaseGameGUI() {}
-	virtual ~IBaseGameGUI() {}
-
-	virtual	bool			interface_control(CEventHandler* m_pReceiver) = 0;
-
-	virtual void			GUI_Initialize() = 0;
-
-	virtual void			SetOwner(CGameObject *owner) = 0;
-
-	virtual void			setDamage(const u32	damage, const u32	Totaldamage) = 0;
-};
 
 
 class CGameGUI : public IBaseGameGUI
 {
 
 	unsigned	int		m_gid;
-
-	cLua*				m_pLua;
 
 	bool				m_bNeedOwner;
 
@@ -103,8 +84,6 @@ public :
 public :
 
 	
-	void					Init(cLua* pLua = 0, const char* filename =0);
-
 	bool					control(CEventHandler* m_pReceiver);	
 
 

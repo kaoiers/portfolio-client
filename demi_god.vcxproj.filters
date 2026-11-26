@@ -147,6 +147,9 @@
     <ClInclude Include="game\objects\CGameObject.h">
       <Filter>Source Files\OBJECT</Filter>
     </ClInclude>
+    <ClInclude Include="game\objects\IGameObject.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
     <ClInclude Include="game\objects\CGameObjectManager.h">
       <Filter>Source Files\OBJECT</Filter>
     </ClInclude>
@@ -169,6 +172,9 @@
       <Filter>Source Files\OBJECT</Filter>
     </ClInclude>
     <ClInclude Include="game\objects\CGameUnit.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\IBaseGameUnit.h">
       <Filter>Source Files\UNIT</Filter>
     </ClInclude>
     <ClInclude Include="game\objects\CGameUnitArmy.h">
@@ -210,10 +216,16 @@
     <ClInclude Include="game\interfaces\IGameGUI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="game\interfaces\IBaseGameGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
     <ClInclude Include="game\PlugIn\PluginManager.h">
       <Filter>Source Files\PLUGIN</Filter>
     </ClInclude>
     <ClInclude Include="game\PlugIn\plugin.h">
+      <Filter>Source Files\PLUGIN</Filter>
+    </ClInclude>
+    <ClInclude Include="game\PlugIn\IPlugin.h">
       <Filter>Source Files\PLUGIN</Filter>
     </ClInclude>
     <ClInclude Include="game\map\CGameMap.h">

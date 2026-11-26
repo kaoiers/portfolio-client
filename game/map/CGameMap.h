@@ -14,7 +14,6 @@
 
 
 class CTerrainObject;
-class cLua;
 class CGameObjectManager;
 class CGridSceneNode;
 class CPathPlanner;

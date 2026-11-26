@@ -195,8 +195,10 @@
     <ClInclude Include="game\interfaces\CUnitWorkerGUI.h" />
     <ClInclude Include="game\interfaces\EnumGUITypes.h" />
     <ClInclude Include="game\interfaces\IGameGUI.h" />
+    <ClInclude Include="game\interfaces\IBaseGameGUI.h" />
     <ClInclude Include="game\map\CGameMap.h" />
     <ClInclude Include="game\objects\CGameObject.h" />
+    <ClInclude Include="game\objects\IGameObject.h" />
     <ClInclude Include="game\objects\CGameObjectManager.h" />
     <ClInclude Include="game\objects\CGameRoom.h" />
     <ClInclude Include="game\objects\CGameRoomCommunity.h" />
@@ -205,6 +207,7 @@
     <ClInclude Include="game\objects\CGameRoomProduct.h" />
     <ClInclude Include="game\objects\CGameRoomStock.h" />
     <ClInclude Include="game\objects\CGameUnit.h" />
+    <ClInclude Include="game\objects\IBaseGameUnit.h" />
     <ClInclude Include="game\objects\CGameUnitArmy.h" />
     <ClInclude Include="game\objects\CGameUnitBunny.h" />
     <ClInclude Include="game\objects\CGameUnitEnemy.h" />
@@ -224,6 +227,7 @@
     <ClInclude Include="game\objects\SObjectResources.h" />
     <ClInclude Include="game\option\CGodOption.h" />
     <ClInclude Include="game\PlugIn\plugin.h" />
+    <ClInclude Include="game\PlugIn\IPlugin.h" />
     <ClInclude Include="game\PlugIn\PluginManager.h" />
     <ClInclude Include="game\shader\CLightEffectManager.h" />
     <ClInclude Include="resource.h" />

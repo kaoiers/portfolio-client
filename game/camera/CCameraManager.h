@@ -11,8 +11,6 @@
 #include "../common/UncopyableUtil.h"
 
 class CAppContext;
-class cLua;
-
 
 class CCameraManager : private  UnCopyable
 {
