@@ -9,6 +9,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <stdafx.h>
+#include <algorithm>
 #include "CGameObject.h"
 #include "CGameObjectManager.h"
 #include "../CAppcontext.h"
@@ -41,74 +42,43 @@ CGameObjectManager::CGameObjectManager()
 
 CGameObjectManager::~CGameObjectManager()
 {
+    removeAllObjects();
     m_object_controller.reset();
-
-    m_map_id_character.clear();
-    m_delete_queue.clear();
+    if (m_instance == this)
+        m_instance = nullptr;
 }
 
 /*======================================================*/
 // 특정 오브젝트 지우기
 /*======================================================*/
-bool CGameObjectManager::removeObject( u32 cid)
+bool CGameObjectManager::removeObject(u32 cid)
 {
-    CGameObject* object = getObjectFromId(cid);
+    auto it = m_map_id_character.find(cid);
+    if (it == m_map_id_character.end())
+        return true;
 
-    if (object)
-    {
-        if (object->removeSceneNode())
-        {
-            unregisterObject(object);
+    CGameObject* object = it->second.get();
+    if (!object->removeSceneNode())
+        return false;
 
-            delete object;
-        }
+    if (m_object_controller->isPossessed(object))
+        m_object_controller->nullifyController();
+    if (auto* unit = dynamic_cast<CGameUnit*>(object))
+        removeUnitFromSet(unit);
+    if (auto* room = dynamic_cast<CGameRoom*>(object))
+        removeRoomFromSet(room);
 
-        else
-        {
-            return false;
-        }
-    }
-
+    m_map_id_character.erase(it);
     return true;
-}
-
-/*======================================================*/
-// 오브젝트 등록 해제하기
-/*======================================================*/
-void CGameObjectManager::unregisterById( CGameObject *obj)
-{
-    std::map<u32, CGameObject*>::iterator iditr = m_map_id_character.find(obj->getId());
-    if (iditr != m_map_id_character.end())
-    {
-        m_map_id_character.erase(iditr);
-    }
-}
-
-/*======================================================*/
-// 오브젝트 등록 해제하기
-/*======================================================*/
-void CGameObjectManager::unregisterObject(CGameObject* obj)
-{
-    std::map<u32, CGameObject*>::iterator iditr = m_map_id_character.find(obj->getId());
-    if (iditr != m_map_id_character.end())
-    {
-        m_map_id_character.erase(iditr);
-    }
 }
 
 /*======================================================*/
 // 오브젝트 아이디 가져오기
 /*======================================================*/
-CGameObject* CGameObjectManager::getObjectFromId( u32 cid)
+CGameObject* CGameObjectManager::getObjectFromId(u32 cid)
 {
-    std::map<u32, CGameObject*>::iterator itr = m_map_id_character.find(cid);
-
-    if (itr != m_map_id_character.end())
-    {
-        return itr->second;
-    }
-
-    return nullptr;
+    const auto it = m_map_id_character.find(cid);
+    return it == m_map_id_character.end() ? nullptr : it->second.get();
 }
 
 /*======================================================*/
@@ -125,21 +95,12 @@ bool CGameObjectManager::drop()
 /*======================================================*/
 void CGameObjectManager::removeAllObjects()
 {
-    std::map<u32, CGameObject*>::iterator itr;
-
-    for (itr = m_map_id_character.begin(); itr != m_map_id_character.end(); itr++)
-    {
-        CGameObject* character = (itr->second);
-
-        if (character->removeSceneNode())
-        {
-            delete character;
-        }
-    }
-
-    m_map_id_character.clear();
-    m_unit_set.clear();
-    m_room_set.clear();
+    std::vector<u32> ids;
+    for (const auto& entry : m_map_id_character)
+        ids.push_back(entry.first);
+    for (u32 id : ids)
+        removeObject(id);
+    m_delete_queue.clear();
 }
 
 /*======================================================*/
@@ -185,22 +146,8 @@ CGameUnitEnemy* CGameObjectManager::addUnitEnemy(OwnerType owner, u32 unit_id, U
     const vector3df& pos,
     const vector3df& rot)
 {
-    CGameUnitEnemy* unit = 0;
-
-    switch (Unittype)
-    {
-    case UNIT_ENEMY_SOLDIER :
-
-        break;
-    }
-
-    registerObject(unit);
-
-    m_unit_set.push_back(unit);
-
-    nsUnit::unitInit(unit);
-
-    return unit;
+    // Engine-backed factory is unavailable in this source-only sample.
+    return nullptr;
 }
 
 /*======================================================*/
@@ -208,15 +155,8 @@ CGameUnitEnemy* CGameObjectManager::addUnitEnemy(OwnerType owner, u32 unit_id, U
 /*======================================================*/
 CGameUnitEnemy* CGameObjectManager::addUnitEnemy( const vector3df& pos, CEnemyGenerator* p_generator)
 {
-    CGameUnitEnemy* unit = 0;
-
-    registerObject(unit);
-
-    m_unit_set.push_back(unit);
-
-    nsUnit::unitInit(unit);
-
-    return unit;
+    // Engine-backed factory is unavailable in this source-only sample.
+    return nullptr;
 }
 
 /*======================================================*/
@@ -226,15 +166,8 @@ CGameUnit* CGameObjectManager::addUnit(OwnerType owner, u32 unit_id, UnitTypes U
     const vector3df& pos,
     const vector3df& rot)
 {
-    CGameUnit* unit = 0;
-
-    if (unit != 0)
-    {
-        registerObject(unit);
-        m_unit_set.push_back(unit);
-        nsUnit::unitInit(unit);
-    }
-    return unit;
+    // Engine-backed factory is unavailable in this source-only sample.
+    return nullptr;
 }
 
 /*======================================================*/
@@ -243,26 +176,8 @@ CGameUnit* CGameObjectManager::addUnit(OwnerType owner, u32 unit_id, UnitTypes U
 CGameUnitArmy* CGameObjectManager::addUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
     const vector3df& rot)
 {
-    CGameUnitArmy* unit = 0;
-
-    if (unit != nullptr)
-    {
-        registerObject(unit);
-
-        m_unit_set.push_back(unit);
-
-        nsUnit::unitInit(unit);
-    }
-
-    return unit;
-}
-
-/*======================================================*/
-// 아이디로 오브젝트 등록하기
-/*======================================================*/
-void CGameObjectManager::registerById(CGameObject *obj)
-{
-    //m_mapIdCharacter[obj->GetID()] = obj;
+    // Engine-backed factory is unavailable in this source-only sample.
+    return nullptr;
 }
 
 /*======================================================*/
@@ -276,7 +191,7 @@ bool CGameObjectManager::control( CEventHandler *p_receiver)
 
     for (itr = m_map_id_character.begin(); itr != m_map_id_character.end(); itr++)
     {
-        CGameObject *object = (itr->second);
+        CGameObject *object = itr->second.get();
         object->control(p_receiver);
     }
 
@@ -308,25 +223,12 @@ void CGameObjectManager::deleteRequest(s32 idkey)
 /*======================================================*/
 void CGameObjectManager::removeDeleteQueue()
 {
-    if (!m_delete_queue.empty())
+    auto pending = std::move(m_delete_queue);
+    m_delete_queue.clear();
+    for (u32 id : pending)
     {
-        deletion_queue::iterator cur_del = m_delete_queue.begin();
-        for (;cur_del != m_delete_queue.end(); ++cur_del)
-        {
-            CGameUnit* p_set_unit_member = 0;
-            CGameRoom* p_set_room_member = 0;
-
-            p_set_unit_member = dynamic_cast<CGameUnit* >(getObjectFromId(*cur_del));
-
-            if (p_set_unit_member)
-            {
-            }
-
-            p_set_room_member = dynamic_cast<CGameRoom* >(getObjectFromId(*cur_del));
-
-            removeObject((*cur_del));
-        }
-        m_delete_queue.clear();
+        if (!removeObject(id))
+            m_delete_queue.push_back(id);
     }
 }
 
@@ -340,31 +242,38 @@ void CGameObjectManager::render()
 /*======================================================*/
 // 오브젝트 등록하기
 /*======================================================*/
-void CGameObjectManager::registerObject( CGameObject *obj)
+bool CGameObjectManager::registerObject(std::unique_ptr<CGameObject> obj)
 {
-    registerById(obj);
+    if (!obj)
+        return false;
 
-    registerBySceneNode(obj);
+    if (obj->getId() == 0)
+    {
+        do
+        {
+            obj->setIdFromValidTest();
+        } while (obj->getId() == 0 || !isValidId(obj->getId()));
+    }
+    if (!isValidId(obj->getId()))
+        return false;
+
+    auto* raw = obj.get();
+    raw->m_object_manager = this;
+    const auto id = raw->getId();
+    m_map_id_character.emplace(id, std::move(obj));
+    if (auto* unit = dynamic_cast<CGameUnit*>(raw))
+        m_unit_set.push_back(unit);
+    if (auto* room = dynamic_cast<CGameRoom*>(raw))
+        m_room_set.push_back(room);
+    return true;
 }
 
 /*======================================================*/
 // 유효한 아이디인지
 /*======================================================*/
-bool CGameObjectManager::isValidId( u32 obj_id)
+bool CGameObjectManager::isValidId(u32 obj_id)
 {
-    ObjectMap::iterator itr;
-
-    for (itr = m_map_id_character.begin(); itr != m_map_id_character.end(); itr++)
-    {
-        u32 ex_id = (itr->first);
-
-        if (ex_id == obj_id)
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return m_map_id_character.find(obj_id) == m_map_id_character.end();
 }
 
 /*======================================================*/
@@ -385,13 +294,8 @@ void CGameObjectManager::dispatchMsg( const Telegram& msg)
 /*======================================================*/
 CGameRoomGod* CGameObjectManager::addGodRoom( OwnerType owner, const vector2di& tile_pos)
 {
-    CGameRoomGod* p_god_room = 0;
-
-    p_god_room->setOnTile(tile_pos);
-
-    registerObject(p_god_room);
-
-    return p_god_room;
+    // Engine-backed factory is unavailable in this source-only sample.
+    return nullptr;
 }
 
 /*======================================================*/
@@ -399,23 +303,8 @@ CGameRoomGod* CGameObjectManager::addGodRoom( OwnerType owner, const vector2di& 
 /*======================================================*/
 CGameRoom* CGameObjectManager::addRoom( OwnerType owner, const BuildingTypes Roomtype, u32 room_id, CGameUnit* p_worker)
 {
-    CGameRoom* room = nullptr;
-
-    switch (Roomtype)
-    {
-    case 1:
-        printf("모르는 건물(%d)\n", Roomtype);
-        return nullptr;
-    }
-
-    if (room_id != 0)
-        room->setId(room_id);
-
-    registerObject(room);
-
-    m_room_set.push_back(room);
-
-    return room;
+    // Engine-backed factory is unavailable in this source-only sample.
+    return nullptr;
 }
 
 /*======================================================*/
@@ -454,6 +343,7 @@ bool CGameObjectManager::isControlled( CGameObject* obj) const
 /*======================================================*/
 void CGameObjectManager::removeUnitFromSet(CGameUnit* p_unit)
 {
+    m_unit_set.erase(std::remove(m_unit_set.begin(), m_unit_set.end(), p_unit), m_unit_set.end());
 }
 
 /*======================================================*/
@@ -499,4 +389,5 @@ void CGameObjectManager::clearTargetFromObject(CGameObject* p_obj)
 /*======================================================*/
 void CGameObjectManager::removeRoomFromSet(CGameRoom* p_room)
 {
+    m_room_set.erase(std::remove(m_room_set.begin(), m_room_set.end(), p_room), m_room_set.end());
 }

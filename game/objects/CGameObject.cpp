@@ -28,12 +28,14 @@ CGameObject::CGameObject(OwnerType owner, u32 objtype,
     vector3df pos,
     vector3df rot,
     vector3df scale) :
+    m_uid(0),
     m_obj_type(objtype),
     m_owner_type(owner),
     m_animgr(nullptr),
     m_enable(true),
     m_command_type(com_none),
     m_object_manager(CAppContext::getGodGame()->getObjectManager()),
+    m_selected(false),
     m_tag(false)
 {
 }
@@ -43,12 +45,14 @@ CGameObject::CGameObject(OwnerType owner, u32 obj_id,
     vector3df pos,
     vector3df rot,
     vector3df scale) :
+    m_uid(obj_id),
     m_obj_type(objtype),
     m_owner_type(owner),
     m_animgr(nullptr),
     m_enable(true),
     m_command_type(com_none),
     m_object_manager(CAppContext::getGodGame()->getObjectManager()),
+    m_selected(false),
     m_tag(false)
 {
 }

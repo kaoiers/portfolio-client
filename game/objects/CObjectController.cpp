@@ -157,7 +157,9 @@ void CObjectController::nullifyController()
         m_owner = 0;
     }
 
-    CControllerGUI::instance()->disableGui();
+    if (auto* gui = CControllerGUI::instance())
+        gui->disableGui();
 
-    m_controller = 0;
+    m_controller = nullptr;
+    m_owner = nullptr;
 }

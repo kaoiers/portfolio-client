@@ -40,6 +40,7 @@ class CGameGUI;
 
 class CGameObject : public IGameObject
 {
+    friend class CGameObjectManager;
     CGameObjectManager* m_object_manager;
 
     s32 m_uid;

@@ -31,6 +31,8 @@ CGameUnitEnemy* CEnemyGenerator::generateEnemy()
 {
     s32 distance_offset = s32(m_enemy_generate_line.getLength());
 
+    if (distance_offset <= 0)
+        return nullptr;
     distance_offset = rand() % distance_offset;
 
     vector3df generate_pos = m_enemy_generate_line.start +
@@ -39,6 +41,9 @@ CGameUnitEnemy* CEnemyGenerator::generateEnemy()
     generate_pos.Y = 0.0f;
 
     CGameUnitEnemy* p_enemy = m_game_map->getObjectManager()->addUnitEnemy(generate_pos, this);
+
+    if (!p_enemy)
+        return nullptr;
 
     vector3df v_destination = vector3df(0, 0,
         m_game_map->getTopLeftUsablePos().Z);

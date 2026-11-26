@@ -44,15 +44,10 @@ class CObjectController;
 
 class CGameObjectManager
 {
-#define	ObjectMap std::map<u32 , CGameObject *>
+using ObjectMap = std::map<u32, std::unique_ptr<CGameObject>>;
 
     ObjectMap m_map_id_character;
-
-#define NodeObjMap std::map<ISceneNode *, CGameObject *>
-
-#define	 deletion_queue	std::list<u32>
-
-    deletion_queue m_delete_queue;
+    std::list<u32> m_delete_queue;
 
     std::vector<CGameUnit* > m_unit_set;
 
@@ -71,8 +66,6 @@ public:
 
     ~CGameObjectManager();
 
-    ObjectMap getObjIDMap() { return m_map_id_character; }
-
     bool removeObject(u32 cid);
 
     void removeAllObjects();
@@ -86,15 +79,8 @@ public:
     bool isValidId(u32 obj_id);
 
 public:
-    void registerObject(CGameObject *obj);
-
-    void registerBySceneNode(CGameObject *obj) {};
-
-    void registerById(CGameObject *obj);
-
-    void unregisterObject(CGameObject *obj);
-
-    void unregisterById(CGameObject *obj);
+    // Transfers ownership; duplicate or null objects are rejected.
+    bool registerObject(std::unique_ptr<CGameObject> obj);
 
 public:
     CGameUnitEnemy* addUnitEnemy(OwnerType owner, u32 unit_id, UnitTypes Unittype,

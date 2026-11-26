@@ -34,7 +34,11 @@ public:
     static CObjectController* getInstance();
 
     CObjectController();
-    ~CObjectController() {};
+    ~CObjectController()
+    {
+        if (instance == this)
+            instance = nullptr;
+    }
 
     void setController(IBaseController * p_controller);
 
