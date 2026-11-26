@@ -63,12 +63,12 @@ public:
 
     void addPlayerExp(u32 exp);
     void increaseExp( u32 exp);
-    const u32 getCurrentLevel() { return m_current_player_level; }
+    u32 getCurrentLevel() const { return m_current_player_level; }
 
     void addUnitCounts();
     void subtractUnitCounts();
-    const u32 getUnitCounts() { return m_unit_counts; }
-    const u32 getTotalUnitCounts() { return m_total_unit_counts; }
+    u32 getUnitCounts() const { return m_unit_counts; }
+    u32 getTotalUnitCounts() const { return m_total_unit_counts; }
     u32 getMaxPlayerExp(u32 level);
 
     inline void addAllResources(s32 g, s32 l, s32 s)

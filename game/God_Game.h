@@ -59,7 +59,7 @@ public:
 
     void setGameState(const GameState state) { m_game_state = state; }
 
-    const bool isRunning() { return m_running; }
+    bool isRunning() const { return m_running; }
     void setRunning(const bool r) { m_running = r; }
 
     void render();
@@ -77,7 +77,7 @@ public:
     void drawSceneForInterface();
     void clearGame(const GameState state);
     void playSound(const char *sound_name, const bool loop /*= true*/);
-    const GameState getCurrentGameState() { return m_game_state; }
+    GameState getCurrentGameState() const { return m_game_state; }
 
     God_Game();
     ~God_Game();
