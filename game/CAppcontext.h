@@ -11,7 +11,7 @@
 #pragma  once
 
 #include "common/UncopyableUtil.h"
-#include "option\CGodOption.h"
+#include "option/CGodOption.h"
 
 class CGodOption;
 class God_Game;

@@ -16,7 +16,7 @@
 #include "../objects/CGameObject.h"
 #include "../eventhandle/CEventHandleManager.h"
 #include "../objects/CGameObjectManager.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../God_Game.h"
 #include "CGUIManager.h"
 

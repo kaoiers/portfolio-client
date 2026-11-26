@@ -13,7 +13,7 @@
 
 #include "CGameMap.h"
 #include "../objects/CGameObjectManager.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../shader/CLightEffectManager.h"
 
 #include "../God_Game.h"

@@ -14,7 +14,7 @@
 #include "objects/CGameObject.h"
 #include "camera/CCameraManager.h"
 #include "eventhandle/CEventHandleManager.h"
-#include "CAppContext.h"
+#include "CAppcontext.h"
 #include "controller/EnumPickingType.h"
 #include "interfaces/CGUIManager.h"
 #include "PlugIn/PluginManager.h"

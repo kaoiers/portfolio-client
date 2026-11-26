@@ -15,9 +15,9 @@
 #include "../objects/CGameUnit.h"
 #include "../objects/CGameUnitEnemy.h"
 #include "../enemy_gen/CEnemyGenerator.h"
-#include "../ai/Telegram.h"
-#include "../ai/MessageDispatcher.h"
-#include "../ai/God_Messages.h"
+#include "Telegram.h"
+#include "MessageDispatcher.h"
+#include "God_Messages.h"
 #include "../objects/CGameObjectManager.h"
 
 

@@ -11,7 +11,7 @@
 
 #include <stdafx.h>
 #include "CLoginGUI.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../God_Game.h"
 #include "../eventhandle/CEventHandleManager.h"
 

@@ -10,7 +10,7 @@
 
 #include <stdafx.h>
 #include "GameResourceManager.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../God_Game.h"
 #include "../interfaces/CMainGameGUI.h"
 

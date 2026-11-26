@@ -12,7 +12,7 @@
 #ifndef LIGHTEFFECT_MANAGER_H
 #define LIGHTEFFECT_MANAGER_H
 
-#include "../common/UnCopyableUtil.h"
+#include "../common/UncopyableUtil.h"
 
 
 class EffectHandler;

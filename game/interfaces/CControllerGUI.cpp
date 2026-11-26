@@ -10,18 +10,18 @@
 
 
 #include "stdafx.h"
-#include "../interfaces/IGameGUI.h"
-#include "../interfaces/CGUIManager.h"
-#include "../interfaces/CControllerGUI.h"
+#include "IGameGUI.h"
+#include "CGUIManager.h"
+#include "CControllerGUI.h"
 
 
-#include "../interfaces/CUnitGodGUI.h"
-#include "../interfaces/CUnitWorkerGUI.h"
-#include "../interfaces/CUnitArmyGUI.h"
-#include "../interfaces/CRoomJailGUI.h"
-#include "../interfaces/CRoomCommunityGUI.h"
-#include "../interfaces/CRoomStockGUI.h"
-#include "../interfaces/CRoomUpTowerGUI.h"
+#include "CUnitGodGUI.h"
+#include "CUnitWorkerGUI.h"
+#include "CUnitArmyGUI.h"
+#include "CRoomJailGUI.h"
+#include "CRoomCommunityGUI.h"
+#include "CRoomStockGUI.h"
+#include "CRoomUpTowerGUI.h"
 
 #include "../objects/CGameUnitGod.h"
 #include "../objects/CGameUnitWorker.h"

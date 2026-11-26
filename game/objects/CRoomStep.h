@@ -12,7 +12,7 @@
 #define DEF_BUILDINGSTEP
 
 
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../interfaces/CGUIManager.h"
 #include "../shader/CLightEffectManager.h"
 
@@ -34,7 +34,7 @@ public :
 	/*======================================================*/
 	// 빌딩중인지
 	/*======================================================*/
-	const bool CRoomStep::isOnBuilding()
+	const bool isOnBuilding()
 	{
 		return  m_on_building;
 	}

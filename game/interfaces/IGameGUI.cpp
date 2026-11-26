@@ -11,7 +11,7 @@
 
 #include <stdafx.h>
 #include "IGameGUI.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../objects/CGameObject.h"
 #include "../God_Game.h"
 #include "../eventhandle/CEventHandleManager.h"

@@ -10,7 +10,7 @@
 
 #include <stdafx.h>
 #include "CGameUnit.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../God_Game.h"
 #include "CGameObject.h"
 #include "../eventhandle/CEventHandleManager.h"

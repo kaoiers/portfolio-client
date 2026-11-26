@@ -10,7 +10,7 @@
 
 #include <stdafx.h>
 #include "CGameRoomGod.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../shader/CLightEffectManager.h"
 #include "../map/CGameMap.h"
 

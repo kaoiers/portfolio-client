@@ -12,11 +12,11 @@
 #include "Goal_MoveToPosition.h"
 #include "../objects/CGameUnit.h"
 
-#include "../ai/Telegram.h"
-#include "../ai/God_Messages.h"
+#include "Telegram.h"
+#include "God_Messages.h"
 #include "Goal_SeekToPosition.h"
 #include "Goal_FollowPath.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 
 
 

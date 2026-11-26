@@ -60,7 +60,7 @@ public:
 template <class entity_type>
 void Goal_Composite<entity_type>::removeAllSubgoals()
 {
-  for (SubgoalList::iterator it = m_sub_goals.begin(); it != m_sub_goals.end();        ++it)
+  for (typename SubgoalList::iterator it = m_sub_goals.begin(); it != m_sub_goals.end();        ++it)
   {
 
 		(*it)->terminate();
@@ -94,9 +94,9 @@ s32 Goal_Composite<entity_type>::processSubgoals()
 
 
     s32 status_of_sub_goals = m_sub_goals.front()->process();
-    if (status_of_sub_goals == completed && m_sub_goals.size() > 1)
+    if (status_of_sub_goals == Goal<entity_type>::completed && m_sub_goals.size() > 1)
     {
-      return active;
+      return Goal<entity_type>::active;
     }
 
     return status_of_sub_goals;
@@ -104,7 +104,7 @@ s32 Goal_Composite<entity_type>::processSubgoals()
   
   else
   {
-    return completed;
+    return Goal<entity_type>::completed;
   }
 }
 

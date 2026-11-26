@@ -11,7 +11,7 @@
 #include <stdafx.h>
 #include "CGameObject.h"
 #include "CGameObjectManager.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../God_Game.h"
 #include "CGameUnit.h"
 #include "CGameUnitEnemySoldier.h"
@@ -25,7 +25,7 @@
 #include "CGameRoomJail.h"
 #include "CGameRoomCommunity.h"
 #include "CGameRoomStock.h"
-#include "CgameRoomGod.h"
+#include "CGameRoomGod.h"
 #include "CGameUnitTiger.h"
 #include "../map/CGameMap.h"
 #include "CObjectController.h"
@@ -216,7 +216,7 @@ void	CGameObjectManager::setControlState(const bool on)
 /*======================================================*/
 CGameUnitEnemy* CGameObjectManager::addUnitEnemy(OwnerType owner,u32 unit_id, UnitTypes Unittype,
 												 const vector3df& pos, 
-												 vector3df& rot)
+												 const vector3df& rot)
 {
 
 	CGameUnitEnemy* unit = 0;
@@ -263,7 +263,7 @@ CGameUnitEnemy* CGameObjectManager::addUnitEnemy( const vector3df& pos , CEnemyG
 /*======================================================*/
 CGameUnit* CGameObjectManager::addUnit(OwnerType owner, u32 unit_id, UnitTypes Unittype,
 									   const vector3df& pos,
-									   vector3df& rot)
+									   const vector3df& rot)
 {
 	
 	CGameUnit* unit = 0;
@@ -282,7 +282,7 @@ CGameUnit* CGameObjectManager::addUnit(OwnerType owner, u32 unit_id, UnitTypes U
 // 아군 추가
 /*======================================================*/
 CGameUnitArmy* CGameObjectManager::addUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
-											   vector3df& rot)
+											   const vector3df& rot)
 {
 
 	CGameUnitArmy* unit = 0;

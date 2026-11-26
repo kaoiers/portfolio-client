@@ -14,7 +14,7 @@
 #include <stdafx.h>
 #include "MessageDispatcher.h"
 #include "../objects/CGameObject.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../objects/CGameObjectManager.h"
 
 using std::set;

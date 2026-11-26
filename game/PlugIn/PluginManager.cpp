@@ -15,8 +15,8 @@
 #include <string>
 #include <memory>
 #include "PluginManager.h"
-#include "Plugin.h"
-#include "../CAppContext.h"
+#include "plugin.h"
+#include "../CAppcontext.h"
 #include <io.h>
 
 using namespace std;
@@ -41,7 +41,7 @@ void PluginManager::loadPlugins ( const string & str_dir )
     for (it = filenames.begin(); it != filenames.end(); ++it)
     {
         const string & filename = *it;
-        string & full_name = str_dir + string("\\") + filename;
+        const string full_name = str_dir + string("\\") + filename;
         loadPlugin (full_name);
     }
 }

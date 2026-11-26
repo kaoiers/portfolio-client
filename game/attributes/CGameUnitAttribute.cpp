@@ -10,7 +10,7 @@
 
 #include <stdafx.h>
 #include "../objects/SGameUnitAttributeResources.h"
-#include "../attributes/CGameUnitAttribute.h"
+#include "CGameUnitAttribute.h"
 
 GAMEUNIT_ATTRIBUTE* m_resource_ptr;
 

@@ -124,16 +124,16 @@ public:
 
 
 	CGameUnitEnemy*		addUnitEnemy(OwnerType owner, u32 unit_id, UnitTypes Unittype,
-		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
+		const vector3df& pos, const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 	CGameUnitEnemy*		addUnitEnemy(const vector3df& pos, CEnemyGenerator* p_generator);
 
 
 	CGameUnit*			addUnit(OwnerType owner, u32 unit_id, UnitTypes Unittype,
-		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
+		const vector3df& pos, const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 	CGameUnitArmy*		addUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
-		vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
+		const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 
 	CGameRoom*			addRoom(OwnerType owner, const BuildingTypes Roomtype, u32 room_id = 0, CGameUnit* p_worker = 0);

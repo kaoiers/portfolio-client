@@ -22,7 +22,7 @@ class CGameRoomGod;
 class CEnemyGenerator;
 class CExplosionSystem;
 
-#include "../common/UnCopyableUtil.h"
+#include "../common/UncopyableUtil.h"
 
 
 class CGameMap : private UnCopyable

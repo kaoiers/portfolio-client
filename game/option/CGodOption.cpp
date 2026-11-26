@@ -1,6 +1,6 @@
 
 #include <stdafx.h>
-#include "cGodOption.h"
+#include "CGodOption.h"
 
 CGodOption * CGodOption::getInstance()
 {

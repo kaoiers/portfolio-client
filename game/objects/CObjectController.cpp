@@ -10,19 +10,19 @@
 
 
 #include <stdafx.h>
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../God_Game.h"
-#include "../objects/CGameObject.h"
-#include "../objects/CObjectController.h"
-#include "../objects/IBaseController.h"
+#include "CGameObject.h"
+#include "CObjectController.h"
+#include "IBaseController.h"
 
 #include <map>
-#include "../Plugin/PluginManager.h"
-#include "../Plugin/plugin.h"
+#include "../PlugIn/PluginManager.h"
+#include "../PlugIn/plugin.h"
 #include "../shader/CLightEffectManager.h"
-#include "../objects/CGameRoom.h"
+#include "CGameRoom.h"
 #include "../interfaces/CControllerGUI.h"
-#include "../objects/CGameUnit.h"
+#include "CGameUnit.h"
 
 
 

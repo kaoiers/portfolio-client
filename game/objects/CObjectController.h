@@ -12,7 +12,7 @@
 
 #ifndef OBJECT_CONTROLLER_H
 #define OBJECT_CONTROLLER_H
-#include "../common/UnCopyableUtil.h"
+#include "../common/UncopyableUtil.h"
 
 
 class IBaseController;

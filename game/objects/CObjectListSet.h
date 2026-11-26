@@ -23,7 +23,7 @@ class CObjectListSet
 
 	inline bool find(entity_type entity)
 	{
-		std::list<entity_type >::iterator itr = m_entity_list.begin();
+		typename std::list<entity_type >::iterator itr = m_entity_list.begin();
 
 		for(itr; itr != m_entity_list.end(); itr++)
 		{
@@ -49,7 +49,7 @@ public :
 
 	inline void remove(entity_type entity)
 	{
-		std::list<entity_type >::iterator itr = m_entity_list.begin();
+		typename std::list<entity_type >::iterator itr = m_entity_list.begin();
 
 		for(itr; itr != m_entity_list.end(); itr++)
 		{

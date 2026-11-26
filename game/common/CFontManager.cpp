@@ -10,7 +10,7 @@
 
 #include <stdafx.h>
 #include "CFontManager.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 
 
 

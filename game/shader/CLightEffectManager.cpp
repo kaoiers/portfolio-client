@@ -11,7 +11,7 @@
 #include <stdafx.h>
 
 #include "CLightEffectManager.h"
-#include "../CAppContext.h"
+#include "../CAppcontext.h"
 #include "../option/CGodOption.h"
 
 CLightEffectManager::CLightEffectManager(  )
