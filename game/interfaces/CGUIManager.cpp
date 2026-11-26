@@ -18,7 +18,6 @@
 #include "../attributes/GameResourceManager.h"
 #include "CLoginGUI.h"
 #include "CControllerGUI.h"
-//#include "CWebDialog.h"
 
 CGUIManager* CGUIManager::m_instance = NULL;
 

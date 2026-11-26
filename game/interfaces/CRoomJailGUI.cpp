@@ -36,7 +36,6 @@ void CRoomJailGUI::setOwner( CGameObject *obj )
 {
 	m_owner = dynamic_cast<CGameRoomJail *>(obj);
 
-		//setDamage( m_pOwner->getRoomHp() , m_pOwner->getTotalRoomHP());
 }
 
 
@@ -48,7 +47,6 @@ bool CRoomJailGUI::interfaceControl( CEventHandler* p_receiver )
 {
 	if(p_receiver->isClickedButtonID(COMMAND_PRISON_FREE_BUTTON))
 	{
-		//printf("헤헤\n");
 	}
 	
 	else if(p_receiver->isClickedButtonID(COMMAND_DESTROY_BUTTON))
@@ -69,7 +67,6 @@ bool CRoomJailGUI::interfaceControl( CEventHandler* p_receiver )
 /*======================================================*/
 void CRoomJailGUI::guiInitialize()
 {
-	//m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 }
 
 

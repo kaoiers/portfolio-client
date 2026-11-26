@@ -11,7 +11,6 @@
 #include <stdafx.h>
 #include "Goal_MoveToPosition.h"
 #include "../objects/CGameUnit.h"
-//#include "../Raven_Game.h"
 
 #include "../ai/Telegram.h"
 #include "../ai/God_Messages.h"
@@ -29,13 +28,11 @@ void Goal_MoveToPosition::activate()
   m_status = active;
   
   //make sure the subgoal list is clear.
-  //RemoveAllSubgoals();
 
 
 
 	if(m_owner->getOwnerType() == object_mine)
 	{	
-		//NetworkPacketSpace::SendUnitMovetoPositionPacket(m_pOwner->GetID(), m_vDestination);
 	} 
 }
 
@@ -44,10 +41,8 @@ void Goal_MoveToPosition::activate()
 /*======================================================*/
 s32 Goal_MoveToPosition::process()
 {
-  //if status is inactive, call Activate()
   activateIfInactive();
     
-  //process the subgoals
   m_status = processSubgoals();
  
   //if any of the subgoals have failed then this goal re-plans
@@ -107,15 +102,6 @@ void Goal_MoveToPosition::render()
 //   Goal_Composite<Raven_Bot>::Render();
 //   
 //   //draw a bullseye
-//   gdi->BlackPen();
-//   gdi->BlueBrush();
-//   gdi->Circle(m_vDestination, 6);
-//   gdi->RedBrush();
-//   gdi->RedPen();
-//   gdi->Circle(m_vDestination, 4);
-//   gdi->YellowBrush();
-//   gdi->YellowPen();
-//   gdi->Circle(m_vDestination, 2);
 }
 
 void Goal_MoveToPosition::terminate()

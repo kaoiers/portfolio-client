@@ -20,7 +20,6 @@
 /*======================================================*/
 void wcharToChar(const wchar_t* pwstr_src, s32 src_len, char* dest, s32 dest_len)
 {
-//	WideCharToMultiByte( 949, 0, pwstrSrc, -1, pstr, len, NULL, NULL);
 
 	size_t con_size = 0;
 	wcstombs_s( &con_size ,dest, src_len, pwstr_src,  dest_len);
@@ -77,9 +76,7 @@ const line3d<f32> CEventHandler::getRay()
 {
 	//scene::ISceneManager *smgr = CAppContext::GetDevice()->getSceneManager();
 
-	//position2d<s32> clickScreenPos(getMousePosition());
 
-	//line3df screenRay = smgr->getSceneCollisionManager()->getRayFromScreenCoordinates(clickScreenPos, smgr->getActiveCamera());
 
 	line3d<f32> screen_ray;
 

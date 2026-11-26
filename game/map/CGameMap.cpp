@@ -185,19 +185,10 @@ void CGameMap::createGraph()
 void CGameMap::render()
 {
 
-// 	if(m_pNavGraph)
-// 	{
-// 		if (m_pNavGraph->NumNodes() == 0) return;		
-// 		video::IVideoDriver* driver = CAppContext::GetDevice()->getSceneManager()->getVideoDriver();		 
-// 		driver->setMaterial(m_pGrid->getMaterial(0));
-// 		driver->setTransform(video::ETS_WORLD, m_pGrid->getAbsoluteTransformation());
 // 		GraphHelper_DrawUsingGDI<NavGraph>(*m_pNavGraph, driver);
-// 	}
 
 
-	//if(m_pGrid) m_pGrid->render();
 
-	//m_pShieldManager->drawAll();
 }
 
 CGameMap * CGameMap::getInstance()
@@ -213,7 +204,6 @@ CGameMap * CGameMap::getInstance()
 void CGameMap::partitionNavGraph(const s32 x, const s32 y)
 {
 
-	//m_pSpacePartition->RenderCells(CAppContext::GetDevice());
 }
 
 
@@ -519,8 +509,6 @@ void CGameMap::removeAllTrees()
 /*======================================================*/
 void CGameMap::godDeadEvent()
 {
-	//CMainGameGUI::GetInstance()->WarningMessage(L"신수가 30초 후에 부활합니다");
-	//m_pGodResurrection->begin(30);
 }
 
 
@@ -529,6 +517,4 @@ void CGameMap::godDeadEvent()
 /*======================================================*/
 void CGameMap::workerDeadEvent()
 {
-	//CMainGameGUI::GetInstance()->WarningMessage(L"일꾼이 30초 후에 부활합니다");
-	//m_pWorkerResurrection->begin(30);
 }

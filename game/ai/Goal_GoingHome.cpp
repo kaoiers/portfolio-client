@@ -50,15 +50,12 @@ void Goal_GoingHome::activate()
 /*======================================================*/
 s32 Goal_GoingHome::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();
 
-	//process the subgoals
 	m_status = processSubgoals();
 
 	if(m_status == completed)
 	{
-		//m_pOwner->SendMessageToAllObjects(0.0, m_pOwner->GetID(), Msg_UnitDead , this);
 
 		m_owner->getObjectManager()->clearMemoryFromObject( m_owner);
 

@@ -141,29 +141,9 @@ void CGameUnitGod::updateControl( CEventHandler* p_receiver )
 /*======================================================*/
 void CGameUnitGod::arbitrate()
 {	
-// 	if(this->isAlive() && !m_bMoveFlag)
-// 	{
-// 		if(m_pTargetingSystem->isTargetPresent())
-// 		{
 // 
-// 			if(!(this->isInHitDistance(this->getTargetingSystem()->getTarget()->Pos(),
-// 				this->getTargetingSystem()->getTarget()->getRadius())))
-// 			{
-// 				m_pBrain->RemoveAllSubgoals();
 // 				
-// 				m_pBrain->AddGoal_AttackTarget();
-// 			}
-// 			else
-// 			{
-// 				m_pBrain->AddGoal_AttackTarget();
 // 
-// 			}		
-// 		}
-// 	}
 // 
-// 	if(m_pBrain->notPresent(goal_move_to_position))
-// 	{
-// 		m_bMoveFlag = false;
-// 	}
 
 }

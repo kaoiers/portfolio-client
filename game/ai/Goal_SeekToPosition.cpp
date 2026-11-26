@@ -40,12 +40,7 @@ void Goal_SeekToPosition::activate()
 
 	m_time_to_reach_pos += margin_of_error;
 
-	//m_pUpdateSendMovePacketRegulator->Initialize();
 // 
-// 	if(m_pOwner->getOwnerType() == object_mine)
-// 	{	
-// 		NetworkPacketSpace::SendUnitMovetoPositionPacket(m_pOwner->GetID(), m_pOwner->Pos());
-// 	}
 
 
 	
@@ -56,7 +51,6 @@ void Goal_SeekToPosition::activate()
 /*======================================================*/
 s32 Goal_SeekToPosition::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();
 
 	//test to see if the bot has become stuck
@@ -68,18 +62,12 @@ s32 Goal_SeekToPosition::process()
 	//test to see if the bot has reached the waypoint. If so terminate the goal
 	else
 	{ 
-// 		if(m_pUpdateSendMovePacketRegulator->isReady() && m_pOwner->getOwnerType() == object_mine)
-// 		{	
-// 			NetworkPacketSpace::SendUnitMovetoPositionPacket(m_pOwner->GetID(), m_pOwner->Pos());
-// 		}
 
 
 		if (m_owner->isAtPosition(m_position))
 		{
 			m_status = completed;
 
-// 			if(m_pOwner->getOwnerType() == object_mine)
-// 				NetworkPacketSpace::SendUnitMovetoPositionPacket(m_pOwner->GetID(), m_vPosition);
 
 
 			stopSeeking();

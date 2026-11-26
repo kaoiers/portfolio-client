@@ -112,8 +112,6 @@ bool PluginManager::loadPlugin ( const string & filename )
 
 	m_plugins.push_back(info);
 
-    //MainFrame * pMainFrame = static_cast<MainFrame*>(::AfxGetMainWnd());
-    //pMainFrame->AddExporter(pPlugin->GetExportName());
     return true;
 }
 
@@ -126,14 +124,12 @@ bool PluginManager::loadPlugin ( const string & filename )
 /*======================================================*/
 void PluginManager::unloadAll ( void )
 {
-//     MainFrame * pMainFrame = static_cast<MainFrame*>(::AfxGetMainWnd());
 
 	std::vector<PluginInfo>::iterator it;
 		for (it=m_plugins.begin(); it!=m_plugins.end(); ++it)
 		{
 			PluginInfo & info = *it;
 	            
-		   // pMainFrame->RemoveExporter(info.pPlugin->GetExportName());
 
 			SAFE_DELETE(info.p_plugin);
 			::FreeLibrary (info.h_dll);

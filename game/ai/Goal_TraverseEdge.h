@@ -16,7 +16,6 @@
 #include "Goal.h"
 
 
-//#include "../navigation/Raven_PathPlanner.h"
 
 
 class CGameUnit;
@@ -46,7 +45,6 @@ public:
   Goal_TraverseEdge(CGameUnit* p_unit,
                     bool       last_edge); 
 
-  //the usual suspects
   void activate();
   s32  process();
   void terminate();

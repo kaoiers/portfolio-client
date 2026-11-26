@@ -79,7 +79,6 @@ void Goal_Think::activate()
 {
 	if (!m_owner->isPossessed())
 	{
-		//Arbitrate();
 	}
 
 	m_status = active;
@@ -94,13 +93,6 @@ s32 Goal_Think::process()
 
 	s32 subgoal_status =  processSubgoals();
 
-// 	if (SubgoalStatus == completed || SubgoalStatus == failed)
-// 	{
-//   		if (!(m_pOwner->isPossessed()))
-//   		{
-//   			m_iStatus = inactive;
-//   		}
-// 	}
 
 	reactivateIfFailed();
 
@@ -196,17 +188,11 @@ void Goal_Think::addGoalExplore()
 	if (notPresent(goal_explore))
 	{
 		removeAllSubgoals();
-		//AddSubgoal( new Goal_Explore(m_pOwner));
 	}
 }
 
 void Goal_Think::addGoalGetItem(u32 item_type)
 {
-	//if (notPresent(ItemTypeToGoalType(ItemType)))
-	//{
-	//	RemoveAllSubgoals();
-		//AddSubgoal( new Goal_GetItem(m_pOwner, ItemType));
-	//}
 }
 
 
@@ -227,7 +213,6 @@ void Goal_Think::addGoalAttackTarget()
 
 void Goal_Think::queueGoalMoveToPosition(vector3df pos)
 {
-	//m_SubGoals.push_back(new Goal_MoveToPosition(m_pOwner, pos));
 }
 
 
@@ -284,7 +269,6 @@ void Goal_Think::addGoalHuntTarget()
 		removeAllSubgoals();
 		addSubgoal(new Goal_HuntTarget(m_owner));
 
-		//printf("적군 아이디[%d] : Goal_HuntTarget\n", m_pOwner->GetID());
 	}
 }
 
@@ -299,7 +283,6 @@ void Goal_Think::addGoalGoingHome()
 		removeAllSubgoals();
 		addSubgoal(new Goal_GoingHome(m_owner));
 
-		//printf("적군 아이디[%d] : Goal_HuntTarget\n", m_pOwner->GetID());
 	}
 }
 
@@ -316,7 +299,6 @@ void Goal_Think::addGoalUnitHuntTarget()
 		addSubgoal(new Goal_UnitHuntTarget(m_owner));
 	}
 
-		//printf("적군 아이디[%d] : Goal_HuntTarget\n", m_pOwner->GetID());
 
 
 }
@@ -332,5 +314,4 @@ void Goal_Think::addGoalAttackTargetForEnemy()
 		removeAllSubgoals();
 		addSubgoal( new Goal_AttackUnitTarget(m_owner));
 	}
-	//printf(".. ");
 }

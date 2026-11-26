@@ -344,8 +344,6 @@ void CGameUnit::addDamage( const u32 damage, CGameUnit* p_attacker)
 				sendMessageToAllObjects(0.0, p_attacker->getId() , Msg_UnitDead , this);
 				this->addGoalDead(); 		
 
-				//NETWORK
-				//NetworkPacketSpace::SendUnitKillReqPacket(this->GetID());
 			}
 		}
 
@@ -362,8 +360,6 @@ void CGameUnit::addDamage( const u32 damage, CGameUnit* p_attacker)
 
 				this->addGoalDead();  
 				
-				//NETWORK
-				//NetworkPacketSpace::SendUnitKillReqPacket(this->GetID());
 
 
 
@@ -421,7 +417,6 @@ void CGameUnit::damageShow( const u32 damage )
 /*======================================================*/
 void CGameUnit::obtainExp( const u32 u_exp )
 {
-	//scene::IParticleSystemSceneNode* ps;
 
 }
 
@@ -432,8 +427,6 @@ void CGameUnit::obtainExp( const u32 u_exp )
 /*======================================================*/
 void CGameUnit::sendDamageReq( const u32 damage, CGameUnit*	p_attacker )
 {
-	//NETWORK
-	//NetworkPacketSpace::SendDamageReqPacket(GetID(), damage, true, pAttacker->GetID());
 	
 }
 
@@ -470,5 +463,4 @@ void CGameUnit::updateHP( const u32 time_ms )
 void CGameUnit::updateHpBar()
 {
 	f32 percent =  (f32(getHp())/f32(getMaxHp())) * m_healthbar_width;
-	//	f32 abc = (50.0f - percent)/m_fHealthbarWidth;
 }

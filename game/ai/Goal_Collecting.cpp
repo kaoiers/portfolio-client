@@ -41,10 +41,8 @@ void Goal_Collecting::activate()
 /*======================================================*/
 s32 Goal_Collecting::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();
 
-	//process the subgoals
 	m_status = processSubgoals();
 
 	//if any of the subgoals have failed then this goal re-plans

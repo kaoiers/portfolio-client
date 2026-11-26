@@ -78,7 +78,6 @@ bool CRoomCommunityGUI::interfaceControl( CEventHandler* p_receiver )
 /*======================================================*/
 void CRoomCommunityGUI::guiInitialize()
 {
-	//m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 
 	CGUIManager*	p_gui_man =  CGUIManager::getInstance();
 
@@ -140,7 +139,6 @@ void CRoomCommunityGUI::addFriendList( const char* friend_name, u32 friend_id, c
 	temp_friend.friend_id = friend_id;
 	temp_friend.friend_name = friend_name;
 	temp_friend.friend_picture_file = friend_picture_file;
-	//temp_friend.friend_button_id = friend_button_id;
 
 
 }

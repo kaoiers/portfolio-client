@@ -56,13 +56,6 @@ public :
  		
 
 
-// 		scene::ISceneNode* node = m_pRoom->getSceneManager()->addSphereSceneNode();
-// 		node->setParent(m_pRoom->GetSceneNode());
-// 		node->setScale(vector3df(20,20,20));
-// 		node->setPosition(m_pRoom->getHeightPos());
-// 		node->setMaterialFlag(video::EMF_LIGHTING, false);
-		//node->getMaterial(0).DiffuseColor = 
-		//ShaderEffect->ApplyEffectToNode(node);
 		
 		
 	}
@@ -124,7 +117,6 @@ inline void CGameRoomProduct::assignTime(const u32 sec )
 
 		
 		
-		//m_ProductStatus->setVisible(true);	
 	}
 }
 
@@ -170,10 +162,6 @@ inline void CGameRoomProduct::cancelProcessing()
 inline void CGameRoomProduct::setCompletedEffect()
 {
 
-// 	scene::IParticleAffector* paf;
-// 	paf = m_ParticleNode->createAttractionAffector(pos ,30.0f, true );
-// 	m_ParticleNode->addAffector(paf);
-// 	paf->drop();
 
 	
 

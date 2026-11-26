@@ -15,7 +15,6 @@
 #include "MessageDispatcher.h"
 #include "../objects/CGameObject.h"
 #include "../CAppContext.h"
-//#include "FrameCounter.h"
 #include "../objects/CGameObjectManager.h"
 
 using std::set;

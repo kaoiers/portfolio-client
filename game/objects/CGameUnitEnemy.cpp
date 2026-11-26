@@ -63,35 +63,16 @@ CGameUnitEnemy::~CGameUnitEnemy()
 void CGameUnitEnemy::arbitrateBehavior()
 {
 // 
-// 	if(this->isAlive())
-// 	{
-// 		if(m_pEnemyTargetingSystem->getTargetType() == target_building  )
-// 		{
 // 			
-// 			m_pBrain->AddGoal_AttackBuilding();				
-// 		}
 // 
 // 		
-// 		else if(m_pEnemyTargetingSystem->getTargetType() == target_unit)
-// 		{
-// 			if(!(this->isInHitDistance(this->getEnemyTargetingSystem()->getUnitTarget()->Pos())))
-// 			{
-// 				m_pBrain->RemoveAllSubgoals();
 // 				
-// 				m_pBrain->AddGoal_AttackTarget(m_pEnemyTargetingSystem->getUnitTarget());
-// 			}
-// 			else
-// 			{
-// 				m_pBrain->AddGoal_AttackTarget(m_pEnemyTargetingSystem->getUnitTarget());
 // 
-// 			}
 // 
 // 			//printf("타겟 유닛 포착!! ");
 // 			
-// 		}
 // 
 // 
-// 	}
 }
 
 
@@ -111,9 +92,7 @@ bool	CGameUnitEnemy::isOnAttack()
 void CGameUnitEnemy::handleDestroyBuildingMessage( CGameRoom* p_room )
 {
 
-	//this->RemoveSubGoals();
 
-	//this->getEnemySensoryMemory()->RemoveRoomFromMemory(pRoom);
 
 	
 }

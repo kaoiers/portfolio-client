@@ -39,7 +39,6 @@ public:
   ~Goal_HuntTarget();
 
 
-   //the usual suspects
   void activate();
   s32  process();
   void terminate() {}

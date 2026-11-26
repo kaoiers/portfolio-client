@@ -34,7 +34,6 @@ enum eMAINMENU_GUI_ID
 	GUI_MAINMENU_TIME_IMAGE = 1510,
 	GUI_MAINMENU_LEVELBAR_BACK_IMAGE = 1511,
 	GUI_MAINMENU_LEVELBAR_FRONT_IMAGE = 1512,
-	//GUI_MAINMENU_LEVELBAR_DEMIGOD_IMAGE = 1511,
 	GUI_MAINMENU_LEVEL_TEXT = 1514,
 	GUI_MAINMENU_WARNING_TEXT = 1515,
 	GUI_MAINMENU_WARNING_IMAGE = 1516,
@@ -81,7 +80,6 @@ class CMainGameGUI : public CGameGUI
 	
 	static	CMainGameGUI*	m_instance;
 
-	//PLAYER_ID				m_playerId;
 	
 private :
 
@@ -123,6 +121,5 @@ public :
 	virtual	void			setOwner(CGameObject *owner);
 
 
-	//NETWORK
 	void					setMyPlayerId(/* PLAYER_ID playerId */);
 };

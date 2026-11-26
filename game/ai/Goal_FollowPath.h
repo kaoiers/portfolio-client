@@ -25,7 +25,6 @@ public:
 
   Goal_FollowPath(CGameUnit* p_unit);
 
-  //the usual suspects
   void activate();
   s32 process();
   void render();

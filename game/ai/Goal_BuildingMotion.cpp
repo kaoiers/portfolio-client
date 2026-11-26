@@ -52,7 +52,6 @@ s32 Goal_BuildingMotion::process()
 	
 	else
 	{
-		//if(!(m_pWorker->GetAnimationMgr()->IsOnAnimation(ANI_WORKING)))
 		{
 			m_worker->setCurrentAni(ANI_WORKING, false);
 		}
@@ -72,11 +71,8 @@ void Goal_BuildingMotion::terminate()
 {
 	m_status = completed;		 
 
-	//m_pWorker->PopBuildingCompletedRoom();
 
-	//m_iStatus = completed;
 
-	//m_pWorker->PopBuildingCompletedRoom();
 
 
 }

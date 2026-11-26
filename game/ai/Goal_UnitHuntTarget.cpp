@@ -11,7 +11,6 @@
 #include <stdafx.h>
 #include "Goal_UnitHuntTarget.h"
 
-//#include "Goal_Explore.h"
 
 #include "Goal_MoveToPosition.h"
 #include "../objects/CGameUnit.h"
@@ -45,11 +44,9 @@ void Goal_UnitHuntTarget::activate()
 /*======================================================*/
 s32 Goal_UnitHuntTarget::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();
 
 	
-	// m_iStatus = ProcessSubgoals();
 
 	if (m_owner->getTarget())
 	{

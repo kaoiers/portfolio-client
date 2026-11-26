@@ -64,11 +64,6 @@ void CGameUnitTiger::privateInitialize()
 {
 
 	
-// 	m_pWeaponSceneNode = this->getSceneManager()->addCubeSceneNode();
-// 	m_pWeaponSceneNode->setScale(vector3df(0.5f , 0.5f , 5.0f));
-// 	m_pWeaponSceneNode->setPosition(vector3df(0 , 0 , 20));
-// 	m_pWeaponSceneNode->setParent(this->GetSceneNode()->getJointNode("weapon"));
-// 	m_pWeaponSceneNode->setVisible(false);
 
 
 }
@@ -76,12 +71,7 @@ void CGameUnitTiger::privateInitialize()
 
 
 
-// void CGameUnitTiger::enter_control()
-// {
 // 
-// }
-// void CGameUnitTiger::update_control(CEventHandler* pReceiver)
-// {
 // 
 // 	
 // // 
@@ -94,15 +84,9 @@ void CGameUnitTiger::privateInitialize()
 // // 	 
 // // 	 else 
 // 		 
-// 	if(pReceiver->isMouseROneClick())
-// 	{
-// 		m_pBrain->AddGoal_MoveToPosition(pReceiver->getMouseUpGroundPosition());
 // 		//printf("빛방울");
-// 	}
 // 
-// }
 // 
-// void CGameUnitTiger::exit_control(){}	
 
 
 

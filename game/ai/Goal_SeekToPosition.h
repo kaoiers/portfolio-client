@@ -43,7 +43,6 @@ public:
 
 	Goal_SeekToPosition(CGameUnit* p_unit, vector3df target);
 
-	//the usual suspects
 	void activate();
 	s32  process();
 	void terminate();

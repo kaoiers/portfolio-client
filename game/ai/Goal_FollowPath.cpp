@@ -11,10 +11,8 @@
 #include <stdafx.h>
 #include "Goal_FollowPath.h"
 #include "../objects/CGameUnit.h"
-//#include "../Raven_Game.h"
 #include "Goal_TraverseEdge.h"
 #include <string>
-//#include "Goal_NegotiateDoor.h"
 
 
 
@@ -41,7 +39,6 @@ void Goal_FollowPath::activate()
 /*======================================================*/
 s32 Goal_FollowPath::process()
 {
-  //if status is inactive, call Activate()
   activateIfInactive();
 
   m_status = processSubgoals();

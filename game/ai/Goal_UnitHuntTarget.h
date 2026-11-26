@@ -45,7 +45,6 @@ public:
 	~Goal_UnitHuntTarget();
 
 
-	//the usual suspects
 	void activate();
 	s32  process();
 	void terminate() {}

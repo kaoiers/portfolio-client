@@ -42,26 +42,18 @@ void CGameRoomGod::initialize( const vector2di& tile_pos )
 	addEarthMesh(this);
 
 
-//  	m_vFirstIndexTile = TilePos;
 //  	//m_NodeIndex	=  CGameMap::GetInstance()->getNodeIndexFromTIle(m_vFirstIndexTile.X, m_vFirstIndexTile.Y );
 //  
 // 
-// 	this->GetSceneNode()->setPosition(
-// 		CGameMap::GetInstance()->getNodePos(m_vFirstIndexTile.X, m_vFirstIndexTile.Y)
 // 		- getBuildingOffset());
 // 
-// 	this->GetSceneNode()->OnRegisterSceneNode();
-// 	this->GetSceneNode()->OnAnimate((u32)(0));
 // 	//this->GetSceneNode()->render();
 // 
-// 	RemoveAndLinkNodes();
 // 
 // 	//ShaderEffect->removeNode(this->GetSceneNode());
 // 	//ShaderEffect->ApplyEffectToNode(this->GetSceneNode());
 // 
-// 	m_bBuildingFinished = true;
 // 	
-// 	this->GetSceneNode()->setID(IDFlag_IsBuildingPickable);
 
 
 	
@@ -102,8 +94,6 @@ void CGameRoomGod::update( const u32 time_ms )
 {
 	buildingUpdate();
 
-	//printf("%0.2f, %0.2f\n", this->GetSceneNode()->getTransformedBoundingBox().MaxEdge.X, this->GetSceneNode()->getTransformedBoundingBox().MaxEdge.Z );
-	//printf("%0.2f, %0.2f\n\n", this->GetSceneNode()->getTransformedBoundingBox().MinEdge.X, this->GetSceneNode()->getTransformedBoundingBox().MinEdge.Z );
 
 }
 
@@ -137,7 +127,5 @@ void addEarthMesh(CGameRoom* p_room)
 
 void addTorchFireParticle(CGameRoom* p_room,  const vector3df& pos)
 {
-	//ISceneNode* parent=0, s32 id=-1,
-	//		const vector3df& position = vector3df(0,0,0),
 
 }

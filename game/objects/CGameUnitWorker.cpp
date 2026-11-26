@@ -88,10 +88,6 @@ void CGameUnitWorker::buildingStart()
 //===========================================================
 //패킷 보내기(네트워크관련)
 //===========================================================
-// 	if(this->getOwnerType() == object_mine)
-// 	{
-// 		SendPacketStartBuildingReq(m_pBuildRoom, this);
-// 	}
 
 	m_build_room->buildingStart(10);
 }
@@ -154,7 +150,6 @@ void CGameUnitWorker::buildingControl( CEventHandler* p_receiver )
 				m_control_room->removeAndLinkNodes();
 
 				
-				//OnNetWorkBuildStartViewCommand(m_pControlRoom);
 
 				m_build_room = m_control_room;
 
@@ -162,23 +157,13 @@ void CGameUnitWorker::buildingControl( CEventHandler* p_receiver )
 
 				this->addGoalBuilding(m_control_room->getFrontPosToBuilding());
 
-				//m_pControlRoom = 0;
 				
 
-				//if(m_pControlRoom->isNotWalkableRoom())
-				//{
-					//m_pControlRoom = 0;
-
-					//this->getObjectManager()->setControlState(false);
-
-				//}				
-				//else
-				//{
 
 
-				//SendPacketBuildingReq(m_pControlRoom, this->GetID());				
 
-				//m_bFixRoomToGround = true;
+
+
 
 				m_control_room->makeBaseGround();
 				pushControlCompletedRoom();	
@@ -187,9 +172,7 @@ void CGameUnitWorker::buildingControl( CEventHandler* p_receiver )
 
 				
 
-				//PushControlCompletedRoom();
 
-				//}
 			}
 			
 
@@ -318,8 +301,6 @@ void CGameUnitWorker::cancelBuilding()
 /*======================================================*/
 void CGameUnitWorker::onNetworkBuildCommand()
 {
-	//m_pControlRoom->RemoveAndLinkNodes();
-	//m_pControlRoom->makeBaseGround();
 	m_control_room->makeBaseGround();
 	pushControlCompletedRoom();	
 
@@ -349,7 +330,6 @@ void CGameUnitWorker::cancelControl()
 	{
 		this->getObjectManager()->deleteRequest(m_control_room->getId());					
 		m_control_room = 0;
-		//this->setObjectType(com_none);
 	}
 
 	this->setCommandType(com_none);
@@ -381,8 +361,6 @@ void CGameUnitWorker::collectingComplete()
 {
 
 	//네트워크관련 
-	//NetworkPacketSpace::SendCollectCompleteReqPacket(m_pProductRoom->GetID());
-	//m_pProductRoom->CollectProduct();
 	this->obtainExp(70);
 }
 

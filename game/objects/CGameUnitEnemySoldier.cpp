@@ -106,5 +106,4 @@ void CGameUnitEnemySoldier::privateInitialize()
 
 CGameUnitEnemySoldier::~CGameUnitEnemySoldier()
 {
-	//m_pBrain->RemoveAllSubgoals();
 }

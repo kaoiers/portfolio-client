@@ -30,12 +30,10 @@ public:
 	Goal_GoingHome(CGameUnit* p_unit):  
 	  Goal_Composite<CGameUnit>(p_unit, goal_goinghome){}
 
-	  //the usual suspects
 	  void activate();
 	  s32  process();
 	  void terminate(){}
 
-	  //this goal is able to accept messages
 	  bool handleMessage(const Telegram& msg);
 
 	  void render();

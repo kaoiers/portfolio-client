@@ -130,10 +130,6 @@ bool CGameRoom::isBuildable(const vector3df& mouse_pos)
 		}
 	}
 
-// 	if( getObjectManager()->IsIntersectWithUnits(GetSceneNode()->getTransformedBoundingBox()) )
-// 	{
-// 		return false;
-// 	}
 
 	m_first_index_tile = getTile(mouse_pos);
 
@@ -354,13 +350,10 @@ void CGameRoom::restoreRoomAreaEdges()
 /*======================================================*/
 void CGameRoom::deleteRoom()
 {
-	//if(CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_game)
-	//{
 		if(this->getOwnerType() == object_mine)
 		{
 
 			//네트워크 관련
-			//NetworkPacketSpace::SendDestroyRoomReqPacket(this->GetID());		
 		}
 
 		deleteRoomReal();
@@ -457,8 +450,6 @@ bool CGameRoom::isProductRoom()
 /*======================================================*/
 vector3df CGameRoom::getFrontPosToBuilding()
 {
-	//vector3df maxEdge = this->GetSceneNode()->getTransformedBoundingBox().MaxEdge;
-	//vector3df minEdge = this->GetSceneNode()->getTransformedBoundingBox().MinEdge;
 
 	vector3df front(2.0f, 0.0f,100.0f );
 	
@@ -500,14 +491,12 @@ bool CGameRoom::addDamage( const u32 damage, CGameUnit*  p_attacker )
 
  		CGameUnitEnemy*	p_enemy = dynamic_cast<CGameUnitEnemy*>(p_attacker);
  
-		//this->DeleteRoomReal();
 
 		return true;
 	}  	
 
 	if(isPossessed())
 	{
-		//this->getOwnedGUI()->setDamage(m_uRoomHp, m_uTotalRoomHp);
 	}
 
 	return false;

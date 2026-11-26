@@ -52,7 +52,6 @@ bool CUnitWorkerGUI::interfaceControl( CEventHandler* p_receiver )
 
 	else if(p_receiver->isClickedButtonID(COMMAND_WORKING_BUTTON))
 	{
-		//this->getGUIManager();
 		
 		m_owner->setCommandType(com_collection);
 		

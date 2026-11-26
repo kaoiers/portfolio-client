@@ -50,7 +50,6 @@ bool CRoomUpTowerGUI::interfaceControl( CEventHandler* p_receiver )
 /*======================================================*/
 void CRoomUpTowerGUI::guiInitialize()
 {
-	//m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 }
 
 
@@ -62,5 +61,4 @@ void CRoomUpTowerGUI::guiInitialize()
 void CRoomUpTowerGUI::setOwner( CGameObject *obj )
 {
 	
-	//setDamage( m_pOwner->getRoomHp() , m_pOwner->getTotalRoomHP());
 }

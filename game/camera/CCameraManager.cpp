@@ -20,11 +20,8 @@
 /*======================================================*/
 void CCameraManager::setMoveSpeed(f32 spd )
 {
-	//list<ISceneNodeAnimator *>::ConstIterator anm  = (rtsCamera->getAnimators()).getLast();
 	
-	//CSceneNodeAnimatorCameraRTS * RTSAnimator = static_cast<CSceneNodeAnimatorCameraRTS *>(*anm);
 
-	//RTSAnimator->setMoveSpeed(spd);
 }
 
 
@@ -34,11 +31,8 @@ void CCameraManager::setMoveSpeed(f32 spd )
 /*======================================================*/
 void CCameraManager::setRotationSpeed(f32 spd)
 {
-	//list<ISceneNodeAnimator *>::ConstIterator anm  = (rtsCamera->getAnimators()).getLast();
 
-	//CSceneNodeAnimatorCameraRTS * RTSAnimator = static_cast<CSceneNodeAnimatorCameraRTS *>(*anm);
 
-	//RTSAnimator->setRotateSpeed(spd);
 
 }
 
@@ -48,11 +42,8 @@ void CCameraManager::setRotationSpeed(f32 spd)
 /*======================================================*/
 void CCameraManager::setZoomSpeed( f32 spd )
 {
-	//list<ISceneNodeAnimator *>::ConstIterator anm  = (rtsCamera->getAnimators()).getLast();
 
-	//CSceneNodeAnimatorCameraRTS * RTSAnimator = static_cast<CSceneNodeAnimatorCameraRTS *>(*anm);
 
-	//RTSAnimator->setZoomSpeed(spd);
 
 }
 
@@ -62,7 +53,6 @@ void CCameraManager::setZoomSpeed( f32 spd )
 /*======================================================*/
 void CCameraManager::setPosition(const vector3df &pos )
 {
-	//rtsCamera->setPosition(pos);	
 }
 
 

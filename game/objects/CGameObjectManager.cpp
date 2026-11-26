@@ -287,27 +287,7 @@ CGameUnitArmy* CGameObjectManager::addUnitArmy(OwnerType owner, UnitTypes Unitty
 
 	CGameUnitArmy* unit = 0;
 
-	/*
-	switch(Unittype)
-	{
-
-		case UNIT_ARMY_BUNNY : 
-			att = resman->Get_UnitAttribute(ATT_UNIT_ARMY_BUNNY);
-			unit = new CGameUnitBunny( owner, GODTYPE_UNIT, res, att, Unittype, pos, rot);
-			break;
-
-		case UNIT_ARMY_TIGER : 
-			att = resman->Get_UnitAttribute(ATT_UNIT_ARMY_TIGER);
-			unit = new CGameUnitTiger(owner,  GODTYPE_UNIT, res, att, Unittype, pos, rot);
-			break;
-
-		case UNIT_ARMY_NAPOLEON : 
-			att = resman->Get_UnitAttribute(ATT_UNIT_ARMY_NAPOLEON);
-			unit = new CGameUnitNapoleon(owner, GODTYPE_UNIT, res, att, Unittype, pos, rot);
-			break;
-	}
-
-	*/
+	
 
 	if (unit != nullptr)
 	{
@@ -346,12 +326,9 @@ bool CGameObjectManager::control( CEventHandler *p_receiver )
 	for(itr = m_map_id_character.begin(); itr != m_map_id_character.end(); itr++)
 	{
 		CGameObject *object = (itr->second);
-		//object->OnCommand();
 		object->control(p_receiver);
 
-		//printf("%d\n", object->GetID());
 		
-		//object->update(CAppContext::GetDevice()->getTimer()->getTime());
 	}
 
 	return true;
@@ -601,7 +578,6 @@ void CGameObjectManager::clearTargetFromObject(CGameObject* p_obj)
 		{
 			CGameUnitEnemy* p_enemy = dynamic_cast<CGameUnitEnemy *>(*itr);
 
-			//pEnemy->getEnemyTargetingSystem()->clearTarget(pObj);
 		}
 	}
 

@@ -31,7 +31,6 @@ public:
 
 	Goal_Enemy_ShortAttack(CGameUnitEnemy* p_unit, CGameUnit* p_target);
 
-	//the usual suspects
 	void activate();
 	s32  process();
 	void terminate();

@@ -13,10 +13,7 @@
 #include "../interfaces/CControllerGUI.h"
 
 
-//#include "CObjectController.h"
 #include "../eventhandle/CEventHandleManager.h"
-//#include "myUtil.h"
-//#include "CGameObjectManager.h"
 #include "../ai/Goal_Think.h"
 #include "../ai/God_Messages.h"
 #include "CGameObjectManager.h"

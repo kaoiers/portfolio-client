@@ -38,7 +38,6 @@ void Goal_Enemy_ShortAttack::activate()
 /*======================================================*/
 s32 Goal_Enemy_ShortAttack::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();
 
 

@@ -67,9 +67,7 @@ void CLightEffectManager::removeNode(  )
 /*======================================================*/
 void CLightEffectManager::setMainShadowLightParameter( const f32 farvalue )
 {
-	//m_pEffectHandler->getShadowLight(0).setPosition(vector3df(0, farvalue, 0));
 
-	//m_pEffectHandler->getShadowLight(0).set
 }
 
 
@@ -80,7 +78,6 @@ void CLightEffectManager::setMainLightPositionFromRadius( const f32 radius )
 {
 	f32	new_value = 0.0f;
 
-	//newValue =   radius/(45 * DEGTORAD);
 
 }
 

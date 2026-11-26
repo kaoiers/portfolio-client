@@ -27,16 +27,12 @@ class CExplosionSystem;
 
 class CGameMap : private UnCopyable
 {	
-	//NavGraph*							m_pNavGraph;
 	CGameObjectManager*					m_obj_man;
 
 	CTerrainObject*						m_terrain;
 
 	CGridSceneNode*						m_grid;
 
-	//CellSpace*						m_pSpacePartition;
-	//PathManager<CPathPlanner>*		m_pPathManager;
-	//CGameSectionManager*				m_pGameSectionManager;
 
 	CBoundaryManager*					m_boundary_manager;
 	CEnemyGenerator*					m_enemy_generator;

@@ -14,7 +14,6 @@ class CAppContext;
 
 class CCameraManager : private  UnCopyable
 {
-	//ICameraSceneNode*			rtsCamera;
 
 public:
 

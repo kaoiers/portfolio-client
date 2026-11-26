@@ -34,7 +34,6 @@ public:
 
 	Goal_BuildingMotion(CGameUnit* p_unit);
 
-	//the usual suspects
 	void activate();
 	s32  process();
 	void terminate();

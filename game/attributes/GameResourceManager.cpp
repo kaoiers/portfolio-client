@@ -196,7 +196,6 @@ void CGameResourceManager::onNetworkSetResources(u32 crop,
 
 	(*m_game_global_resource) = temp;
 
-	//printf("[리소스]진짜 보내주나??\n");
 }
 
 

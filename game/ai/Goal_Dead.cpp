@@ -25,10 +25,7 @@ void Goal_Dead::activate()
 {
 	m_status = active;
 
-// 	if(!(m_pOwner->GetAnimationMgr()->IsOnAnimation(ANI_WALK)))
-// 	{
 	m_owner->setCurrentAni(ANI_DIE, false);
-//	}	
 
 	
 }

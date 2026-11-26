@@ -29,7 +29,6 @@ void Goal_ShortAttack::activate()
 /*======================================================*/
 s32 Goal_ShortAttack::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();	
 	
 	if(!(m_owner->isInHitDistance(m_owner->getTarget()->getPos(), m_owner->getTarget()->getRadius() ))  )
@@ -46,19 +45,8 @@ s32 Goal_ShortAttack::process()
 	}
 
 // 	//test to see if the bot has become stuck
-// 	if (isStuck())
-// 	{
-// 		m_iStatus = failed;
-// 	}
 
 	//test to see if the bot has reached the waypoint. If so terminate the goal
-// 	else
-// 	{ 
-// 		if (m_pOwner->isAtPosition(m_vPosition))
-// 		{
- 			//m_iStatus = inactive;
-// 		}
-// 	}
 
 	return m_status;
 
@@ -66,7 +54,6 @@ s32 Goal_ShortAttack::process()
 
 void Goal_ShortAttack::terminate()
 {
-	//m_iStatus = completed;
 }
 
 Goal_ShortAttack::Goal_ShortAttack( CGameUnit* p_unit, CGameUnit* p_target )

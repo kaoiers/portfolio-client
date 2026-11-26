@@ -36,19 +36,14 @@ CObjectController::CObjectController() : m_controller(0), m_owner(0), m_control_
 	
 
 	
-	//ShaderEffect->ExcludeLightingCalculations(m_pSpotLight);
 
 	
-	//ShaderEffect->setMaterialFlag(video::EMF_LIGHTING, false);
 	
 
-	//m_pSpotLight->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
-	//m_pSpotLight->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
 
 
 	//m_pSpotLight->set
 
-	//m_pSpotLight->setLightType(video::E_LIGHT_TYPE::ELT_SPOT);
 
 	instance = this;
 }

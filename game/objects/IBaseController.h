@@ -27,7 +27,6 @@ public :
 	virtual void	updateControl(CEventHandler* p_receiver) = 0;
 	virtual void	exitControl() = 0;	
 	virtual	void	onCommand() = 0;
-	//virtual	void	update(const u32 timeMs) = 0;
 
 
 	virtual ~IBaseController(){};

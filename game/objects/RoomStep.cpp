@@ -30,8 +30,6 @@ bool CRoomStep::updateBuilding()
 		else
 		{
 
-			//m_pRoom->GetSceneNode()->setMesh(m_pRoomMesh);
-			//m_pRoom->GetSceneNode()->setMaterialFlag(video::EMF_LIGHTING, false);
 
 			m_on_building = false;
 

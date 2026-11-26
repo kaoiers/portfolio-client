@@ -27,7 +27,6 @@ public:
 
 	Goal_Dead(CGameUnit* p_unit);
 
-	//the usual suspects
 	void activate();
 	s32  process();
 	void terminate();

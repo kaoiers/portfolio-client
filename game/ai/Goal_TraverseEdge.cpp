@@ -14,10 +14,6 @@
 #include "../objects/CGameUnit.h"
 
 
-//#include "game/CObjectResourceManager.h"
-// #include "..\constants.h"
-// #include "../navigation/Raven_PathPlanner.h"
-// #include "debug/DebugConsole.h"
 
 
 
@@ -57,15 +53,10 @@ void Goal_TraverseEdge::activate()
 
 s32 Goal_TraverseEdge::process()
 {
-  //if status is inactive, call Activate()
   activateIfInactive();
   
   //if the bot has become stuck return failure
 
-//   if(m_pUpdateSendMovePacketRegulator->isReady() && m_pOwner->getOwnerType() == object_mine)
-//   {	
-// 	  NetworkPacketSpace::SendUnitMovetoPositionPacket(m_pOwner->GetID(), m_pOwner->Pos());
-//   }
 
 
 
@@ -102,16 +93,11 @@ void Goal_TraverseEdge::terminate()
 {
   //turn off steering behaviors.
   
-  //m_pOwner->GetSteering()->SeekOff();
 
-  //m_pOwner->GetSteering()->ArriveOff();
 
-// m_pOwner->GetAnimationMgr()->SetDefaultAni();
   
   //return max speed back to normal3  
   
-  //m_pOwner->SetMaxSpeed(m_pOwner->getUnitResource()->m_fMax_Speed);
 
-  //m_pOwner->SetVelocity(vector3df(0,0,0));
 }
 

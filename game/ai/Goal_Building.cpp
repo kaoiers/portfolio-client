@@ -34,10 +34,8 @@ void Goal_Building::activate()
 /*======================================================*/
 s32 Goal_Building::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();
 
-	//process the subgoals
 	m_status = processSubgoals();
 
 	//if any of the subgoals have failed then this goal re-plans
@@ -48,7 +46,6 @@ s32 Goal_Building::process()
 
 bool Goal_Building::handleMessage( const Telegram& msg )
 {
-	//bool bHandled = ForwardMessageToFrontMostSubgoal(msg);
 
 	return true;
 

@@ -33,7 +33,6 @@ void Goal_AttackUnitTarget::activate()
 
 	m_enemy = dynamic_cast<CGameUnitEnemy *>(m_owner);
 
-	//m_pTarget = m_pEnemy->getEnemyTargetingSystem()->getUnitTarget();
 
 
 	m_status = completed;
@@ -48,13 +47,10 @@ void Goal_AttackUnitTarget::activate()
 //-----------------------------------------------------------------------------
 s32 Goal_AttackUnitTarget::process()
 {
-	//if status is inactive, call Activate()
 	activateIfInactive();
 
-	//process the subgoals
 	m_status = processSubgoals();
 
-	//m_SubGoals.front().front();
 
 
 
@@ -87,17 +83,12 @@ void Goal_AttackUnitTarget::terminate()
 
 Goal_AttackUnitTarget::Goal_AttackUnitTarget( CGameUnit* p_owner ):Goal_Composite<CGameUnit>(p_owner, goal_attack_unit_target)
 {
-	//m_pUpdateRegulator = new Regulator(2.0f);
 }
 
 void Goal_AttackUnitTarget::stopHunting()
 {
-	//m_pOwner->GetSteering()->SeekOff();
 
-	//m_pOwner->GetSteering()->ArriveOff();
 	
-	//m_pOwner->SetVelocity(vector3df(0,0,0));
 
-	//m_pOwner->GetAnimationMgr()->SetDefaultAni();
 
 }

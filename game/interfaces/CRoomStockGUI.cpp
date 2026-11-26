@@ -30,7 +30,6 @@ enum
 /*======================================================*/
 void CRoomStockGUI::guiInitialize()
 {
-//m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 }
 
 
@@ -42,7 +41,6 @@ void CRoomStockGUI::setOwner( CGameObject *obj )
 {
 	m_owner = dynamic_cast<CGameRoomStock* >(obj);
 
-	//	setDamage( m_pOwner->getRoomHp() , m_pOwner->getTotalRoomHP());
 }
 
 

@@ -167,7 +167,6 @@ inline void MovingEntity::setHeading(const vector3df& new_heading)
 	 
 
   //the side vector must always be perpendicular to the heading
-  //m_vSide = m_vHeading.Perp();
 }
 
 

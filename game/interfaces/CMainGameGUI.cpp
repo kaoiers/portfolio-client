@@ -27,9 +27,6 @@
 
 #include "../shader/CLightEffectManager.h"
 
-// #include "network/CNetworkManager.h"
-// #include "PacketGame.h"
-// #include "network/CNetworkManager.h"
 
 
 #include "../objects/CGameRoom.h"
@@ -42,15 +39,7 @@
 #include "../PlugIn/PluginManager.h"
 
 
-// #include "web/WebBrowserView.h"
-// #include "CWebGUI.h"
-// #include "CWebDialog.h"
 
-//NETWORK
-// PACKET_GAME_WAVE_START_CL_AG_REQ* CreateWaveStartPacket()
-// {
-// 	return (new PACKET_GAME_WAVE_START_CL_AG_REQ());
-// }
 
 CMainGameGUI	*CMainGameGUI::m_instance = NULL;
 
@@ -72,11 +61,9 @@ m_alpha_ratio(0.0f)
 
 	m_game = CAppContext::getGodGame();
 	
-	//m_playerId		= INVALID_PLAYER_ID;
 
 	
 	
-//SetNeedOwner(true);
 }
 
 
@@ -264,11 +251,8 @@ void CMainGameGUI::playSound2D( const char* soundname , const bool loop)
 /*======================================================*/
 void CMainGameGUI::playSound3D( const char* soundname , const vector3df& pos , const bool loop )
 {
-	//vector3df Campos  = CAppContext::GetDevice()->getSceneManager()->getActiveCamera()->getPosition();
 
-	//vector3df SoundPos = Campos - pos;
 
-	//m_pGame->getPluginManager()->getSoundManager()->PlaySound3D(soundname, SoundPos ,loop);
 }
 
 
