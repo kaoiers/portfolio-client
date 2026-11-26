@@ -1,6 +1,10 @@
 #include "../stdafx.h"
 #include "../game/objects/CGameObject.h"
 #include "../game/objects/CGameObjectManager.h"
+#include "../game/objects/IBaseController.h"
+#include "../game/eventhandle/CEventHandleManager.h"
+#include "../game/map/CGameMap.h"
+#include "../game/camera/CCameraManager.h"
 
 #include <iostream>
 #include <stdexcept>
@@ -13,7 +17,7 @@ void require(bool condition, const char* message)
         throw std::runtime_error(message);
 }
 
-class TestObject final : public CGameObject
+class TestObject final : public CGameObject, public IBaseController
 {
 public:
     TestObject(u32 id, int& destroyed)
@@ -22,6 +26,10 @@ public:
     void control(CEventHandler*) override {}
     void onCommand() override {}
     bool handleMessage(const Telegram&) override { return false; }
+    void enterControl() override {}
+    void exitControl() override {}
+    void updateControl(CEventHandler* handler) override { last_handler = handler; }
+    CEventHandler* last_handler = nullptr;
 
 private:
     int& destroyed_;
@@ -59,7 +67,26 @@ int main()
             require(manager.registerObject(std::make_unique<TestObject>(9, destroyed)), "registration before teardown");
         }
         require(destroyed == 5, "manager destructor releases remaining objects");
-        std::cout << "Object lifecycle tests passed\n";
+        {
+            CGameObjectManager first;
+            CGameObjectManager second;
+            CCameraManager camera;
+            CGameMap map(first, camera);
+            require(map.getObjectManager() == &first, "map retains injected manager");
+            CEventHandler handler;
+
+            auto object = std::make_unique<TestObject>(11, destroyed);
+            auto* raw = object.get();
+            require(raw->getObjectManager() == nullptr && !raw->isPossessed(), "detached object has no global manager");
+            require(first.registerObject(std::move(object)), "first manager owns object");
+            first.setController(raw);
+            require(raw->isPossessed(), "object queries its own manager");
+            require(!second.isControlled(raw), "other controller stays independent");
+            first.update(&handler);
+            require(raw->last_handler == &handler, "injected input reaches controller");
+            require(first.removeObject(11), "controlled object can be removed");
+        }
+        std::cout << "Object lifecycle and injected dependency tests passed\n";
         return 0;
     }
     catch (const std::exception& error)

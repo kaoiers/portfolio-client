@@ -13,6 +13,7 @@
 
 class CTerrainObject;
 class CGameObjectManager;
+class CCameraManager;
 class CGridSceneNode;
 class CPathPlanner;
 class CBoundaryManager;
@@ -27,6 +28,7 @@ class CExplosionSystem;
 class CGameMap : private UnCopyable
 {
     CGameObjectManager* m_obj_man;
+    CCameraManager* m_camera_manager;
 
     CTerrainObject* m_terrain;
 
@@ -51,7 +53,7 @@ class CGameMap : private UnCopyable
     void displayObjectsByDepth(u32 x_offset, u32 y_offset, u32 depth);
 
 public:
-    CGameMap(CGameObjectManager* man);
+    CGameMap(CGameObjectManager& manager, CCameraManager& camera_manager);
     ~CGameMap();
 
     bool sectionInit(u32 tiles_x, u32 tiles_z, f32 height, f32 width);

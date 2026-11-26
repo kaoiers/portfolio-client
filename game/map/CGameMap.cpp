@@ -27,9 +27,10 @@ namespace
     constexpr u32 INITIAL_ENEMY_MAX_COUNT = 2;
 }
 
-CGameMap::CGameMap(CGameObjectManager* man)
+CGameMap::CGameMap(CGameObjectManager& manager, CCameraManager& camera_manager)
     :
-    m_obj_man(man),
+    m_obj_man(&manager),
+    m_camera_manager(&camera_manager),
     m_terrain(0),
     m_grid(0),
     m_cell_width(0),
@@ -77,7 +78,7 @@ bool CGameMap::init( s32 cells_x, s32 cells_z, s32 partition_x, s32 partition_z,
     //신전 배치
     //
     //////////////////////////////////////////////////////////////////////////////////////////////
-    CGameObjectManager* obj_man = CGameObjectManager::getInstance();
+    CGameObjectManager* obj_man = m_obj_man;
     CGameRoom* p_room = 0;
     p_room = obj_man->addRoomOnTile(object_mine, BUILDING_GOD, vector2di(28, 31));
 
@@ -121,7 +122,7 @@ void CGameMap::displayObjectsByDepth( u32 x_offset, u32 y_offset, u32 depth)
 
     createEnemyGenerator(); //순서유의
 
-    CCameraManager* camera_man = CAppContext::getGodGame()->getCameraManager();
+    CCameraManager* camera_man = m_camera_manager;
     vector3df topleftpos(getPosByTile(m_min_usable_tile.X, m_min_usable_tile.Y));
     vector3df bottomrightpos(getPosByTile(m_max_usable_tile.X, m_max_usable_tile.Y));
     camera_man->setBoundary(vector2df(topleftpos.X, topleftpos.Z),

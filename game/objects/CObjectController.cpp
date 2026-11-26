@@ -23,21 +23,8 @@
 #include "../interfaces/CControllerGUI.h"
 #include "CGameUnit.h"
 
-CObjectController* CObjectController::instance = nullptr;
-
 CObjectController::CObjectController() : m_controller(0), m_owner(0), m_control_state(0), m_plug_in_particle(0)
 {
-    //m_pSpotLight->set
-
-    instance = this;
-}
-
-/*======================================================*/
-// 인스턴트
-/*======================================================*/
-CObjectController* CObjectController::getInstance()
-{
-    return instance;
 }
 
 /*======================================================*/
@@ -50,7 +37,8 @@ void CObjectController::setController( IBaseController * p_controller)
         if (m_controller)
         {
             m_controller->exitControl();
-            CControllerGUI::instance()->disableGui();
+            if (auto* gui = CControllerGUI::instance())
+                gui->disableGui();
         }
 
         m_controller = p_controller;
@@ -68,13 +56,13 @@ void CObjectController::setController( IBaseController * p_controller)
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CObjectController::update()
+void CObjectController::update(CEventHandler* event_handler)
 {
     if (m_controller)
     {
         commonUpdateControlForType(m_owner->getObjectType());
 
-        m_controller->updateControl(CAppContext::getGodGame()->getEventHandler());
+        m_controller->updateControl(event_handler);
     }
 }
 

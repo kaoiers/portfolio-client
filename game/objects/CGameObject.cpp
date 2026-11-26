@@ -34,7 +34,7 @@ CGameObject::CGameObject(OwnerType owner, u32 objtype,
     m_animgr(nullptr),
     m_enable(true),
     m_command_type(com_none),
-    m_object_manager(CAppContext::getGodGame()->getObjectManager()),
+    m_object_manager(nullptr),
     m_selected(false),
     m_tag(false)
 {
@@ -51,7 +51,7 @@ CGameObject::CGameObject(OwnerType owner, u32 obj_id,
     m_animgr(nullptr),
     m_enable(true),
     m_command_type(com_none),
-    m_object_manager(CAppContext::getGodGame()->getObjectManager()),
+    m_object_manager(nullptr),
     m_selected(false),
     m_tag(false)
 {
@@ -84,7 +84,7 @@ CGameObject::~CGameObject()
 /*======================================================*/
 bool CGameObject::isPossessed()
 {
-    return (CObjectController::getInstance()->isPossessed(this));
+    return m_object_manager && m_object_manager->isControlled(this);
 }
 
 /*======================================================*/

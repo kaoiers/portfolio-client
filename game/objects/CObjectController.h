@@ -28,17 +28,9 @@ class CObjectController : public UnCopyable
 
     bool m_control_state;
 
-    static CObjectController* instance;
-
 public:
-    static CObjectController* getInstance();
-
     CObjectController();
-    ~CObjectController()
-    {
-        if (instance == this)
-            instance = nullptr;
-    }
+    ~CObjectController() = default;
 
     void setController(IBaseController * p_controller);
 
@@ -56,7 +48,7 @@ public:
 
     void setControlState(const bool state) { m_control_state = state; }
 
-    void update();
+    void update(CEventHandler* event_handler);
 
     void commonEnterControlForType(const u32 type);
     void commonUpdateControlForType(const u32 type);

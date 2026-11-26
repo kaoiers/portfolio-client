@@ -201,11 +201,11 @@ bool CGameObjectManager::control( CEventHandler *p_receiver)
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameObjectManager::update()
+void CGameObjectManager::update(CEventHandler* event_handler)
 {
     Dispatcher->dispatchDelayedMessages();
 
-    m_object_controller->update();
+    m_object_controller->update(event_handler);
 
     removeDeleteQueue();
 }

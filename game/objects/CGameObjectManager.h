@@ -105,7 +105,7 @@ public:
 public:
     bool control(CEventHandler *p_receiver);
 
-    void update();
+    void update(CEventHandler* event_handler);
 
     void render();
 

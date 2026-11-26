@@ -57,7 +57,7 @@ bool God_Game::gameLoading()
     m_gui_manager->gameLoading();
     m_camera_manager = std::make_unique<CCameraManager>();
     m_camera_manager->init();
-    m_game_map = std::make_unique<CGameMap>(getObjectManager());
+    m_game_map = std::make_unique<CGameMap>(*m_object_manager, *m_camera_manager);
 
     setGameState(God_Game::GameState::on_game);
 
@@ -120,7 +120,7 @@ void God_Game::update(u32 time_ms)
     {
         //순서유의
         if (m_object_manager)
-            m_object_manager->update();
+            m_object_manager->update(m_event_handler.get());
 
         if (m_game_map)
             m_game_map->update(time_ms);
