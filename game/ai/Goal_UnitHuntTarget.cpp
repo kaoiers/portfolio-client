@@ -43,7 +43,7 @@ void Goal_UnitHuntTarget::Activate()
 /*======================================================*/
 // 유닛 헌팅 행동 초기화
 /*======================================================*/
-int Goal_UnitHuntTarget::Process()
+s32 Goal_UnitHuntTarget::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();

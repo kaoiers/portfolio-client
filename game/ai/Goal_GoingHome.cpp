@@ -48,7 +48,7 @@ void Goal_GoingHome::Activate()
 /*======================================================*/
 //  철수하기 행동 처리
 /*======================================================*/
-int Goal_GoingHome::Process()
+s32 Goal_GoingHome::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();

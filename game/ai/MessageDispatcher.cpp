@@ -35,9 +35,9 @@ void MessageDispatcher::Discharge(CGameObject* pReceiver, const Telegram& telegr
 
 
 void MessageDispatcher::DispatchMsg(double       delay,
-                                    int          sender,
-                                    int          receiver,
-                                    int          msg,
+                                    s32          sender,
+                                    s32          receiver,
+                                    s32          msg,
                                     void*        AdditionalInfo = NULL)
 {
 
@@ -97,7 +97,7 @@ void MessageDispatcher::DispatchDelayedMessages()
   }
 }
 
-void MessageDispatcher::DispatchMessageToAllObjects( double delay, int sender, int msg, void* ExtraInfo )
+void MessageDispatcher::DispatchMessageToAllObjects( double delay, s32 sender, s32 msg, void* ExtraInfo )
 {
 
 	CGameObject* pSender = EntityMgr->GetObjectFromID(sender);

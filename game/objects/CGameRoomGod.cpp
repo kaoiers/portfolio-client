@@ -18,7 +18,7 @@ void AddEarthMesh(CGameRoom* pRoom);
 void AddTorchFireParticle(CGameRoom* pRoom,  const vector3df& pos);
 
 
-CGameRoomGod::CGameRoomGod(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res, const vector2di& TilePos,
+CGameRoomGod::CGameRoomGod(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res, const vector2di& TilePos,
 						   const vector3df& pos, 
 						   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 						   const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ )
@@ -26,7 +26,7 @@ CGameRoomGod::CGameRoomGod(OwnerType owner, unsigned int objtype, unsigned int b
 {
 	initialize(TilePos);
 }
-CGameRoomGod::CGameRoomGod(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res, const vector2di& TilePos)
+CGameRoomGod::CGameRoomGod(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res, const vector2di& TilePos)
 : CGameRoom(owner, objtype, btype, res)
 {
 	initialize(TilePos);

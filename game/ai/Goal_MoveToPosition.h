@@ -34,7 +34,7 @@ public:
 
  //the usual suspects
   void Activate();
-  int  Process();
+  s32  Process();
   void Terminate();
 
   //this goal is able to accept messages

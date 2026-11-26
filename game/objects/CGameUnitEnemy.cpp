@@ -17,7 +17,7 @@
 #include "CGameObjectManager.h"
 #include "../enemy_gen/CEnemyGenerator.h"
 
-CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* pGenerator ,OwnerType owner, unsigned int obj_id, unsigned int objtype,
+CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* pGenerator ,OwnerType owner, u32 obj_id, u32 objtype,
 							   const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute, 
 							   UnitTypes unittype, 
 							   const vector3df& pos , 
@@ -34,7 +34,7 @@ CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* pGenerator ,OwnerType owner, uns
 
 }
 
-CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* pGenerator, OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* pGenerator, OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
 							   const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 							   const vector3df& pos , 
 							   const vector3df& rot , 

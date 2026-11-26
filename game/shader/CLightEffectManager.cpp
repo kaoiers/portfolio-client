@@ -89,7 +89,7 @@ void CLightEffectManager::setMainLightPositionFromRadius( const f32 radius )
 /*======================================================*/
 // 현재 GUI 지정
 /*======================================================*/
-unsigned int CLightEffectManager::AddMineShadowLight( const vector3df& position, const vector3df& target )
+u32 CLightEffectManager::AddMineShadowLight( const vector3df& position, const vector3df& target )
 {
 	return 0;
 

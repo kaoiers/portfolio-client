@@ -90,7 +90,7 @@ void CGUIManager::RegisterGUIByID( CGameGUI *pGui )
 /*======================================================*/
 // 아이디로부터 인터페이스 찾기
 /*======================================================*/
-CGameGUI* CGUIManager::FindInterfaceFromID( int cid )
+CGameGUI* CGUIManager::FindInterfaceFromID( s32 cid )
 {
 	GUIMap::iterator itr = m_pGUIs.find(cid);
 	
@@ -133,7 +133,7 @@ bool CGUIManager::GameLoading( )
 /*======================================================*/
 // 마지막으로 저장된 GUI ID
 /*======================================================*/
-unsigned int CGUIManager::getLastGUIID()
+u32 CGUIManager::getLastGUIID()
 {
 	GUIMap::iterator itr;
 	itr = m_pGUIs.end();

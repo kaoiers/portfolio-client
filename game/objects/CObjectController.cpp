@@ -139,7 +139,7 @@ bool CObjectController::isPossessed( CGameObject * obj )
 /*======================================================*/
 // 타입마다 컨트롤 설정
 /*======================================================*/
-void CObjectController::CommonEnterControlForType( const unsigned int type )
+void CObjectController::CommonEnterControlForType( const u32 type )
 {
 	switch(type)
 	{
@@ -163,7 +163,7 @@ void CObjectController::CommonEnterControlForType( const unsigned int type )
 /*======================================================*/
 // 컨트롤별 컨트롤 업데이트
 /*======================================================*/
-void CObjectController::CommonUpdateControlForType( const unsigned int type )
+void CObjectController::CommonUpdateControlForType( const u32 type )
 {
 	switch(type)
 	{

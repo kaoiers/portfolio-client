@@ -25,7 +25,7 @@ class CUnitGodGUI : public CGameGUI
 
 public :
 
-	CUnitGodGUI(position2d<s32> rect = position2di(0,0)) :
+	CUnitGodGUI(position2d<s16> rect = position2di(0,0)) :
 	   CGameGUI(rect){}
 
 	virtual	~CUnitGodGUI() {};

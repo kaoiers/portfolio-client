@@ -56,7 +56,7 @@ class CObjectController;
 class CGameObjectManager
 {
 
-#define	ObjectMap std::map<unsigned int , CGameObject *>
+#define	ObjectMap std::map<u32 , CGameObject *>
 
 	ObjectMap										m_mapIdCharacter;
 
@@ -65,7 +65,7 @@ class CGameObjectManager
 
 
 
-#define	 DeletionQue	std::list<unsigned int>
+#define	 DeletionQue	std::list<u32>
 
 	DeletionQue										m_deleteque;
 
@@ -92,17 +92,17 @@ public:
 
 	ObjectMap			getObjIDMap() { return m_mapIdCharacter; }
 
-	bool				RemoveObject(unsigned int cid);
+	bool				RemoveObject(u32 cid);
 
 	void				RemoveAllObjects();
 
-	CGameObject*		GetObjectFromID(unsigned int cid);
+	CGameObject*		GetObjectFromID(u32 cid);
 
-	void				DeleteRequest(int idkey);
+	void				DeleteRequest(s32 idkey);
 
 	void				RemoveDeleteQue();
 
-	bool				IsValidID(unsigned int obj_id);
+	bool				IsValidID(u32 obj_id);
 
 
 
@@ -123,28 +123,28 @@ public:
 public:
 
 
-	CGameUnitEnemy*		AddUnitEnemy(OwnerType owner, unsigned int unit_id, UnitTypes Unittype,
+	CGameUnitEnemy*		AddUnitEnemy(OwnerType owner, u32 unit_id, UnitTypes Unittype,
 		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 	CGameUnitEnemy*		AddUnitEnemy(const vector3df& pos, CEnemyGenerator* pGenerator);
 
 
-	CGameUnit*			AddUnit(OwnerType owner, unsigned int unit_id, UnitTypes Unittype,
+	CGameUnit*			AddUnit(OwnerType owner, u32 unit_id, UnitTypes Unittype,
 		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 	CGameUnitArmy*		AddUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
 		vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 
-	CGameRoom*			AddRoom(OwnerType owner, const BuildingTypes Roomtype, unsigned int RoomID = 0, CGameUnit* pWorker = 0);
+	CGameRoom*			AddRoom(OwnerType owner, const BuildingTypes Roomtype, u32 RoomID = 0, CGameUnit* pWorker = 0);
 
-	CGameRoom*			AddRoomOnTile(OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile, unsigned int RoomID = 0);
+	CGameRoom*			AddRoomOnTile(OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile, u32 RoomID = 0);
 
 
 
 	CGameRoomGod*		AddGodRoom(OwnerType owner, const vector2di& tilePos);
 
-	CTerrainObject*		AddTerrainMap(OwnerType owner, int cx, int cz, float sx, float sz) { return nullptr; };
+	CTerrainObject*		AddTerrainMap(OwnerType owner, s32 cx, s32 cz, f32 sx, f32 sz) { return nullptr; };
 
 
 public :

@@ -42,7 +42,7 @@ void Goal_MoveToPosition::Activate()
 /*======================================================*/
 // 이동하기 행동 처리
 /*======================================================*/
-int Goal_MoveToPosition::Process()
+s32 Goal_MoveToPosition::Process()
 {
   //if status is inactive, call Activate()
   ActivateIfInactive();

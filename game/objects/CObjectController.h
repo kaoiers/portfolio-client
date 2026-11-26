@@ -65,8 +65,8 @@ public :
 
 	void				update();
 
-	void				CommonEnterControlForType(const unsigned int type);
-	void				CommonUpdateControlForType(const unsigned int type);
+	void				CommonEnterControlForType(const u32 type);
+	void				CommonUpdateControlForType(const u32 type);
 
 
 };

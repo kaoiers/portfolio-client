@@ -18,7 +18,7 @@
 #include "../shader/CLightEffectManager.h"
 
 
-CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner, unsigned int obj_id, unsigned int objtype,
+CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner, u32 obj_id, u32 objtype,
 											 const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute, 
 											 UnitTypes unittype, 
 											 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -31,7 +31,7 @@ CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerT
 
 }
 
-CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
 											 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 											 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 											 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 

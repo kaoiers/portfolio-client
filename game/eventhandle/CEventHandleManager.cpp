@@ -18,7 +18,7 @@
 /*======================================================*/
 // wchar -> char
 /*======================================================*/
-void WCharToChar(const wchar_t* pwstrSrc, int src_len, char* dest, int dest_len)
+void WCharToChar(const wchar_t* pwstrSrc, s32 src_len, char* dest, s32 dest_len)
 {
 //	WideCharToMultiByte( 949, 0, pwstrSrc, -1, pstr, len, NULL, NULL);
 
@@ -35,7 +35,7 @@ CEventHandler::CEventHandler()
 	:
 	iOffsetWheel(0.0f),
 	m_iButtonID(-1),
-	MousePosition(position2d<s32>(0, 0)),
+	MousePosition(position2d<s16>(0, 0)),
 	MouseRelativePosition(position2d<f32>(0.0f, 0.0f)),
 	m_bOverGUI(false)
 {
@@ -54,7 +54,7 @@ CEventHandler::CEventHandler()
 /*======================================================*/
 void CEventHandler::allkeyUpdate()
 {
-	for(int i=0; i<3; i++)
+	for(s32 i=0; i<3; i++)
 	{
 		bMouseOneclick[i] = false;
 		bMouseButtonUp[i] = false;
@@ -96,7 +96,7 @@ const line3d<f32> CEventHandler::getRay()
 /*======================================================*/
 // 버튼이 눌렸는지
 /*======================================================*/
-bool CEventHandler::isClickedButtonID(s32 buttonID)
+bool CEventHandler::isClickedButtonID(s16 buttonID)
 {
 	if(m_iButtonID == buttonID)
 	{

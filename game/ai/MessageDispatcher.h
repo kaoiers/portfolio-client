@@ -30,8 +30,8 @@ class CGameObject;
 
 //to make code easier to read
 const double SEND_MSG_IMMEDIATELY = 0.0;
-const int    NO_ADDITIONAL_INFO   = 0;
-const int    SENDER_ID_IRRELEVANT = -1;
+const s32    NO_ADDITIONAL_INFO   = 0;
+const s32    SENDER_ID_IRRELEVANT = -1;
 
 
 class MessageDispatcher
@@ -60,9 +60,9 @@ public:
 
   //send a message to another agent. Receiving agent is referenced by ID.
   void DispatchMsg(double      delay,
-                   int         sender,
-                   int         receiver,
-                   int         msg,
+                   s32         sender,
+                   s32         receiver,
+                   s32         msg,
                    void*       ExtraInfo);
 
   //send out any delayed messages. This method is called each time through   
@@ -70,8 +70,8 @@ public:
   void DispatchDelayedMessages();
 
   void DispatchMessageToAllObjects(double      delay,
-	  int         sender,
-	  int         msg,
+	  s32         sender,
+	  s32         msg,
 	  void*       ExtraInfo);
 
 

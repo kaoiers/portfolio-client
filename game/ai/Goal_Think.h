@@ -34,9 +34,9 @@ public:
 	void EnemyInit();
 	void ArmyInit();
 
-	bool notPresent(unsigned int GoalType)const;
+	bool notPresent(u32 GoalType)const;
 
-	int  Process();
+	s32  Process();
 	void Activate();
 	void Terminate(){}
 
@@ -44,7 +44,7 @@ public:
 
 	//top level goal types
 	void AddGoal_MoveToPosition(vector3df pos);
-	void AddGoal_GetItem(unsigned int ItemType);
+	void AddGoal_GetItem(u32 ItemType);
 	void AddGoal_Explore();
 	void AddGoal_Die();
 	void AddGoal_Building(const vector3df& pos);

@@ -55,7 +55,7 @@ void CRoomStep::UpdateBuildingStatus()
 
 	wchar_t status[30];
 
-	wsprintfW(status, L"%d %% 완료", static_cast<int>((building_process)*100.0f));
+	wsprintfW(status, L"%d %% 완료", static_cast<s32>((building_process)*100.0f));
 
 }
 

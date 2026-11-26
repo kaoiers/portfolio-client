@@ -30,7 +30,7 @@ void CGameUnitBunny::OnCommand()
 
 
 
-CGameUnitBunny::CGameUnitBunny(OwnerType owner, unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnitBunny::CGameUnitBunny(OwnerType owner, u32 obj_id, u32 objtype, const UNIT_RESOURCE* resource,
 							   const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 							   const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 							   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -40,7 +40,7 @@ CGameUnitBunny::CGameUnitBunny(OwnerType owner, unsigned int obj_id, unsigned in
 
 }
 
-CGameUnitBunny::CGameUnitBunny(OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnitBunny::CGameUnitBunny(OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
 							   const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 							   const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 							   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 

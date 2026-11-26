@@ -25,24 +25,24 @@ class CGameRoom : public CGameObject , public IBaseController
 {
 	
 	const ROOM_RESOURCE*					m_rResource;
-	unsigned	int							m_uWidth_cells, m_uHeight_cells;
+	u32							m_uWidth_cells, m_uHeight_cells;
 	CRoomStep*								m_pBuildingStep;
-	unsigned int							m_uTotalRoomHp;
+	u32							m_uTotalRoomHp;
 	u32										m_uRoomHp;
 	CGameUnitArmy*							m_pGuardian;
 	bool									m_bNetLive;
-	unsigned	int							room_type;
+	u32							room_type;
 
 protected :
 
 	bool									m_bBuildingFinished;
 	vector2di								m_vFirstIndexTile;
-	int										m_NodeIndex;
+	s32										m_NodeIndex;
 
 
 public :
 
-	unsigned int					getRoomType() { return room_type; }
+	u32					getRoomType() { return room_type; }
 
 	CGameResourceManager*					getGameResource();
 	bool									isProductRoom();
@@ -63,13 +63,13 @@ public :
 
 public :
 
-	CGameRoom(OwnerType owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res,
+	CGameRoom(OwnerType owner, u32 objtype,  u32 btype, const ROOM_RESOURCE* res,
 		const vector3df& pos,
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
 
-	CGameRoom(OwnerType owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res);
+	CGameRoom(OwnerType owner, u32 objtype,  u32 btype, const ROOM_RESOURCE* res);
 	virtual		~CGameRoom();
 
 
@@ -97,7 +97,7 @@ public :
 	bool									isBuildable(const vector3df& MousePos);
 	f32										getBuildingTime();
 	
-	void									BuildingStart(const unsigned int seconds);
+	void									BuildingStart(const u32 seconds);
 
 	void									FollowMouse(CEventHandler* pReceiver);
 	void									RemoveAndLinkNodes();
@@ -113,7 +113,7 @@ public :
 	void									RestoreRoomAreaEdges();
 	void									DeleteRoom();
 	void									DeleteRoomReal();
-	int										getRoomNodeIndex();
+	s32										getRoomNodeIndex();
 	bool									RemoveAllNodesForDestroy();
 	void									Explosion();
 
@@ -123,7 +123,7 @@ protected :
 	vector3df								getBuildingOffset();
 	void									RemoveBoundaryLines();
 	void									AddBoundaryLines(const bool walkable = true);
-	int										LinkDoorEdges();
+	s32										LinkDoorEdges();
 
 };
 

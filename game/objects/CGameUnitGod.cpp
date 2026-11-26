@@ -67,7 +67,7 @@ void CGameUnitGod::enter_control()
 
 
 
-CGameUnitGod::CGameUnitGod(OwnerType owner, unsigned int obj_id, unsigned int objtype,
+CGameUnitGod::CGameUnitGod(OwnerType owner, u32 obj_id, u32 objtype,
 						   const UNIT_RESOURCE* resource, 
 						   const GAMEUNIT_ATTRIBUTE* attribute, 
 						   UnitTypes unittype, 

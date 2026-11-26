@@ -25,7 +25,7 @@ class CRoomUpTowerGUI : public CGameGUI
 
 public :
 
-	CRoomUpTowerGUI(position2d<s32> rect = position2di(0,0)) :
+	CRoomUpTowerGUI(position2d<s16> rect = position2di(0,0)) :
 	   CGameGUI(rect){}
 
 	   virtual	~CRoomUpTowerGUI() {};

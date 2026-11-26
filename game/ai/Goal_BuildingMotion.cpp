@@ -32,7 +32,7 @@ void Goal_BuildingMotion::Activate()
 /*======================================================*/
 //  빌딩 애니메이션 처리
 /*======================================================*/
-int Goal_BuildingMotion::Process()
+s32 Goal_BuildingMotion::Process()
 {
 	ActivateIfInactive();
 

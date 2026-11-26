@@ -31,9 +31,9 @@ struct ROOM_RESOURCE :  BASIC_OBJECT_RESOURCE
 	u32				m_iHeight_cells;
 	vector3di		doorVector;
 	f32				m_iBuildingTime;
-	s32				NeedGold;
-	s32				NeedStone;
-	s32				NeedWood;
+	s16				NeedGold;
+	s16				NeedStone;
+	s16				NeedWood;
 };
 
 

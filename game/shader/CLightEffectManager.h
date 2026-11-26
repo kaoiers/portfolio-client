@@ -24,8 +24,8 @@ class CLightEffectManager : public UnCopyable
 {
 
 
-	unsigned int					FilterType;
-	unsigned int					ShadowMode;
+	u32					FilterType;
+	u32					ShadowMode;
 
 public :
 	
@@ -37,7 +37,7 @@ public :
 	static	CLightEffectManager* GetInstance();
 
 	void						drop();
-	unsigned int				AddMineShadowLight(const vector3df& position, 	const vector3df& target);
+	u32				AddMineShadowLight(const vector3df& position, 	const vector3df& target);
 	void						removeNode();
 	void						SetMainShadowLightParameter(const f32 farvalue );
 	void						setMainLightPositionFromRadius(const f32 radius);

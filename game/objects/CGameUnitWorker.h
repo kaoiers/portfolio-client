@@ -59,7 +59,7 @@ public :
 
 
 
-	CGameUnitWorker(OwnerType owner, unsigned int obj_id, unsigned int objtype,
+	CGameUnitWorker(OwnerType owner, u32 obj_id, u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 
@@ -107,7 +107,7 @@ public :
 public :
 	
 	void					OnNetWorkBuildCommand();
-	void					OnNetWorkBuildStartCommand(unsigned int seconds);
+	void					OnNetWorkBuildStartCommand(u32 seconds);
 	void					OnNetWorkBuildStartViewCommand(CGameRoom*	pRoom);
 	void					OnNetWorkBuildCompleteViewCommand();
 	

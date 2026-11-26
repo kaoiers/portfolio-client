@@ -38,7 +38,7 @@ void Goal_AttackTarget::Activate()
 /*======================================================*/
 //  타겟 공격 행동 처리
 /*======================================================*/
-int Goal_AttackTarget::Process()
+s32 Goal_AttackTarget::Process()
 {
 	ActivateIfInactive();
 
@@ -53,7 +53,7 @@ int Goal_AttackTarget::Process()
 /*======================================================*/
 //  자식 목표있는지 검사
 /*======================================================*/
-bool Goal_AttackTarget::notPresent(unsigned int GoalType)const
+bool Goal_AttackTarget::notPresent(u32 GoalType)const
 {
 	if (!m_SubGoals.empty())
 	{

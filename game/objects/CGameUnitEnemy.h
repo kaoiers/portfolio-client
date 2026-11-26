@@ -38,9 +38,9 @@ protected :
 
 	u32						m_sGoingHomeTime;
 
-	s32						m_sRemainTime;
+	s16						m_sRemainTime;
 
-	s32						m_sElapsedTime;
+	s16						m_sElapsedTime;
 
 
 public :
@@ -67,7 +67,7 @@ public :
 	void							HandleKillUnitMessage(CGameUnit*	pUnit);
 	void							HandleUnitDeadMessage(CGameUnit*	pUnit);
 
-	s32								getRemainTime() {return m_sGoingHomeTime - m_sElapsedTime; }
+	s16								getRemainTime() {return m_sGoingHomeTime - m_sElapsedTime; }
 
 
 	
@@ -79,7 +79,7 @@ public :
 
 	CEnemyTargetingSystem*			getEnemyTargetingSystem() {return m_pEnemyTargetingSystem; }
 
-	CGameUnitEnemy(CEnemyGenerator* pGenerator , OwnerType owner,unsigned int obj_id, unsigned int objtype,
+	CGameUnitEnemy(CEnemyGenerator* pGenerator , OwnerType owner,u32 obj_id, u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 
@@ -87,7 +87,7 @@ public :
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
-	CGameUnitEnemy(CEnemyGenerator* pGenerator , OwnerType owner,unsigned int objtype,
+	CGameUnitEnemy(CEnemyGenerator* pGenerator , OwnerType owner,u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 

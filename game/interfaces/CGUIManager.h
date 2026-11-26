@@ -38,7 +38,7 @@ class CGUIManager
 	CPopUpGUI*			m_pPopUpGUI;
 	CWebDialog*			m_pWebDialog;
 
-	typedef std::map<unsigned int , CGameGUI *> GUIMap;
+	typedef std::map<u32 , CGameGUI *> GUIMap;
 	GUIMap	m_pGUIs;
 
 	
@@ -54,7 +54,7 @@ public :
 
 	virtual				~CGUIManager();
 
-	CGameGUI*			FindInterfaceFromID( int cid );
+	CGameGUI*			FindInterfaceFromID( s32 cid );
 
 	void				RegisterGUIByID(CGameGUI *pGui);
 
@@ -86,7 +86,7 @@ public :
 	CWebDialog*			getWebDialog() const { return m_pWebDialog; }
 
 public :
-	unsigned int getLastGUIID();
+	u32 getLastGUIID();
 
 private :
 

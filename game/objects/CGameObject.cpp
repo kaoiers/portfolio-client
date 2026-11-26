@@ -23,9 +23,9 @@
 #include "../interfaces/CControllerGUI.h"
 #include "../interfaces/CGUIManager.h"
 
-unsigned int	CGameObject::m_iNextValidID = 1;
+u32	CGameObject::m_iNextValidID = 1;
 
-CGameObject::CGameObject(OwnerType owner, unsigned int objtype,
+CGameObject::CGameObject(OwnerType owner, u32 objtype,
 						 vector3df pos,
 						 vector3df rot,
 						 vector3df scale) :
@@ -41,8 +41,8 @@ CGameObject::CGameObject(OwnerType owner, unsigned int objtype,
 
 }
 
-CGameObject::CGameObject(OwnerType owner,  unsigned int obj_id,
-						 unsigned int objtype, 
+CGameObject::CGameObject(OwnerType owner,  u32 obj_id,
+						 u32 objtype,
 						 vector3df pos, 
 						 vector3df rot, 
 						 vector3df scale) :
@@ -104,7 +104,7 @@ bool CGameObject::isPossessed()
 /*======================================================*/
 // 모든 오브젝트들에게 메시지를 보내기
 /*======================================================*/
-bool CGameObject::SendMessageToAllObjects( double delay, int sender, int msg, void* ExtraInfo )
+bool CGameObject::SendMessageToAllObjects( double delay, s32 sender, s32 msg, void* ExtraInfo )
 {
 	 Dispatcher->DispatchMessageToAllObjects(delay,	 sender, msg, ExtraInfo);
 	

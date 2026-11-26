@@ -26,7 +26,7 @@
 #include "../interfaces/CMainGameGUI.h"
 
 
-CGameUnit::CGameUnit(OwnerType owner,unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnit::CGameUnit(OwnerType owner,u32 obj_id, u32 objtype, const UNIT_RESOURCE* resource,
 					const GAMEUNIT_ATTRIBUTE* attribute,
 					 UnitTypes unittype,
 					 AllianceType Ally,
@@ -54,7 +54,7 @@ MovingEntity(owner, obj_id, objtype,
 	m_pBrain = new Goal_Think(this);
 }
 
-CGameUnit::CGameUnit(OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnit::CGameUnit(OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
 					 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype,AllianceType Ally,
 					 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -236,7 +236,7 @@ bool CGameUnit::isAttackSuccess(CGameObject* opponent )
 /*======================================================*/
 // 현재 애니메이션 설정하기
 /*======================================================*/
-void CGameUnit::setCurrentAni( const unsigned int atype, const bool bLoop )
+void CGameUnit::setCurrentAni( const u32 atype, const bool bLoop )
 {
 	
 
@@ -453,7 +453,7 @@ void CGameUnit::RemoveSubGoals()
 /*======================================================*/
 void CGameUnit::updateHP( const u32 timeMs )
 {
-	if(getHp() < static_cast<int>(getMaxHp()))
+	if(getHp() < static_cast<s32>(getMaxHp()))
 	{
 		
 

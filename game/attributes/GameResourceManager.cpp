@@ -135,8 +135,8 @@ void CGameResourceManager::AddPlayerExp( u32 exp )
 	{
 		IncreaseExp(exp);
 		CMainGameGUI* pGUI = CMainGameGUI::GetInstance();
-		f32 a = float(int(m_uCurrentPlayerExp));
-		f32 b = float(getMaxPlayerExp(m_uCurrentPlayerLevel));
+		f32 a = f32(s32(m_uCurrentPlayerExp));
+		f32 b = f32(getMaxPlayerExp(m_uCurrentPlayerLevel));
 		pGUI->setLevelStatus( a/b , m_uCurrentPlayerLevel);		
 	}
 }
@@ -185,9 +185,9 @@ u32 CGameResourceManager::getMaxPlayerExp(u32 level)
 /*======================================================*/
 // 네트워크용 
 /*======================================================*/
-void CGameResourceManager::OnNetworkSetResources(unsigned int crop,
-												 unsigned int woods,
-												 unsigned int gold )
+void CGameResourceManager::OnNetworkSetResources(u32 crop,
+												 u32 woods,
+												 u32 gold )
 {
 	GlobalResource temp;
 	temp.crop = crop;

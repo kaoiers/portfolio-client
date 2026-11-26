@@ -22,10 +22,10 @@ class CRoomCommunityGUI : public CGameGUI
 
 	typedef struct 
 	{
-		unsigned int friend_id;		
+		u32 friend_id;
 		std::string friend_name;
 		std::string	friend_picture_file;		
-		int			friend_button_id;
+		s32			friend_button_id;
 
 	}FriendInfo;
 
@@ -41,16 +41,16 @@ class CRoomCommunityGUI : public CGameGUI
 	CButtonGUI*				m_pFriendButton[friend_button_counts];
 	CTextGUI*				m_pFriendName[friend_button_counts];
 
-	unsigned int						m_friend_id;
+	u32						m_friend_id;
 
 
-	unsigned				int			m_uCurrent_page;
+	u32			m_uCurrent_page;
 
 
 
 	virtual bool			interface_control(CEventHandler* pReceiver);
 
-	unsigned int			friend_button_id;
+	u32			friend_button_id;
 
 	void					ResetFriendsList();
 
@@ -59,7 +59,7 @@ class CRoomCommunityGUI : public CGameGUI
 
 public :
 
-	CRoomCommunityGUI(position2d<s32> rect = position2di(0,0));
+	CRoomCommunityGUI(position2d<s16> rect = position2di(0,0));
 
 	   virtual	~CRoomCommunityGUI() {};
 
@@ -68,9 +68,9 @@ public :
 	   virtual void	SetOwner(CGameObject *obj);
 
 
-	   void			addFriendList(const char* friend_name , unsigned int friend_id,  const char* friend_picture_file = "none" );
+	   void			addFriendList(const char* friend_name , u32 friend_id,  const char* friend_picture_file = "none" );
 
-	   void			setFriendPicture( unsigned int friend_id, size_t stream_size, char* pStream );
+	   void			setFriendPicture( u32 friend_id, size_t stream_size, char* pStream );
 
 };
 

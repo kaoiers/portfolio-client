@@ -54,7 +54,7 @@ void Goal_SeekToPosition::Activate()
 /*======================================================*/
 //  도착 검사 처리
 /*======================================================*/
-int Goal_SeekToPosition::Process()
+s32 Goal_SeekToPosition::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();

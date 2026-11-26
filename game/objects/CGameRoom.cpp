@@ -27,7 +27,7 @@
 #include "../God_Game.h"
 
 
-CGameRoom::CGameRoom(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res,
+CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res,
 					 const vector3df& pos, 
 					 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ ) : 
@@ -40,7 +40,7 @@ m_pBuildingStep(0),m_NodeIndex(-1),m_bBuildingFinished(false), m_uTotalRoomHp(10
 
 }
 
-CGameRoom::CGameRoom(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
+CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res )
 :CGameObject(owner, objtype), room_type(btype), m_rResource(res) 
 ,m_uWidth_cells(res->m_iWidth_cells), m_uHeight_cells(res->m_iHeight_cells),
 
@@ -111,17 +111,17 @@ bool CGameRoom::isBuildable(const vector3df& MousePos)
 	Curtile.X -= 1;
 	Curtile.Y -= 1;
 
-	for(unsigned int i = 0; i<m_uHeight_cells+2; i++)
+	for(u32 i = 0; i<m_uHeight_cells+2; i++)
 	{
-		for(unsigned int j = 0; j<m_uWidth_cells+2; j++)
+		for(u32 j = 0; j<m_uWidth_cells+2; j++)
 		{
 			if( !(pMap->IsNodePresent(Curtile.X + j, Curtile.Y + i)) || 
 
 				!(pMap->IsInUsableArea(Curtile.X + j, Curtile.Y + i))
 
 				/*
-				unsigned int(pMap->getNumCellsX()) <= (Curtile.X + j) 
-				|| unsigned int(pMap->getNumCellsZ()) <= (Curtile.Y + i)   
+				u32(pMap->getNumCellsX()) <= (Curtile.X + j)
+				|| u32(pMap->getNumCellsZ()) <= (Curtile.Y + i)
 				|| (Curtile.X + j) < 0 || (Curtile.Y + i) < 0 */)
 			{
 
@@ -184,9 +184,9 @@ bool CGameRoom::RemoveAllNodesForDestroy()
 {
 	CGameMap*	pMap = CGameMap::GetInstance();
 
- 	for(unsigned int i=0; i<m_uHeight_cells; i++)
+	for(u32 i=0; i<m_uHeight_cells; i++)
  	{
- 		for(unsigned int j=0; j<m_uWidth_cells; j++)
+		for(u32 j=0; j<m_uWidth_cells; j++)
  		{			
 			if(pMap->IsNodePresent(m_vFirstIndexTile.X + j, m_vFirstIndexTile.Y + i))
 			{
@@ -223,7 +223,7 @@ void CGameRoom::setOnebyOneNode()
 /*======================================================*/
 // 문노드 연결하기
 /*======================================================*/
-int CGameRoom::LinkDoorEdges()
+s32 CGameRoom::LinkDoorEdges()
 {
 	CGameMap* pMap = CGameMap::GetInstance();
 	vector2di rTile;
@@ -253,7 +253,7 @@ int CGameRoom::LinkDoorEdges()
 	{
 		rTile.Y  = m_vFirstIndexTile.Y;
 		pMap->AddNodeAndLinkEdges(rTile.X,rTile.Y);
-		for(unsigned int i = 0; i<m_uHeight_cells; i++)
+		for(u32 i = 0; i<m_uHeight_cells; i++)
 		{
 			rTile.Y += 1;
 			if(pMap->IsNodePresent(rTile.X,rTile.Y))
@@ -322,7 +322,7 @@ const bool	CGameRoom::isBuildingCompleted()
 /*======================================================*/
 // 건설 시작되기
 /*======================================================*/
-void CGameRoom::BuildingStart(const unsigned int seconds)
+void CGameRoom::BuildingStart(const u32 seconds)
 {
 	m_pBuildingStep->StartBuilding(seconds);
 }
@@ -339,9 +339,9 @@ void CGameRoom::RestoreRoomAreaEdges()
 
 	CGameMap*	pMap = CGameMap::GetInstance();
 
-	for(unsigned int i=0; i<m_uHeight_cells; i++)
+	for(u32 i=0; i<m_uHeight_cells; i++)
 	{
-		for(unsigned int j=0; j<m_uWidth_cells; j++)
+		for(u32 j=0; j<m_uWidth_cells; j++)
 		{			
 			pMap->AddNodeAndLinkEdges(m_vFirstIndexTile.X + j, m_vFirstIndexTile.Y + i);
 		}
@@ -409,7 +409,7 @@ void CGameRoom::RemoveBoundaryLines()
 /*======================================================*/
 // 건물 인덱스 가져오기
 /*======================================================*/
-int CGameRoom::getRoomNodeIndex()
+s32 CGameRoom::getRoomNodeIndex()
 {
 	CGameMap*	pMap = CGameMap::GetInstance(); 
 	

@@ -29,7 +29,7 @@ class CGUIManager;
 class CGameGUI : public IBaseGameGUI
 {
 
-	unsigned	int		m_gid;
+	u32		m_gid;
 
 	bool				m_bNeedOwner;
 
@@ -41,7 +41,7 @@ class CGameGUI : public IBaseGameGUI
 
 	IGUIObject*			m_pFocusedObject;
 
-	static  unsigned int				m_iNextValidID;
+	static  u32				m_iNextValidID;
 
 
 	bool					element_control(CEventHandler* m_pReceiver);
@@ -52,7 +52,7 @@ typedef std::list<IGUIObject *> GuiElementsList	;
 typedef std::map<std::string , CObjectListSet<IGUIObject *> > GroupGUI ;
 
 	GroupGUI							m_Group;
-	position2d<s32>						m_abolutePosition;
+	position2d<s16>						m_abolutePosition;
 	GuiElementsList						m_pElements;
 	CGameObject*						m_pOwner;
 
@@ -61,7 +61,7 @@ public :
 
 
 	CGameGUI() {};
-	CGameGUI(position2d<s32> pos = position2d<s32>(0,0) );
+	CGameGUI(position2d<s16> pos = position2d<s16>(0,0) );
 
 	virtual ~CGameGUI();
 
@@ -102,11 +102,11 @@ public :
 		
 	void					RegisterElement( IGUIObject *pGui );
 
-	IGUIObject*				FindElementByID(s32 eid);
+	IGUIObject*				FindElementByID(s16 eid);
 
-	position2d<s32>			GetPosition() const  { return  m_abolutePosition; }
+	position2d<s16>			GetPosition() const  { return  m_abolutePosition; }
 	
-	unsigned int			GetID() const { return m_gid; }
+	u32			GetID() const { return m_gid; }
 
 
 	void					SetNeedOwner(const bool need = true) {m_bNeedOwner = need;}
@@ -117,13 +117,13 @@ public :
 
 public :
 
-	CButtonGUI*				addButton(const position2d<s32> Position, const char* defaultImage, s32 mID = -1 ,std::wstring text = L"");
+	CButtonGUI*				addButton(const position2d<s16> Position, const char* defaultImage, s16 mID = -1 ,std::wstring text = L"");
 	
-	CImageGUI*				addImage(const position2d<s32> Position, const char* defaultImage , s32 mID = -1);
+	CImageGUI*				addImage(const position2d<s16> Position, const char* defaultImage , s16 mID = -1);
 	
-	position2d<s32> GetRelativePosition( const position2d<s32> pos ) const;
+	position2d<s16> GetRelativePosition( const position2d<s16> pos ) const;
 	
-	position2d<s32> GetAbsolutePosition(const position2d<s32> pos) const;
+	position2d<s16> GetAbsolutePosition(const position2d<s16> pos) const;
 
 	bool							FindGroupByName(const char * name, std::list<IGUIObject *>* pGroupList);
 	

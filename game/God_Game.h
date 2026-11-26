@@ -65,7 +65,7 @@ public :
 
 
 	void								render();
-	void								upadte(unsigned int timeMs);
+	void								upadte(u32 timeMs);
 	bool								control();
 
 

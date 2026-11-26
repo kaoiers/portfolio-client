@@ -55,7 +55,7 @@ void Goal_TraverseEdge::Activate()
 
 
 
-int Goal_TraverseEdge::Process()
+s32 Goal_TraverseEdge::Process()
 {
   //if status is inactive, call Activate()
   ActivateIfInactive();

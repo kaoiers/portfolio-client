@@ -39,7 +39,7 @@ enum message_type
 
 
 //메시지 정보
-inline std::string MessageToString(int msg)
+inline std::string MessageToString(s32 msg)
 {
 	switch(msg)
 	{

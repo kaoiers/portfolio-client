@@ -159,7 +159,7 @@ size_t PluginManager::GetNumPlugins ( void ) const
 /*======================================================*/
 // 플러그인 가져오기
 /*======================================================*/
-IPlugin * PluginManager::GetPlugin ( int nIndex )
+IPlugin * PluginManager::GetPlugin ( s32 nIndex )
 {
     if ( nIndex < 0 || nIndex >= GetNumPlugins() )
         return NULL;

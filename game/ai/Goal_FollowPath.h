@@ -27,7 +27,7 @@ public:
 
   //the usual suspects
   void Activate();
-  int Process();
+  s32 Process();
   void Render();
   void Terminate();
 

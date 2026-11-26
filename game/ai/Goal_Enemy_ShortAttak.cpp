@@ -36,7 +36,7 @@ void Goal_Enemy_ShortAttack::Activate()
 /*======================================================*/
 //  프로세스 시작
 /*======================================================*/
-int Goal_Enemy_ShortAttack::Process()
+s32 Goal_Enemy_ShortAttack::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();

@@ -21,8 +21,8 @@ class IGUIObject;
 
 struct SGuiEvent : public SEvent
 {
-	s32	GUI_ID;
-	s32	GetGUID() const {return GUI_ID;}
+	s16	GUI_ID;
+	s16	GetGUID() const {return GUI_ID;}
 };
 
 
@@ -59,7 +59,7 @@ private :
 
 	God_Game*						m_pGame;
 	CGUIManager*					m_pGUIManager;
-	position2d<s32>					MousePosition;
+	position2d<s16>					MousePosition;
 	position2d<f32>					MouseRelativePosition;
 	bool							KeyIsDown[0xFF];
 	bool							OneKeyIsDown[0xFF];
@@ -67,7 +67,7 @@ private :
 	bool							bMouseButtonUp[3];
 	bool							bMouseOneclick[3];
 	f32								iOffsetWheel;
-	s32								m_iButtonID;
+	s16								m_iButtonID;
 	bool							m_bOverGUI;
 
 	void							allkeyUpdate();
@@ -97,15 +97,15 @@ public :
 		return tempOffset; 	
 	}
 
-	const position2d<s32>&		getMousePosition() const {return MousePosition; }
-	const position2d<s32>		getWindowMousePos() const;
+	const position2d<s16>&		getMousePosition() const {return MousePosition; }
+	const position2d<s16>		getWindowMousePos() const;
 
 	const position2d<f32>&		getRelativeMousePosition() const {return MouseRelativePosition; }
 	const line3d<f32>			getRay();
 	const bool					isMouseOutOfScreen();
 	vector3d<f32>				getMouseUpGroundPosition() { return vector3d<f32>(0, 0, 0); };
 	
-	bool						isClickedButtonID(s32 buttonID);
+	bool						isClickedButtonID(s16 buttonID);
 	void						setInvalidButtonID() { m_iButtonID = INVALID_BUTTON;  }
 	
 	void						setCursorOnGUI(const IGUIObject* obj, const bool on = true );

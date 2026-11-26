@@ -39,7 +39,7 @@ void Goal_Collecting::Activate()
 /*======================================================*/
 // 자원채집 행동 처리
 /*======================================================*/
-int Goal_Collecting::Process()
+s32 Goal_Collecting::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();

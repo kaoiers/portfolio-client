@@ -37,7 +37,7 @@ void Goal_Dead::Activate()
 /*======================================================*/
 //  죽는 애니메이션 조작
 /*======================================================*/
-int  Goal_Dead::Process()
+s32  Goal_Dead::Process()
 {
 	ActivateIfInactive();
 

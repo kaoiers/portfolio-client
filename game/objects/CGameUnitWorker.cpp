@@ -47,7 +47,7 @@ bool CGameUnitWorker::short_attack( CGameUnit* pTarget )
 	return false;
 }
 
-CGameUnitWorker::CGameUnitWorker(OwnerType owner, unsigned int obj_id, unsigned int objtype,
+CGameUnitWorker::CGameUnitWorker(OwnerType owner, u32 obj_id, u32 objtype,
 								 const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute, 
 								 UnitTypes unittype, const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/
 								 , const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/
@@ -334,7 +334,7 @@ void CGameUnitWorker::OnNetWorkBuildCommand()
 /*======================================================*/
 // 네트워크용
 /*======================================================*/
-void CGameUnitWorker::OnNetWorkBuildStartCommand(unsigned int seconds)
+void CGameUnitWorker::OnNetWorkBuildStartCommand(u32 seconds)
 {
 	m_pBuildRoom->BuildingStart(seconds);
 }

@@ -28,7 +28,7 @@ class CRoomStockGUI : public CGameGUI
 
 public :
 
-	CRoomStockGUI(position2d<s32> rect = position2di(0,0)) :
+	CRoomStockGUI(position2d<s16> rect = position2di(0,0)) :
 	   CGameGUI(rect){}
 
 

@@ -44,9 +44,9 @@ class CGameObject : public IGameObject
 {
 	CGameObjectManager*			m_pObjectManager;
 
-	int							m_uid;
+	s32							m_uid;
 
-	int							m_objType;
+	s32							m_objType;
 
 	OwnerType					m_eOwnerType;
 
@@ -64,20 +64,20 @@ protected:
 
 public:	
 
-	static  unsigned int		m_iNextValidID;
+	static  u32		m_iNextValidID;
 
 	bool         IsTagged()const{return m_bTag;}
 	void         Tag(){m_bTag = true;}
 	void         UnTag(){m_bTag = false;}
 	
 	
-	CGameObject(OwnerType owner , unsigned int objtype,
+	CGameObject(OwnerType owner , u32 objtype,
 				vector3df pos = vector3df(0.0f, 0.0f, 0.0f),
 				vector3df rot = vector3df(0.0f, 0.0f, 0.0f),
 				vector3df scale = vector3df(1.0f, 1.0f, 1.0f));
 
 
-	CGameObject(OwnerType owner , unsigned int obj_id, unsigned int objtype,
+	CGameObject(OwnerType owner , u32 obj_id, u32 objtype,
 		vector3df pos = vector3df(0.0f, 0.0f, 0.0f),
 		vector3df rot = vector3df(0.0f, 0.0f, 0.0f),
 		vector3df scale = vector3df(1.0f, 1.0f, 1.0f));
@@ -91,12 +91,12 @@ public:
 
 
 	CGameAnimationMgr*			GetAnimationMgr() { return m_pAnimgr; }	
-	void						SetID(int cid) { m_uid = cid; }
+	void						SetID(s32 cid) { m_uid = cid; }
 	u32							GetID() {return m_uid;}
 	bool						isPossessed();
 	CGameObjectManager*			getObjectManager() const { return m_pObjectManager; }
-	int							getObjectType() const { return m_objType; }
-	void						setObjectType(const int iType) { m_objType = iType;  }
+	s32							getObjectType() const { return m_objType; }
+	void						setObjectType(const s32 iType) { m_objType = iType;  }
 	bool						RemoveSceneNode();
 
 	CMainGameGUI*				getMainGameGUI();
@@ -106,7 +106,7 @@ public:
 	Command_Type		getCommandType() const { return m_CommandType; }
 
 	void						SetIDFromValidTest();
-	bool						SendMessageToAllObjects( double delay, int sender, int msg, void* ExtraInfo );
+	bool						SendMessageToAllObjects( double delay, s32 sender, s32 msg, void* ExtraInfo );
 	vector3df					getHeightPos();
 };
 

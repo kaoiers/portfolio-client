@@ -51,7 +51,7 @@ class CUnitWorkerGUI : public CGameGUI
 
 public :
 
-	CUnitWorkerGUI(position2d<s32> rect = position2di(0,0)) :
+	CUnitWorkerGUI(position2d<s16> rect = position2di(0,0)) :
 	   CGameGUI(rect){}
 
 	 virtual	~CUnitWorkerGUI() {};

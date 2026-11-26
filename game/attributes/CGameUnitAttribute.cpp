@@ -50,7 +50,7 @@ void CGameUnitAttribute::Levelup()
 /*======================================================*/
 u32 CGameUnitAttribute::CalAttacked( u32 att )
 {
-	s32 attack = att - m_uDefence;
+	s16 attack = att - m_uDefence;
 	
 	if(attack < 0)
 		attack = 1;

@@ -46,7 +46,7 @@ void Goal_AttackUnitTarget::Activate()
 
 //-------------------------- Process ------------------------------------------
 //-----------------------------------------------------------------------------
-int Goal_AttackUnitTarget::Process()
+s32 Goal_AttackUnitTarget::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();
@@ -67,7 +67,7 @@ int Goal_AttackUnitTarget::Process()
 }
 
 
-bool Goal_AttackUnitTarget::notPresent(unsigned int GoalType)const
+bool Goal_AttackUnitTarget::notPresent(u32 GoalType)const
 {
 	if (!m_SubGoals.empty())
 	{

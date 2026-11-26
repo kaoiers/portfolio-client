@@ -14,7 +14,8 @@
 #define SAFE_DELETE(a) if(a!=0) delete a
 
 
-typedef short s32;
+typedef short s16;
+typedef int s32;
 typedef float f32;
 typedef unsigned int u32;
 
@@ -112,16 +113,16 @@ public:
 
 struct SEvent
 {
-	int a;
+	s32 a;
 };
 
-typedef vector2d<int> vector2di;
-typedef vector3d<int> vector3di;
+typedef vector2d<s32> vector2di;
+typedef vector3d<s32> vector3di;
 typedef vector2d<f32> vector2df;
 typedef vector3d<f32> vector3df;
 typedef line2d<f32>		line2df;
 typedef line3d<f32>		line3df;
 
-typedef position2d<s32> position2di;
-typedef position3d<s32> position3di;
+typedef position2d<s16> position2di;
+typedef position3d<s16> position3di;
 

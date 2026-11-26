@@ -36,7 +36,7 @@ CGameUnitNapoleon::~CGameUnitNapoleon()
 
 }
 
-CGameUnitNapoleon::CGameUnitNapoleon(OwnerType owner, unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnitNapoleon::CGameUnitNapoleon(OwnerType owner, u32 obj_id, u32 objtype, const UNIT_RESOURCE* resource,
 									 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 									 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 									 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -46,7 +46,7 @@ CGameUnitNapoleon::CGameUnitNapoleon(OwnerType owner, unsigned int obj_id, unsig
 
 }
 
-CGameUnitNapoleon::CGameUnitNapoleon(OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnitNapoleon::CGameUnitNapoleon(OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
 									 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 									 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 									 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 

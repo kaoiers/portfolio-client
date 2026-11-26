@@ -55,7 +55,7 @@ void Goal_HuntTarget::Activate()
 /*======================================================*/
 //  타겟 헌팅 행동 처리
 /*======================================================*/
-int Goal_HuntTarget::Process()
+s32 Goal_HuntTarget::Process()
 {
   //if status is inactive, call Activate()
   ActivateIfInactive();

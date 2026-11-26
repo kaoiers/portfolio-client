@@ -15,9 +15,9 @@ class CTextGUI;
 
 struct GlobalResource
 {
-	unsigned	int		crop;
-	unsigned	int		lumber;
-	unsigned	int		stone;
+	u32		crop;
+	u32		lumber;
+	u32		stone;
 };
 
 class CGameResourceManager
@@ -30,7 +30,7 @@ class CGameResourceManager
 	u32					m_uTotalUnitCounts;
 	
 
-	unsigned	int		m_iFlag;
+	u32		m_iFlag;
 	const	u32			TimeDescendentInterval;
 	
 	u32					LastUpdatedTime;
@@ -72,7 +72,7 @@ public :
 	const u32			getTotalUnitCounts() { return m_uTotalUnitCounts; }
 	u32					getMaxPlayerExp(u32 level) ;
 
-	inline void AddAllResources(int g, int l, int s)
+	inline void AddAllResources(s32 g, s32 l, s32 s)
 	{ 
 		GlobalResource temp;
 		temp.crop = g;
@@ -81,21 +81,21 @@ public :
 	}
 
 	
-	inline void AddCropResource(unsigned int crop)
+	inline void AddCropResource(u32 crop)
 	{
 		GlobalResource temp;
 		temp.crop  = crop;		
 		
 	}
 
-	inline void AddLumberResource(unsigned int lum)
+	inline void AddLumberResource(u32 lum)
 	{
 		GlobalResource temp;
 		temp.lumber  = lum;
 		
 	}
 
-	inline void AddStoneResource(unsigned int stone)
+	inline void AddStoneResource(u32 stone)
 	{
 		GlobalResource temp;
 		temp.stone  = stone;
@@ -106,8 +106,8 @@ public :
 
 public :
 
-	void	OnNetworkSetResources(unsigned int crop,
-		unsigned int woods,  unsigned int gold );
+	void	OnNetworkSetResources(u32 crop,
+		u32 woods,  u32 gold );
 
 
 

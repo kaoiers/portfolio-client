@@ -41,9 +41,9 @@ void CRoomCommunityGUI::ResetFriendsList()
 
 
 
-	for(unsigned int i=0; i < friend_button_counts; i++)
+	for(u32 i=0; i < friend_button_counts; i++)
 	{
-		unsigned int idx = ((m_uCurrent_page - 1) * friend_button_counts) + i;
+		u32 idx = ((m_uCurrent_page - 1) * friend_button_counts) + i;
 	
 
 	}
@@ -83,18 +83,18 @@ void CRoomCommunityGUI::GUI_Initialize()
 	CGUIManager*	pGUIMan =  CGUIManager::GetInstance();
 
 
-	int startPosX = -390;
-	int startPosY = 580;
+	s32 startPosX = -390;
+	s32 startPosY = 580;
 
-	unsigned int ImagesizeX = 90;
+	u32 ImagesizeX = 90;
 
-	unsigned int button_id = COMMAND_BUIDING_DAMAGE_TEXT+1;
+	u32 button_id = COMMAND_BUIDING_DAMAGE_TEXT+1;
 
 
 
-	for(unsigned int i=0; i < friend_button_counts; i++)
+	for(u32 i=0; i < friend_button_counts; i++)
 	{
-		position2d<s32> pos(0,0);
+		position2d<s16> pos(0,0);
 
 		pos.Y += 50; 
 
@@ -130,7 +130,7 @@ void CRoomCommunityGUI::SetOwner( CGameObject *obj )
 /*======================================================*/
 // 프렌드 리스트 추가
 /*======================================================*/
-void CRoomCommunityGUI::addFriendList( const char* friend_name, unsigned int friend_id, const char* friend_picture_file /*= 0 */ )
+void CRoomCommunityGUI::addFriendList( const char* friend_name, u32 friend_id, const char* friend_picture_file /*= 0 */ )
 {
 	friend_button_id++;
 
@@ -150,12 +150,12 @@ void CRoomCommunityGUI::addFriendList( const char* friend_name, unsigned int fri
 /*======================================================*/
 // 사진 설정
 /*======================================================*/
-void CRoomCommunityGUI::setFriendPicture( unsigned int friend_id, size_t stream_size, char* pStream )
+void CRoomCommunityGUI::setFriendPicture( u32 friend_id, size_t stream_size, char* pStream )
 {
 
 }
 
 
-CRoomCommunityGUI::CRoomCommunityGUI( position2d<s32> rect /*= position2di(0,0)*/ ) :
+CRoomCommunityGUI::CRoomCommunityGUI( position2d<s16> rect /*= position2di(0,0)*/ ) :
 CGameGUI(rect),  friend_button_id(COMMAND_BUIDING_DAMAGE_TEXT+1), m_uCurrent_page(1) {}
 

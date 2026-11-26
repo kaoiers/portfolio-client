@@ -47,9 +47,9 @@ public:
 
 	
 	void ActivateForUnit(CGameUnit*	pUnit);
-	int  Process();
+	s32  Process();
 	void Terminate();
-	bool notPresent(unsigned int GoalType)const;
+	bool notPresent(u32 GoalType)const;
   void StopHunting();
 
 };

@@ -32,7 +32,7 @@ public :
 	virtual		bool		short_attack(CGameUnit* pTarget); 
 
 
-	CGameUnitEnemySoldier(CEnemyGenerator* pGenerator,  OwnerType owner,unsigned int obj_id, unsigned int objtype,
+	CGameUnitEnemySoldier(CEnemyGenerator* pGenerator,  OwnerType owner,u32 obj_id, u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 
@@ -40,7 +40,7 @@ public :
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
-	CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner,unsigned int objtype,
+	CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner,u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 

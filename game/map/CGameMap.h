@@ -42,10 +42,10 @@ class CGameMap : private UnCopyable
 	CEnemyGenerator*					m_pEnemyGenerator;
 
 
-	float								m_dCellWidth, m_dCellHeight;
-	float								m_fTotalHeight, m_fTotalWidth;
+	f32								m_dCellWidth, m_dCellHeight;
+	f32								m_fTotalHeight, m_fTotalWidth;
 	line3df								m_lselectedRect[4];	
-	int									m_iCellsX, m_iCellsZ;
+	s32									m_iCellsX, m_iCellsZ;
 
 	vector2di							m_vMinUsableTile, m_vMaxUsableTile;
 	CGameRoomGod*						m_pGodRoom;
@@ -53,7 +53,7 @@ class CGameMap : private UnCopyable
 
 	void								CreateGraph();
 	void								CreateEnemyGenerator();
-	void								PartitionNavGraph(const int x, const int y);
+	void								PartitionNavGraph(const s32 x, const s32 y);
 	void								DisplayObjects(u32	xOffset, u32	yOffset);
 	void								DisplayObjectsByDepth(u32	xOffset, u32	yOffset, u32 depth);
 	
@@ -63,8 +63,8 @@ public :
 	CGameMap(CGameObjectManager* man) ;
 	~CGameMap();
 
-	bool								SectionInit(unsigned int tilesX, unsigned int tilesZ, float Height, float Width);
-	bool								init(int cellsX, int cellsZ, int PartitionX,  int PartitionZ,  float cwidth  = 300.0f , float cheight = 300.0f);	
+	bool								SectionInit(u32 tilesX, u32 tilesZ, f32 Height, f32 Width);
+	bool								init(s32 cellsX, s32 cellsZ, s32 PartitionX,  s32 PartitionZ,  f32 cwidth  = 300.0f , f32 cheight = 300.0f);
 
 
 	void								render();	
@@ -73,8 +73,8 @@ public :
 	CBoundaryManager*					getBoundaryManager() {return m_pBoundaryManager; }
 	bool								isPathObstructed(const vector3df& A, 
 		const vector3df& B, f32 BoundingRadius) const;
-	bool								isInBoundaries(const vector3df& point, int return_idx);
-	bool								isWalkableWall(const unsigned int idx) { return true; };
+	bool								isInBoundaries(const vector3df& point, s32 return_idx);
+	bool								isWalkableWall(const u32 idx) { return true; };
 	
 	//일꾼, 신 죽었을 때 받는 이벤트
 	void								GodDeadEvent();
@@ -85,17 +85,17 @@ public :
 
 	void								addExplosion(const vector3df& pos, const f32 scl);
 	
-	int							getNumCellsX() const	{return m_iCellsX;}
-	int							getNumCellsZ() const	{return m_iCellsZ;}
-	float						getCellWidth() const	{ return m_dCellWidth; }
-	float						getCellHeight() const   { return m_dCellHeight; }
+	s32							getNumCellsX() const	{return m_iCellsX;}
+	s32							getNumCellsZ() const	{return m_iCellsZ;}
+	f32						getCellWidth() const	{ return m_dCellWidth; }
+	f32						getCellHeight() const   { return m_dCellHeight; }
 
 	const double&						GetCellSpaceNeighborhoodRange() {return m_dCellSpaceNeighborhoodRange;}
 
 	bool								getNodePosFromMousePos(const vector3df& groundPoint, vector3df& tilePos);
-	bool								IsNodePresent(const int x, const int y);
-	bool								IsNodeAllLinked(const int x, const int y);
-	bool								IsInUsableArea(const int x, const int y);
+	bool								IsNodePresent(const s32 x, const s32 y);
+	bool								IsNodeAllLinked(const s32 x, const s32 y);
+	bool								IsInUsableArea(const s32 x, const s32 y);
 
 	vector3df							getTopLeftUsablePos() { return vector3df(0,0,0); };
 	vector3df							getBottomRightUsablePos();
@@ -104,20 +104,20 @@ public :
 	void								StartEnemyGenerate(); 
 
 
-	bool								RemoveNode(const int x, const int y);
-	vector3df							getNodePos(const int x, const int y);
-	vector3df							getPosByTile(const int x, const int y);
+	bool								RemoveNode(const s32 x, const s32 y);
+	vector3df							getNodePos(const s32 x, const s32 y);
+	vector3df							getPosByTile(const s32 x, const s32 y);
 	vector2di							getTileFromPos(const vector3df& groundPoint);
 	
-	void								setOnebyOneBuildingNode(const int x, const int y) {};
+	void								setOnebyOneBuildingNode(const s32 x, const s32 y) {};
 	bool								LinkEdges(const vector2di a, const vector2di b) { return true; };
-	bool								AddNodeByTile( const int x, const int y);
+	bool								AddNodeByTile( const s32 x, const s32 y);
 
-	bool								AddNodeAndLinkEdges(const int x, const int y);
-	bool								AddNodeAndLinkEdgesForDoor(const int x, const int y, const vector3df& pos);
-	void								AddNodeToCellSpace(const int x, const int y);
+	bool								AddNodeAndLinkEdges(const s32 x, const s32 y);
+	bool								AddNodeAndLinkEdgesForDoor(const s32 x, const s32 y, const vector3df& pos);
+	void								AddNodeToCellSpace(const s32 x, const s32 y);
 
-	int									getNodeIndexFromTIle( const int x, const int y) const; 
+	s32									getNodeIndexFromTIle( const s32 x, const s32 y) const;
 };
 
 #endif

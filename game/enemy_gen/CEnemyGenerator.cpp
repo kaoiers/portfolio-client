@@ -36,12 +36,12 @@ void CEnemyGenerator::Initialize()
 /*======================================================*/
 CGameUnitEnemy* CEnemyGenerator::GenerateEnemy()
 {
-	int DIstanceOffset = int(m_lEnemyGenerateLine.getLength());
+	s32 DIstanceOffset = s32(m_lEnemyGenerateLine.getLength());
 
 	DIstanceOffset = rand() % DIstanceOffset;
 		 
  	vector3df GeneratePos = m_lEnemyGenerateLine.start + 
- 		(vector3df(1,0,0) * float(DIstanceOffset) );	
+		(vector3df(1,0,0) * f32(DIstanceOffset) );
 
 	GeneratePos.Y = 0.0f;
 
@@ -63,7 +63,7 @@ CGameUnitEnemy* CEnemyGenerator::GenerateEnemy()
 CEnemyGenerator::CEnemyGenerator(CGameMap * pMap, const u32 EnemyGeneratePeriod, const u32 EnemyApperPeriod, const u32 EnemyMaxCounts) 
 	: m_pGameMap(pMap)
 {
-		srand((int)time(NULL));
+		srand((s32)time(NULL));
 
 		vector3df tl = m_pGameMap->getTopLeftUsablePos();
 		vector3df br = m_pGameMap->getBottomRightUsablePos();

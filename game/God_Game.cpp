@@ -126,7 +126,7 @@ void God_Game::render()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void God_Game::upadte(unsigned int timeMs)
+void God_Game::upadte(u32 timeMs)
 {
 //#ifdef NETWORK_ON
 	//if(m_pNetworkManager)

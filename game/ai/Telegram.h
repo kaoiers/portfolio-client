@@ -20,14 +20,14 @@
 struct Telegram
 {
   //the entity that sent this telegram
-  int          Sender;
+  s32          Sender;
 
   //the entity that is to receive this telegram
-  int          Receiver;
+  s32          Receiver;
 
   //the message itself. These are all enumerated in the file
   //"MessageTypes.h"
-  int          Msg;
+  s32          Msg;
 
   //messages can be dispatched immediately or delayed for a specified amount
   //of time. If a delay is necessary this field is stamped with the time 
@@ -46,9 +46,9 @@ struct Telegram
 
 
   Telegram(double time,
-           int    sender,
-           int    receiver,
-           int    msg,
+           s32    sender,
+           s32    receiver,
+           s32    msg,
            void*  info = NULL): DispatchTime(time),
                                Sender(sender),
                                Receiver(receiver),

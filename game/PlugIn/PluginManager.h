@@ -40,7 +40,7 @@ public:
     void UnloadAll ( void );
 
     size_t GetNumPlugins ( void ) const;
-    IPlugin * GetPlugin ( int nIndex );
+    IPlugin * GetPlugin ( s32 nIndex );
 	IPlugin * GetPlugin(std::string plugin_name );
 	void GetFilenames(const std::string & dir, std::vector<std::string> & filenames) const;
 	bool LoadPlugin(const std::string & filename);

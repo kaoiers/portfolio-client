@@ -24,20 +24,20 @@ protected:
 
   SubgoalList   m_SubGoals;
 
-  int  ProcessSubgoals();
+  s32  ProcessSubgoals();
 
   bool ForwardMessageToFrontMostSubgoal(const Telegram& msg);
 
 
 public:
 
-  Goal_Composite(entity_type* pE, int type):Goal<entity_type>(pE,type){}
+  Goal_Composite(entity_type* pE, s32 type):Goal<entity_type>(pE,type){}
 
   virtual ~Goal_Composite(){RemoveAllSubgoals();}
 
   virtual void Activate() = 0;
 
-  virtual int  Process() = 0;
+  virtual s32  Process() = 0;
 
   virtual void Terminate() = 0;
 
@@ -76,7 +76,7 @@ void Goal_Composite<entity_type>::RemoveAllSubgoals()
 // 하위 목표들 실행시키기
 /*======================================================*/
 template <class entity_type>
-int Goal_Composite<entity_type>::ProcessSubgoals()
+s32 Goal_Composite<entity_type>::ProcessSubgoals()
 { 
   //remove all completed and failed goals from the front of the subgoal list
   while (!m_SubGoals.empty() &&
@@ -93,7 +93,7 @@ int Goal_Composite<entity_type>::ProcessSubgoals()
   {
 
 
-    int StatusOfSubGoals = m_SubGoals.front()->Process();
+    s32 StatusOfSubGoals = m_SubGoals.front()->Process();
     if (StatusOfSubGoals == completed && m_SubGoals.size() > 1)
     {
       return active;

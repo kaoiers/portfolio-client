@@ -32,7 +32,7 @@ void Goal_Building::Activate()
 /*======================================================*/
 //  건물 짓기 행동 처리
 /*======================================================*/
-int Goal_Building::Process()
+s32 Goal_Building::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();

@@ -44,7 +44,7 @@ protected:
 
 public:
 
-	MovingEntity(OwnerType owner,int objtype,
+	MovingEntity(OwnerType owner,s32 objtype,
 		f32   max_speed ,
 		f32   mass ,
 		f32   turn_rate ,
@@ -65,8 +65,8 @@ public:
     	
   }
 
-MovingEntity(OwnerType owner,unsigned int obj_id,
-			 int		objtype,			   
+MovingEntity(OwnerType owner,u32 obj_id,
+			 s32		objtype,
 			 f32   max_speed ,
 			 f32   mass ,
 			 f32   turn_rate ,

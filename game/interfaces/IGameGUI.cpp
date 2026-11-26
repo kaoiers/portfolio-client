@@ -17,10 +17,10 @@
 #include "../eventhandle/CEventHandleManager.h"
 #include "CGUIManager.h"
 
-unsigned int CGameGUI::m_iNextValidID = 0xFFF;
+u32 CGameGUI::m_iNextValidID = 0xFFF;
 
 
-CGameGUI::CGameGUI(position2d<s32> pos ) 
+CGameGUI::CGameGUI(position2d<s16> pos )
 	:  
 m_abolutePosition(pos),
 m_gid(m_iNextValidID++),
@@ -100,9 +100,9 @@ void CGameGUI::SetPosition( const vector2di pos )
 /*======================================================*/
 // 상대 포지션 가져오기
 /*======================================================*/
-position2d<s32> CGameGUI::GetRelativePosition( const position2d<s32> pos ) const
+position2d<s16> CGameGUI::GetRelativePosition( const position2d<s16> pos ) const
 {
-	position2d<s32> relPos;
+	position2d<s16> relPos;
 	
 	return relPos;
 }
@@ -111,9 +111,9 @@ position2d<s32> CGameGUI::GetRelativePosition( const position2d<s32> pos ) const
 /*======================================================*/
 // 절대 포지션 가조오기
 /*======================================================*/
-position2d<s32> CGameGUI::GetAbsolutePosition(const position2d<s32> pos) const
+position2d<s16> CGameGUI::GetAbsolutePosition(const position2d<s16> pos) const
 {
-	position2d<s32> absPos;
+	position2d<s16> absPos;
 	absPos.X = m_abolutePosition.X + pos.X;
 	absPos.Y = m_abolutePosition.Y + pos.Y;
 
@@ -152,7 +152,7 @@ bool CGameGUI::control( CEventHandler* m_pReceiver )
 /*======================================================*/
 // 아이디로 오브젝트 찾기
 /*======================================================*/
-IGUIObject* CGameGUI::FindElementByID( s32 eid )
+IGUIObject* CGameGUI::FindElementByID( s16 eid )
 {
 	GuiElementsList::iterator it;
 		
@@ -167,7 +167,7 @@ IGUIObject* CGameGUI::FindElementByID( s32 eid )
 /*======================================================*/
 // 버튼 추가
 /*======================================================*/
-CButtonGUI*CGameGUI::addButton( const position2d<s32> Position, const char* defaultImage, s32 mID /*= -1 */,std::wstring text /*= 0*/ )
+CButtonGUI*CGameGUI::addButton( const position2d<s16> Position, const char* defaultImage, s16 mID /*= -1 */,std::wstring text /*= 0*/ )
 {
 
 	return nullptr;

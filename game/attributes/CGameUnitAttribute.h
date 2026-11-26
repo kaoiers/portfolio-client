@@ -37,7 +37,7 @@ class CGameUnitAttribute
 
 	u32	m_uCurrentLevel;
 
-	s32	m_uCurrentHp;
+	s16	m_uCurrentHp;
 	
 	u32	m_uCurrentExp;
 
@@ -77,7 +77,7 @@ public :
 
 	u32				getLevel() const {	return	m_uCurrentLevel; }
 	
-	s32				getHp() { return m_uCurrentHp;  }
+	s16				getHp() { return m_uCurrentHp;  }
 	u32				getMaxHp() const {return m_uMaxHp; }
 	void			IncreaseHp() { m_uCurrentHp++; }
 	

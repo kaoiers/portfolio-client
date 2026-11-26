@@ -63,13 +63,13 @@ public:
 protected:
 
 
-  int             m_iType;
+  s32             m_iType;
 
 
   entity_type*    m_pOwner;
 
 
-  int             m_iStatus;
+  s32             m_iStatus;
 
 
 
@@ -80,7 +80,7 @@ protected:
 
 public:
 
-  Goal(entity_type*  pE, int type):m_iType(type),
+  Goal(entity_type*  pE, s32 type):m_iType(type),
                                    m_pOwner(pE),
                                    m_iStatus(inactive)
   {}
@@ -91,7 +91,7 @@ public:
   virtual void Activate() = 0;
 
 
-  virtual int  Process() = 0;
+  virtual s32  Process() = 0;
 
 
   virtual void Terminate() = 0;
@@ -109,7 +109,7 @@ public:
   bool         isActive()const{return m_iStatus == active;}
   bool         isInactive()const{return m_iStatus == inactive;}
   bool         hasFailed()const{return m_iStatus == failed;}
-  int          GetType()const{return m_iType;}
+  s32          GetType()const{return m_iType;}
   
 };
 

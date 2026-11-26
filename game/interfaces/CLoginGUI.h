@@ -51,7 +51,7 @@ public :
 	void					ShowLoginWindowGUI(const bool bshow = true);
 
 
-	CLoginGUI(position2d<s32> rect);
+	CLoginGUI(position2d<s16> rect);
 	virtual	~CLoginGUI() {};
 
 	virtual	void	SetOwner(CGameObject *owner) {};

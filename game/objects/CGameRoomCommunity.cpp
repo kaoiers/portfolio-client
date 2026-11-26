@@ -14,7 +14,7 @@
 #include <map>
 #include "../shader/CLightEffectManager.h"
 
-CGameRoomCommunity::CGameRoomCommunity(OwnerType owner, unsigned int objtype, unsigned int btype,
+CGameRoomCommunity::CGameRoomCommunity(OwnerType owner, u32 objtype, u32 btype,
 									   const ROOM_RESOURCE* res, 
 									   const vector3df& pos, 
 									   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -24,7 +24,7 @@ CGameRoomCommunity::CGameRoomCommunity(OwnerType owner, unsigned int objtype, un
 
 }
 
-CGameRoomCommunity::CGameRoomCommunity(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
+CGameRoomCommunity::CGameRoomCommunity(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res )
 : CGameRoom(owner, objtype, btype, res)
 {
 	

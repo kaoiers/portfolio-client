@@ -58,7 +58,7 @@ CMainGameGUI	*CMainGameGUI::m_pInstance = NULL;
 
 
 CMainGameGUI::CMainGameGUI(CGameObjectManager*	pObjMan) : 
-CGameGUI(position2d<s32>(0, 0)),
+CGameGUI(position2d<s16>(0, 0)),
 m_pBuilding(NULL), 
 m_pObjMan(pObjMan), 
 m_bObjectSelectAvailable(true), 
@@ -238,7 +238,7 @@ void CMainGameGUI::FadeOutWarningMessage(const u32 timeMs)
 	if(preTime == 0)
 		preTime = timeMs;
 
-	f32 delta = float(timeMs - preTime)/1000.0f;
+	f32 delta = f32(timeMs - preTime)/1000.0f;
 	preTime = timeMs;
 	m_fAlphaRatio = m_fAlphaRatio - delta * 100.0f; 
 

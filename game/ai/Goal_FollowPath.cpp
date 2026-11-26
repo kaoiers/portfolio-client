@@ -39,7 +39,7 @@ void Goal_FollowPath::Activate()
 /*======================================================*/
 // 그래프 길 따라가기 행동 처리
 /*======================================================*/
-int Goal_FollowPath::Process()
+s32 Goal_FollowPath::Process()
 {
   //if status is inactive, call Activate()
   ActivateIfInactive();

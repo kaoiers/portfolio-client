@@ -20,8 +20,8 @@ class CGameUnitProduct
 
 	CGameRoomWaiting*	m_pWaitingRoom;
 	UnitTypes			m_CurrentUnitType;
-	unsigned	int		m_uDestinationTime;	
-	unsigned	int		m_uProductTIme;
+	u32		m_uDestinationTime;
+	u32		m_uProductTIme;
 	f32			m_fPercentage;
 
 	void		CompleteProcessing();

@@ -27,7 +27,7 @@ void Goal_ShortAttack::Activate()
 /*======================================================*/
 //  근거리 공격 도중관련 처리
 /*======================================================*/
-int Goal_ShortAttack::Process()
+s32 Goal_ShortAttack::Process()
 {
 	//if status is inactive, call Activate()
 	ActivateIfInactive();	

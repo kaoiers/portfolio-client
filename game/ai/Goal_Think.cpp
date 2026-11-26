@@ -88,11 +88,11 @@ void Goal_Think::Activate()
 /*======================================================*/
 // 처리하기
 /*======================================================*/
-int Goal_Think::Process()
+s32 Goal_Think::Process()
 {
  	ActivateIfInactive();
 
-	int SubgoalStatus =  ProcessSubgoals();
+	s32 SubgoalStatus =  ProcessSubgoals();
 
 // 	if (SubgoalStatus == completed || SubgoalStatus == failed)
 // 	{
@@ -132,7 +132,7 @@ void Goal_Think::Arbitrate()
 /*======================================================*/
 // 하위 목표 실행 확인
 /*======================================================*/
-bool Goal_Think::notPresent(unsigned int GoalType)const
+bool Goal_Think::notPresent(u32 GoalType)const
 {
 	if (!m_SubGoals.empty())
 	{
@@ -149,7 +149,7 @@ bool Goal_Think::notPresent(unsigned int GoalType)const
 /*======================================================*/
 void Goal_Think::AddGoal_MoveToPosition(vector3df pos)
 {
-	int idx	= -1;
+	s32 idx	= -1;
 
 
 	CGameMap*	pMap =	CGameMap::GetInstance();
@@ -200,7 +200,7 @@ void Goal_Think::AddGoal_Explore()
 	}
 }
 
-void Goal_Think::AddGoal_GetItem(unsigned int ItemType)
+void Goal_Think::AddGoal_GetItem(u32 ItemType)
 {
 	//if (notPresent(ItemTypeToGoalType(ItemType)))
 	//{
