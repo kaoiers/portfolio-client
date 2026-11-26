@@ -32,11 +32,11 @@ public:
     m_destination(pos)
     {}
 
-    void activate();
-    s32 process();
-    void terminate();
+    void activate() override;
+    s32 process() override;
+    void terminate() override;
 
-    bool handleMessage(const Telegram& msg);
+    bool handleMessage(const Telegram& msg) override;
 
     void render();
 };

@@ -22,10 +22,10 @@ private:
 public:
     Goal_FollowPath(CGameUnit* p_unit);
 
-    void activate();
-    s32 process();
+    void activate() override;
+    s32 process() override;
     void render();
-    void terminate();
+    void terminate() override;
 
     bool stopSeeking();
 };

@@ -25,9 +25,9 @@ private:
 public:
     Goal_ShortAttack(CGameUnit* p_unit, CGameUnit* p_target);
 
-    void activate();
-    s32 process();
-    void terminate();
+    void activate() override;
+    s32 process() override;
+    void terminate() override;
 };
 
 #endif

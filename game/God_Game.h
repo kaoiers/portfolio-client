@@ -32,13 +32,13 @@ struct PACKET_ACCOUNT_LOGIN_CL_LN_REQ;
 class God_Game : private UnCopyable
 {
 public:
-    typedef enum
+    enum class GameState
     {
         on_intro,
         on_game,
         on_friend
 
-    }GameState;
+    };
 
 private:
     GameState m_game_state;

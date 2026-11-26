@@ -31,7 +31,7 @@
 #include "CObjectController.h"
 #include "../ai/MessageDispatcher.h"
 
-CGameObjectManager * CGameObjectManager::m_instance = NULL;
+CGameObjectManager * CGameObjectManager::m_instance = nullptr;
 
 CGameObjectManager::CGameObjectManager()
 {
@@ -108,7 +108,7 @@ CGameObject* CGameObjectManager::getObjectFromId( u32 cid)
         return itr->second;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*======================================================*/
@@ -399,13 +399,13 @@ CGameRoomGod* CGameObjectManager::addGodRoom( OwnerType owner, const vector2di& 
 /*======================================================*/
 CGameRoom* CGameObjectManager::addRoom( OwnerType owner, const BuildingTypes Roomtype, u32 room_id, CGameUnit* p_worker)
 {
-    CGameRoom* room = NULL;
+    CGameRoom* room = nullptr;
 
     switch (Roomtype)
     {
     case 1:
         printf("모르는 건물(%d)\n", Roomtype);
-        return NULL;
+        return nullptr;
     }
 
     if (room_id != 0)
@@ -465,7 +465,7 @@ void CGameObjectManager::clearMemoryFromObject(CGameObject* p_obj)
 
     std::vector<CGameUnit *>::iterator itr = unit_set.begin();
 
-    CGameUnit* p_unit = NULL;
+    CGameUnit* p_unit = nullptr;
     if (p_obj->getObjectType() == GODTYPE_UNIT)
     {
         p_unit = dynamic_cast<CGameUnit *>(p_obj);

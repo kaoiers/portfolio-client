@@ -29,7 +29,7 @@
 #include "../objects/CGameRoomCommunity.h"
 #include "../objects/CGameRoomStock.h"
 
-CControllerGUI* CControllerGUI::p_instance = NULL;
+CControllerGUI* CControllerGUI::p_instance = nullptr;
 
 CControllerGUI::CControllerGUI() :
     m_current_gui(0)
@@ -111,5 +111,5 @@ void CControllerGUI::disableGui()
 /*======================================================*/
 CGameGUI* CControllerGUI::setCurrentControlGUI( CGameObject * obj)
 {
-    return NULL;
+    return nullptr;
 }

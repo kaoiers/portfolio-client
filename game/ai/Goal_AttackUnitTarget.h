@@ -33,11 +33,11 @@ public:
     {
     };
 
-    void activate();
+    void activate() override;
 
     void activateForUnit(CGameUnit* p_unit);
-    s32 process();
-    void terminate();
+    s32 process() override;
+    void terminate() override;
     bool notPresent(u32 goal_type) const;
     void stopHunting();
 };

@@ -325,7 +325,7 @@ bool CGameRoom::isBuildable(const vector3df& mouse_pos)
 
         if (this->getObjectManager()->isControlled(this))
         {
-            this->getObjectManager()->setController(NULL);
+            this->getObjectManager()->setController(nullptr);
 
             CControllerGUI::instance()->disableGui();
     }

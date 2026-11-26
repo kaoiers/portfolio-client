@@ -21,10 +21,10 @@
 #include "CLoginGUI.h"
 #include "CControllerGUI.h"
 
-CGUIManager* CGUIManager::m_instance = NULL;
+CGUIManager* CGUIManager::m_instance = nullptr;
 
 CGUIManager::CGUIManager()
-    : m_mouse_cursor_gui(0), m_main_game_gui(0), m_pop_up_gui(0), m_web_dialog(NULL)
+    : m_mouse_cursor_gui(0), m_main_game_gui(0), m_pop_up_gui(0), m_web_dialog(nullptr)
 {
     m_instance = this;
 
@@ -89,7 +89,7 @@ CGameGUI* CGUIManager::findInterfaceFromId( s32 cid)
     {
         return itr->second;
     }
-    return NULL;
+    return nullptr;
 }
 
 /*======================================================*/

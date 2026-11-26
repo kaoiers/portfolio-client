@@ -31,11 +31,11 @@ void MessageDispatcher::dispatchMsg(double delay,
     s32 sender,
     s32 receiver,
     s32 msg,
-    void* additional_info = NULL)
+    void* additional_info = nullptr)
 {
     CGameObject* p_receiver = EntityMgr->getObjectFromId(receiver);
 
-    if (p_receiver == NULL)
+    if (p_receiver == nullptr)
     {
         return;
     }
@@ -80,7 +80,7 @@ void MessageDispatcher::dispatchMessageToAllObjects( double delay, s32 sender, s
 {
     CGameObject* p_sender = EntityMgr->getObjectFromId(sender);
 
-    if (p_sender == NULL)
+    if (p_sender == nullptr)
     {
         return;
     }

@@ -38,9 +38,9 @@ public:
     Goal_TraverseEdge(CGameUnit* p_unit,
         bool last_edge);
 
-    void activate();
-    s32 process();
-    void terminate();
+    void activate() override;
+    s32 process() override;
+    void terminate() override;
 };
 
 #endif

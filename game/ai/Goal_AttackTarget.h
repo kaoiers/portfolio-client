@@ -27,10 +27,10 @@ class Goal_AttackTarget : public Goal_Composite<CGameUnit>
 public:
     Goal_AttackTarget(CGameUnit* p_owner);
 
-    void activate();
+    void activate() override;
 
-    s32 process();
-    void terminate();
+    s32 process() override;
+    void terminate() override;
     bool notPresent(u32 goal_type) const;
 };
 

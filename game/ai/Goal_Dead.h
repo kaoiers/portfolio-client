@@ -23,9 +23,9 @@ private:
 public:
     Goal_Dead(CGameUnit* p_unit);
 
-    void activate();
-    s32 process();
-    void terminate();
+    void activate() override;
+    s32 process() override;
+    void terminate() override;
 };
 
 #endif

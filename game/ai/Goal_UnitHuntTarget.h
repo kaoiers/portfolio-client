@@ -35,14 +35,14 @@ private:
 
 public:
     Goal_UnitHuntTarget(CGameUnit* p_bot):Goal_Composite<CGameUnit>(p_bot, goal_unithunt_target),
-    m_lvp_tried(false), m_target(NULL)
+    m_lvp_tried(false), m_target(nullptr)
     {}
 
     ~Goal_UnitHuntTarget();
 
-    void activate();
-    s32 process();
-    void terminate() {}
+    void activate() override;
+    s32 process() override;
+    void terminate() override {}
 
     void render();
     void stopHunting();

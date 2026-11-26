@@ -33,16 +33,16 @@ public:
 
     virtual ~Goal_Composite() { removeAllSubgoals(); }
 
-    virtual void activate() = 0;
+    void activate() override = 0;
 
-    virtual s32 process() = 0;
+    s32 process() override = 0;
 
-    virtual void terminate() = 0;
+    void terminate() override = 0;
 
-    virtual bool handleMessage(const Telegram& msg)
+    bool handleMessage(const Telegram& msg) override
     { return forwardMessageToFrontMostSubgoal(msg); }
 
-    void addSubgoal(std::unique_ptr<Goal<entity_type>> g);
+    void addSubgoal(std::unique_ptr<Goal<entity_type>> g) override;
 
     void removeAllSubgoals();
 };

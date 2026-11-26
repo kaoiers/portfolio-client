@@ -113,7 +113,7 @@ bool CGameUnit::handleMessage( const Telegram& msg)
         {
             CGameUnitEnemy* unit = dynamic_cast<CGameUnitEnemy * >(this);
 
-            if (unit != NULL)
+            if (unit != nullptr)
             {
                 CGameRoom* room = reinterpret_cast<CGameRoom * >(msg.extra_info);
 
@@ -126,7 +126,7 @@ bool CGameUnit::handleMessage( const Telegram& msg)
         {
             CGameUnitEnemy* unit = dynamic_cast<CGameUnitEnemy * >(this);
 
-            if (unit != NULL)
+            if (unit != nullptr)
             {
                 CGameUnit* p_target = reinterpret_cast<CGameUnit * >(msg.extra_info);
 
@@ -158,7 +158,7 @@ bool CGameUnit::handleMessage( const Telegram& msg)
 
         CGameUnit* unit = reinterpret_cast<CGameUnit * >(msg.extra_info);
 
-        if (enemy != NULL)
+        if (enemy != nullptr)
         {
             if (enemy != unit)
             {
@@ -298,7 +298,7 @@ void CGameUnit::addDamage( const u32 damage, CGameUnit* p_attacker)
 
                     if (this->isPossessed())
                     {
-                        this->getObjectManager()->setController(NULL);
+                        this->getObjectManager()->setController(nullptr);
                     }
                 }
             }

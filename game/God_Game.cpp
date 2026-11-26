@@ -29,7 +29,7 @@
 
 God_Game::God_Game()
     :
-    m_game_state(on_intro),
+    m_game_state(GameState::on_intro),
     m_running(true)
 {
 }
@@ -51,7 +51,7 @@ bool God_Game::gameLoading()
     m_camera_manager->init();
     m_game_map = std::make_unique<CGameMap>(getObjectManager());
 
-    setGameState(God_Game::on_game);
+    setGameState(God_Game::GameState::on_game);
 
     m_game_map->init(60, 80, 10, 10);
     m_gui_manager->gameLoadingComplete();
@@ -82,7 +82,7 @@ bool God_Game::initialize()
 /*======================================================*/
 void God_Game::render()
 {
-    if (m_game_state == on_game || m_game_state == on_friend)
+    if (m_game_state == GameState::on_game || m_game_state == GameState::on_friend)
     {
         if (CAppContext::getGodOption()->isShaderOn())
         {
@@ -107,7 +107,7 @@ void God_Game::render()
 /*======================================================*/
 void God_Game::update(u32 time_ms)
 {
-    if (m_game_state == on_game || m_game_state == on_friend)
+    if (m_game_state == GameState::on_game || m_game_state == GameState::on_friend)
     {
         //순서유의
         if (m_object_manager)
@@ -129,7 +129,7 @@ bool God_Game::control()
     if (m_gui_manager)
         m_gui_manager->control(m_event_handler.get());
 
-    if (m_game_state == on_game || m_game_state == on_friend)
+    if (m_game_state == GameState::on_game || m_game_state == GameState::on_friend)
     {
         if (m_object_manager)
             m_object_manager->control(m_event_handler.get());
@@ -168,13 +168,13 @@ void God_Game::clearGame(const GameState state)
 
     m_game_map->removeAllTrees();
 
-    m_object_manager->setController(NULL);
+    m_object_manager->setController(nullptr);
 
     m_object_manager->removeAllObjects();
 
     m_camera_manager->init();
 
-    if (m_game_state == on_friend)
+    if (m_game_state == GameState::on_friend)
         m_gui_manager->getMainGameGUI()->enableDoorButton(true);
     else
         m_gui_manager->getMainGameGUI()->enableDoorButton(false);

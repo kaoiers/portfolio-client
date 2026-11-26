@@ -71,19 +71,19 @@ void PluginManager::getFilenames ( const string & dir,
 bool PluginManager::loadPlugin ( const string & filename)
 {
     HMODULE h_dll = ::LoadLibraryA (filename.c_str());
-    if ( h_dll == NULL)
+    if ( h_dll == nullptr)
     {
         LPSTR lp_msg_buf = nullptr;
         ::FormatMessageA(
             FORMAT_MESSAGE_ALLOCATE_BUFFER |
             FORMAT_MESSAGE_FROM_SYSTEM |
             FORMAT_MESSAGE_IGNORE_INSERTS,
-            NULL,
+            nullptr,
             GetLastError(),
             MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
             reinterpret_cast<LPSTR>(&lp_msg_buf),
             0,
-            NULL
+            nullptr
         );
 
         if (lp_msg_buf) ::OutputDebugStringA(lp_msg_buf);
@@ -93,11 +93,11 @@ bool PluginManager::loadPlugin ( const string & filename)
     }
 
     CREATEPLUGIN p_func = (CREATEPLUGIN)::GetProcAddress (h_dll, "CreatePlugin");
-    if ( p_func == NULL)
+    if ( p_func == nullptr)
         return false;
 
     IPlugin * p_plugin = p_func(*this);
-    if ( p_plugin == NULL)
+    if ( p_plugin == nullptr)
         return false;
 
     PluginInfo info;
@@ -143,7 +143,7 @@ size_t PluginManager::getNumPlugins ( void) const
 IPlugin * PluginManager::getPlugin ( s32 n_index)
 {
     if ( n_index < 0 || n_index >= getNumPlugins())
-        return NULL;
+        return nullptr;
 
     return m_plugins[n_index].p_plugin;
 }
@@ -158,5 +158,5 @@ IPlugin * PluginManager::getPlugin(std::string plugin_name)
     if (itr != m_map_plugins.end())
         return (itr->second);
 
-    return NULL;
+    return nullptr;
 }

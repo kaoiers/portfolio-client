@@ -24,9 +24,9 @@ CGameGUI::CGameGUI(position2d<s16> pos)
     m_gid(m_next_valid_id++),
     m_need_owner(false),
     m_enable(true),
-    m_owner(NULL),
+    m_owner(nullptr),
     m_one_button_select(false),
-    m_focused_object(NULL)
+    m_focused_object(nullptr)
 {
 }
 
@@ -137,7 +137,7 @@ IGUIObject* CGameGUI::findElementById( s16 eid)
     {
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*======================================================*/

@@ -14,7 +14,7 @@
 #include "../God_Game.h"
 #include "../interfaces/CMainGameGUI.h"
 
-CGameResourceManager* CGameResourceManager::m_instance = NULL;
+CGameResourceManager* CGameResourceManager::m_instance = nullptr;
 
 CGameResourceManager::CGameResourceManager(u32 unit_limits) : m_game_global_resource(std::make_unique<GlobalResource>()),
     m_flag(0),
@@ -110,8 +110,8 @@ bool CGameResourceManager::isAllResourcesSetting() const
 /*======================================================*/
 void CGameResourceManager::addPlayerExp( u32 exp)
 {
-    if (CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_game ||
-        CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_intro
+    if (CAppContext::getGodGame()->getCurrentGameState() == God_Game::GameState::on_game ||
+        CAppContext::getGodGame()->getCurrentGameState() == God_Game::GameState::on_intro
     )
     {
         increaseExp(exp);
@@ -175,7 +175,7 @@ void CGameResourceManager::onNetworkSetResources(u32 crop,
 /*======================================================*/
 bool CGameResourceManager::isOnMyGame()
 {
-    return (CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_game);
+    return (CAppContext::getGodGame()->getCurrentGameState() == God_Game::GameState::on_game);
 }
 
 /*======================================================*/

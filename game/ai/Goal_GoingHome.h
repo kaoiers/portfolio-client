@@ -24,11 +24,11 @@ public:
     Goal_GoingHome(CGameUnit* p_unit):
     Goal_Composite<CGameUnit>(p_unit, goal_goinghome) {}
 
-    void activate();
-    s32 process();
-    void terminate() {}
+    void activate() override;
+    s32 process() override;
+    void terminate() override {}
 
-    bool handleMessage(const Telegram& msg);
+    bool handleMessage(const Telegram& msg) override;
 
     void render();
 };

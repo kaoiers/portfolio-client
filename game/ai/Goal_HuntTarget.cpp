@@ -29,7 +29,7 @@ void Goal_HuntTarget::activate()
 
     m_enemy_unit = dynamic_cast<CGameUnitEnemy *>(m_owner);
 
-    if (m_enemy_unit == NULL)
+    if (m_enemy_unit == nullptr)
     {
         m_status = completed;
         return;

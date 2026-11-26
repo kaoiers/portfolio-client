@@ -46,7 +46,7 @@ struct Telegram
         s32 sender,
         s32 receiver,
         s32 msg,
-        void* info = NULL): dispatch_time(time),
+        void* info = nullptr): dispatch_time(time),
     sender(sender),
     receiver(receiver),
     msg(msg),

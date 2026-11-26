@@ -51,7 +51,7 @@ public:
     void setGuardian(CGameUnitArmy* p_unit) { m_guardian = p_unit; }
     CGameUnitArmy* getGuardian() { return m_guardian; }
     void nullifyGuardian() { m_guardian = 0; };
-    bool isGuardianPresent() const { return (m_guardian != NULL); }
+    bool isGuardianPresent() const { return (m_guardian != nullptr); }
     void setNetLive(const bool on) { m_net_live = on; }
     bool getNetLive() { return m_net_live; }
 

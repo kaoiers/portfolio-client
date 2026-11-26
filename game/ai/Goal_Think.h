@@ -28,9 +28,9 @@ public:
 
     bool notPresent(u32 goal_type) const;
 
-    s32 process();
-    void activate();
-    void terminate() {}
+    s32 process() override;
+    void activate() override;
+    void terminate() override {}
 
     void removeSubGoals();
 

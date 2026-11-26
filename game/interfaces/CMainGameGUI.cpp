@@ -36,11 +36,11 @@
 
 #include "../PlugIn/PluginManager.h"
 
-CMainGameGUI *CMainGameGUI::m_instance = NULL;
+CMainGameGUI *CMainGameGUI::m_instance = nullptr;
 
 CMainGameGUI::CMainGameGUI(CGameObjectManager* p_obj_man) :
     CGameGUI(position2d<s16>(0, 0)),
-    m_building(NULL),
+    m_building(nullptr),
     m_obj_man(p_obj_man),
     m_object_select_available(true),
     m_game_resource_manager(0),
@@ -84,7 +84,7 @@ bool CMainGameGUI::interfaceControl( CEventHandler * p_receiver)
 
     if (p_receiver->isMouseLUp()
         && !p_receiver->isCursorOnGUI()
-        && !m_obj_man->isOnControlState() && CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_game)
+        && !m_obj_man->isOnControlState() && CAppContext::getGodGame()->getCurrentGameState() == God_Game::GameState::on_game)
     {
         CGameObject *obj = nullptr; // m_pObjMan->getPicker()->getMouseOverObject(pReceiver);
 

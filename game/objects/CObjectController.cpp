@@ -23,7 +23,7 @@
 #include "../interfaces/CControllerGUI.h"
 #include "CGameUnit.h"
 
-CObjectController* CObjectController::instance = NULL;
+CObjectController* CObjectController::instance = nullptr;
 
 CObjectController::CObjectController() : m_controller(0), m_owner(0), m_control_state(0), m_plug_in_particle(0)
 {

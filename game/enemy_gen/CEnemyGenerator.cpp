@@ -47,13 +47,13 @@ CGameUnitEnemy* CEnemyGenerator::generateEnemy()
 
     m_enemy = p_enemy;
 
-    return NULL;
+    return nullptr;
 }
 
 CEnemyGenerator::CEnemyGenerator(CGameMap * p_map, const u32 enemy_generate_period, const u32 enemy_appear_period, const u32 enemy_max_counts)
     : m_game_map(p_map)
 {
-    srand((s32)time(NULL));
+    srand((s32)time(nullptr));
 
     vector3df tl = m_game_map->getTopLeftUsablePos();
     vector3df br = m_game_map->getBottomRightUsablePos();
