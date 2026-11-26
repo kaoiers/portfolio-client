@@ -79,11 +79,11 @@ public:
     virtual ~CGameObject();
 
     void setOwnerType(OwnerType owner) { m_owner_type = owner; }
-    OwnerType getOwnerType() { return m_owner_type; }
+    OwnerType getOwnerType() const { return m_owner_type; }
 
     CGameAnimationMgr* getAnimationMgr() { return m_animgr; }
     void setId(s32 cid) { m_uid = cid; }
-    u32 getId() { return m_uid; }
+    u32 getId() const { return m_uid; }
     bool isPossessed();
     CGameObjectManager* getObjectManager() const { return m_object_manager; }
     s32 getObjectType() const { return m_obj_type; }

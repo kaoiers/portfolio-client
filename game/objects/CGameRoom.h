@@ -38,22 +38,22 @@ protected:
     s32 m_node_index;
 
 public:
-    u32 getRoomType() { return room_type; }
+    u32 getRoomType() const { return room_type; }
 
     CGameResourceManager* getGameResource();
     bool isProductRoom();
 
-    bool isAlive() { return (m_room_hp > 0); }
+    bool isAlive() const { return (m_room_hp > 0); }
     bool addDamage(const u32 damage, CGameUnit* p_attacker);
-    const u32 getRoomHp() { return m_room_hp; }
-    const u32 getTotalRoomHP() { return m_total_room_hp; }
+    u32 getRoomHp() const { return m_room_hp; }
+    u32 getTotalRoomHP() const { return m_total_room_hp; }
 
     void setGuardian(CGameUnitArmy* p_unit) { m_guardian = p_unit; }
     CGameUnitArmy* getGuardian() { return m_guardian; }
     void nullifyGuardian() { m_guardian = 0; };
     bool isGuardianPresent() const { return (m_guardian != nullptr); }
     void setNetLive(const bool on) { m_net_live = on; }
-    bool getNetLive() { return m_net_live; }
+    bool getNetLive() const { return m_net_live; }
 
 public:
     CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res,
@@ -69,7 +69,7 @@ public:
 public:
     void setOnebyOneNode();
     void setOnTile(const vector2di& first_index_tile);
-    const vector2di& getFirstTile() { return m_first_index_tile; }
+    const vector2di& getFirstTile() const { return m_first_index_tile; }
 
 public:
     void buildingUpdate();

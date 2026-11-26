@@ -41,11 +41,11 @@ public:
     void setUseVolume(bool _on) { m_use_volume = _on; }
     void setUseFullScreen(bool _on) { m_use_full_screen = _on; }
 
-    const bool isSoundOn() const { return m_use_sound; }
-    const bool isShaderOn() const { return m_use_shader; }
-    const bool isShadowOn() const { return m_use_shadow; }
-    const bool isVolumeOn() const { return m_use_volume; }
-    const bool isFullScreen() const { return m_use_full_screen; }
+    bool isSoundOn() const { return m_use_sound; }
+    bool isShaderOn() const { return m_use_shader; }
+    bool isShadowOn() const { return m_use_shadow; }
+    bool isVolumeOn() const { return m_use_volume; }
+    bool isFullScreen() const { return m_use_full_screen; }
 
     static CGodOption* getInstance();
 };
