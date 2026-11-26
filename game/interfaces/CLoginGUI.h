@@ -37,24 +37,24 @@ class CLoginGUI  : public CGameGUI
 {	
 	
 
-	void					ShowLoginWindow(const bool bshow);
-	void					ShowJoinWindow(const bool bshow);
+	void					showLoginWindow(const bool bshow);
+	void					showJoinWindow(const bool bshow);
 
 private :
 
-	virtual	bool			interface_control(CEventHandler* pReceiver);
+	virtual	bool			interfaceControl(CEventHandler* p_receiver);
 
 public :
 
-	virtual void			GUI_Initialize();
+	virtual void			guiInitialize();
 
-	void					ShowLoginWindowGUI(const bool bshow = true);
+	void					showLoginWindowGui(const bool bshow = true);
 
 
 	CLoginGUI(position2d<s16> rect);
 	virtual	~CLoginGUI() {};
 
-	virtual	void	SetOwner(CGameObject *owner) {};
+	virtual	void	setOwner(CGameObject *owner) {};
 
 
 

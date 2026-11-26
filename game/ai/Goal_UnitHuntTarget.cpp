@@ -22,13 +22,13 @@
 /*======================================================*/
 // 유닛 헌팅 행동 초기화
 /*======================================================*/
-void Goal_UnitHuntTarget::Activate()
+void Goal_UnitHuntTarget::activate()
 {
-	m_iStatus = active;
+	m_status = active;
 
 	//if this goal is reactivated then there may be some existing subgoals that
 	//must be removed
-	RemoveAllSubgoals();
+	removeAllSubgoals();
 
 
 
@@ -43,22 +43,22 @@ void Goal_UnitHuntTarget::Activate()
 /*======================================================*/
 // 유닛 헌팅 행동 초기화
 /*======================================================*/
-s32 Goal_UnitHuntTarget::Process()
+s32 Goal_UnitHuntTarget::process()
 {
 	//if status is inactive, call Activate()
-	ActivateIfInactive();
+	activateIfInactive();
 
 	
 	// m_iStatus = ProcessSubgoals();
 
-	if (m_pOwner->getTarget())
+	if (m_owner->getTarget())
 	{
 		//if target is in view this goal is satisfied
-		if(m_pOwner->isInHitDistance(m_pOwner->getTarget()->Pos(), m_pOwner->getTarget()->getRadius()))
+		if(m_owner->isInHitDistance(m_owner->getTarget()->getPos(), m_owner->getTarget()->getRadius()))
 		{
-			RemoveAllSubgoals();
-			StopHunting();
-			m_iStatus = completed;
+			removeAllSubgoals();
+			stopHunting();
+			m_status = completed;
 		}
 		else
 		{
@@ -68,12 +68,12 @@ s32 Goal_UnitHuntTarget::Process()
 	}
 	else
 	{
-		RemoveAllSubgoals();
-		StopHunting();
-		m_iStatus = completed;
+		removeAllSubgoals();
+		stopHunting();
+		m_status = completed;
 	}
 
-	return m_iStatus;
+	return m_status;
 
 }
 
@@ -81,10 +81,10 @@ s32 Goal_UnitHuntTarget::Process()
 /*======================================================*/
 // 이동 중당
 /*======================================================*/
-void Goal_UnitHuntTarget::StopHunting()
+void Goal_UnitHuntTarget::stopHunting()
 {
 	
-	m_pOwner->SetVelocity(vector3df(0,0,0));
+	m_owner->setVelocity(vector3df(0,0,0));
 
 }
 

@@ -28,28 +28,28 @@ class Goal_TraverseEdge : public Goal<CGameUnit>
 private:
 
   //true if m_Edge is the last in the path.
-  bool      m_bLastEdgeInPath;
+  bool      m_last_edge_in_path;
 
   //the estimated time the bot should take to traverse the edge
-  double     m_dTimeExpected;
+  double     m_time_expected;
   
   //this records the time this goal was activated
-  double     m_dStartTime;
+  double     m_start_time;
 
- 	Regulator*				m_pUpdateSendMovePacketRegulator;
+ 	Regulator*				m_update_send_move_packet_regulator;
 
   //returns true if the bot gets stuck
   bool      isStuck()const;
 
 public:
 
-  Goal_TraverseEdge(CGameUnit* pUnit,
-                    bool       LastEdge); 
+  Goal_TraverseEdge(CGameUnit* p_unit,
+                    bool       last_edge); 
 
   //the usual suspects
-  void Activate();
-  s32  Process();
-  void Terminate();
+  void activate();
+  s32  process();
+  void terminate();
 
 };
 

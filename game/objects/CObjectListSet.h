@@ -15,17 +15,17 @@
 template <typename entity_type> 
 class CObjectListSet
 {
-	typedef std::list<entity_type > EntityList;	
+	typedef std::list<entity_type > entity_list;	
 
 	
 
-	EntityList m_EntityList;	
+	entity_list m_entity_list;	
 
 	inline bool find(entity_type entity)
 	{
-		std::list<entity_type >::iterator itr = m_EntityList.begin();
+		std::list<entity_type >::iterator itr = m_entity_list.begin();
 
-		for(itr; itr != m_EntityList.end(); itr++)
+		for(itr; itr != m_entity_list.end(); itr++)
 		{
 			if((*itr) == entity)
 			{
@@ -43,19 +43,19 @@ public :
 	{
 		if(!find(entity))
 		{
-			m_EntityList.push_back(entity);
+			m_entity_list.push_back(entity);
 		}
 	}
 
 	inline void remove(entity_type entity)
 	{
-		std::list<entity_type >::iterator itr = m_EntityList.begin();
+		std::list<entity_type >::iterator itr = m_entity_list.begin();
 
-		for(itr; itr != m_EntityList.end(); itr++)
+		for(itr; itr != m_entity_list.end(); itr++)
 		{
 			if((*itr) == entity)
 			{
-				m_EntityList.erase(itr);
+				m_entity_list.erase(itr);
 				return;
 			}
 		}	
@@ -63,25 +63,25 @@ public :
 
 	inline void clear()
 	{
-		m_EntityList.clear();
+		m_entity_list.clear();
 	}
 
 
 	inline const  std::list<entity_type >& getAll()
 	{
-		return m_EntityList;
+		return m_entity_list;
 	}
 
 	inline std::list<entity_type >& getNormalAll()
 	{
-		return m_EntityList;
+		return m_entity_list;
 	}
 
 	~CObjectListSet() 
 	{
-		if(!m_EntityList.empty())
+		if(!m_entity_list.empty())
 		{
-			m_EntityList.clear();
+			m_entity_list.clear();
 		}
 	}		
 };

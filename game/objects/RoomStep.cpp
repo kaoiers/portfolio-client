@@ -7,7 +7,7 @@
 /*======================================================*/
 // 빌딩 시작
 /*======================================================*/
-void	CRoomStep::StartBuilding(const u32 timeMs)
+void	CRoomStep::startBuilding(const u32 time_ms)
 {
 
 }
@@ -17,11 +17,11 @@ void	CRoomStep::StartBuilding(const u32 timeMs)
 /*======================================================*/
 // 빌딩 지어질 때 업데이트
 /*======================================================*/
-bool CRoomStep::UpdateBuilding()
+bool CRoomStep::updateBuilding()
 {
-	if (m_bOnBuilding)
+	if (m_on_building)
 	{
-		if (!m_uStepTime.empty())
+		if (!m_step_time.empty())
 		{
 
 
@@ -33,14 +33,14 @@ bool CRoomStep::UpdateBuilding()
 			//m_pRoom->GetSceneNode()->setMesh(m_pRoomMesh);
 			//m_pRoom->GetSceneNode()->setMaterialFlag(video::EMF_LIGHTING, false);
 
-			m_bOnBuilding = false;
+			m_on_building = false;
 
-			m_pRoom->setBuildingCompleted();
+			m_room->setBuildingCompleted();
 
 			return true;
 		}
 
-		UpdateBuildingStatus();
+		updateBuildingStatus();
 	}
 	return false;
 }
@@ -49,7 +49,7 @@ bool CRoomStep::UpdateBuilding()
 /*======================================================*/
 // 빌딩 상태 업데이트
 /*======================================================*/
-void CRoomStep::UpdateBuildingStatus()
+void CRoomStep::updateBuildingStatus()
 {
 	double building_process = 0.0; // (m_pTimer->end()) / (m_pRoom->getBuildingTime());
 

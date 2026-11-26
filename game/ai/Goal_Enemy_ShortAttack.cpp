@@ -19,34 +19,34 @@
 #include "../objects/CGameUnit.h"
 
 
-Goal_Enemy_ShortAttack::Goal_Enemy_ShortAttack( CGameUnitEnemy* pUnit, CGameUnit* pTarget )
-:Goal(pUnit, goal_enemy_short_attack) ,m_pEnemy(pUnit) ,  m_pTarget(pTarget)
+Goal_Enemy_ShortAttack::Goal_Enemy_ShortAttack( CGameUnitEnemy* p_unit, CGameUnit* p_target )
+:Goal(p_unit, goal_enemy_short_attack) ,m_enemy(p_unit) ,  m_target(p_target)
 {
 
 }
 /*======================================================*/
 //  프로세스 진입
 /*======================================================*/
-void Goal_Enemy_ShortAttack::Activate()
+void Goal_Enemy_ShortAttack::activate()
 {
-	m_iStatus = active;	
+	m_status = active;	
 }
 
 
 /*======================================================*/
 //  프로세스 시작
 /*======================================================*/
-s32 Goal_Enemy_ShortAttack::Process()
+s32 Goal_Enemy_ShortAttack::process()
 {
 	//if status is inactive, call Activate()
-	ActivateIfInactive();
+	activateIfInactive();
 
 
 	
-	return m_iStatus;
+	return m_status;
 }
 
-void Goal_Enemy_ShortAttack::Terminate()
+void Goal_Enemy_ShortAttack::terminate()
 {
 
 }

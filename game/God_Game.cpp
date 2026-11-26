@@ -31,8 +31,8 @@
 
 God_Game::God_Game() 
 : 
-m_eGameState(on_intro),
-m_bRunning(true)
+m_game_state(on_intro),
+m_running(true)
 {
 
 }
@@ -48,20 +48,20 @@ God_Game::~God_Game()
 /*======================================================*/
 // 게임 로딩 처리
 /*======================================================*/
-bool God_Game::GameLoading()
+bool God_Game::gameLoading()
 {
-	m_pGUIManager = std::make_unique<CGUIManager>();
-	m_pEventHandler = std::make_unique<CEventHandler>();
-	m_pObjectManager = std::make_unique<CGameObjectManager>();
-	m_pGUIManager->GameLoading();	
-	m_pCameraManager = std::make_unique<CCameraManager>();
-	m_pCameraManager->Init();
-	m_pGameMap		= std::make_unique<CGameMap>(getObjectManager());
+	m_gui_manager = std::make_unique<CGUIManager>();
+	m_event_handler = std::make_unique<CEventHandler>();
+	m_object_manager = std::make_unique<CGameObjectManager>();
+	m_gui_manager->gameLoading();	
+	m_camera_manager = std::make_unique<CCameraManager>();
+	m_camera_manager->init();
+	m_game_map		= std::make_unique<CGameMap>(getObjectManager());
 	
 	setGameState(God_Game::on_game);	
 	
-	m_pGameMap->init(60, 80,  10, 10);
-	m_pGUIManager->GameLoadingComplete();
+	m_game_map->init(60, 80,  10, 10);
+	m_gui_manager->gameLoadingComplete();
 
 	return true;
 }
@@ -69,7 +69,7 @@ bool God_Game::GameLoading()
 /*======================================================*/
 // 게임 리셋
 /*======================================================*/
-bool God_Game::GameReset()
+bool God_Game::gameReset()
 {
 
 
@@ -82,9 +82,9 @@ bool God_Game::GameReset()
 /*======================================================*/
 // 초기화
 /*======================================================*/
-bool God_Game::Initialize()
+bool God_Game::initialize()
 {
-	GameLoading();
+	gameLoading();
 
 	return true;
 }
@@ -95,16 +95,16 @@ bool God_Game::Initialize()
 /*======================================================*/
 void God_Game::render()
 {
-	if(m_eGameState == on_game || m_eGameState == on_friend)
+	if(m_game_state == on_game || m_game_state == on_friend)
 	{
-		if(CAppContext::GetGodOption()->isShaderOn())
+		if(CAppContext::getGodOption()->isShaderOn())
 		{
 		}
 		else
 		{
 		}
-		if(m_pGameMap)
-			m_pGameMap->render();
+		if(m_game_map)
+			m_game_map->render();
 
 
 	}else
@@ -113,31 +113,31 @@ void God_Game::render()
 
 
 
-	if(m_pGUIManager)
-		m_pGUIManager->render();
+	if(m_gui_manager)
+		m_gui_manager->render();
 
 }	
 
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void God_Game::upadte(u32 timeMs)
+void God_Game::update(u32 time_ms)
 {
 
 
-	if(m_eGameState == on_game || m_eGameState == on_friend)
+	if(m_game_state == on_game || m_game_state == on_friend)
 	{
 		//순서유의
-		if(m_pObjectManager)
-			m_pObjectManager->update();
+		if(m_object_manager)
+			m_object_manager->update();
 
 
-		if(m_pGameMap)
-			m_pGameMap->update(timeMs);
+		if(m_game_map)
+			m_game_map->update(time_ms);
 	}
 
-	if(m_pEventHandler)
-		m_pEventHandler->update();	
+	if(m_event_handler)
+		m_event_handler->update();	
 }
 
 
@@ -148,13 +148,13 @@ void God_Game::upadte(u32 timeMs)
 /*======================================================*/
 bool God_Game::control()
 {
-	if(m_pGUIManager)
-		m_pGUIManager->control(m_pEventHandler.get());			
+	if(m_gui_manager)
+		m_gui_manager->control(m_event_handler.get());			
 	
-	if(m_eGameState == on_game || m_eGameState == on_friend)
+	if(m_game_state == on_game || m_game_state == on_friend)
 	{
-		if(m_pObjectManager)
-			m_pObjectManager->control(m_pEventHandler.get());
+		if(m_object_manager)
+			m_object_manager->control(m_event_handler.get());
 	}
 
 	return true;
@@ -166,12 +166,12 @@ bool God_Game::control()
 /*======================================================*/
 // 인터페이스 렌더링
 /*======================================================*/
-void God_Game::DrawScneneForInterface()
+void God_Game::drawSceneForInterface()
 {
 
-	if(m_pGUIManager)
+	if(m_gui_manager)
 	{
-		m_pGUIManager->render();
+		m_gui_manager->render();
 	}
 
 }
@@ -181,11 +181,11 @@ void God_Game::DrawScneneForInterface()
 /*======================================================*/
 // 인스턴스
 /*======================================================*/
-God_Game* God_Game::GetInstance()
+God_Game* God_Game::getInstance()
 {
-	static std::unique_ptr<God_Game> Instance = std::make_unique<God_Game >();
+	static std::unique_ptr<God_Game> instance = std::make_unique<God_Game >();
 
-	return Instance.get();
+	return instance.get();
 }
 
 
@@ -193,29 +193,29 @@ God_Game* God_Game::GetInstance()
 /*======================================================*/
 // 게임 초기화
 /*======================================================*/
-void God_Game::ClearGame(const GameState state )
+void God_Game::clearGame(const GameState state )
 {
-	m_eGameState = state;
+	m_game_state = state;
 
-	m_pGameMap->removeAllTrees();
+	m_game_map->removeAllTrees();
 
-	m_pObjectManager->setController(NULL);
+	m_object_manager->setController(NULL);
 
-	m_pObjectManager->RemoveAllObjects();
+	m_object_manager->removeAllObjects();
 
-	m_pCameraManager->Init();
+	m_camera_manager->init();
 
-	if(m_eGameState == on_friend)
-		m_pGUIManager->getMainGameGUI()->EnableDoorButton(true);
+	if(m_game_state == on_friend)
+		m_gui_manager->getMainGameGUI()->enableDoorButton(true);
 	else
-		m_pGUIManager->getMainGameGUI()->EnableDoorButton(false);
+		m_gui_manager->getMainGameGUI()->enableDoorButton(false);
 }
 
 
 /*======================================================*/
 // 사운드 플레이
 /*======================================================*/
-void God_Game::playSound( const char *sundName, const bool loop /*= true*/ )
+void God_Game::playSound( const char *sound_name, const bool loop /*= true*/ )
 {
 	
 }
@@ -226,7 +226,7 @@ void God_Game::playSound( const char *sundName, const bool loop /*= true*/ )
 /*======================================================*/
 // 경고 박스 띄우기
 /*======================================================*/
-void WarningBox( const std::wstring str )
+void warningBox( const std::wstring str )
 {
 }
 

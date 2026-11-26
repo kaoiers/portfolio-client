@@ -33,9 +33,9 @@ CGameRoomCommunity::CGameRoomCommunity(OwnerType owner, u32 objtype, u32 btype, 
 /*======================================================*/
 // 컨트롤 초기화
 /*======================================================*/
-void CGameRoomCommunity::enter_control()
+void CGameRoomCommunity::enterControl()
 {
-	CControllerGUI::Instance()->setCurrentControlGUI(this);
+	CControllerGUI::instance()->setCurrentControlGUI(this);
 
 }
 
@@ -43,7 +43,7 @@ void CGameRoomCommunity::enter_control()
 /*======================================================*/
 // 컨트롤 업데이트
 /*======================================================*/
-void CGameRoomCommunity::update_control( CEventHandler* pReceiver )
+void CGameRoomCommunity::updateControl( CEventHandler* p_receiver )
 {
 
 }
@@ -51,7 +51,7 @@ void CGameRoomCommunity::update_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 컨트롤 종료시 처리
 /*======================================================*/
-void CGameRoomCommunity::exit_control()
+void CGameRoomCommunity::exitControl()
 {
 
 }
@@ -60,10 +60,10 @@ void CGameRoomCommunity::exit_control()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameRoomCommunity::update( const u32 timeMs )
+void CGameRoomCommunity::update( const u32 time_ms )
 {
 
-	BuildingUpdate();
+	buildingUpdate();
 }
 
 CGameRoomCommunity::~CGameRoomCommunity()

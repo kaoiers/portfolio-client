@@ -23,19 +23,19 @@
 #include "../interfaces/CControllerGUI.h"
 #include "../interfaces/CGUIManager.h"
 
-u32	CGameObject::m_iNextValidID = 1;
+u32	CGameObject::m_next_valid_id = 1;
 
 CGameObject::CGameObject(OwnerType owner, u32 objtype,
 						 vector3df pos,
 						 vector3df rot,
 						 vector3df scale) :
-							m_objType(objtype),  
-							m_eOwnerType(owner),
-							m_pAnimgr(NULL),
-							m_bEnable(true),
-							m_CommandType(com_none),
-							m_pObjectManager(CAppContext::GetGodGame()->getObjectManager()),
-							m_bTag(false)
+							m_obj_type(objtype),  
+							m_owner_type(owner),
+							m_animgr(NULL),
+							m_enable(true),
+							m_command_type(com_none),
+							m_object_manager(CAppContext::getGodGame()->getObjectManager()),
+							m_tag(false)
 {
 	
 
@@ -46,13 +46,13 @@ CGameObject::CGameObject(OwnerType owner,  u32 obj_id,
 						 vector3df pos, 
 						 vector3df rot, 
 						 vector3df scale) :
-m_objType(objtype),  
-m_eOwnerType(owner),
-m_pAnimgr(NULL),
-m_bEnable(true),
-m_CommandType(com_none),
-m_pObjectManager(CAppContext::GetGodGame()->getObjectManager()),
-m_bTag(false)
+m_obj_type(objtype),  
+m_owner_type(owner),
+m_animgr(NULL),
+m_enable(true),
+m_command_type(com_none),
+m_object_manager(CAppContext::getGodGame()->getObjectManager()),
+m_tag(false)
 {
 	
 }
@@ -61,7 +61,7 @@ m_bTag(false)
 /*======================================================*/
 // 신노드 지우기
 /*======================================================*/
-bool CGameObject::RemoveSceneNode()
+bool CGameObject::removeSceneNode()
 {
 	
 	return true;	
@@ -72,13 +72,13 @@ bool CGameObject::RemoveSceneNode()
 /*======================================================*/
 // 오브젝트 아이디 설정하기
 /*======================================================*/
-void CGameObject::SetIDFromValidTest()
+void CGameObject::setIdFromValidTest()
 {
 
 	
-	m_uid = m_iNextValidID;			
+	m_uid = m_next_valid_id;			
 	
-	m_iNextValidID++;
+	m_next_valid_id++;
 	
 
 }
@@ -96,7 +96,7 @@ CGameObject::~CGameObject()
 /*======================================================*/
 bool CGameObject::isPossessed()
 {	
-	return (CObjectController::GetInstance()->isPossessed(this));
+	return (CObjectController::getInstance()->isPossessed(this));
 }
 
 
@@ -104,9 +104,9 @@ bool CGameObject::isPossessed()
 /*======================================================*/
 // 모든 오브젝트들에게 메시지를 보내기
 /*======================================================*/
-bool CGameObject::SendMessageToAllObjects( double delay, s32 sender, s32 msg, void* ExtraInfo )
+bool CGameObject::sendMessageToAllObjects( double delay, s32 sender, s32 msg, void* extra_info )
 {
-	 Dispatcher->DispatchMessageToAllObjects(delay,	 sender, msg, ExtraInfo);
+	 Dispatcher->dispatchMessageToAllObjects(delay,	 sender, msg, extra_info);
 	
 	 return true;
 }
@@ -127,7 +127,7 @@ vector3df CGameObject::getHeightPos()
 /*======================================================*/
 void CGameObject::setCommandType( Command_Type type )
 {
-	m_CommandType = type; 
+	m_command_type = type; 
 }
 
 
@@ -136,7 +136,7 @@ void CGameObject::setCommandType( Command_Type type )
 /*======================================================*/
 CMainGameGUI* CGameObject::getMainGameGUI()
 {
-	return CMainGameGUI::GetInstance();
+	return CMainGameGUI::getInstance();
 }
 
 
@@ -145,5 +145,5 @@ CMainGameGUI* CGameObject::getMainGameGUI()
 /*======================================================*/
 CGameGUI* CGameObject::getOwnedGUI()
 {
-	return CGUIManager::GetInstance()->getUnitController()->getCurrentControlGUI();
+	return CGUIManager::getInstance()->getUnitController()->getCurrentControlGUI();
 }

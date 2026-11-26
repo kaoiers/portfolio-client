@@ -33,13 +33,13 @@ enum message_type
 	Msg_EnemyKillUnit,
 	Msg_EnemyAttackRoom,
 	Msg_DestroyRoom,
-	Msg_IDemagedYou
+	MSG_I_DAMAGED_YOU
 };
 
 
 
 //메시지 정보
-inline std::string MessageToString(s32 msg)
+inline std::string messageToString(s32 msg)
 {
 	switch(msg)
 	{

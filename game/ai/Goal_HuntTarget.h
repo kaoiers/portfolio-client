@@ -26,26 +26,26 @@ private:
 
   //this value is set to true if the last visible position of the target
   //bot has been searched without success
-  bool  m_bLVPTried;
-  CGameUnitEnemy*	m_pEnemyUnit;
-  CGameUnit*		m_pTarget;
+  bool  m_lvp_tried;
+  CGameUnitEnemy*	m_enemy_unit;
+  CGameUnit*		m_target;
 
 public:
 
-  Goal_HuntTarget(CGameUnit* pBot):Goal_Composite<CGameUnit>(pBot, goal_hunt_target),
-                                   m_bLVPTried(false), m_pTarget(NULL)
+  Goal_HuntTarget(CGameUnit* p_bot):Goal_Composite<CGameUnit>(p_bot, goal_hunt_target),
+                                   m_lvp_tried(false), m_target(NULL)
   {}
 
   ~Goal_HuntTarget();
 
 
    //the usual suspects
-  void Activate();
-  s32  Process();
-  void Terminate() {}
+  void activate();
+  s32  process();
+  void terminate() {}
 
-  void Render();
-  void StopHunting();
+  void render();
+  void stopHunting();
 
 };
 

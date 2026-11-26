@@ -20,7 +20,7 @@
 
 
 Goal_FollowPath::
-Goal_FollowPath(CGameUnit* pUnit):Goal_Composite<CGameUnit>(pUnit, goal_follow_path)
+Goal_FollowPath(CGameUnit* p_unit):Goal_Composite<CGameUnit>(p_unit, goal_follow_path)
 {
 }
 
@@ -28,9 +28,9 @@ Goal_FollowPath(CGameUnit* pUnit):Goal_Composite<CGameUnit>(pUnit, goal_follow_p
 /*======================================================*/
 // 그래프 길 따라가기 행동 초기화
 /*======================================================*/
-void Goal_FollowPath::Activate()
+void Goal_FollowPath::activate()
 {
-  m_iStatus = active;
+  m_status = active;
   //remove the edge from the path
   
 }
@@ -39,31 +39,31 @@ void Goal_FollowPath::Activate()
 /*======================================================*/
 // 그래프 길 따라가기 행동 처리
 /*======================================================*/
-s32 Goal_FollowPath::Process()
+s32 Goal_FollowPath::process()
 {
   //if status is inactive, call Activate()
-  ActivateIfInactive();
+  activateIfInactive();
 
-  m_iStatus = ProcessSubgoals();
+  m_status = processSubgoals();
 
   //if there are no subgoals present check to see if the path still has edges.
   //remaining. If it does then call activate to grab the next edge.
-  if (m_iStatus == completed )
+  if (m_status == completed )
   {
-    Activate(); 
+    activate(); 
   }
 
-  else if(m_iStatus == completed)
+  else if(m_status == completed)
   {
-	  StopSeeking();
+	  stopSeeking();
   }
 
 
 
-  return m_iStatus;
+  return m_status;
 }
 
-void Goal_FollowPath::Terminate()
+void Goal_FollowPath::terminate()
 {
 
 }
@@ -72,9 +72,9 @@ void Goal_FollowPath::Terminate()
 /*======================================================*/
 // 멈추기
 /*======================================================*/
-bool Goal_FollowPath::StopSeeking()
+bool Goal_FollowPath::stopSeeking()
 {
-	m_pOwner->SetVelocity(vector3df(0,0,0));
+	m_owner->setVelocity(vector3df(0,0,0));
 
 	return true;
 }

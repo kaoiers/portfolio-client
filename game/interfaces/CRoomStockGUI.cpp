@@ -28,7 +28,7 @@ enum
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CRoomStockGUI::GUI_Initialize()
+void CRoomStockGUI::guiInitialize()
 {
 //m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 }
@@ -38,9 +38,9 @@ void CRoomStockGUI::GUI_Initialize()
 /*======================================================*/
 // 주인 오브젝트 설정
 /*======================================================*/
-void CRoomStockGUI::SetOwner( CGameObject *obj )
+void CRoomStockGUI::setOwner( CGameObject *obj )
 {
-	m_pOwner = dynamic_cast<CGameRoomStock* >(obj);
+	m_owner = dynamic_cast<CGameRoomStock* >(obj);
 
 	//	setDamage( m_pOwner->getRoomHp() , m_pOwner->getTotalRoomHP());
 }
@@ -50,14 +50,14 @@ void CRoomStockGUI::SetOwner( CGameObject *obj )
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CRoomStockGUI::interface_control( CEventHandler* pReceiver )
+bool CRoomStockGUI::interfaceControl( CEventHandler* p_receiver )
 {
 
-	if(pReceiver->isClickedButtonID(COMMAND_WAREHOUSE_DESTROY_BUTTON ))
+	if(p_receiver->isClickedButtonID(COMMAND_WAREHOUSE_DESTROY_BUTTON ))
 	{
-		m_pOwner->Explosion();	
+		m_owner->explosion();	
 
-		m_pOwner->DeleteRoom();
+		m_owner->deleteRoom();
 	}
 
 	return true;

@@ -27,18 +27,18 @@ private:
 
 public:
 
-	Goal_GoingHome(CGameUnit* pUnit):  
-	  Goal_Composite<CGameUnit>(pUnit, goal_goinghome){}
+	Goal_GoingHome(CGameUnit* p_unit):  
+	  Goal_Composite<CGameUnit>(p_unit, goal_goinghome){}
 
 	  //the usual suspects
-	  void Activate();
-	  s32  Process();
-	  void Terminate(){}
+	  void activate();
+	  s32  process();
+	  void terminate(){}
 
 	  //this goal is able to accept messages
-	  bool HandleMessage(const Telegram& msg);
+	  bool handleMessage(const Telegram& msg);
 
-	  void Render();
+	  void render();
 };
 
 

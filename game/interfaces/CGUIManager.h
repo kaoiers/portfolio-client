@@ -27,19 +27,19 @@ class CWebDialog;
 
 class CGUIManager
 {
-	CFontManager*		m_pFontManager;
-	CMainGameGUI*		m_pMainGameGUI;
-	COptionGUI*			m_pOptionGUI;
-	CMouseCursorGUI*	m_pMouseCursorGUI;
-	CLoginGUI*			m_pLoginGUI;
-	CDialogBox*			m_pDialogBoxGUI;
-	CControllerGUI*		m_pControllerGUI;
-	CGameIntroGUI*		m_pGameIntroGUI;
-	CPopUpGUI*			m_pPopUpGUI;
-	CWebDialog*			m_pWebDialog;
+	CFontManager*		m_font_manager;
+	CMainGameGUI*		m_main_game_gui;
+	COptionGUI*			m_option_gui;
+	CMouseCursorGUI*	m_mouse_cursor_gui;
+	CLoginGUI*			m_login_gui;
+	CDialogBox*			m_dialog_box_gui;
+	CControllerGUI*		m_controller_gui;
+	CGameIntroGUI*		m_game_intro_gui;
+	CPopUpGUI*			m_pop_up_gui;
+	CWebDialog*			m_web_dialog;
 
 	typedef std::map<u32 , CGameGUI *> GUIMap;
-	GUIMap	m_pGUIs;
+	GUIMap	m_guis;
 
 	
 
@@ -49,41 +49,41 @@ public :
 
 	CGUIManager();
 
-	static	   CGUIManager*		m_pInstance;
-	static	   CGUIManager*		GetInstance()   {return m_pInstance; }
+	static	   CGUIManager*		m_instance;
+	static	   CGUIManager*		getInstance()   {return m_instance; }
 
 	virtual				~CGUIManager();
 
-	CGameGUI*			FindInterfaceFromID( s32 cid );
+	CGameGUI*			findInterfaceFromId( s32 cid );
 
-	void				RegisterGUIByID(CGameGUI *pGui);
+	void				registerGuiById(CGameGUI *p_gui);
 
-	bool				IsPressed();
+	bool				isPressed();
 
-	bool				PostEvent(const SEvent& event);
+	bool				postEvent(const SEvent& event);
 
-	void				Interface_Init(CGameGUI* BaseGUI);
+	void				interfaceInit(CGameGUI* BaseGUI);
 
 public :
 
-	bool				GameLoading();
+	bool				gameLoading();
 
-	bool				GameLoadingComplete() { return true;  };
+	bool				gameLoadingComplete() { return true;  };
 
-	bool				control(CEventHandler* pReceiver);
+	bool				control(CEventHandler* p_receiver);
 
 	bool				render();
 
-	COptionGUI*			getOptionGUI() const { return m_pOptionGUI; }
-	CMainGameGUI*		getMainGameGUI() const {return m_pMainGameGUI; }
-	CMouseCursorGUI*	getMouseCursorGUI() const { return m_pMouseCursorGUI; }
-	CLoginGUI*			getLoginGUI() const { return m_pLoginGUI; }
-	CDialogBox*			getDIalogGUI() const { return m_pDialogBoxGUI; }
-	CControllerGUI*		getUnitController() const {return m_pControllerGUI; }
-	CGameIntroGUI*		getGameIntroGUI() const {return m_pGameIntroGUI; }
-	CControllerGUI*		getControllerGUI() const { return  m_pControllerGUI;}
-	CPopUpGUI*			getPopUpGUI() const { return m_pPopUpGUI; }
-	CWebDialog*			getWebDialog() const { return m_pWebDialog; }
+	COptionGUI*			getOptionGUI() const { return m_option_gui; }
+	CMainGameGUI*		getMainGameGUI() const {return m_main_game_gui; }
+	CMouseCursorGUI*	getMouseCursorGUI() const { return m_mouse_cursor_gui; }
+	CLoginGUI*			getLoginGUI() const { return m_login_gui; }
+	CDialogBox*			getDialogGui() const { return m_dialog_box_gui; }
+	CControllerGUI*		getUnitController() const {return m_controller_gui; }
+	CGameIntroGUI*		getGameIntroGUI() const {return m_game_intro_gui; }
+	CControllerGUI*		getControllerGUI() const { return  m_controller_gui;}
+	CPopUpGUI*			getPopUpGUI() const { return m_pop_up_gui; }
+	CWebDialog*			getWebDialog() const { return m_web_dialog; }
 
 public :
 	u32 getLastGUIID();

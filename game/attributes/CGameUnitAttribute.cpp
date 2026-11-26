@@ -12,24 +12,24 @@
 #include "../objects/SGameUnitAttributeResources.h"
 #include "../attributes/CGameUnitAttribute.h"
 
-GAMEUNIT_ATTRIBUTE* m_pResource;
+GAMEUNIT_ATTRIBUTE* m_resource_ptr;
 
 
 
 CGameUnitAttribute::CGameUnitAttribute(const GAMEUNIT_ATTRIBUTE* att )
-: m_pGameAttribute(att),
-  m_uCurrentLevel(att->m_uDefaultLevel), //실제 레벨로 대체
-  m_uCurrentHp(att->m_uDefaultHP),
-  m_uAttack(att->m_uDefaultAttack),
-  m_uDefence(att->m_uDefaultDefence),
-  m_fAttackRange(att->m_fDefaultAttackRange),
-  m_fCriticalRate(att->m_fCriticalRate),
-  m_fBlockingRate(att->m_fBlockingRate),
-  m_uMaxExp(att->m_uDefaultExp),
-  m_uMaxHp(att->m_uDefaultHP),
-  m_fFOV(att->m_fDefaultFOV),
-  m_fViewDistance(att->m_fDefaultViewDistance),
-  m_bAlive(true)
+: m_game_attribute(att),
+  m_current_level(att->m_default_level), //실제 레벨로 대체
+  m_current_hp(att->m_default_hp),
+  m_attack(att->m_default_attack),
+  m_defence(att->m_default_defence),
+  m_attack_range(att->m_default_attack_range),
+  m_critical_rate(att->m_critical_rate),
+  m_blocking_rate(att->m_blocking_rate),
+  m_max_exp(att->m_default_exp),
+  m_max_hp(att->m_default_hp),
+  m_fov(att->m_default_fov),
+  m_view_distance(att->m_default_view_distance),
+  m_alive(true)
 {
 
 }
@@ -38,29 +38,29 @@ CGameUnitAttribute::CGameUnitAttribute(const GAMEUNIT_ATTRIBUTE* att )
 /*======================================================*/
 // 레벨업 처리하기
 /*======================================================*/
-void CGameUnitAttribute::Levelup()
+void CGameUnitAttribute::levelUp()
 {
-	m_uCurrentLevel++;
-	m_uCurrentHp = m_uMaxHp;
+	m_current_level++;
+	m_current_hp = m_max_hp;
 }
 
 
 /*======================================================*/
 // 공격 당했을 HP수치 처리하기
 /*======================================================*/
-u32 CGameUnitAttribute::CalAttacked( u32 att )
+u32 CGameUnitAttribute::calAttacked( u32 att )
 {
-	s16 attack = att - m_uDefence;
+	s16 attack = att - m_defence;
 	
 	if(attack < 0)
 		attack = 1;
 
-	m_uCurrentHp -= attack;
+	m_current_hp -= attack;
 
-	if(m_uCurrentHp <= 0)
+	if(m_current_hp <= 0)
 	{
-		m_uCurrentHp = 0 ;
-		m_bAlive = false;
+		m_current_hp = 0 ;
+		m_alive = false;
 	}	
 
 	return attack;

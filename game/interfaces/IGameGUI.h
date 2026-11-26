@@ -31,30 +31,30 @@ class CGameGUI : public IBaseGameGUI
 
 	u32		m_gid;
 
-	bool				m_bNeedOwner;
+	bool				m_need_owner;
 
-	bool				m_bEnable;
+	bool				m_enable;
 
-	bool				m_useOneSelectButton;
+	bool				m_use_one_select_button;
 
-	bool				m_bOneButtonSelect;
+	bool				m_one_button_select;
 
-	IGUIObject*			m_pFocusedObject;
+	IGUIObject*			m_focused_object;
 
-	static  u32				m_iNextValidID;
+	static  u32				m_next_valid_id;
 
 
-	bool					element_control(CEventHandler* m_pReceiver);
+	bool					elementControl(CEventHandler* m_receiver);
 protected :
 
 typedef std::list<IGUIObject *> GuiElementsList	;
 
 typedef std::map<std::string , CObjectListSet<IGUIObject *> > GroupGUI ;
 
-	GroupGUI							m_Group;
-	position2d<s16>						m_abolutePosition;
-	GuiElementsList						m_pElements;
-	CGameObject*						m_pOwner;
+	GroupGUI							m_group;
+	position2d<s16>						m_absolute_position;
+	GuiElementsList						m_elements;
+	CGameObject*						m_owner;
 
 
 public :
@@ -65,14 +65,14 @@ public :
 
 	virtual ~CGameGUI();
 
-	void					SetOneButtonInterface(const bool sel = true) { m_useOneSelectButton  = sel;  } 
+	void					setOneButtonInterface(const bool sel = true) { m_use_one_select_button  = sel;  } 
 
-	bool					isOneButtonInterface() const {return m_useOneSelectButton; }
+	bool					isOneButtonInterface() const {return m_use_one_select_button; }
 
 
-	void					SetOneButtonSelectState( IGUIObject *guiobj );
+	void					setOneButtonSelectState( IGUIObject *guiobj );
 
-	void					SetAllButtonSelectState(const bool states = true);
+	void					setAllButtonSelectState(const bool states = true);
 
 	bool					isOneButtonSelectState();
 
@@ -84,50 +84,50 @@ public :
 public :
 
 	
-	bool					control(CEventHandler* m_pReceiver);	
+	bool					control(CEventHandler* m_receiver);	
 
 
-	void					Show();
+	void					show();
 
-	void					Hide();
+	void					hide();
 
-	bool					isEnable() const { return m_bEnable; }
+	bool					isEnable() const { return m_enable; }
 
 	bool					isClicked() { return true; };
 
 public :
 
 
-	void					SetPosition(const vector2di pos);
+	void					setPosition(const vector2di pos);
 		
-	void					RegisterElement( IGUIObject *pGui );
+	void					registerElement( IGUIObject *p_gui );
 
-	IGUIObject*				FindElementByID(s16 eid);
+	IGUIObject*				findElementById(s16 eid);
 
-	position2d<s16>			GetPosition() const  { return  m_abolutePosition; }
+	position2d<s16>			getPosition() const  { return  m_absolute_position; }
 	
-	u32			GetID() const { return m_gid; }
+	u32			getId() const { return m_gid; }
 
 
-	void					SetNeedOwner(const bool need = true) {m_bNeedOwner = need;}
+	void					setNeedOwner(const bool need = true) {m_need_owner = need;}
 
-	bool					isNeedOwner() const { return m_bNeedOwner; }
+	bool					isNeedOwner() const { return m_need_owner; }
 
-	bool					PostEvent(const SEvent& event) { return true; };
+	bool					postEvent(const SEvent& event) { return true; };
 
 public :
 
-	CButtonGUI*				addButton(const position2d<s16> Position, const char* defaultImage, s16 mID = -1 ,std::wstring text = L"");
+	CButtonGUI*				addButton(const position2d<s16> position, const char* default_image, s16 m_id = -1 ,std::wstring text = L"");
 	
-	CImageGUI*				addImage(const position2d<s16> Position, const char* defaultImage , s16 mID = -1);
+	CImageGUI*				addImage(const position2d<s16> position, const char* default_image , s16 m_id = -1);
 	
-	position2d<s16> GetRelativePosition( const position2d<s16> pos ) const;
+	position2d<s16> getRelativePosition( const position2d<s16> pos ) const;
 	
-	position2d<s16> GetAbsolutePosition(const position2d<s16> pos) const;
+	position2d<s16> getAbsolutePosition(const position2d<s16> pos) const;
 
-	bool							FindGroupByName(const char * name, std::list<IGUIObject *>* pGroupList);
+	bool							findGroupByName(const char * name, std::list<IGUIObject *>* p_group_list);
 	
-	CObjectListSet<IGUIObject *>* 	FindGroupByName( const char * name);
+	CObjectListSet<IGUIObject *>* 	findGroupByName( const char * name);
 
 	void							addGroup(const char * name, IGUIObject* obj);
 

@@ -24,11 +24,11 @@ CLightEffectManager::CLightEffectManager(  )
 /*======================================================*/
 // 인스턴스
 /*======================================================*/
-CLightEffectManager* CLightEffectManager::GetInstance()
+CLightEffectManager* CLightEffectManager::getInstance()
 {
-	static std::unique_ptr<CLightEffectManager> Instance = std::make_unique<CLightEffectManager>();
+	static std::unique_ptr<CLightEffectManager> instance = std::make_unique<CLightEffectManager>();
 
-	return	Instance.get();
+	return	instance.get();
 }
 
 
@@ -65,7 +65,7 @@ void CLightEffectManager::removeNode(  )
 /*======================================================*/
 // 쉐도우 라이트 파라미터 지정
 /*======================================================*/
-void CLightEffectManager::SetMainShadowLightParameter( const f32 farvalue )
+void CLightEffectManager::setMainShadowLightParameter( const f32 farvalue )
 {
 	//m_pEffectHandler->getShadowLight(0).setPosition(vector3df(0, farvalue, 0));
 
@@ -78,7 +78,7 @@ void CLightEffectManager::SetMainShadowLightParameter( const f32 farvalue )
 /*======================================================*/
 void CLightEffectManager::setMainLightPositionFromRadius( const f32 radius )
 {
-	f32	newValue = 0.0f;
+	f32	new_value = 0.0f;
 
 	//newValue =   radius/(45 * DEGTORAD);
 
@@ -89,7 +89,7 @@ void CLightEffectManager::setMainLightPositionFromRadius( const f32 radius )
 /*======================================================*/
 // 현재 GUI 지정
 /*======================================================*/
-u32 CLightEffectManager::AddMineShadowLight( const vector3df& position, const vector3df& target )
+u32 CLightEffectManager::addMineShadowLight( const vector3df& position, const vector3df& target )
 {
 	return 0;
 

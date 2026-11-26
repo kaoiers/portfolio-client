@@ -10,18 +10,18 @@
 
 #include <stdafx.h>
 #include "CGameUnitBunny.h"
-void CGameUnitBunny::PrivateInitialize()
+void CGameUnitBunny::privateInitialize()
 {
 
 
 }
 
-void CGameUnitBunny::control( CEventHandler* pReceiver )
+void CGameUnitBunny::control( CEventHandler* p_receiver )
 {
 
 }
 
-void CGameUnitBunny::OnCommand()
+void CGameUnitBunny::onCommand()
 {
 
 }

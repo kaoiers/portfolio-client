@@ -45,29 +45,29 @@ class CGameObject;
 
 class CControllerGUI
 {
-	CGameGUI*		m_pCurrentGUI;
-	CUnitGodGUI*			m_pUnitGodGUI;
-	CUnitWorkerGUI*			m_pUnitWorkerGUI;	
-	CUnitArmyGUI*			m_pUnitArmyGUI;
+	CGameGUI*		m_current_gui;
+	CUnitGodGUI*			m_unit_god_gui;
+	CUnitWorkerGUI*			m_unit_worker_gui;	
+	CUnitArmyGUI*			m_unit_army_gui;
 
 
-	CRoomJailGUI*			m_pRoomJailGUI;
-	CRoomWaitingGUI*		m_pRoomWaitingGUI;
-	CRoomFarmGUI*			m_pRoomFarmGUI;
-	CRoomMineGUI*			m_pRoomMineGUI;
+	CRoomJailGUI*			m_room_jail_gui;
+	CRoomWaitingGUI*		m_room_waiting_gui;
+	CRoomFarmGUI*			m_room_farm_gui;
+	CRoomMineGUI*			m_room_mine_gui;
 
-	CRoomWoodGUI*			m_pRoomWoodGUI;
+	CRoomWoodGUI*			m_room_wood_gui;
 
-	CRoomCommunityGUI*		m_pRoomCommunityGUI;
-	CRoomStockGUI*			m_pRoomStockGUI;
-	CRoomTowerGUI*			m_pRoomTowerGUI;
-	CRoomUpTowerGUI*		m_pRoomUpTowerGUI;
+	CRoomCommunityGUI*		m_room_community_gui;
+	CRoomStockGUI*			m_room_stock_gui;
+	CRoomTowerGUI*			m_room_tower_gui;
+	CRoomUpTowerGUI*		m_room_up_tower_gui;
 
 
 
-	void					SetGUIController(CGameGUI* pGUI);
+	void					setGuiController(CGameGUI* p_gui);
 
-	static	CControllerGUI*	pInstance;
+	static	CControllerGUI*	p_instance;
 
 	
 
@@ -78,21 +78,21 @@ public :
 
 	~CControllerGUI();
 
-	static	CControllerGUI*	Instance();
+	static	CControllerGUI*	instance();
 
-	void					setGodGUI(CGameUnitGod* pGod);
+	void					setGodGUI(CGameUnitGod* p_god);
 
-	void					setWorkerGUI(CGameUnitWorker* pWorker);
+	void					setWorkerGUI(CGameUnitWorker* p_worker);
 
-	void					setArmyGUI(CGameUnitArmy*	pArmy);
+	void					setArmyGUI(CGameUnitArmy*	p_army);
 
 	CGameGUI*		setCurrentControlGUI(CGameObject * obj);
 
-	CGameGUI*		getCurrentControlGUI() {return m_pCurrentGUI;}
+	CGameGUI*		getCurrentControlGUI() {return m_current_gui;}
 
-	CRoomCommunityGUI*		getCommunityGUI() { return m_pRoomCommunityGUI; }
+	CRoomCommunityGUI*		getCommunityGUI() { return m_room_community_gui; }
 
-	void					DisableGUI();
+	void					disableGui();
 
 
 	

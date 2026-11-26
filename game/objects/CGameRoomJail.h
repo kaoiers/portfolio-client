@@ -24,12 +24,12 @@ public :
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));
 
 
-	void						enter_control();
-	void						update_control(CEventHandler* pReceiver) ;
-	void						exit_control();
-	void						update(const u32 timeMs);
-	void						extra_node_setting(){};
-	bool						HandleMessage(const Telegram& msg) {return true;}
+	void						enterControl();
+	void						updateControl(CEventHandler* p_receiver) ;
+	void						exitControl();
+	void						update(const u32 time_ms);
+	void						extraNodeSetting(){};
+	bool						handleMessage(const Telegram& msg) {return true;}
 
 
 	CGameRoomJail(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res);

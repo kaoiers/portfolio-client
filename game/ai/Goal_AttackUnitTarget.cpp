@@ -27,16 +27,16 @@
 
 //------------------------------- Activate ------------------------------------
 //-----------------------------------------------------------------------------
-void Goal_AttackUnitTarget::Activate()
+void Goal_AttackUnitTarget::activate()
 {
-	m_iStatus = active;
+	m_status = active;
 
-	m_pEnemy = dynamic_cast<CGameUnitEnemy *>(m_pOwner);
+	m_enemy = dynamic_cast<CGameUnitEnemy *>(m_owner);
 
 	//m_pTarget = m_pEnemy->getEnemyTargetingSystem()->getUnitTarget();
 
 
-	m_iStatus = completed;
+	m_status = completed;
 
 
 }
@@ -46,13 +46,13 @@ void Goal_AttackUnitTarget::Activate()
 
 //-------------------------- Process ------------------------------------------
 //-----------------------------------------------------------------------------
-s32 Goal_AttackUnitTarget::Process()
+s32 Goal_AttackUnitTarget::process()
 {
 	//if status is inactive, call Activate()
-	ActivateIfInactive();
+	activateIfInactive();
 
 	//process the subgoals
-	m_iStatus = ProcessSubgoals();
+	m_status = processSubgoals();
 
 	//m_SubGoals.front().front();
 
@@ -60,18 +60,18 @@ s32 Goal_AttackUnitTarget::Process()
 
 	//it is possible for a bot's target to die whilst this goal is active so we
 	//must test to make sure the bot always has an active target	
-	ReactivateIfFailed();
+	reactivateIfFailed();
 
 
-	return m_iStatus;
+	return m_status;
 }
 
 
-bool Goal_AttackUnitTarget::notPresent(u32 GoalType)const
+bool Goal_AttackUnitTarget::notPresent(u32 goal_type)const
 {
-	if (!m_SubGoals.empty())
+	if (!m_sub_goals.empty())
 	{
-		return m_SubGoals.front()->GetType() != GoalType;
+		return m_sub_goals.front()->getType() != goal_type;
 	}
 
 	return true;
@@ -80,17 +80,17 @@ bool Goal_AttackUnitTarget::notPresent(u32 GoalType)const
 
 
 
-void Goal_AttackUnitTarget::Terminate()
+void Goal_AttackUnitTarget::terminate()
 {
-	m_iStatus = completed;
+	m_status = completed;
 }
 
-Goal_AttackUnitTarget::Goal_AttackUnitTarget( CGameUnit* pOwner ):Goal_Composite<CGameUnit>(pOwner, goal_attack_unit_target)
+Goal_AttackUnitTarget::Goal_AttackUnitTarget( CGameUnit* p_owner ):Goal_Composite<CGameUnit>(p_owner, goal_attack_unit_target)
 {
 	//m_pUpdateRegulator = new Regulator(2.0f);
 }
 
-void Goal_AttackUnitTarget::StopHunting()
+void Goal_AttackUnitTarget::stopHunting()
 {
 	//m_pOwner->GetSteering()->SeekOff();
 

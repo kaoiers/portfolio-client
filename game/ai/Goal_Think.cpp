@@ -26,11 +26,11 @@
 #include "../map/CGameMap.h"
 #include "../interfaces/CMainGameGUI.h"
 
-Goal_Think::Goal_Think(CGameUnit* pUnit):Goal_Composite<CGameUnit>(pUnit, goal_think)
+Goal_Think::Goal_Think(CGameUnit* p_unit):Goal_Composite<CGameUnit>(p_unit, goal_think)
 {
 
-	const double LowRangeOfBias = 0.5;
-	const double HighRangeOfBias = 1.5;
+	const double low_range_of_bias = 0.5;
+	const double high_range_of_bias = 1.5;
 
 	
 }
@@ -39,7 +39,7 @@ Goal_Think::Goal_Think(CGameUnit* pUnit):Goal_Composite<CGameUnit>(pUnit, goal_t
 
 Goal_Think::~Goal_Think()
 {
-	RemoveAllSubgoals();
+	removeAllSubgoals();
 
 
 }
@@ -49,9 +49,9 @@ Goal_Think::~Goal_Think()
 /*======================================================*/
 // 유닛 군사용 목표 평가기 추가
 /*======================================================*/
-void Goal_Think::ArmyInit()
+void Goal_Think::armyInit()
 {
-	double AttackBias = 1.0;
+	double attack_bias = 1.0;
 
 	
 }
@@ -61,9 +61,9 @@ void Goal_Think::ArmyInit()
 /*======================================================*/
 // 적군용 목표 평가기 추가
 /*======================================================*/
-void Goal_Think::EnemyInit()
+void Goal_Think::enemyInit()
 {
-	double AttackBias = 1.0;
+	double attack_bias = 1.0;
  	
 	
 
@@ -75,24 +75,24 @@ void Goal_Think::EnemyInit()
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void Goal_Think::Activate()
+void Goal_Think::activate()
 {
-	if (!m_pOwner->isPossessed())
+	if (!m_owner->isPossessed())
 	{
 		//Arbitrate();
 	}
 
-	m_iStatus = active;
+	m_status = active;
 }
 
 /*======================================================*/
 // 처리하기
 /*======================================================*/
-s32 Goal_Think::Process()
+s32 Goal_Think::process()
 {
- 	ActivateIfInactive();
+ 	activateIfInactive();
 
-	s32 SubgoalStatus =  ProcessSubgoals();
+	s32 subgoal_status =  processSubgoals();
 
 // 	if (SubgoalStatus == completed || SubgoalStatus == failed)
 // 	{
@@ -102,25 +102,25 @@ s32 Goal_Think::Process()
 //   		}
 // 	}
 
-	ReactivateIfFailed();
+	reactivateIfFailed();
 
-	return m_iStatus;
+	return m_status;
 }
 
 /*======================================================*/
 // 목표 중재기
 /*======================================================*/
-void Goal_Think::Arbitrate()
+void Goal_Think::arbitrate()
 {
 	double best = 0;
 	
 
-	if(!(m_pOwner->isAlive()))
+	if(!(m_owner->isAlive()))
 	{
 		return ;
 	}
 
-	if (!notPresent(goal_move_to_position) && m_pOwner->getUnitType() != UNIT_ENEMY_SOLDIER)
+	if (!notPresent(goal_move_to_position) && m_owner->getUnitType() != UNIT_ENEMY_SOLDIER)
 	{
 		return ;		
 	}
@@ -132,11 +132,11 @@ void Goal_Think::Arbitrate()
 /*======================================================*/
 // 하위 목표 실행 확인
 /*======================================================*/
-bool Goal_Think::notPresent(u32 GoalType)const
+bool Goal_Think::notPresent(u32 goal_type)const
 {
-	if (!m_SubGoals.empty())
+	if (!m_sub_goals.empty())
 	{
-		return m_SubGoals.front()->GetType() != GoalType;
+		return m_sub_goals.front()->getType() != goal_type;
 	}
 
 	return true;
@@ -147,19 +147,19 @@ bool Goal_Think::notPresent(u32 GoalType)const
 /*======================================================*/
 // 하위 목표로 이동하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_MoveToPosition(vector3df pos)
+void Goal_Think::addGoalMoveToPosition(vector3df pos)
 {
 	s32 idx	= -1;
 
 
-	CGameMap*	pMap =	CGameMap::GetInstance();
+	CGameMap*	p_map =	CGameMap::getInstance();
 
-	vector3df  br = pMap->getBottomRightUsablePos();
-	vector3df  tl = pMap->getTopLeftUsablePos();
+	vector3df  br = p_map->getBottomRightUsablePos();
+	vector3df  tl = p_map->getTopLeftUsablePos();
 
 
 
-	if(m_pOwner->getAllyType() == unit_mine)
+	if(m_owner->getAllyType() == unit_mine)
 	{
 		if(pos.Z >= tl.Z || pos.Z <= br.Z ||  pos.X <= tl.X || pos.X >= br.X )
 		{
@@ -167,13 +167,13 @@ void Goal_Think::AddGoal_MoveToPosition(vector3df pos)
 		}
 	}
 
-	if(CGameMap::GetInstance()->isInBoundaries(pos, idx))
+	if(CGameMap::getInstance()->isInBoundaries(pos, idx))
 	{
-		if((CGameMap::GetInstance()->isWalkableWall(idx)))
+		if((CGameMap::getInstance()->isWalkableWall(idx)))
 		{
 
-			RemoveAllSubgoals();
-			AddSubgoal( new Goal_MoveToPosition(m_pOwner, pos));
+			removeAllSubgoals();
+			addSubgoal( new Goal_MoveToPosition(m_owner, pos));
 
 			return;
 
@@ -181,8 +181,8 @@ void Goal_Think::AddGoal_MoveToPosition(vector3df pos)
 	
 	}else
 	{
-		RemoveAllSubgoals();
-		AddSubgoal( new Goal_MoveToPosition(m_pOwner, pos));
+		removeAllSubgoals();
+		addSubgoal( new Goal_MoveToPosition(m_owner, pos));
 	}
 
 
@@ -191,16 +191,16 @@ void Goal_Think::AddGoal_MoveToPosition(vector3df pos)
 /*======================================================*/
 // 하위 목표로 탐험하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_Explore()
+void Goal_Think::addGoalExplore()
 {
 	if (notPresent(goal_explore))
 	{
-		RemoveAllSubgoals();
+		removeAllSubgoals();
 		//AddSubgoal( new Goal_Explore(m_pOwner));
 	}
 }
 
-void Goal_Think::AddGoal_GetItem(u32 ItemType)
+void Goal_Think::addGoalGetItem(u32 item_type)
 {
 	//if (notPresent(ItemTypeToGoalType(ItemType)))
 	//{
@@ -215,17 +215,17 @@ void Goal_Think::AddGoal_GetItem(u32 ItemType)
 /*======================================================*/
 // 하위 목표로 공격하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_AttackTarget()
+void Goal_Think::addGoalAttackTarget()
 {
 	if (notPresent(goal_attack_target))
 	{
-		RemoveAllSubgoals();
-		AddSubgoal( new Goal_AttackTarget(m_pOwner));
+		removeAllSubgoals();
+		addSubgoal( new Goal_AttackTarget(m_owner));
 	}
 }
 
 
-void Goal_Think::QueueGoal_MoveToPosition(vector3df pos)
+void Goal_Think::queueGoalMoveToPosition(vector3df pos)
 {
 	//m_SubGoals.push_back(new Goal_MoveToPosition(m_pOwner, pos));
 }
@@ -234,32 +234,32 @@ void Goal_Think::QueueGoal_MoveToPosition(vector3df pos)
 /*======================================================*/
 // 하위 목표로 죽기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_Die()
+void Goal_Think::addGoalDie()
 {
-	RemoveAllSubgoals();
-	AddSubgoal( new Goal_Dead(m_pOwner));
+	removeAllSubgoals();
+	addSubgoal( new Goal_Dead(m_owner));
 }
 
 
 /*======================================================*/
 // 하위 목표로 수집하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_Collecting( const vector3df& pos )
+void Goal_Think::addGoalCollecting( const vector3df& pos )
 {
-	RemoveAllSubgoals();
+	removeAllSubgoals();
 
-	AddSubgoal(new Goal_Collecting(m_pOwner, pos));
+	addSubgoal(new Goal_Collecting(m_owner, pos));
 }
 
 
 /*======================================================*/
 // 하위 목표로 건설하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_Building( const vector3df& pos )
+void Goal_Think::addGoalBuilding( const vector3df& pos )
 {
-	RemoveAllSubgoals();
+	removeAllSubgoals();
 
-	AddSubgoal(new Goal_Building(m_pOwner, pos));
+	addSubgoal(new Goal_Building(m_owner, pos));
 
 }
 
@@ -267,9 +267,9 @@ void Goal_Think::AddGoal_Building( const vector3df& pos )
 /*======================================================*/
 // 하위 목표들 모두 지우기
 /*======================================================*/
-void Goal_Think::RemoveSubGoals()
+void Goal_Think::removeSubGoals()
 {
-	RemoveAllSubgoals();
+	removeAllSubgoals();
 }
 
 
@@ -277,12 +277,12 @@ void Goal_Think::RemoveSubGoals()
 /*======================================================*/
 // 하위 목표로 헌팅하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_HuntTarget()
+void Goal_Think::addGoalHuntTarget()
 {
 	if (notPresent(goal_hunt_target))
 	{
-		RemoveAllSubgoals();
-		AddSubgoal(new Goal_HuntTarget(m_pOwner));
+		removeAllSubgoals();
+		addSubgoal(new Goal_HuntTarget(m_owner));
 
 		//printf("적군 아이디[%d] : Goal_HuntTarget\n", m_pOwner->GetID());
 	}
@@ -292,12 +292,12 @@ void Goal_Think::AddGoal_HuntTarget()
 /*======================================================*/
 // 하위 목표로 철수하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_GoingHome()
+void Goal_Think::addGoalGoingHome()
 {
 	if (notPresent(goal_goinghome))
 	{
-		RemoveAllSubgoals();
-		AddSubgoal(new Goal_GoingHome(m_pOwner));
+		removeAllSubgoals();
+		addSubgoal(new Goal_GoingHome(m_owner));
 
 		//printf("적군 아이디[%d] : Goal_HuntTarget\n", m_pOwner->GetID());
 	}
@@ -308,12 +308,12 @@ void Goal_Think::AddGoal_GoingHome()
 /*======================================================*/
 // 하위 목표로 유닛 헌팅 추가
 /*======================================================*/
-void Goal_Think::AddGoal_UnitHuntTarget()
+void Goal_Think::addGoalUnitHuntTarget()
 {
 	if (notPresent(goal_unithunt_target))
 	{
-		RemoveAllSubgoals();
-		AddSubgoal(new Goal_UnitHuntTarget(m_pOwner));
+		removeAllSubgoals();
+		addSubgoal(new Goal_UnitHuntTarget(m_owner));
 	}
 
 		//printf("적군 아이디[%d] : Goal_HuntTarget\n", m_pOwner->GetID());
@@ -325,12 +325,12 @@ void Goal_Think::AddGoal_UnitHuntTarget()
 /*======================================================*/
 // 하위 목표로 아군 공격하기 추가
 /*======================================================*/
-void Goal_Think::AddGoal_AttackTargetForEnemy()
+void Goal_Think::addGoalAttackTargetForEnemy()
 {
 	if (notPresent(goal_attack_target))
 	{
-		RemoveAllSubgoals();
-		AddSubgoal( new Goal_AttackUnitTarget(m_pOwner));
+		removeAllSubgoals();
+		addSubgoal( new Goal_AttackUnitTarget(m_owner));
 	}
 	//printf(".. ");
 }

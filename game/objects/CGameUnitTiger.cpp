@@ -45,13 +45,13 @@ CGameUnitTiger::~CGameUnitTiger()
 
 }
 
-void CGameUnitTiger::control(CEventHandler* pReceiver)
+void CGameUnitTiger::control(CEventHandler* p_receiver)
 {
 	
 }
 
 
-void CGameUnitTiger::OnCommand()
+void CGameUnitTiger::onCommand()
 {
 
 }
@@ -60,7 +60,7 @@ void CGameUnitTiger::OnCommand()
 
 
 
-void CGameUnitTiger::PrivateInitialize()
+void CGameUnitTiger::privateInitialize()
 {
 
 	

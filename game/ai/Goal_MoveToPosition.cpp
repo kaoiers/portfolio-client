@@ -24,16 +24,16 @@
 /*======================================================*/
 // 이동하기 행동 초기화
 /*======================================================*/
-void Goal_MoveToPosition::Activate()
+void Goal_MoveToPosition::activate()
 {
-  m_iStatus = active;
+  m_status = active;
   
   //make sure the subgoal list is clear.
   //RemoveAllSubgoals();
 
 
 
-	if(m_pOwner->getOwnerType() == object_mine)
+	if(m_owner->getOwnerType() == object_mine)
 	{	
 		//NetworkPacketSpace::SendUnitMovetoPositionPacket(m_pOwner->GetID(), m_vDestination);
 	} 
@@ -42,18 +42,18 @@ void Goal_MoveToPosition::Activate()
 /*======================================================*/
 // 이동하기 행동 처리
 /*======================================================*/
-s32 Goal_MoveToPosition::Process()
+s32 Goal_MoveToPosition::process()
 {
   //if status is inactive, call Activate()
-  ActivateIfInactive();
+  activateIfInactive();
     
   //process the subgoals
-  m_iStatus = ProcessSubgoals();
+  m_status = processSubgoals();
  
   //if any of the subgoals have failed then this goal re-plans
-  ReactivateIfFailed();
+  reactivateIfFailed();
 
-  return m_iStatus;
+  return m_status;
 }
 
 
@@ -64,29 +64,29 @@ s32 Goal_MoveToPosition::Process()
 /*======================================================*/
 // 메시지 처리하기
 /*======================================================*/
-bool Goal_MoveToPosition::HandleMessage(const Telegram& msg)
+bool Goal_MoveToPosition::handleMessage(const Telegram& msg)
 {
   //first, pass the message down the goal hierarchy
-  bool bHandled = ForwardMessageToFrontMostSubgoal(msg);
+  bool b_handled = forwardMessageToFrontMostSubgoal(msg);
 
   //if the msg was not handled, test to see if this goal can handle it
-  if (bHandled == false)
+  if (b_handled == false)
   {
-    switch(msg.Msg)
+    switch(msg.msg)
     {
     case Msg_PathReady:
 
       //clear any existing goals
-      RemoveAllSubgoals();
+      removeAllSubgoals();
 
-      AddSubgoal(new Goal_FollowPath(m_pOwner));
+      addSubgoal(new Goal_FollowPath(m_owner));
 
       return true; //msg handled
 
 
     case Msg_NoPathAvailable:
 
-      m_iStatus = failed;
+      m_status = failed;
 
       return true; //msg handled
 
@@ -101,7 +101,7 @@ bool Goal_MoveToPosition::HandleMessage(const Telegram& msg)
 /*======================================================*/
 // 길 렌더링
 /*======================================================*/
-void Goal_MoveToPosition::Render()
+void Goal_MoveToPosition::render()
 {
 //   //forward the request to the subgoals
 //   Goal_Composite<Raven_Bot>::Render();
@@ -118,7 +118,7 @@ void Goal_MoveToPosition::Render()
 //   gdi->Circle(m_vDestination, 2);
 }
 
-void Goal_MoveToPosition::Terminate()
+void Goal_MoveToPosition::terminate()
 {
 
 	

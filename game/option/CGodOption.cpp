@@ -2,9 +2,9 @@
 #include <stdafx.h>
 #include "cGodOption.h"
 
-CGodOption * CGodOption::GetInstance()
+CGodOption * CGodOption::getInstance()
 {
-	static	CGodOption Instance;
+	static	CGodOption instance;
 
-	return &Instance;
+	return &instance;
 }

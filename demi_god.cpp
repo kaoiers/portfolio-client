@@ -6,25 +6,25 @@
 
 int main()
 {
-	God_Game *godGame = God_Game::GetInstance();
+	God_Game *god_game = God_Game::getInstance();
 
-	if (!godGame->Initialize())
+	if (!god_game->initialize())
 	{
 		return false;
 	}
 
-	while (godGame->isRunning())
+	while (god_game->isRunning())
 	{
 
-		godGame->control();
+		god_game->control();
 
-		godGame->upadte(0);
+		god_game->update(0);
 
-		godGame->render();
+		god_game->render();
 
 	}
 
-	godGame->GameReset();
+	god_game->gameReset();
 
     return 0;
 }

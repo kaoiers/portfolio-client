@@ -23,9 +23,9 @@ class CAppContext : public UnCopyable
 
 public :
 
-	static God_Game *GetGodGame();
-	static CShapeDrawer* GetShapeDrawer();	
-	static CGodOption*	GetGodOption();
+	static God_Game *getGodGame();
+	static CShapeDrawer* getShapeDrawer();	
+	static CGodOption*	getGodOption();
 };
 
 

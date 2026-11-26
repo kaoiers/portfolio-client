@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 
-#define GameResource CGameResourceManager::GetInstance()
+#define GameResource CGameResourceManager::getInstance()
 
 class CTextGUI;
 
@@ -22,57 +22,57 @@ struct GlobalResource
 
 class CGameResourceManager
 {
-	GlobalResource*		m_pGameGlobalResource;
-	u32					m_uCurrentPlayerLevel;
-	u32					m_uCurrentPlayerExp;
-	const	u32			m_uInitialExp;
-	u32					m_uUnitCounts;
-	u32					m_uTotalUnitCounts;
+	GlobalResource*		m_game_global_resource;
+	u32					m_current_player_level;
+	u32					m_current_player_exp;
+	const	u32			m_initial_exp;
+	u32					m_unit_counts;
+	u32					m_total_unit_counts;
 	
 
-	u32		m_iFlag;
-	const	u32			TimeDescendentInterval;
+	u32		m_flag;
+	const	u32			time_descendent_interval;
 	
-	u32					LastUpdatedTime;
-	u32					CurrentCrop, CurrentStone, CurrentWood; 
+	u32					last_updated_time;
+	u32					current_crop, current_stone, current_wood; 
 
 	CTextGUI*			text_gold ;
 	CTextGUI*			text_lumber;
 	CTextGUI*			text_stone;
 	CTextGUI*			text_unit;
 
-	static	CGameResourceManager* m_pInstance;
+	static	CGameResourceManager* m_instance;
 	
 public :
 
-	CGameResourceManager(u32 unitLimits = 10); 
+	CGameResourceManager(u32 unit_limits = 10); 
 
 	~CGameResourceManager() 
 	{
-		SAFE_DELETE(m_pGameGlobalResource);
+		SAFE_DELETE(m_game_global_resource);
 	}
 
-	void Init();
+	void init();
 
-	static	CGameResourceManager*	GetInstance() {return m_pInstance;};
+	static	CGameResourceManager*	getInstance() {return m_instance;};
 
-	void				update(u32 timeMs);
-	void				IncreaseStatusCycle();	
-	void				DecreaseStatusCycle();
-	bool				IsAllResourcesSetting() const;
+	void				update(u32 time_ms);
+	void				increaseStatusCycle();	
+	void				decreaseStatusCycle();
+	bool				isAllResourcesSetting() const;
 
 	
-	void				AddPlayerExp(u32 exp);
-	void				IncreaseExp( u32 exp);
-	const u32			getCurrentLevel() { return m_uCurrentPlayerLevel; }
+	void				addPlayerExp(u32 exp);
+	void				increaseExp( u32 exp);
+	const u32			getCurrentLevel() { return m_current_player_level; }
 	
 	void				addUnitCounts(); 
-	void				SubstractUnitCounts();
-	const u32			getUnitCounts() { return m_uUnitCounts; }
-	const u32			getTotalUnitCounts() { return m_uTotalUnitCounts; }
+	void				subtractUnitCounts();
+	const u32			getUnitCounts() { return m_unit_counts; }
+	const u32			getTotalUnitCounts() { return m_total_unit_counts; }
 	u32					getMaxPlayerExp(u32 level) ;
 
-	inline void AddAllResources(s32 g, s32 l, s32 s)
+	inline void addAllResources(s32 g, s32 l, s32 s)
 	{ 
 		GlobalResource temp;
 		temp.crop = g;
@@ -81,21 +81,21 @@ public :
 	}
 
 	
-	inline void AddCropResource(u32 crop)
+	inline void addCropResource(u32 crop)
 	{
 		GlobalResource temp;
 		temp.crop  = crop;		
 		
 	}
 
-	inline void AddLumberResource(u32 lum)
+	inline void addLumberResource(u32 lum)
 	{
 		GlobalResource temp;
 		temp.lumber  = lum;
 		
 	}
 
-	inline void AddStoneResource(u32 stone)
+	inline void addStoneResource(u32 stone)
 	{
 		GlobalResource temp;
 		temp.stone  = stone;
@@ -106,7 +106,7 @@ public :
 
 public :
 
-	void	OnNetworkSetResources(u32 crop,
+	void	onNetworkSetResources(u32 crop,
 		u32 woods,  u32 gold );
 
 

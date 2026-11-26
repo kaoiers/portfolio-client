@@ -20,11 +20,11 @@ class CGameRoomStock;
 class CRoomStockGUI : public CGameGUI
 {
 
-	CGameRoomStock*	m_pOwner;	
+	CGameRoomStock*	m_owner;	
 
-	CTextGUI*		m_pDamageText;
+	CTextGUI*		m_damage_text;
 
-	virtual bool	interface_control(CEventHandler* pReceiver);
+	virtual bool	interfaceControl(CEventHandler* p_receiver);
 
 public :
 
@@ -34,9 +34,9 @@ public :
 
 	   virtual	~CRoomStockGUI() {};
 
-	   virtual void	GUI_Initialize();
+	   virtual void	guiInitialize();
 
-	   virtual void	SetOwner(CGameObject *obj);
+	   virtual void	setOwner(CGameObject *obj);
 
 
 };

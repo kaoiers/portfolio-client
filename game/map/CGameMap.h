@@ -28,34 +28,34 @@ class CExplosionSystem;
 class CGameMap : private UnCopyable
 {	
 	//NavGraph*							m_pNavGraph;
-	CGameObjectManager*					m_pObjMan;
+	CGameObjectManager*					m_obj_man;
 
-	CTerrainObject*						m_pTerrain;
+	CTerrainObject*						m_terrain;
 
-	CGridSceneNode*						m_pGrid;
+	CGridSceneNode*						m_grid;
 
 	//CellSpace*						m_pSpacePartition;
 	//PathManager<CPathPlanner>*		m_pPathManager;
 	//CGameSectionManager*				m_pGameSectionManager;
 
-	CBoundaryManager*					m_pBoundaryManager;
-	CEnemyGenerator*					m_pEnemyGenerator;
+	CBoundaryManager*					m_boundary_manager;
+	CEnemyGenerator*					m_enemy_generator;
 
 
-	f32								m_dCellWidth, m_dCellHeight;
-	f32								m_fTotalHeight, m_fTotalWidth;
-	line3df								m_lselectedRect[4];	
-	s32									m_iCellsX, m_iCellsZ;
+	f32								m_cell_width, m_cell_height;
+	f32								m_total_height, m_total_width;
+	line3df								m_selected_rect[4];	
+	s32									m_cells_x, m_cells_z;
 
-	vector2di							m_vMinUsableTile, m_vMaxUsableTile;
-	CGameRoomGod*						m_pGodRoom;
-	double								m_dCellSpaceNeighborhoodRange;
+	vector2di							m_min_usable_tile, m_max_usable_tile;
+	CGameRoomGod*						m_god_room;
+	double								m_cell_space_neighborhood_range;
 
-	void								CreateGraph();
-	void								CreateEnemyGenerator();
-	void								PartitionNavGraph(const s32 x, const s32 y);
-	void								DisplayObjects(u32	xOffset, u32	yOffset);
-	void								DisplayObjectsByDepth(u32	xOffset, u32	yOffset, u32 depth);
+	void								createGraph();
+	void								createEnemyGenerator();
+	void								partitionNavGraph(const s32 x, const s32 y);
+	void								displayObjects(u32	x_offset, u32	y_offset);
+	void								displayObjectsByDepth(u32	x_offset, u32	y_offset, u32 depth);
 	
 
 public :
@@ -63,61 +63,61 @@ public :
 	CGameMap(CGameObjectManager* man) ;
 	~CGameMap();
 
-	bool								SectionInit(u32 tilesX, u32 tilesZ, f32 Height, f32 Width);
-	bool								init(s32 cellsX, s32 cellsZ, s32 PartitionX,  s32 PartitionZ,  f32 cwidth  = 300.0f , f32 cheight = 300.0f);
+	bool								sectionInit(u32 tiles_x, u32 tiles_z, f32 height, f32 width);
+	bool								init(s32 cells_x, s32 cells_z, s32 partition_x,  s32 partition_z,  f32 cwidth  = 300.0f , f32 cheight = 300.0f);
 
 
 	void								render();	
-	void								update(const u32 timeMs) { };
-	static CGameMap*					GetInstance();
-	CBoundaryManager*					getBoundaryManager() {return m_pBoundaryManager; }
+	void								update(const u32 time_ms) { };
+	static CGameMap*					getInstance();
+	CBoundaryManager*					getBoundaryManager() {return m_boundary_manager; }
 	bool								isPathObstructed(const vector3df& A, 
-		const vector3df& B, f32 BoundingRadius) const;
+		const vector3df& B, f32 bounding_radius) const;
 	bool								isInBoundaries(const vector3df& point, s32 return_idx);
 	bool								isWalkableWall(const u32 idx) { return true; };
 	
 	//일꾼, 신 죽었을 때 받는 이벤트
-	void								GodDeadEvent();
-	void								WorkerDeadEvent();
+	void								godDeadEvent();
+	void								workerDeadEvent();
 	void								removeAllTrees();
 
 public :
 
 	void								addExplosion(const vector3df& pos, const f32 scl);
 	
-	s32							getNumCellsX() const	{return m_iCellsX;}
-	s32							getNumCellsZ() const	{return m_iCellsZ;}
-	f32						getCellWidth() const	{ return m_dCellWidth; }
-	f32						getCellHeight() const   { return m_dCellHeight; }
+	s32							getNumCellsX() const	{return m_cells_x;}
+	s32							getNumCellsZ() const	{return m_cells_z;}
+	f32						getCellWidth() const	{ return m_cell_width; }
+	f32						getCellHeight() const   { return m_cell_height; }
 
-	const double&						GetCellSpaceNeighborhoodRange() {return m_dCellSpaceNeighborhoodRange;}
+	const double&						getCellSpaceNeighborhoodRange() {return m_cell_space_neighborhood_range;}
 
-	bool								getNodePosFromMousePos(const vector3df& groundPoint, vector3df& tilePos);
-	bool								IsNodePresent(const s32 x, const s32 y);
-	bool								IsNodeAllLinked(const s32 x, const s32 y);
-	bool								IsInUsableArea(const s32 x, const s32 y);
+	bool								getNodePosFromMousePos(const vector3df& ground_point, vector3df& tile_pos);
+	bool								isNodePresent(const s32 x, const s32 y);
+	bool								isNodeAllLinked(const s32 x, const s32 y);
+	bool								isInUsableArea(const s32 x, const s32 y);
 
 	vector3df							getTopLeftUsablePos() { return vector3df(0,0,0); };
 	vector3df							getBottomRightUsablePos();
-	CGameRoomGod*						getGodRoom() {	return m_pGodRoom; }
-	CGameObjectManager*					getObjectManager() { return m_pObjMan; }
-	void								StartEnemyGenerate(); 
+	CGameRoomGod*						getGodRoom() {	return m_god_room; }
+	CGameObjectManager*					getObjectManager() { return m_obj_man; }
+	void								startEnemyGenerate(); 
 
 
-	bool								RemoveNode(const s32 x, const s32 y);
+	bool								removeNode(const s32 x, const s32 y);
 	vector3df							getNodePos(const s32 x, const s32 y);
 	vector3df							getPosByTile(const s32 x, const s32 y);
-	vector2di							getTileFromPos(const vector3df& groundPoint);
+	vector2di							getTileFromPos(const vector3df& ground_point);
 	
 	void								setOnebyOneBuildingNode(const s32 x, const s32 y) {};
-	bool								LinkEdges(const vector2di a, const vector2di b) { return true; };
-	bool								AddNodeByTile( const s32 x, const s32 y);
+	bool								linkEdges(const vector2di a, const vector2di b) { return true; };
+	bool								addNodeByTile( const s32 x, const s32 y);
 
-	bool								AddNodeAndLinkEdges(const s32 x, const s32 y);
-	bool								AddNodeAndLinkEdgesForDoor(const s32 x, const s32 y, const vector3df& pos);
-	void								AddNodeToCellSpace(const s32 x, const s32 y);
+	bool								addNodeAndLinkEdges(const s32 x, const s32 y);
+	bool								addNodeAndLinkEdgesForDoor(const s32 x, const s32 y, const vector3df& pos);
+	void								addNodeToCellSpace(const s32 x, const s32 y);
 
-	s32									getNodeIndexFromTIle( const s32 x, const s32 y) const;
+	s32									getNodeIndexFromTile( const s32 x, const s32 y) const;
 };
 
 #endif

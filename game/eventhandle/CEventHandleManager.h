@@ -22,7 +22,7 @@ class IGUIObject;
 struct SGuiEvent : public SEvent
 {
 	s16	GUI_ID;
-	s16	GetGUID() const {return GUI_ID;}
+	s16	getGuid() const {return GUI_ID;}
 };
 
 
@@ -57,59 +57,59 @@ class CEventHandler
 
 private :
 
-	God_Game*						m_pGame;
-	CGUIManager*					m_pGUIManager;
-	position2d<s16>					MousePosition;
-	position2d<f32>					MouseRelativePosition;
-	bool							KeyIsDown[0xFF];
-	bool							OneKeyIsDown[0xFF];
-	bool							bMouseButtonDown[3];
-	bool							bMouseButtonUp[3];
-	bool							bMouseOneclick[3];
-	f32								iOffsetWheel;
-	s16								m_iButtonID;
-	bool							m_bOverGUI;
+	God_Game*						m_game;
+	CGUIManager*					m_gui_manager;
+	position2d<s16>					mouse_position;
+	position2d<f32>					mouse_relative_position;
+	bool							key_is_down[0xFF];
+	bool							one_key_is_down[0xFF];
+	bool							b_mouse_button_down[3];
+	bool							b_mouse_button_up[3];
+	bool							b_mouse_one_click[3];
+	f32								wheel_offset;
+	s16								m_button_id;
+	bool							m_over_gui;
 
-	void							allkeyUpdate();
+	void							allKeyUpdate();
 
-	std::vector<KeyEventParam>		m_pressedKeys;
+	std::vector<KeyEventParam>		m_pressed_keys;
 public :	
-	bool		isMouseLDown() const  {return bMouseButtonDown[MOUSELEFT]; }
-	bool		isMouseMDown() const  { return bMouseButtonDown[MOUSEMIDDLE]; }
-	bool		isMouseRDown() const  { return bMouseButtonDown[MOUSERIGHT]; }
+	bool		isMouseLDown() const  {return b_mouse_button_down[MOUSELEFT]; }
+	bool		isMouseMDown() const  { return b_mouse_button_down[MOUSEMIDDLE]; }
+	bool		isMouseRDown() const  { return b_mouse_button_down[MOUSERIGHT]; }
 
-	bool		isMouseLUp()  {	return bMouseButtonUp[MOUSELEFT]; }
-	bool		isMouseMUp() const { return bMouseButtonUp[MOUSEMIDDLE]; }
-	bool		isMouseRUp() const { return bMouseButtonUp[MOUSERIGHT]; }
-
-
-	bool		isMouseLOneClick() { return bMouseOneclick[MOUSELEFT]; }
-	bool		isMouseROneClick() { return bMouseOneclick[MOUSERIGHT]; }
-	bool		isMouseMOneClick() { return bMouseOneclick[MOUSEMIDDLE]; } 
+	bool		isMouseLUp()  {	return b_mouse_button_up[MOUSELEFT]; }
+	bool		isMouseMUp() const { return b_mouse_button_up[MOUSEMIDDLE]; }
+	bool		isMouseRUp() const { return b_mouse_button_up[MOUSERIGHT]; }
 
 
-	bool		getPressedKey( KeyEventParam& keyParam );
+	bool		isMouseLOneClick() { return b_mouse_one_click[MOUSELEFT]; }
+	bool		isMouseROneClick() { return b_mouse_one_click[MOUSERIGHT]; }
+	bool		isMouseMOneClick() { return b_mouse_one_click[MOUSEMIDDLE]; } 
+
+
+	bool		getPressedKey( KeyEventParam& key_param );
 
 	inline f32 getWheelOffset()  
 	{
-		f32 tempOffset = iOffsetWheel;
-		iOffsetWheel = 0.0f;		
-		return tempOffset; 	
+		f32 temp_offset = wheel_offset;
+		wheel_offset = 0.0f;		
+		return temp_offset; 	
 	}
 
-	const position2d<s16>&		getMousePosition() const {return MousePosition; }
+	const position2d<s16>&		getMousePosition() const {return mouse_position; }
 	const position2d<s16>		getWindowMousePos() const;
 
-	const position2d<f32>&		getRelativeMousePosition() const {return MouseRelativePosition; }
+	const position2d<f32>&		getRelativeMousePosition() const {return mouse_relative_position; }
 	const line3d<f32>			getRay();
 	const bool					isMouseOutOfScreen();
 	vector3d<f32>				getMouseUpGroundPosition() { return vector3d<f32>(0, 0, 0); };
 	
-	bool						isClickedButtonID(s16 buttonID);
-	void						setInvalidButtonID() { m_iButtonID = INVALID_BUTTON;  }
+	bool						isClickedButtonID(s16 button_id);
+	void						setInvalidButtonID() { m_button_id = INVALID_BUTTON;  }
 	
 	void						setCursorOnGUI(const IGUIObject* obj, const bool on = true );
-	const bool					isCursorOnGUI() const  { return m_bOverGUI ; }
+	const bool					isCursorOnGUI() const  { return m_over_gui ; }
 	u32							getScreenHeight() const ;
 	u32							getScreenWidth() const ;
 	
@@ -117,9 +117,9 @@ public :
 
 	inline	 void	 update()
 	{
-		allkeyUpdate();
+		allKeyUpdate();
 		setInvalidButtonID();
-		m_bOverGUI =  false;
+		m_over_gui =  false;
 	}
 };
 

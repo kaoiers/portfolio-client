@@ -31,28 +31,28 @@ class CRoomCommunityGUI : public CGameGUI
 
 
 
-	CGameRoomCommunity*		m_pOwner;	
+	CGameRoomCommunity*		m_owner;	
 
 	enum 
 	{
 		friend_button_counts = 5
 	};
 
-	CButtonGUI*				m_pFriendButton[friend_button_counts];
-	CTextGUI*				m_pFriendName[friend_button_counts];
+	CButtonGUI*				m_friend_button[friend_button_counts];
+	CTextGUI*				m_friend_name[friend_button_counts];
 
 	u32						m_friend_id;
 
 
-	u32			m_uCurrent_page;
+	u32			m_current_page;
 
 
 
-	virtual bool			interface_control(CEventHandler* pReceiver);
+	virtual bool			interfaceControl(CEventHandler* p_receiver);
 
 	u32			friend_button_id;
 
-	void					ResetFriendsList();
+	void					resetFriendsList();
 
 
 
@@ -63,14 +63,14 @@ public :
 
 	   virtual	~CRoomCommunityGUI() {};
 
-	   virtual void	GUI_Initialize();
+	   virtual void	guiInitialize();
 
-	   virtual void	SetOwner(CGameObject *obj);
+	   virtual void	setOwner(CGameObject *obj);
 
 
 	   void			addFriendList(const char* friend_name , u32 friend_id,  const char* friend_picture_file = "none" );
 
-	   void			setFriendPicture( u32 friend_id, size_t stream_size, char* pStream );
+	   void			setFriendPicture( u32 friend_id, size_t stream_size, char* p_stream );
 
 };
 

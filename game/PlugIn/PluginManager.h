@@ -23,27 +23,27 @@ class PluginManager
 {
 	struct PluginInfo
 	{
-		IPlugin * pPlugin;
-		HMODULE   hDll;
+		IPlugin * p_plugin;
+		HMODULE   h_dll;
 	};
 
 	
 
 	typedef std::map< std::string, IPlugin * > PluginMap;
-	PluginMap					m_mapPlugins;
+	PluginMap					m_map_plugins;
 	std::vector<PluginInfo>		m_plugins;
 
 public:
 
-    static PluginManager * GetInstance(void);
-	void LoadPlugins ( const std::string & strDir );
-    void UnloadAll ( void );
+    static PluginManager * getInstance(void);
+	void loadPlugins ( const std::string & str_dir );
+    void unloadAll ( void );
 
-    size_t GetNumPlugins ( void ) const;
-    IPlugin * GetPlugin ( s32 nIndex );
-	IPlugin * GetPlugin(std::string plugin_name );
-	void GetFilenames(const std::string & dir, std::vector<std::string> & filenames) const;
-	bool LoadPlugin(const std::string & filename);
+    size_t getNumPlugins ( void ) const;
+    IPlugin * getPlugin ( s32 n_index );
+	IPlugin * getPlugin(std::string plugin_name );
+	void getFilenames(const std::string & dir, std::vector<std::string> & filenames) const;
+	bool loadPlugin(const std::string & filename);
 };
 
 

@@ -25,19 +25,19 @@ class Goal_BuildingMotion : public Goal<CGameUnit>
 private:
 
 
-	CGameUnitWorker*	m_pWorker;
+	CGameUnitWorker*	m_worker;
 
 	
 
 
 public:
 
-	Goal_BuildingMotion(CGameUnit* pUnit);
+	Goal_BuildingMotion(CGameUnit* p_unit);
 
 	//the usual suspects
-	void Activate();
-	s32  Process();
-	void Terminate();
+	void activate();
+	s32  process();
+	void terminate();
 
 };
 

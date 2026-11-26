@@ -19,16 +19,16 @@
 
 class CRoomStep
 {
-	u32								m_uAllSteps;
-	f32								m_fPeriodicalTime;
-	std::list<f32>					m_uStepTime;
-	CGameRoom*						m_pRoom;
-	bool							m_bOnBuilding;
+	u32								m_all_steps;
+	f32								m_periodical_time;
+	std::list<f32>					m_step_time;
+	CGameRoom*						m_room;
+	bool							m_on_building;
 
 public :
 
-	bool							UpdateBuilding();
-	void							UpdateBuildingStatus();
+	bool							updateBuilding();
+	void							updateBuildingStatus();
 	
 	
 	/*======================================================*/
@@ -36,23 +36,23 @@ public :
 	/*======================================================*/
 	const bool CRoomStep::isOnBuilding()
 	{
-		return  m_bOnBuilding;
+		return  m_on_building;
 	}
 
-	void							StartBuilding(const u32 timeMs);
+	void							startBuilding(const u32 time_ms);
 
-	CRoomStep(const ROOM_RESOURCE* res, CGameRoom*	pRoom) 
+	CRoomStep(const ROOM_RESOURCE* res, CGameRoom*	p_room) 
 	:   
-		m_pRoom(pRoom),
-		m_fPeriodicalTime(0),
-		m_bOnBuilding(false)
+		m_room(p_room),
+		m_periodical_time(0),
+		m_on_building(false)
 	
 	{
 	}
 
 	~CRoomStep()
 	{
-		m_uStepTime.clear();
+		m_step_time.clear();
 	}
 };
 

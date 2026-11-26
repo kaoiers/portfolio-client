@@ -24,50 +24,50 @@ class CGameUnitEnemy : public CGameUnit
 
 protected :
 	
-	CEnemySensoryMemory*			m_pEnemySensoryMemory;
+	CEnemySensoryMemory*			m_enemy_sensory_memory;
 
-	CEnemyTargetingSystem*			m_pEnemyTargetingSystem;
+	CEnemyTargetingSystem*			m_enemy_targeting_system;
 
-	Regulator*						m_pEnemyTargetRegulator;
+	Regulator*						m_enemy_target_regulator;
 
-	Regulator*						m_pEnemyMemoryRegulator;
+	Regulator*						m_enemy_memory_regulator;
 
-	Regulator*						m_pArbitrateRegulator;
+	Regulator*						m_arbitrate_regulator;
 
-	CEnemyGenerator*				m_pGenerator;
+	CEnemyGenerator*				m_generator;
 
-	u32						m_sGoingHomeTime;
+	u32						m_going_home_time;
 
-	s16						m_sRemainTime;
+	s16						m_remain_time;
 
-	s16						m_sElapsedTime;
+	s16						m_elapsed_time;
 
 
 public :
 
-	virtual		void				control(CEventHandler* pReceiver){};
+	virtual		void				control(CEventHandler* p_receiver){};
 
-	virtual		void				OnCommand(){};
+	virtual		void				onCommand(){};
 
-	virtual		bool				long_attack(CGameUnit*	pTarget) { return false; } 
+	virtual		bool				longAttack(CGameUnit*	p_target) { return false; } 
 
-	CEnemyGenerator*				getEnemyGenerator() { return m_pGenerator; }
-
-
+	CEnemyGenerator*				getEnemyGenerator() { return m_generator; }
 
 
-	virtual void					enter_control(){};
-	virtual void					update_control(CEventHandler* pReceiver){};
-	virtual void					exit_control(){};	
 
-	void							ArbitrateBehavior();
+
+	virtual void					enterControl(){};
+	virtual void					updateControl(CEventHandler* p_receiver){};
+	virtual void					exitControl(){};	
+
+	void							arbitrateBehavior();
 	bool							isOnAttack();
 
-	void							HandleDestroyBuildingMessage(CGameRoom*	pRoom);
-	void							HandleKillUnitMessage(CGameUnit*	pUnit);
-	void							HandleUnitDeadMessage(CGameUnit*	pUnit);
+	void							handleDestroyBuildingMessage(CGameRoom*	p_room);
+	void							handleKillUnitMessage(CGameUnit*	p_unit);
+	void							handleUnitDeadMessage(CGameUnit*	p_unit);
 
-	s16								getRemainTime() {return m_sGoingHomeTime - m_sElapsedTime; }
+	s16								getRemainTime() {return m_going_home_time - m_elapsed_time; }
 
 
 	
@@ -75,11 +75,11 @@ public :
 
 public :
 
-	CEnemySensoryMemory*			getEnemySensoryMemory() {return m_pEnemySensoryMemory; }
+	CEnemySensoryMemory*			getEnemySensoryMemory() {return m_enemy_sensory_memory; }
 
-	CEnemyTargetingSystem*			getEnemyTargetingSystem() {return m_pEnemyTargetingSystem; }
+	CEnemyTargetingSystem*			getEnemyTargetingSystem() {return m_enemy_targeting_system; }
 
-	CGameUnitEnemy(CEnemyGenerator* pGenerator , OwnerType owner,u32 obj_id, u32 objtype,
+	CGameUnitEnemy(CEnemyGenerator* p_generator , OwnerType owner,u32 obj_id, u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 
@@ -87,7 +87,7 @@ public :
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
-	CGameUnitEnemy(CEnemyGenerator* pGenerator , OwnerType owner,u32 objtype,
+	CGameUnitEnemy(CEnemyGenerator* p_generator , OwnerType owner,u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 

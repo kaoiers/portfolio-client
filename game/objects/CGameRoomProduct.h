@@ -21,35 +21,35 @@
 
 class CGameRoomProduct
 {
-	CGameRoomProductBase*	m_pRoom;
+	CGameRoomProductBase*	m_room;
 
-	const f32									m_fStatusWidth, m_fStatusHeight, m_fBarWidth, m_fBarHeight;
+	const f32									m_status_width, m_status_height, m_bar_width, m_bar_height;
 
-	u32											m_uProductCompletedTime, m_uProductTime;
+	u32											m_product_completed_time, m_product_time;
 
-	ProductTypes								m_ProductType;
+	ProductTypes								m_product_type;
 
 
-	bool										m_bProduced;
+	bool										m_produced;
 	
 	void										assignTime(const u32 sec);
-	void										SetCompletedEffect();
+	void										setCompletedEffect();
 
 
 
 
 public :
 
-	CGameRoomProduct(CGameRoomProductBase*	 pProductRoom)  : 
-	   m_pRoom(pProductRoom), 
-	   m_fStatusWidth(250), 
-	   m_fStatusHeight(22),
-	   m_fBarWidth(240),
-	   m_fBarHeight(20),   
-	   m_uProductCompletedTime(0),
-	   m_uProductTime(0),
-	   m_ProductType(PRODUCT_COUNTS),
-	   m_bProduced(false)
+	CGameRoomProduct(CGameRoomProductBase*	 p_product_room)  : 
+	   m_room(p_product_room), 
+	   m_status_width(250), 
+	   m_status_height(22),
+	   m_bar_width(240),
+	   m_bar_height(20),   
+	   m_product_completed_time(0),
+	   m_product_time(0),
+	   m_product_type(PRODUCT_COUNTS),
+	   m_produced(false)
 	   
 	{
 
@@ -67,17 +67,17 @@ public :
 		
 	}
 
-	const		bool		isProduced() const { return m_bProduced; }
-	void					setProduced(const bool pro) { m_bProduced = pro; } 
+	const		bool		isProduced() const { return m_produced; }
+	void					setProduced(const bool pro) { m_produced = pro; } 
 
-	f32						ProductProcessing();
-	void					setProductToProcessing(ProductTypes type) { m_ProductType = type; }
+	f32						productProcessing();
+	void					setProductToProcessing(ProductTypes type) { m_product_type = type; }
 
-	bool					isOnProduct() {	return		(m_uProductCompletedTime != 0); }
+	bool					isOnProduct() {	return		(m_product_completed_time != 0); }
 
-	void					TurnOnProcessing(ProductTypes type, const u32 sec);
-	void					CompleteProcessing();
-	void					CancelProcessing();
+	void					turnOnProcessing(ProductTypes type, const u32 sec);
+	void					completeProcessing();
+	void					cancelProcessing();
 
 
 
@@ -94,7 +94,7 @@ public :
 /*======================================================*/
 // 자원 생산 처리
 /*======================================================*/
-inline f32 CGameRoomProduct::ProductProcessing()
+inline f32 CGameRoomProduct::productProcessing()
 {
 	
 	return 0.0f;
@@ -105,7 +105,7 @@ inline f32 CGameRoomProduct::ProductProcessing()
 /*======================================================*/
 // 자원 생산 설정하기
 /*======================================================*/
-inline void CGameRoomProduct::TurnOnProcessing( ProductTypes type, const u32 sec  )
+inline void CGameRoomProduct::turnOnProcessing( ProductTypes type, const u32 sec  )
 {
 	setProductToProcessing(type);
 
@@ -119,7 +119,7 @@ inline void CGameRoomProduct::TurnOnProcessing( ProductTypes type, const u32 sec
 /*======================================================*/
 inline void CGameRoomProduct::assignTime(const u32 sec )
 {
-	if(m_ProductType != PRODUCT_COUNTS)
+	if(m_product_type != PRODUCT_COUNTS)
 	{
 
 		
@@ -133,17 +133,17 @@ inline void CGameRoomProduct::assignTime(const u32 sec )
 // 자원 생산 완료 처리
 /*======================================================*/
 
-inline void CGameRoomProduct::CompleteProcessing()
+inline void CGameRoomProduct::completeProcessing()
 {
-	m_uProductCompletedTime = 0;
+	m_product_completed_time = 0;
 
-	m_uProductTime = 0;
+	m_product_time = 0;
 
-	m_ProductType = PRODUCT_COUNTS;
+	m_product_type = PRODUCT_COUNTS;
 
-	m_bProduced = false;
+	m_produced = false;
 
-	m_pRoom->CollectProductCompleteProcedure();
+	m_room->collectProductCompleteProcedure();
 
 
 }
@@ -152,14 +152,14 @@ inline void CGameRoomProduct::CompleteProcessing()
 /*======================================================*/
 // 처리 취소
 /*======================================================*/
-inline void CGameRoomProduct::CancelProcessing()
+inline void CGameRoomProduct::cancelProcessing()
 {
 
-	m_uProductCompletedTime = 0;
+	m_product_completed_time = 0;
 
-	m_uProductTime = 0;
+	m_product_time = 0;
 
-	m_ProductType = PRODUCT_COUNTS;
+	m_product_type = PRODUCT_COUNTS;
 }
 
 
@@ -167,7 +167,7 @@ inline void CGameRoomProduct::CancelProcessing()
 /*======================================================*/
 // 처리효과 완료
 /*======================================================*/
-inline void CGameRoomProduct::SetCompletedEffect()
+inline void CGameRoomProduct::setCompletedEffect()
 {
 
 // 	scene::IParticleAffector* paf;

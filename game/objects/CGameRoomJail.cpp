@@ -34,9 +34,9 @@ CGameRoomJail::CGameRoomJail(OwnerType owner, u32 objtype, u32 btype, const ROOM
 /*======================================================*/
 // 컨트롤 초기화
 /*======================================================*/
-void CGameRoomJail::enter_control()
+void CGameRoomJail::enterControl()
 {
-	CControllerGUI::Instance()->setCurrentControlGUI(this);
+	CControllerGUI::instance()->setCurrentControlGUI(this);
 
 	
 
@@ -45,7 +45,7 @@ void CGameRoomJail::enter_control()
 /*======================================================*/
 // 컨트롤 어데이트
 /*======================================================*/
-void CGameRoomJail::update_control( CEventHandler* pReceiver )
+void CGameRoomJail::updateControl( CEventHandler* p_receiver )
 {
 
 }
@@ -54,7 +54,7 @@ void CGameRoomJail::update_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 컨트롤 종료
 /*======================================================*/
-void CGameRoomJail::exit_control()
+void CGameRoomJail::exitControl()
 {
 	
 
@@ -64,8 +64,8 @@ void CGameRoomJail::exit_control()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameRoomJail::update( const u32 timeMs )
+void CGameRoomJail::update( const u32 time_ms )
 {
-	BuildingUpdate();
+	buildingUpdate();
 
 }

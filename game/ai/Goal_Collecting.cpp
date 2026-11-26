@@ -20,17 +20,17 @@
 /*======================================================*/
 // 자원채집 행동 초기화
 /*======================================================*/
-void Goal_Collecting::Activate()
+void Goal_Collecting::activate()
 {
 
-	m_pWorker = dynamic_cast<CGameUnitWorker* >(m_pOwner);
+	m_worker = dynamic_cast<CGameUnitWorker* >(m_owner);
 
 
-	m_iStatus = active;
+	m_status = active;
 	//make sure the subgoal list is clear.
-	RemoveAllSubgoals();
+	removeAllSubgoals();
 
-	AddSubgoal(new Goal_MoveToPosition(m_pOwner, m_vDestination));
+	addSubgoal(new Goal_MoveToPosition(m_owner, m_destination));
 
 
 }
@@ -39,23 +39,23 @@ void Goal_Collecting::Activate()
 /*======================================================*/
 // 자원채집 행동 처리
 /*======================================================*/
-s32 Goal_Collecting::Process()
+s32 Goal_Collecting::process()
 {
 	//if status is inactive, call Activate()
-	ActivateIfInactive();
+	activateIfInactive();
 
 	//process the subgoals
-	m_iStatus = ProcessSubgoals();
+	m_status = processSubgoals();
 
 	//if any of the subgoals have failed then this goal re-plans
-	ReactivateIfFailed();
+	reactivateIfFailed();
 
-	if( m_iStatus== completed )
+	if( m_status== completed )
 	{
-		m_pWorker->CollectingComplete();		
+		m_worker->collectingComplete();		
 	}
 
-	return m_iStatus;
+	return m_status;
 }
 
 
@@ -63,15 +63,15 @@ s32 Goal_Collecting::Process()
 /*======================================================*/
 // 메시지 처리하기
 /*======================================================*/
-bool Goal_Collecting::HandleMessage( const Telegram& msg )
+bool Goal_Collecting::handleMessage( const Telegram& msg )
 {
-	bool bHandled = ForwardMessageToFrontMostSubgoal(msg);
+	bool b_handled = forwardMessageToFrontMostSubgoal(msg);
 
-	return bHandled;
+	return b_handled;
 
 }
 
-void Goal_Collecting::Terminate()
+void Goal_Collecting::terminate()
 {
 
 }

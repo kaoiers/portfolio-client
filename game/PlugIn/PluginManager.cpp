@@ -21,35 +21,35 @@
 
 using namespace std;
 
-PluginManager * PluginManager::GetInstance()
+PluginManager * PluginManager::getInstance()
 {
-	static std::unique_ptr<PluginManager> Instance = std::make_unique<PluginManager >();
+	static std::unique_ptr<PluginManager> instance = std::make_unique<PluginManager >();
 
-    return Instance.get();
+    return instance.get();
 }
 
 
 /*======================================================*/
 // 모든 플러그인 불러오기
 /*======================================================*/
-void PluginManager::LoadPlugins ( const string & strDir )
+void PluginManager::loadPlugins ( const string & str_dir )
 {
     std::vector<string> filenames;
-    GetFilenames(strDir, filenames);
+    getFilenames(str_dir, filenames);
 
     std::vector<std::string>::const_iterator it;
     for (it = filenames.begin(); it != filenames.end(); ++it)
     {
         const string & filename = *it;
-        string & fullName = strDir + string("\\") + filename;
-        LoadPlugin (fullName);
+        string & full_name = str_dir + string("\\") + filename;
+        loadPlugin (full_name);
     }
 }
 
 /*======================================================*/
 // 파일 이름 가져오기
 /*======================================================*/
-void PluginManager::GetFilenames ( const string & dir, 
+void PluginManager::getFilenames ( const string & dir, 
                                   std::vector<string> & filenames ) const
 {
     string mask = dir + string("\\*.plug");
@@ -70,12 +70,12 @@ void PluginManager::GetFilenames ( const string & dir,
 /*======================================================*/
 // 플러그인 불러오기
 /*======================================================*/
-bool PluginManager::LoadPlugin ( const string & filename )
+bool PluginManager::loadPlugin ( const string & filename )
 {
-    HMODULE hDll = ::LoadLibraryA (filename.c_str());
-    if ( hDll == NULL )
+    HMODULE h_dll = ::LoadLibraryA (filename.c_str());
+    if ( h_dll == NULL )
     {
-        LPSTR lpMsgBuf = nullptr;
+        LPSTR lp_msg_buf = nullptr;
         ::FormatMessageA( 
             FORMAT_MESSAGE_ALLOCATE_BUFFER | 
             FORMAT_MESSAGE_FROM_SYSTEM | 
@@ -83,32 +83,32 @@ bool PluginManager::LoadPlugin ( const string & filename )
             NULL,
             GetLastError(),
             MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
-            reinterpret_cast<LPSTR>(&lpMsgBuf),
+            reinterpret_cast<LPSTR>(&lp_msg_buf),
             0,
             NULL 
         );
 
-        if (lpMsgBuf) ::OutputDebugStringA(lpMsgBuf);
+        if (lp_msg_buf) ::OutputDebugStringA(lp_msg_buf);
 
-        LocalFree( lpMsgBuf );
+        LocalFree( lp_msg_buf );
         return false;
     }
 
-	CREATEPLUGIN pFunc = (CREATEPLUGIN)::GetProcAddress (hDll, "CreatePlugin");
-    if ( pFunc == NULL )
+	CREATEPLUGIN p_func = (CREATEPLUGIN)::GetProcAddress (h_dll, "CreatePlugin");
+    if ( p_func == NULL )
         return false;
 
 
-    IPlugin * pPlugin = pFunc(*this);
-    if ( pPlugin == NULL )
+    IPlugin * p_plugin = p_func(*this);
+    if ( p_plugin == NULL )
         return false;
 
 
     PluginInfo info;
-    info.pPlugin = pPlugin;
-    info.hDll    = hDll;
+    info.p_plugin = p_plugin;
+    info.h_dll    = h_dll;
 
-	m_mapPlugins[pPlugin->GetName()] = pPlugin;
+	m_map_plugins[p_plugin->GetName()] = p_plugin;
 
 	m_plugins.push_back(info);
 
@@ -124,7 +124,7 @@ bool PluginManager::LoadPlugin ( const string & filename )
 /*======================================================*/
 // 모든 플러그인 해제하기 
 /*======================================================*/
-void PluginManager::UnloadAll ( void )
+void PluginManager::unloadAll ( void )
 {
 //     MainFrame * pMainFrame = static_cast<MainFrame*>(::AfxGetMainWnd());
 
@@ -135,14 +135,14 @@ void PluginManager::UnloadAll ( void )
 	            
 		   // pMainFrame->RemoveExporter(info.pPlugin->GetExportName());
 
-			SAFE_DELETE(info.pPlugin);
-			::FreeLibrary (info.hDll);
+			SAFE_DELETE(info.p_plugin);
+			::FreeLibrary (info.h_dll);
 		}
 
 	
 
     m_plugins.clear();
-	m_mapPlugins.clear();
+	m_map_plugins.clear();
 }
 
 
@@ -150,7 +150,7 @@ void PluginManager::UnloadAll ( void )
 /*======================================================*/
 //플러그인 갯수 가져오기
 /*======================================================*/
-size_t PluginManager::GetNumPlugins ( void ) const
+size_t PluginManager::getNumPlugins ( void ) const
 {
     return m_plugins.size();
 }
@@ -159,24 +159,24 @@ size_t PluginManager::GetNumPlugins ( void ) const
 /*======================================================*/
 // 플러그인 가져오기
 /*======================================================*/
-IPlugin * PluginManager::GetPlugin ( s32 nIndex )
+IPlugin * PluginManager::getPlugin ( s32 n_index )
 {
-    if ( nIndex < 0 || nIndex >= GetNumPlugins() )
+    if ( n_index < 0 || n_index >= getNumPlugins() )
         return NULL;
 
-    return m_plugins[nIndex].pPlugin;
+    return m_plugins[n_index].p_plugin;
 }
 
 
 /*======================================================*/
 // 플러그인 가져오기
 /*======================================================*/
-IPlugin * PluginManager::GetPlugin(std::string plugin_name )
+IPlugin * PluginManager::getPlugin(std::string plugin_name )
 {
 
- 	PluginMap::iterator itr = m_mapPlugins.find(plugin_name);
+ 	PluginMap::iterator itr = m_map_plugins.find(plugin_name);
 // 
- 	if(itr != m_mapPlugins.end())
+ 	if(itr != m_map_plugins.end())
  		return (itr->second);
 
 

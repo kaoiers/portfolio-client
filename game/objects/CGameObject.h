@@ -42,33 +42,33 @@ class	CGameGUI;
 
 class CGameObject : public IGameObject
 {
-	CGameObjectManager*			m_pObjectManager;
+	CGameObjectManager*			m_object_manager;
 
 	s32							m_uid;
 
-	s32							m_objType;
+	s32							m_obj_type;
 
-	OwnerType					m_eOwnerType;
+	OwnerType					m_owner_type;
 
-	bool						m_bSeleted;
+	bool						m_selected;
 
-	Command_Type				m_CommandType;
+	Command_Type				m_command_type;
 
-	bool						m_bTag;
+	bool						m_tag;
 	
 protected:
 
-	bool						m_bEnable;
+	bool						m_enable;
 
-	CGameAnimationMgr*			m_pAnimgr;
+	CGameAnimationMgr*			m_animgr;
 
 public:	
 
-	static  u32		m_iNextValidID;
+	static  u32		m_next_valid_id;
 
-	bool         IsTagged()const{return m_bTag;}
-	void         Tag(){m_bTag = true;}
-	void         UnTag(){m_bTag = false;}
+	bool         isTagged()const{return m_tag;}
+	void         tag(){m_tag = true;}
+	void         untag(){m_tag = false;}
 	
 	
 	CGameObject(OwnerType owner , u32 objtype,
@@ -85,28 +85,28 @@ public:
 
 	virtual						~CGameObject();
 
-	void						setOwnerType(OwnerType owner) { m_eOwnerType = owner; }
-	OwnerType			getOwnerType() { return m_eOwnerType; }
+	void						setOwnerType(OwnerType owner) { m_owner_type = owner; }
+	OwnerType			getOwnerType() { return m_owner_type; }
 
 
 
-	CGameAnimationMgr*			GetAnimationMgr() { return m_pAnimgr; }	
-	void						SetID(s32 cid) { m_uid = cid; }
-	u32							GetID() {return m_uid;}
+	CGameAnimationMgr*			getAnimationMgr() { return m_animgr; }	
+	void						setId(s32 cid) { m_uid = cid; }
+	u32							getId() {return m_uid;}
 	bool						isPossessed();
-	CGameObjectManager*			getObjectManager() const { return m_pObjectManager; }
-	s32							getObjectType() const { return m_objType; }
-	void						setObjectType(const s32 iType) { m_objType = iType;  }
-	bool						RemoveSceneNode();
+	CGameObjectManager*			getObjectManager() const { return m_object_manager; }
+	s32							getObjectType() const { return m_obj_type; }
+	void						setObjectType(const s32 i_type) { m_obj_type = i_type;  }
+	bool						removeSceneNode();
 
 	CMainGameGUI*				getMainGameGUI();
 	CGameGUI*			getOwnedGUI();
 
 	void						setCommandType(Command_Type type);
-	Command_Type		getCommandType() const { return m_CommandType; }
+	Command_Type		getCommandType() const { return m_command_type; }
 
-	void						SetIDFromValidTest();
-	bool						SendMessageToAllObjects( double delay, s32 sender, s32 msg, void* ExtraInfo );
+	void						setIdFromValidTest();
+	bool						sendMessageToAllObjects( double delay, s32 sender, s32 msg, void* extra_info );
 	vector3df					getHeightPos();
 };
 

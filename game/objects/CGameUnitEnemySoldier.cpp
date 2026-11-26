@@ -18,25 +18,25 @@
 #include "../shader/CLightEffectManager.h"
 
 
-CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner, u32 obj_id, u32 objtype,
+CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* p_generator, OwnerType owner, u32 obj_id, u32 objtype,
 											 const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute, 
 											 UnitTypes unittype, 
 											 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 											 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 											 const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ )
-											  : CGameUnitEnemy(pGenerator,owner, obj_id, objtype, resource, attribute ,unittype, pos, rot, scale)
+											  : CGameUnitEnemy(p_generator,owner, obj_id, objtype, resource, attribute ,unittype, pos, rot, scale)
 {
 
 
 
 }
 
-CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
+CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* p_generator, OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
 											 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 											 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 											 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 											 const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ )
-											  : CGameUnitEnemy(pGenerator, owner, objtype, resource, attribute ,unittype, pos, rot, scale)
+											  : CGameUnitEnemy(p_generator, owner, objtype, resource, attribute ,unittype, pos, rot, scale)
 {
 
 }
@@ -45,11 +45,11 @@ CGameUnitEnemySoldier::CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerT
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameUnitEnemySoldier::update( u32 timeMs )
+void CGameUnitEnemySoldier::update( u32 time_ms )
 {
-	UpdateMoveMent(timeMs);
+	updateMovement(time_ms);
 
-	m_pBrain->Process();
+	m_brain->process();
 
 
 	if(this->getOwnerType() == object_mine)
@@ -58,13 +58,13 @@ void CGameUnitEnemySoldier::update( u32 timeMs )
 		
 	}
 
-	if(m_sRemainTime == 0)
+	if(m_remain_time == 0)
 	{
-		m_sRemainTime = timeMs;
+		m_remain_time = time_ms;
 	}
 	else
 	{
-		m_sElapsedTime = timeMs - m_sRemainTime;
+		m_elapsed_time = time_ms - m_remain_time;
 	}
 
 
@@ -78,19 +78,19 @@ void CGameUnitEnemySoldier::update( u32 timeMs )
 /*======================================================*/
 // 근거리 공격하기
 /*======================================================*/
-bool CGameUnitEnemySoldier::short_attack( CGameUnit* pTarget )
+bool CGameUnitEnemySoldier::shortAttack( CGameUnit* p_target )
 {
 
-	if(!m_bHitOnce)
+	if(!m_hit_once)
 	{	
 		{
 
 			if(this->getOwnerType() == object_mine)
-				pTarget->SendDamageReq(getAttack(), this);
+				p_target->sendDamageReq(getAttack(), this);
 
-			Dispatcher->DispatchMsg(0.0, 0, pTarget->GetID(), Msg_IDemagedYou , this);
+			Dispatcher->dispatchMsg(0.0, 0, p_target->getId(), MSG_I_DAMAGED_YOU , this);
 
-			m_bHitOnce = true;
+			m_hit_once = true;
 		}	 
 	}
 
@@ -98,7 +98,7 @@ bool CGameUnitEnemySoldier::short_attack( CGameUnit* pTarget )
 
 }
 
-void CGameUnitEnemySoldier::PrivateInitialize()
+void CGameUnitEnemySoldier::privateInitialize()
 {
 
 }

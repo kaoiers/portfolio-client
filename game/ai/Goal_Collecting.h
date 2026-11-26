@@ -23,30 +23,30 @@ class Goal_Collecting : public Goal_Composite<CGameUnit>
 {
 private:
 
-	CGameUnitWorker*	m_pWorker;
+	CGameUnitWorker*	m_worker;
 
 
 
 
 	//the position the bot wants to reach
-	vector3df m_vDestination;
+	vector3df m_destination;
 
 public:
 
-	Goal_Collecting(CGameUnit* pUnit, vector3df   pos):  
-	  Goal_Composite<CGameUnit>(pUnit, 	goal_collecting),
-		  m_vDestination(pos)
+	Goal_Collecting(CGameUnit* p_unit, vector3df   pos):  
+	  Goal_Composite<CGameUnit>(p_unit, 	goal_collecting),
+		  m_destination(pos)
 	  {}
 
 	  //the usual suspects
-	  void Activate();
-	  s32  Process();
-	  void Terminate();
+	  void activate();
+	  s32  process();
+	  void terminate();
 
 	  //this goal is able to accept messages
-	  bool HandleMessage(const Telegram& msg);
+	  bool handleMessage(const Telegram& msg);
 
-	  void Render();
+	  void render();
 };
 
 

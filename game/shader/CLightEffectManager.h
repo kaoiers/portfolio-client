@@ -17,7 +17,7 @@
 
 class EffectHandler;
 
-#define	ShaderEffect CLightEffectManager::GetInstance()
+#define	ShaderEffect CLightEffectManager::getInstance()
 
 
 class CLightEffectManager : public UnCopyable
@@ -34,12 +34,12 @@ public :
 	CLightEffectManager();
 	~CLightEffectManager() {};
 
-	static	CLightEffectManager* GetInstance();
+	static	CLightEffectManager* getInstance();
 
 	void						drop();
-	u32				AddMineShadowLight(const vector3df& position, 	const vector3df& target);
+	u32				addMineShadowLight(const vector3df& position, 	const vector3df& target);
 	void						removeNode();
-	void						SetMainShadowLightParameter(const f32 farvalue );
+	void						setMainShadowLightParameter(const f32 farvalue );
 	void						setMainLightPositionFromRadius(const f32 radius);
 	void						drawAll();
 

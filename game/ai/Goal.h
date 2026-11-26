@@ -63,53 +63,53 @@ public:
 protected:
 
 
-  s32             m_iType;
+  s32             m_type;
 
 
-  entity_type*    m_pOwner;
+  entity_type*    m_owner;
 
 
-  s32             m_iStatus;
+  s32             m_status;
 
 
 
-  void ActivateIfInactive();
+  void activateIfInactive();
 
 
-  void ReactivateIfFailed();
+  void reactivateIfFailed();
 
 public:
 
-  Goal(entity_type*  pE, s32 type):m_iType(type),
-                                   m_pOwner(pE),
-                                   m_iStatus(inactive)
+  Goal(entity_type*  p_e, s32 type):m_type(type),
+                                   m_owner(p_e),
+                                   m_status(inactive)
   {}
 
   virtual ~Goal(){}
 
 
-  virtual void Activate() = 0;
+  virtual void activate() = 0;
 
 
-  virtual s32  Process() = 0;
+  virtual s32  process() = 0;
 
 
-  virtual void Terminate() = 0;
+  virtual void terminate() = 0;
 
-  virtual bool HandleMessage(const Telegram& msg){return false;}
+  virtual bool handleMessage(const Telegram& msg){return false;}
 
 
-  virtual void AddSubgoal(Goal<entity_type>* g)
+  virtual void addSubgoal(Goal<entity_type>* g)
   {
 	  throw std::runtime_error("Cannot add goals to atomic goals");
   }
 
 
-  bool         isComplete()const{return m_iStatus == completed;} 
-  bool         isActive()const{return m_iStatus == active;}
-  bool         isInactive()const{return m_iStatus == inactive;}
-  bool         hasFailed()const{return m_iStatus == failed;}
-  s32          GetType()const{return m_iType;}
+  bool         isComplete()const{return m_status == completed;} 
+  bool         isActive()const{return m_status == active;}
+  bool         isInactive()const{return m_status == inactive;}
+  bool         hasFailed()const{return m_status == failed;}
+  s32          getType()const{return m_type;}
   
 };
 
@@ -118,21 +118,21 @@ public:
 
 
 template <class entity_type>
-void  Goal<entity_type>::ReactivateIfFailed()
+void  Goal<entity_type>::reactivateIfFailed()
 {
   if (hasFailed())
   {
-     m_iStatus = inactive;
+     m_status = inactive;
   }
 }
 
   
 template <class entity_type>
-void  Goal<entity_type>::ActivateIfInactive()
+void  Goal<entity_type>::activateIfInactive()
 {
   if (isInactive())
   {
-    Activate();   
+    activate();   
   }
 }
 

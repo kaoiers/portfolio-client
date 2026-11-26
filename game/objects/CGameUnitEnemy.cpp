@@ -17,42 +17,42 @@
 #include "CGameObjectManager.h"
 #include "../enemy_gen/CEnemyGenerator.h"
 
-CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* pGenerator ,OwnerType owner, u32 obj_id, u32 objtype,
+CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* p_generator ,OwnerType owner, u32 obj_id, u32 objtype,
 							   const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute, 
 							   UnitTypes unittype, 
 							   const vector3df& pos , 
 							   const vector3df& rot , 
 							   const vector3df& scale  )
 							   : CGameUnit(owner, obj_id, objtype, resource, attribute ,unittype, unit_opponet, pos, rot, scale)
-							   , m_pGenerator(pGenerator), m_sRemainTime(0), m_sElapsedTime(0)
+							   , m_generator(p_generator), m_remain_time(0), m_elapsed_time(0)
 {
 
 	
-	m_pBrain->EnemyInit();
+	m_brain->enemyInit();
 
-	m_sGoingHomeTime = 120 * 1000;
+	m_going_home_time = 120 * 1000;
 
 }
 
-CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* pGenerator, OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
+CGameUnitEnemy::CGameUnitEnemy(CEnemyGenerator* p_generator, OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
 							   const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 							   const vector3df& pos , 
 							   const vector3df& rot , 
 							   const vector3df& scale  )
 							   : CGameUnit(owner, objtype, resource, attribute ,unittype, unit_opponet, pos, rot, scale)
-							   , m_pGenerator(pGenerator), m_sRemainTime(0), m_sElapsedTime(0)
+							   , m_generator(p_generator), m_remain_time(0), m_elapsed_time(0)
 {
 	
-	m_sGoingHomeTime = 120 * 1000;
+	m_going_home_time = 120 * 1000;
 
-	m_pBrain->EnemyInit();
+	m_brain->enemyInit();
 }
 
 CGameUnitEnemy::~CGameUnitEnemy()
 {
 
-	if(m_pGenerator)
-		m_pGenerator->addDeadCount();
+	if(m_generator)
+		m_generator->addDeadCount();
 
 }
 
@@ -60,7 +60,7 @@ CGameUnitEnemy::~CGameUnitEnemy()
 // 행동 중재하기
 /*======================================================*/
 
-void CGameUnitEnemy::ArbitrateBehavior()
+void CGameUnitEnemy::arbitrateBehavior()
 {
 // 
 // 	if(this->isAlive())
@@ -100,7 +100,7 @@ void CGameUnitEnemy::ArbitrateBehavior()
 /*======================================================*/
 bool	CGameUnitEnemy::isOnAttack()
 {
-	return (!(m_pBrain->notPresent(goal_attack_building) ) || !(m_pBrain->notPresent(goal_attack_target) ) );
+	return (!(m_brain->notPresent(goal_attack_building) ) || !(m_brain->notPresent(goal_attack_target) ) );
 
 }
 
@@ -108,7 +108,7 @@ bool	CGameUnitEnemy::isOnAttack()
 /*======================================================*/
 // 빌딩 파괴 메시지 처리하기
 /*======================================================*/
-void CGameUnitEnemy::HandleDestroyBuildingMessage( CGameRoom* pRoom )
+void CGameUnitEnemy::handleDestroyBuildingMessage( CGameRoom* p_room )
 {
 
 	//this->RemoveSubGoals();
@@ -122,7 +122,7 @@ void CGameUnitEnemy::HandleDestroyBuildingMessage( CGameRoom* pRoom )
 /*======================================================*/
 // 죽기 메시지 처리하기
 /*======================================================*/
-void CGameUnitEnemy::HandleKillUnitMessage( CGameUnit* pUnit )
+void CGameUnitEnemy::handleKillUnitMessage( CGameUnit* p_unit )
 {
 	
 }
@@ -131,7 +131,7 @@ void CGameUnitEnemy::HandleKillUnitMessage( CGameUnit* pUnit )
 /*======================================================*/
 // 데미지 메시지 처리하기
 /*======================================================*/
-void CGameUnitEnemy::HandleUnitDeadMessage( CGameUnit* pUnit )
+void CGameUnitEnemy::handleUnitDeadMessage( CGameUnit* p_unit )
 {
 	
 }

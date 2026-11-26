@@ -46,7 +46,7 @@ struct	Telegram;
 
 
 
-#define EntityMgr CGameObjectManager::GetInstance()
+#define EntityMgr CGameObjectManager::getInstance()
 
 
 class CObjectController;
@@ -58,31 +58,31 @@ class CGameObjectManager
 
 #define	ObjectMap std::map<u32 , CGameObject *>
 
-	ObjectMap										m_mapIdCharacter;
+	ObjectMap										m_map_id_character;
 
 
 #define NodeObjMap std::map<ISceneNode *, CGameObject *>	
 
 
 
-#define	 DeletionQue	std::list<u32>
+#define	 deletion_queue	std::list<u32>
 
-	DeletionQue										m_deleteque;
+	deletion_queue										m_delete_queue;
 
-	std::vector<CGameUnit* >						m_UnitSet;
+	std::vector<CGameUnit* >						m_unit_set;
 
-	std::vector<CGameRoom* >						m_RoomSet;
+	std::vector<CGameRoom* >						m_room_set;
 
-	CObjectController*								m_pObjectController;
+	CObjectController*								m_object_controller;
 
 
 
 
 private:
-	static CGameObjectManager * m_pInstance;
+	static CGameObjectManager * m_instance;
 
 public:
-	static CGameObjectManager* GetInstance();
+	static CGameObjectManager* getInstance();
 
 public:
 
@@ -90,66 +90,66 @@ public:
 
 	~CGameObjectManager();
 
-	ObjectMap			getObjIDMap() { return m_mapIdCharacter; }
+	ObjectMap			getObjIDMap() { return m_map_id_character; }
 
-	bool				RemoveObject(u32 cid);
+	bool				removeObject(u32 cid);
 
-	void				RemoveAllObjects();
+	void				removeAllObjects();
 
-	CGameObject*		GetObjectFromID(u32 cid);
+	CGameObject*		getObjectFromId(u32 cid);
 
-	void				DeleteRequest(s32 idkey);
+	void				deleteRequest(s32 idkey);
 
-	void				RemoveDeleteQue();
+	void				removeDeleteQueue();
 
-	bool				IsValidID(u32 obj_id);
-
-
-
-public:
-
-	void				RegisterObject(CGameObject *obj);
-
-	void				RegisterbySceneNode(CGameObject *obj) {};
-
-	void				RegisterbyID(CGameObject *obj);
-
-	void				UnRegisterObject(CGameObject *obj);
-
-	void				UnRegisterbyID(CGameObject *obj);
+	bool				isValidId(u32 obj_id);
 
 
 
 public:
 
+	void				registerObject(CGameObject *obj);
 
-	CGameUnitEnemy*		AddUnitEnemy(OwnerType owner, u32 unit_id, UnitTypes Unittype,
+	void				registerBySceneNode(CGameObject *obj) {};
+
+	void				registerById(CGameObject *obj);
+
+	void				unregisterObject(CGameObject *obj);
+
+	void				unregisterById(CGameObject *obj);
+
+
+
+public:
+
+
+	CGameUnitEnemy*		addUnitEnemy(OwnerType owner, u32 unit_id, UnitTypes Unittype,
 		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
-	CGameUnitEnemy*		AddUnitEnemy(const vector3df& pos, CEnemyGenerator* pGenerator);
+	CGameUnitEnemy*		addUnitEnemy(const vector3df& pos, CEnemyGenerator* p_generator);
 
 
-	CGameUnit*			AddUnit(OwnerType owner, u32 unit_id, UnitTypes Unittype,
+	CGameUnit*			addUnit(OwnerType owner, u32 unit_id, UnitTypes Unittype,
 		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
-	CGameUnitArmy*		AddUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
+	CGameUnitArmy*		addUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
 		vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 
-	CGameRoom*			AddRoom(OwnerType owner, const BuildingTypes Roomtype, u32 RoomID = 0, CGameUnit* pWorker = 0);
+	CGameRoom*			addRoom(OwnerType owner, const BuildingTypes Roomtype, u32 room_id = 0, CGameUnit* p_worker = 0);
 
-	CGameRoom*			AddRoomOnTile(OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile, u32 RoomID = 0);
+	CGameRoom*			addRoomOnTile(OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile, u32 room_id = 0);
 
 
 
-	CGameRoomGod*		AddGodRoom(OwnerType owner, const vector2di& tilePos);
+	CGameRoomGod*		addGodRoom(OwnerType owner, const vector2di& tile_pos);
 
-	CTerrainObject*		AddTerrainMap(OwnerType owner, s32 cx, s32 cz, f32 sx, f32 sz) { return nullptr; };
+	CTerrainObject*		addTerrainMap(OwnerType owner, s32 cx, s32 cz, f32 sx, f32 sz) { return nullptr; };
 
 
 public :
 
-	bool				control(CEventHandler *pReceiver);
+	bool				control(CEventHandler *p_receiver);
 
 	void				update();
 
@@ -159,7 +159,7 @@ public :
 
 	void				setController(IBaseController* controller);
 
-	bool				isControled(CGameObject* obj) const;
+	bool				isControlled(CGameObject* obj) const;
 
 	bool				isOnControlState();
 
@@ -167,18 +167,18 @@ public :
 
 public :
 
-	void				DispatchMsg(const Telegram& msg);
+	void				dispatchMsg(const Telegram& msg);
 
-	bool				Init();
+	bool				init();
 
 	
-	void				RemoveUnitFromSet(CGameUnit* pUnit);
+	void				removeUnitFromSet(CGameUnit* p_unit);
 
-	void				RemoveRoomFromSet(CGameRoom* pRoom);
+	void				removeRoomFromSet(CGameRoom* p_room);
 
-	void				ClearMemoryFromObject(CGameObject* pObj);
+	void				clearMemoryFromObject(CGameObject* p_obj);
 
-	void				ClearTargetFromObject( CGameObject* pObj );
+	void				clearTargetFromObject( CGameObject* p_obj );
 };
 
 

@@ -24,20 +24,20 @@ class CGameUnit;
 class CGameRoom : public CGameObject , public IBaseController
 {
 	
-	const ROOM_RESOURCE*					m_rResource;
-	u32							m_uWidth_cells, m_uHeight_cells;
-	CRoomStep*								m_pBuildingStep;
-	u32							m_uTotalRoomHp;
-	u32										m_uRoomHp;
-	CGameUnitArmy*							m_pGuardian;
-	bool									m_bNetLive;
+	const ROOM_RESOURCE*					m_resource;
+	u32							m_room_width_cells, m_room_height_cells;
+	CRoomStep*								m_building_step;
+	u32							m_total_room_hp;
+	u32										m_room_hp;
+	CGameUnitArmy*							m_guardian;
+	bool									m_net_live;
 	u32							room_type;
 
 protected :
 
-	bool									m_bBuildingFinished;
-	vector2di								m_vFirstIndexTile;
-	s32										m_NodeIndex;
+	bool									m_building_finished;
+	vector2di								m_first_index_tile;
+	s32										m_node_index;
 
 
 public :
@@ -47,17 +47,17 @@ public :
 	CGameResourceManager*					getGameResource();
 	bool									isProductRoom();
 
-	bool									isAlive() {return  (m_uRoomHp > 0); }
-	bool									addDamage(const u32 damage, CGameUnit* pAttacker);
-	const u32								getRoomHp() { return m_uRoomHp;}
-	const u32								getTotalRoomHP() { return m_uTotalRoomHp; }
+	bool									isAlive() {return  (m_room_hp > 0); }
+	bool									addDamage(const u32 damage, CGameUnit* p_attacker);
+	const u32								getRoomHp() { return m_room_hp;}
+	const u32								getTotalRoomHP() { return m_total_room_hp; }
 
-	void									setGuardian(CGameUnitArmy* pUnit) { m_pGuardian = pUnit; } 
-	CGameUnitArmy*							getGuardian() { return m_pGuardian; }
-	void									NullifyGuardian() { m_pGuardian = 0; };
-	bool									isGuardianPresent() const { return (m_pGuardian != NULL); }
-	void									setNetLive(const bool on) { m_bNetLive = on; }
-	bool									getNetLive() {return m_bNetLive;}
+	void									setGuardian(CGameUnitArmy* p_unit) { m_guardian = p_unit; } 
+	CGameUnitArmy*							getGuardian() { return m_guardian; }
+	void									nullifyGuardian() { m_guardian = 0; };
+	bool									isGuardianPresent() const { return (m_guardian != NULL); }
+	void									setNetLive(const bool on) { m_net_live = on; }
+	bool									getNetLive() {return m_net_live;}
  
 
 
@@ -73,57 +73,57 @@ public :
 	virtual		~CGameRoom();
 
 
-	bool									HandleMessage(const Telegram& msg);
+	bool									handleMessage(const Telegram& msg);
 
 public :
 
 	void									setOnebyOneNode();
-	void									setOnTile(const vector2di& FirstIndexTile);
-	const vector2di&						getFirstTile() {return m_vFirstIndexTile; }
+	void									setOnTile(const vector2di& first_index_tile);
+	const vector2di&						getFirstTile() {return m_first_index_tile; }
 
 
 public :
 
-	void									BuildingUpdate();
+	void									buildingUpdate();
 	bool									isNotWalkableRoom();
-	void									setBuildingCompleted() {m_bBuildingFinished = true;}
-	vector3df								Pos();
+	void									setBuildingCompleted() {m_building_finished = true;}
+	vector3df								getPos();
 	vector3df								getIntersectPoint(const vector3df& point);
-	void									OnBuildingCompleted();
+	void									onBuildingCompleted();
 
 public :
 
 	
-	bool									isBuildable(const vector3df& MousePos);
+	bool									isBuildable(const vector3df& mouse_pos);
 	f32										getBuildingTime();
 	
-	void									BuildingStart(const u32 seconds);
+	void									buildingStart(const u32 seconds);
 
-	void									FollowMouse(CEventHandler* pReceiver);
-	void									RemoveAndLinkNodes();
+	void									followMouse(CEventHandler* p_receiver);
+	void									removeAndLinkNodes();
 	void									setBuildableColor(const bool buildable = true);
 	
-	vector3df								GetCenterPosToBuilding();
-	vector3df								GetFrontPosToBuilding();
-	vector3df								GetGuardPos();
+	vector3df								getCenterPosToBuilding();
+	vector3df								getFrontPosToBuilding();
+	vector3df								getGuardPos();
 
 
 	void									makeBaseGround();
 	const bool								isBuildingCompleted();
-	void									RestoreRoomAreaEdges();
-	void									DeleteRoom();
-	void									DeleteRoomReal();
+	void									restoreRoomAreaEdges();
+	void									deleteRoom();
+	void									deleteRoomReal();
 	s32										getRoomNodeIndex();
-	bool									RemoveAllNodesForDestroy();
-	void									Explosion();
+	bool									removeAllNodesForDestroy();
+	void									explosion();
 
 protected :
 
-	vector2di								getTile( const vector3df& GroundPoint );
+	vector2di								getTile( const vector3df& ground_point );
 	vector3df								getBuildingOffset();
-	void									RemoveBoundaryLines();
-	void									AddBoundaryLines(const bool walkable = true);
-	s32										LinkDoorEdges();
+	void									removeBoundaryLines();
+	void									addBoundaryLines(const bool walkable = true);
+	s32										linkDoorEdges();
 
 };
 

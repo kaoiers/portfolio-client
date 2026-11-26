@@ -45,67 +45,67 @@ class CGameUnit : public  IBaseGameUnit,  public MovingEntity, public CGameUnitA
 
 protected :
 
-	CSteering*									m_pSteering;
+	CSteering*									m_steering;
 
-	CSensoryMemory*								m_pSensoryMemory;
+	CSensoryMemory*								m_sensory_memory;
 	
-	CTargetingSystem*							m_pTargetingSystem;
+	CTargetingSystem*							m_targeting_system;
 
-	CPathPlanner*								m_pPathPlanner;
+	CPathPlanner*								m_path_planner;
 
-	Goal_Think*									m_pBrain;
+	Goal_Think*									m_brain;
 
-	Regulator*									m_pTargetSelectionRegulator;
+	Regulator*									m_target_selection_regulator;
 
-	Regulator*									m_pVisionUpdateRegulator;
+	Regulator*									m_vision_update_regulator;
 
-	CLongTimeRegulator*							m_pHPUpdateRegulator;
+	CLongTimeRegulator*							m_hp_update_regulator;
 	
-	bool										m_bHitOnce;
+	bool										m_hit_once;
 
 private :
 
 	u32								m_unit_type;
 
-	const UNIT_RESOURCE* 						m_rUnitResource;
+	const UNIT_RESOURCE* 						m_unit_resource;
 
-	AllianceType								m_eAlly;
+	AllianceType								m_ally_type;
 
-	const f32									m_fHealthbarHeight, m_fHealthbarWidth;
+	const f32									m_healthbar_height, m_healthbar_width;
 
-	const u32									m_uHPUpdateTime;
+	const u32									m_hp_update_time;
 
 
 public :
 
-	void										InitAnimation();
+	void										initAnimation();
 
-	void										InitWeapon();
+	void										initWeapon();
 
-	void										UpdateMoveMent(u32 timeMs);
+	void										updateMovement(u32 time_ms);
 
-	bool										HandleMessage(const Telegram& msg);
+	bool										handleMessage(const Telegram& msg);
 
-	CSteering*									GetSteering() const { return m_pSteering; }
+	CSteering*									getSteering() const { return m_steering; }
 
-	CSensoryMemory*								GetSensoryMem()		{ return m_pSensoryMemory; }
+	CSensoryMemory*								getSensoryMem()		{ return m_sensory_memory; }
 
-	CTargetingSystem*							getTargetingSystem() { return m_pTargetingSystem; }
+	CTargetingSystem*							getTargetingSystem() { return m_targeting_system; }
 
-	CPathPlanner*								GetPathPlanner()    { return m_pPathPlanner; }
+	CPathPlanner*								getPathPlanner()    { return m_path_planner; }
 
-	Goal_Think*									getBrain() { return m_pBrain; }
+	Goal_Think*									getBrain() { return m_brain; }
 
 
 
-	const UNIT_RESOURCE* 						getUnitResource()  { return m_rUnitResource; }
+	const UNIT_RESOURCE* 						getUnitResource()  { return m_unit_resource; }
 	u32						getUnitType() {return m_unit_type;}
-	AllianceType							getAllyType() const { return m_eAlly; }
+	AllianceType							getAllyType() const { return m_ally_type; }
 	virtual	bool								isAttackSuccess(CGameObject* opponent );
 
-	void										setCurrentAni(const u32 atype, const bool bLoop);
+	void										setCurrentAni(const u32 atype, const bool b_loop);
 	CGameUnit*									getTarget() const;
-	bool										isInHitDistance(const vector3df& pos, f32 bRadius);
+	bool										isInHitDistance(const vector3df& pos, f32 b_radius);
 	vector3df									getApproachPosition(const vector3df& pos);
 
 	
@@ -113,35 +113,35 @@ public :
 
 public :
 	
-	const f32									getHitRange() {return  m_rUnitResource->m_fHitRange; }
-	const f32									getRadius() {return m_rUnitResource->m_fRadius; }
-	const f32									GetViewDistance() {  return  getViewDistance();  }
+	const f32									getHitRange() {return  m_unit_resource->m_hit_range; }
+	const f32									getRadius() {return m_unit_resource->m_radius; }
+	const f32									getUnitViewDistance() {  return  getViewDistance();  }
 
-	void										DispatchMessageKill(CGameUnit* pTarget);
-	void										AddGoal_Dead();
-	void										AddGoal_MoveToPosition(const vector3df& pos);
-	void										AddDamage(const u32 damage, CGameUnit*	pAttacker);
-	void										DamageShow(const u32 damage);
-	void										RemoveSubGoals();
-	void										DamageStatusUpdate();
-	bool										canWalkTo(const vector3df&  TargetPos);
+	void										dispatchMessageKill(CGameUnit* p_target);
+	void										addGoalDead();
+	void										addGoalMoveToPosition(const vector3df& pos);
+	void										addDamage(const u32 damage, CGameUnit*	p_attacker);
+	void										damageShow(const u32 damage);
+	void										removeSubGoals();
+	void										damageStatusUpdate();
+	bool										canWalkTo(const vector3df&  target_pos);
 	bool										canWalkBetween(const vector3df& from, const vector3df& to);
 
-	void										ObtainExp(const u32  uExp);
-	void										SendDamageReq(const u32	damage, CGameUnit*	pUnit);
+	void										obtainExp(const u32  u_exp);
+	void										sendDamageReq(const u32	damage, CGameUnit*	p_unit);
 
-	void										updateHP( const u32 timeMs );
+	void										updateHP( const u32 time_ms );
 	void										updateHpBar();
 	
 	
 	CGameUnit(OwnerType owner,u32 obj_id, u32 objtype, const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute,
-		UnitTypes unittype,AllianceType m_bAlly,
+		UnitTypes unittype,AllianceType ally_type,
 		const vector3df& pos = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
 	CGameUnit(OwnerType owner,u32 objtype, const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute,
-		UnitTypes unittype,AllianceType m_bAlly,
+		UnitTypes unittype,AllianceType ally_type,
 		const vector3df& pos = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));
@@ -154,14 +154,14 @@ public :
 
 namespace nsUnit
 {
-	inline void UnitInit(CGameUnit* pUnit)
+	inline void unitInit(CGameUnit* p_unit)
 	{
-		if (pUnit == nullptr)
+		if (p_unit == nullptr)
 			return;
 
-		pUnit->InitWeapon();
-		pUnit->InitAnimation();
-		pUnit->PrivateInitialize();
+		p_unit->initWeapon();
+		p_unit->initAnimation();
+		p_unit->privateInitialize();
 	}
 };
 

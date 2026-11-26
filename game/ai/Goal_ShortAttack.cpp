@@ -18,31 +18,31 @@
 /*======================================================*/
 // 근거리 공격 시작
 /*======================================================*/
-void Goal_ShortAttack::Activate()
+void Goal_ShortAttack::activate()
 {
-	m_iStatus = active;	
+	m_status = active;	
 }
 
 
 /*======================================================*/
 //  근거리 공격 도중관련 처리
 /*======================================================*/
-s32 Goal_ShortAttack::Process()
+s32 Goal_ShortAttack::process()
 {
 	//if status is inactive, call Activate()
-	ActivateIfInactive();	
+	activateIfInactive();	
 	
-	if(!(m_pOwner->isInHitDistance(m_pOwner->getTarget()->Pos(), m_pOwner->getTarget()->getRadius() ))  )
+	if(!(m_owner->isInHitDistance(m_owner->getTarget()->getPos(), m_owner->getTarget()->getRadius() ))  )
 	{
-		m_iStatus = failed;
-		return m_iStatus;
+		m_status = failed;
+		return m_status;
 	}
 	
 
-	if(m_pOwner->short_attack(m_pOwner->getTarget()))
+	if(m_owner->shortAttack(m_owner->getTarget()))
 	{
-		m_iStatus = completed;
-		return m_iStatus;	
+		m_status = completed;
+		return m_status;	
 	}
 
 // 	//test to see if the bot has become stuck
@@ -60,17 +60,17 @@ s32 Goal_ShortAttack::Process()
 // 		}
 // 	}
 
-	return m_iStatus;
+	return m_status;
 
 }
 
-void Goal_ShortAttack::Terminate()
+void Goal_ShortAttack::terminate()
 {
 	//m_iStatus = completed;
 }
 
-Goal_ShortAttack::Goal_ShortAttack( CGameUnit* pUnit, CGameUnit* pTarget )
-:Goal(pUnit, goal_short_attack) , m_pTarget(pTarget)
+Goal_ShortAttack::Goal_ShortAttack( CGameUnit* p_unit, CGameUnit* p_target )
+:Goal(p_unit, goal_short_attack) , m_target(p_target)
 {
 	
 

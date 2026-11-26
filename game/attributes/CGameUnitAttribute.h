@@ -31,43 +31,43 @@ typedef enum
 class CGameUnitAttribute
 {
 
-	const GAMEUNIT_ATTRIBUTE* m_pGameAttribute;
+	const GAMEUNIT_ATTRIBUTE* m_game_attribute;
 
 	////////////////////////////////////////////////
 
-	u32	m_uCurrentLevel;
+	u32	m_current_level;
 
-	s16	m_uCurrentHp;
+	s16	m_current_hp;
 	
-	u32	m_uCurrentExp;
+	u32	m_current_exp;
 
 	////////////////////////////////////////////////
 
-	u32	m_uAttack;
+	u32	m_attack;
 	
-	u32	m_uDefence;
+	u32	m_defence;
 	
-	f32	m_fAttackRange;
+	f32	m_attack_range;
 	
-	f32    m_fCriticalRate;
+	f32    m_critical_rate;
 	
-	f32    m_fBlockingRate;
+	f32    m_blocking_rate;
 
 	//////////////////////////////////////////////
 
-	u32    m_uMaxExp;
+	u32    m_max_exp;
 	
-	u32    m_uMaxHp;
+	u32    m_max_hp;
 
 	//////////////////////////////////////////////
 
-	f32	m_fFOV;
+	f32	m_fov;
 
-	f32	m_fViewDistance;
+	f32	m_view_distance;
 
-	bool		m_bAlive;
+	bool		m_alive;
 
-	ATTACK_TYPE			m_eAttackType;
+	ATTACK_TYPE			m_attack_type;
 
 
 public :
@@ -75,36 +75,36 @@ public :
 	CGameUnitAttribute(const GAMEUNIT_ATTRIBUTE* att);
 	virtual ~CGameUnitAttribute() {} ; 
 
-	u32				getLevel() const {	return	m_uCurrentLevel; }
+	u32				getLevel() const {	return	m_current_level; }
 	
-	s16				getHp() { return m_uCurrentHp;  }
-	u32				getMaxHp() const {return m_uMaxHp; }
-	void			IncreaseHp() { m_uCurrentHp++; }
+	s16				getHp() { return m_current_hp;  }
+	u32				getMaxHp() const {return m_max_hp; }
+	void			increaseHp() { m_current_hp++; }
 	
-	u32				getExp() { return m_uCurrentExp;  }
-	u32				getMaxExp() const { return m_uMaxExp;  }	
+	u32				getExp() { return m_current_exp;  }
+	u32				getMaxExp() const { return m_max_exp;  }	
 	
-	u32				getAttack() const { return m_uAttack;  }
-	u32				getDefence() const { return m_uDefence;  }
-	f32				getAttackRange() const { return m_fAttackRange;  }
+	u32				getAttack() const { return m_attack;  }
+	u32				getDefence() const { return m_defence;  }
+	f32				getAttackRange() const { return m_attack_range;  }
 
-	f32				getFOV() const { return m_fFOV; }
-	f32				getViewDistance() const { return m_fViewDistance; }
+	f32				getFOV() const { return m_fov; }
+	f32				getViewDistance() const { return m_view_distance; }
 
-	const bool			isLevelUpAvailable() const {return (m_uCurrentExp >= m_uMaxExp); }
-	const bool			isDead() const {return (m_uCurrentHp <= 0); }
+	const bool			isLevelUpAvailable() const {return (m_current_exp >= m_max_exp); }
+	const bool			isDead() const {return (m_current_hp <= 0); }
 
-	const bool			isAlive() {return m_bAlive; }
+	const bool			isAlive() {return m_alive; }
 
 
-	ATTACK_TYPE	getAttackType ()  { return m_eAttackType; }
+	ATTACK_TYPE	getAttackType ()  { return m_attack_type; }
 
 	
 	
 	
-	void				Levelup();
+	void				levelUp();
 
-	u32			CalAttacked(u32 att);
+	u32			calAttacked(u32 att);
 };
 
 

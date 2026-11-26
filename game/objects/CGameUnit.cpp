@@ -29,51 +29,51 @@
 CGameUnit::CGameUnit(OwnerType owner,u32 obj_id, u32 objtype, const UNIT_RESOURCE* resource,
 					const GAMEUNIT_ATTRIBUTE* attribute,
 					 UnitTypes unittype,
-					 AllianceType Ally,
+					 AllianceType ally,
 				   const vector3df& pos, 
 				   const vector3df& rot , 
 				   const vector3df& scale ) :
 MovingEntity(owner, obj_id, objtype,
 			
-			 resource->m_fMax_Speed,
-			 resource->m_fMass,
-			 resource->m_fTurnRate,
-			 resource->m_fMaxForce,
-			 resource->m_fNormal_Speed, 
+			 resource->m_max_speed,
+			 resource->m_mass,
+			 resource->m_turn_rate,
+			 resource->m_max_force,
+			 resource->m_normal_speed, 
 			 pos, rot, scale),
 			 m_unit_type(unittype),
-			 m_rUnitResource(resource),
-			 m_eAlly(Ally), 
-			 m_bHitOnce(false),			 
+			 m_unit_resource(resource),
+			 m_ally_type(ally), 
+			 m_hit_once(false),			 
 			 CGameUnitAttribute(attribute),
-			 m_fHealthbarHeight(10.0f), 
-			 m_fHealthbarWidth(90.0f),
-			 m_uHPUpdateTime(2500)
+			 m_healthbar_height(10.0f), 
+			 m_healthbar_width(90.0f),
+			 m_hp_update_time(2500)
 
 {	
-	m_pBrain = new Goal_Think(this);
+	m_brain = new Goal_Think(this);
 }
 
 CGameUnit::CGameUnit(OwnerType owner, u32 objtype, const UNIT_RESOURCE* resource,
-					 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype,AllianceType Ally,
+					 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype,AllianceType ally,
 					 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ ) :
 MovingEntity(owner, objtype,
-			 resource->m_fMax_Speed,
-			 resource->m_fMass,
-			 resource->m_fTurnRate,
-			 resource->m_fMaxForce,
-			 resource->m_fNormal_Speed, 
+			 resource->m_max_speed,
+			 resource->m_mass,
+			 resource->m_turn_rate,
+			 resource->m_max_force,
+			 resource->m_normal_speed, 
 			 pos, rot, scale),
 			 m_unit_type(unittype),
-			 m_rUnitResource(resource),
-			 m_eAlly(Ally), 
-			 m_bHitOnce(false),			 
+			 m_unit_resource(resource),
+			 m_ally_type(ally), 
+			 m_hit_once(false),			 
 			 CGameUnitAttribute(attribute),
-			 m_fHealthbarHeight(10.0f), 
-			 m_fHealthbarWidth(90.0f),
-			 m_uHPUpdateTime(2500)
+			 m_healthbar_height(10.0f), 
+			 m_healthbar_width(90.0f),
+			 m_hp_update_time(2500)
 {
 }
 
@@ -89,7 +89,7 @@ CGameUnit::~CGameUnit()
 /*======================================================*/
 // 유닛 애니메이션 초기화
 /*======================================================*/
-void CGameUnit::InitAnimation()
+void CGameUnit::initAnimation()
 {
 
 }
@@ -99,7 +99,7 @@ void CGameUnit::InitAnimation()
 /*======================================================*/
 // 무기 초기화
 /*======================================================*/
-void CGameUnit::InitWeapon()
+void CGameUnit::initWeapon()
 {
 
 
@@ -112,16 +112,16 @@ void CGameUnit::InitWeapon()
 /*======================================================*/
 // 메시지 처리하기
 /*======================================================*/
-bool CGameUnit::HandleMessage( const Telegram& msg )
+bool CGameUnit::handleMessage( const Telegram& msg )
 {
-	m_pBrain->HandleMessage(msg);
+	m_brain->handleMessage(msg);
 
-	switch(msg.Msg)
+	switch(msg.msg)
 	{
 
 	case Msg_YouDead :
 
-		getObjectManager()->DeleteRequest(this->GetID());
+		getObjectManager()->deleteRequest(this->getId());
 
 
 		break;
@@ -133,9 +133,9 @@ bool CGameUnit::HandleMessage( const Telegram& msg )
 
 			if(unit != NULL)
 			{
-				CGameRoom*	room = reinterpret_cast<CGameRoom * >(msg.ExtraInfo);
+				CGameRoom*	room = reinterpret_cast<CGameRoom * >(msg.extra_info);
 
-				unit->HandleDestroyBuildingMessage(room);
+				unit->handleDestroyBuildingMessage(room);
 
 			}
 		}
@@ -147,9 +147,9 @@ bool CGameUnit::HandleMessage( const Telegram& msg )
 
 			if(unit != NULL)
 			{
-				CGameUnit*	pTarget = reinterpret_cast<CGameUnit * >(msg.ExtraInfo);
+				CGameUnit*	p_target = reinterpret_cast<CGameUnit * >(msg.extra_info);
 
-				unit->HandleKillUnitMessage(pTarget);
+				unit->handleKillUnitMessage(p_target);
 
 			}
 
@@ -157,7 +157,7 @@ bool CGameUnit::HandleMessage( const Telegram& msg )
 
 		break;
 
-	case Msg_IDemagedYou :
+	case MSG_I_DAMAGED_YOU :
 
 		{
 			if(this->getUnitType() != UNIT_ENEMY_SOLDIER)
@@ -165,7 +165,7 @@ bool CGameUnit::HandleMessage( const Telegram& msg )
 				if(this->getUnitType() != UNIT_WORKER1)
 				{	
 
-					if(m_pBrain->notPresent(goal_attack_target) && m_pBrain->notPresent(goal_move_to_position))
+					if(m_brain->notPresent(goal_attack_target) && m_brain->notPresent(goal_move_to_position))
 					{			
 					}
 
@@ -188,13 +188,13 @@ bool CGameUnit::HandleMessage( const Telegram& msg )
 
 		CGameUnitEnemy*	enemy = dynamic_cast<CGameUnitEnemy* >(this);
 
-		CGameUnit*	unit = reinterpret_cast<CGameUnit * >(msg.ExtraInfo);
+		CGameUnit*	unit = reinterpret_cast<CGameUnit * >(msg.extra_info);
 
 		if(enemy != NULL)
 		{		
 			if(enemy != unit)
 			{
-				enemy->HandleUnitDeadMessage(unit);
+				enemy->handleUnitDeadMessage(unit);
 			}
 		}
 
@@ -203,7 +203,7 @@ bool CGameUnit::HandleMessage( const Telegram& msg )
 		{	
 
 
-			CGameUnit*	unit = reinterpret_cast<CGameUnit * >(msg.ExtraInfo);
+			CGameUnit*	unit = reinterpret_cast<CGameUnit * >(msg.extra_info);
 
 			if(unit != this)
 				if(unit && unit->getAllyType() != this->getAllyType())
@@ -236,7 +236,7 @@ bool CGameUnit::isAttackSuccess(CGameObject* opponent )
 /*======================================================*/
 // 현재 애니메이션 설정하기
 /*======================================================*/
-void CGameUnit::setCurrentAni( const u32 atype, const bool bLoop )
+void CGameUnit::setCurrentAni( const u32 atype, const bool b_loop )
 {
 	
 
@@ -247,7 +247,7 @@ void CGameUnit::setCurrentAni( const u32 atype, const bool bLoop )
 /*======================================================*/
 // 이동 업데이트
 /*======================================================*/
-void CGameUnit::UpdateMoveMent(u32 timeMs)
+void CGameUnit::updateMovement(u32 time_ms)
 {
 	
 }
@@ -267,15 +267,15 @@ CGameUnit* CGameUnit::getTarget() const
 /*======================================================*/
 // 공격범위에 들어왔는지
 /*======================================================*/
-bool CGameUnit::isInHitDistance( const vector3df& pos, f32 bRadius)
+bool CGameUnit::isInHitDistance( const vector3df& pos, f32 b_radius)
 {
-	vector3df distance = pos - Pos();
+	vector3df distance = pos - getPos();
 	
-	f32	hitDistance = getHitRange() + bRadius;
+	f32	hit_distance = getHitRange() + b_radius;
 
-	hitDistance *= hitDistance;
+	hit_distance *= hit_distance;
 
-	return (distance.getLength() < hitDistance);
+	return (distance.getLength() < hit_distance);
 
 }
 
@@ -285,11 +285,11 @@ bool CGameUnit::isInHitDistance( const vector3df& pos, f32 bRadius)
 /*======================================================*/
 vector3df CGameUnit::getApproachPosition( const vector3df& pos ) 
 {
-	vector3df distance = pos - Pos();
+	vector3df distance = pos - getPos();
 	
-	f32 newLength = distance.getLength() - getHitRange();
+	f32 new_length = distance.getLength() - getHitRange();
 			
-	return (Pos() + (newLength * distance.normalize()));
+	return (getPos() + (new_length * distance.normalize()));
 }
 
 
@@ -297,20 +297,20 @@ vector3df CGameUnit::getApproachPosition( const vector3df& pos )
 /*======================================================*/
 // 죽이기 메시지 보내기
 /*======================================================*/
-void CGameUnit::DispatchMessageKill( CGameUnit* pTarget )
+void CGameUnit::dispatchMessageKill( CGameUnit* p_target )
 {
-	void *killedTarget = reinterpret_cast<CGameUnit *>(pTarget);
+	void *killed_target = reinterpret_cast<CGameUnit *>(p_target);
 
-	Dispatcher->DispatchMessageToAllObjects(SEND_MSG_IMMEDIATELY, SENDER_ID_IRRELEVANT , Msg_UnitDead, killedTarget);
+	Dispatcher->dispatchMessageToAllObjects(SEND_MSG_IMMEDIATELY, SENDER_ID_IRRELEVANT , Msg_UnitDead, killed_target);
 }
 
 
 /*======================================================*/
 // 죽기 목표 설정
 /*======================================================*/
-void CGameUnit::AddGoal_Dead()
+void CGameUnit::addGoalDead()
 {
-	m_pBrain->AddGoal_Die();
+	m_brain->addGoalDie();
 
 }
 
@@ -318,9 +318,9 @@ void CGameUnit::AddGoal_Dead()
 /*======================================================*/
 // 이동하기 목표 설정
 /*======================================================*/
-void CGameUnit::AddGoal_MoveToPosition(const vector3df& pos)
+void CGameUnit::addGoalMoveToPosition(const vector3df& pos)
 {
-	m_pBrain->AddGoal_MoveToPosition(pos);
+	m_brain->addGoalMoveToPosition(pos);
 }
 
 
@@ -328,12 +328,12 @@ void CGameUnit::AddGoal_MoveToPosition(const vector3df& pos)
 /*======================================================*/
 // 데미지 더하기
 /*======================================================*/
-void CGameUnit::AddDamage( const u32 damage, CGameUnit* pAttacker)
+void CGameUnit::addDamage( const u32 damage, CGameUnit* p_attacker)
 {
 
-	if(pAttacker)
+	if(p_attacker)
 	{
-	CalAttacked(pAttacker->getAttack());
+	calAttacked(p_attacker->getAttack());
 
 
 	if(this->getOwnerType() == object_mine){
@@ -341,8 +341,8 @@ void CGameUnit::AddDamage( const u32 damage, CGameUnit* pAttacker)
 		{
 			if(!this->isAlive())
 			{
-				SendMessageToAllObjects(0.0, pAttacker->GetID() , Msg_UnitDead , this);
-				this->AddGoal_Dead(); 		
+				sendMessageToAllObjects(0.0, p_attacker->getId() , Msg_UnitDead , this);
+				this->addGoalDead(); 		
 
 				//NETWORK
 				//NetworkPacketSpace::SendUnitKillReqPacket(this->GetID());
@@ -354,13 +354,13 @@ void CGameUnit::AddDamage( const u32 damage, CGameUnit* pAttacker)
 
 			if(!this->isAlive())
 			{
-				CGameUnitEnemy* pEnemy = dynamic_cast<CGameUnitEnemy *>(pAttacker);
+				CGameUnitEnemy* p_enemy = dynamic_cast<CGameUnitEnemy *>(p_attacker);
 
-				SendMessageToAllObjects(0.0, pEnemy->GetID(), Msg_UnitDead , this);
+				sendMessageToAllObjects(0.0, p_enemy->getId(), Msg_UnitDead , this);
 
-				SendMessageToAllObjects(0.0, pEnemy->GetID(), Msg_EnemyKillUnit , this);
+				sendMessageToAllObjects(0.0, p_enemy->getId(), Msg_EnemyKillUnit , this);
 
-				this->AddGoal_Dead();  
+				this->addGoalDead();  
 				
 				//NETWORK
 				//NetworkPacketSpace::SendUnitKillReqPacket(this->GetID());
@@ -378,7 +378,7 @@ void CGameUnit::AddDamage( const u32 damage, CGameUnit* pAttacker)
 
 	}
 
-	DamageShow(damage);
+	damageShow(damage);
 
 	updateHpBar();
 
@@ -390,9 +390,9 @@ void CGameUnit::AddDamage( const u32 damage, CGameUnit* pAttacker)
 /*======================================================*/
 // 걸어갈 수 있는지
 /*======================================================*/
-bool CGameUnit::canWalkTo(const vector3df&  TargetPos)
+bool CGameUnit::canWalkTo(const vector3df&  target_pos)
 {
-	return  (!(CGameMap::GetInstance())->isPathObstructed( this->Pos()  ,TargetPos, this->getRadius()));	
+	return  (!(CGameMap::getInstance())->isPathObstructed( this->getPos()  ,target_pos, this->getRadius()));	
 }
 
 
@@ -401,7 +401,7 @@ bool CGameUnit::canWalkTo(const vector3df&  TargetPos)
 /*======================================================*/
 bool CGameUnit::canWalkBetween( const vector3df& from, const vector3df& to ) 
 {
-	return  (!(CGameMap::GetInstance())->isPathObstructed( from, to, getRadius()));	
+	return  (!(CGameMap::getInstance())->isPathObstructed( from, to, getRadius()));	
 
 }
 
@@ -409,7 +409,7 @@ bool CGameUnit::canWalkBetween( const vector3df& from, const vector3df& to )
 /*======================================================*/
 // 데미지 표시하기
 /*======================================================*/
-void CGameUnit::DamageShow( const u32 damage )
+void CGameUnit::damageShow( const u32 damage )
 {
 	
 }
@@ -419,7 +419,7 @@ void CGameUnit::DamageShow( const u32 damage )
 /*======================================================*/
 // 경험치 획득 처리하기
 /*======================================================*/
-void CGameUnit::ObtainExp( const u32 uExp )
+void CGameUnit::obtainExp( const u32 u_exp )
 {
 	//scene::IParticleSystemSceneNode* ps;
 
@@ -430,7 +430,7 @@ void CGameUnit::ObtainExp( const u32 uExp )
 /*======================================================*/
 // 데미지 처리하기
 /*======================================================*/
-void CGameUnit::SendDamageReq( const u32 damage, CGameUnit*	pAttacker )
+void CGameUnit::sendDamageReq( const u32 damage, CGameUnit*	p_attacker )
 {
 	//NETWORK
 	//NetworkPacketSpace::SendDamageReqPacket(GetID(), damage, true, pAttacker->GetID());
@@ -441,9 +441,9 @@ void CGameUnit::SendDamageReq( const u32 damage, CGameUnit*	pAttacker )
 /*======================================================*/
 // 하위 목표 삭제하기
 /*======================================================*/
-void CGameUnit::RemoveSubGoals()
+void CGameUnit::removeSubGoals()
 {
-	m_pBrain->RemoveAllSubgoals();
+	m_brain->removeAllSubgoals();
 
 }
 
@@ -451,7 +451,7 @@ void CGameUnit::RemoveSubGoals()
 /*======================================================*/
 // 시간에 따라 HP 증가시키기
 /*======================================================*/
-void CGameUnit::updateHP( const u32 timeMs )
+void CGameUnit::updateHP( const u32 time_ms )
 {
 	if(getHp() < static_cast<s32>(getMaxHp()))
 	{
@@ -469,6 +469,6 @@ void CGameUnit::updateHP( const u32 timeMs )
 /*======================================================*/
 void CGameUnit::updateHpBar()
 {
-	f32 percent =  (f32(getHp())/f32(getMaxHp())) * m_fHealthbarWidth;
+	f32 percent =  (f32(getHp())/f32(getMaxHp())) * m_healthbar_width;
 	//	f32 abc = (50.0f - percent)/m_fHealthbarWidth;
 }

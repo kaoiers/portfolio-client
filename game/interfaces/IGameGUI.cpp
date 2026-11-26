@@ -17,18 +17,18 @@
 #include "../eventhandle/CEventHandleManager.h"
 #include "CGUIManager.h"
 
-u32 CGameGUI::m_iNextValidID = 0xFFF;
+u32 CGameGUI::m_next_valid_id = 0xFFF;
 
 
 CGameGUI::CGameGUI(position2d<s16> pos )
 	:  
-m_abolutePosition(pos),
-m_gid(m_iNextValidID++),
-m_bNeedOwner(false),
-m_bEnable(true),
-m_pOwner(NULL),
-m_bOneButtonSelect(false),
-m_pFocusedObject(NULL)
+m_absolute_position(pos),
+m_gid(m_next_valid_id++),
+m_need_owner(false),
+m_enable(true),
+m_owner(NULL),
+m_one_button_select(false),
+m_focused_object(NULL)
 {
 
 }
@@ -37,24 +37,24 @@ m_pFocusedObject(NULL)
 CGameGUI::~CGameGUI()
 {
 	
-	m_Group.clear();
+	m_group.clear();
 
-	m_pElements.clear();
+	m_elements.clear();
 }
 
 
 /*======================================================*/
 // 보이기
 /*======================================================*/
-void CGameGUI::Show()
+void CGameGUI::show()
 {
 	GuiElementsList::iterator it;
 	
-	for(it = m_pElements.begin(); it != m_pElements.end(); it++)
+	for(it = m_elements.begin(); it != m_elements.end(); it++)
 	{
 	
 	}
-	m_bEnable = true;
+	m_enable = true;
 
 }
 
@@ -63,26 +63,26 @@ void CGameGUI::Show()
 /*======================================================*/
 // 숨기기
 /*======================================================*/
-void CGameGUI::Hide()
+void CGameGUI::hide()
 {
 
 	GuiElementsList::iterator it;
 
-	for(it = m_pElements.begin(); it != m_pElements.end(); it++)
+	for(it = m_elements.begin(); it != m_elements.end(); it++)
 	{
 	
 	}
 
-	m_bEnable = false;
+	m_enable = false;
 }
 
 
 /*======================================================*/
 // 오브젝트 등록
 /*======================================================*/
-void CGameGUI::RegisterElement( IGUIObject *pGui )
+void CGameGUI::registerElement( IGUIObject *p_gui )
 {
-	m_pElements.push_back(pGui);
+	m_elements.push_back(p_gui);
 }	
 
 
@@ -91,7 +91,7 @@ void CGameGUI::RegisterElement( IGUIObject *pGui )
 /*======================================================*/
 //  포지션 설정
 /*======================================================*/
-void CGameGUI::SetPosition( const vector2di pos )
+void CGameGUI::setPosition( const vector2di pos )
 {
 }
 
@@ -100,35 +100,35 @@ void CGameGUI::SetPosition( const vector2di pos )
 /*======================================================*/
 // 상대 포지션 가져오기
 /*======================================================*/
-position2d<s16> CGameGUI::GetRelativePosition( const position2d<s16> pos ) const
+position2d<s16> CGameGUI::getRelativePosition( const position2d<s16> pos ) const
 {
-	position2d<s16> relPos;
+	position2d<s16> rel_pos;
 	
-	return relPos;
+	return rel_pos;
 }
 
 
 /*======================================================*/
 // 절대 포지션 가조오기
 /*======================================================*/
-position2d<s16> CGameGUI::GetAbsolutePosition(const position2d<s16> pos) const
+position2d<s16> CGameGUI::getAbsolutePosition(const position2d<s16> pos) const
 {
-	position2d<s16> absPos;
-	absPos.X = m_abolutePosition.X + pos.X;
-	absPos.Y = m_abolutePosition.Y + pos.Y;
+	position2d<s16> abs_pos;
+	abs_pos.X = m_absolute_position.X + pos.X;
+	abs_pos.Y = m_absolute_position.Y + pos.Y;
 
-	return absPos;
+	return abs_pos;
 }
 
 
 /*======================================================*/
 // 모든 오브젝트 컨트롤
 /*======================================================*/
-bool CGameGUI::element_control( CEventHandler* m_pReceiver )
+bool CGameGUI::elementControl( CEventHandler* m_receiver )
 {
 	GuiElementsList::iterator it;
 
-	for(it = m_pElements.begin(); it != m_pElements.end(); it++)
+	for(it = m_elements.begin(); it != m_elements.end(); it++)
 	{
 		
 	}
@@ -139,11 +139,11 @@ bool CGameGUI::element_control( CEventHandler* m_pReceiver )
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CGameGUI::control( CEventHandler* m_pReceiver )
+bool CGameGUI::control( CEventHandler* m_receiver )
 {
-	element_control(m_pReceiver);
+	elementControl(m_receiver);
 
-	interface_control(m_pReceiver);
+	interfaceControl(m_receiver);
 
 	return true;
 }
@@ -152,11 +152,11 @@ bool CGameGUI::control( CEventHandler* m_pReceiver )
 /*======================================================*/
 // 아이디로 오브젝트 찾기
 /*======================================================*/
-IGUIObject* CGameGUI::FindElementByID( s16 eid )
+IGUIObject* CGameGUI::findElementById( s16 eid )
 {
 	GuiElementsList::iterator it;
 		
-	for(it = m_pElements.begin(); it != m_pElements.end(); it++)
+	for(it = m_elements.begin(); it != m_elements.end(); it++)
 	{
 
 	}
@@ -167,7 +167,7 @@ IGUIObject* CGameGUI::FindElementByID( s16 eid )
 /*======================================================*/
 // 버튼 추가
 /*======================================================*/
-CButtonGUI*CGameGUI::addButton( const position2d<s16> Position, const char* defaultImage, s16 mID /*= -1 */,std::wstring text /*= 0*/ )
+CButtonGUI*CGameGUI::addButton( const position2d<s16> position, const char* default_image, s16 m_id /*= -1 */,std::wstring text /*= 0*/ )
 {
 
 	return nullptr;
@@ -176,11 +176,11 @@ CButtonGUI*CGameGUI::addButton( const position2d<s16> Position, const char* defa
 /*======================================================*/
 // 원버튼 클릭 처리
 /*======================================================*/
-void CGameGUI::SetOneButtonSelectState( IGUIObject *guiobj )
+void CGameGUI::setOneButtonSelectState( IGUIObject *guiobj )
 {
 	GuiElementsList::iterator it;
 
-	for(it = m_pElements.begin(); it != m_pElements.end(); it++)
+	for(it = m_elements.begin(); it != m_elements.end(); it++)
 	{
 		
 	}	
@@ -191,11 +191,11 @@ void CGameGUI::SetOneButtonSelectState( IGUIObject *guiobj )
 /*======================================================*/
 // 모든 버튼 셀렉트로 전환
 /*======================================================*/
-void	CGameGUI::SetAllButtonSelectState(const bool states)
+void	CGameGUI::setAllButtonSelectState(const bool states)
 {
 	GuiElementsList::iterator it;
 
-	for(it = m_pElements.begin(); it != m_pElements.end(); it++)
+	for(it = m_elements.begin(); it != m_elements.end(); it++)
 	{
 		
 	}
@@ -210,7 +210,7 @@ bool CGameGUI::isOneButtonSelectState()
 {
 	GuiElementsList::iterator it;
 
-	for(it = m_pElements.begin(); it != m_pElements.end(); it++)
+	for(it = m_elements.begin(); it != m_elements.end(); it++)
 	{
 	}
 
@@ -224,6 +224,6 @@ bool CGameGUI::isOneButtonSelectState()
 /*======================================================*/
 CGUIManager* CGameGUI::getGUIManager()
 {
-	return CGUIManager::GetInstance();
+	return CGUIManager::getInstance();
 
 }

@@ -10,7 +10,7 @@ public:
 	IGameObject() {}
 	virtual ~IGameObject() {};
 
-	virtual	void				control(CEventHandler* pReceiver) = 0;
-	virtual	void				OnCommand() = 0;
-	virtual bool				HandleMessage(const Telegram& msg) = 0;
+	virtual	void				control(CEventHandler* p_receiver) = 0;
+	virtual	void				onCommand() = 0;
+	virtual bool				handleMessage(const Telegram& msg) = 0;
 };

@@ -24,23 +24,23 @@
 /*======================================================*/
 //  철수하기 행동 시작
 /*======================================================*/
-void Goal_GoingHome::Activate()
+void Goal_GoingHome::activate()
 {
-	m_iStatus = active;
+	m_status = active;
 	//make sure the subgoal list is clear.
-	RemoveAllSubgoals();
+	removeAllSubgoals();
 
-	CGameUnitEnemy* pEnemy =  dynamic_cast<CGameUnitEnemy* >(m_pOwner);
+	CGameUnitEnemy* p_enemy =  dynamic_cast<CGameUnitEnemy* >(m_owner);
 
-	line3df l =  pEnemy->getEnemyGenerator()->getEnemyGenerateLine();
+	line3df l =  p_enemy->getEnemyGenerator()->getEnemyGenerateLine();
 
 	l.start = l.start + vector3df(0,0,-100);
 	l.end = l.end + vector3df(0,0,-100);
 
 	
-	vector3df vDes;// = l.getClosestPoint(pEnemy->Pos());
+	vector3df v_des;// = l.getClosestPoint(pEnemy->Pos());
 
-	AddSubgoal(new Goal_MoveToPosition(m_pOwner, vDes));
+	addSubgoal(new Goal_MoveToPosition(m_owner, v_des));
 }
 
 
@@ -48,36 +48,36 @@ void Goal_GoingHome::Activate()
 /*======================================================*/
 //  철수하기 행동 처리
 /*======================================================*/
-s32 Goal_GoingHome::Process()
+s32 Goal_GoingHome::process()
 {
 	//if status is inactive, call Activate()
-	ActivateIfInactive();
+	activateIfInactive();
 
 	//process the subgoals
-	m_iStatus = ProcessSubgoals();
+	m_status = processSubgoals();
 
-	if(m_iStatus == completed)
+	if(m_status == completed)
 	{
 		//m_pOwner->SendMessageToAllObjects(0.0, m_pOwner->GetID(), Msg_UnitDead , this);
 
-		m_pOwner->getObjectManager()->ClearMemoryFromObject( m_pOwner);
+		m_owner->getObjectManager()->clearMemoryFromObject( m_owner);
 
-		Dispatcher->DispatchMsg(0.0, 1, m_pOwner->GetID(), Msg_YouDead, NULL);
+		Dispatcher->dispatchMsg(0.0, 1, m_owner->getId(), Msg_YouDead, NULL);
 	}
 
 	//if any of the subgoals have failed then this goal re-plans
-	ReactivateIfFailed();
+	reactivateIfFailed();
 
-	return m_iStatus;
+	return m_status;
 }
 
 
 /*======================================================*/
 //  메시지 포워딩
 /*======================================================*/
-bool Goal_GoingHome::HandleMessage( const Telegram& msg )
+bool Goal_GoingHome::handleMessage( const Telegram& msg )
 {
-	bool bHandled = ForwardMessageToFrontMostSubgoal(msg);
+	bool b_handled = forwardMessageToFrontMostSubgoal(msg);
 
-	return bHandled;
+	return b_handled;
 }

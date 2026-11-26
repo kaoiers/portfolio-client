@@ -17,13 +17,13 @@
 
 class CGameUnitNapoleon : public CGameUnitArmy
 {
-	virtual		void		PrivateInitialize();
+	virtual		void		privateInitialize();
 
 public :
 
-	virtual		void		control(CEventHandler* pReceiver);
+	virtual		void		control(CEventHandler* p_receiver);
 
-	virtual		void		OnCommand();
+	virtual		void		onCommand();
 
 	CGameUnitNapoleon(OwnerType owner,u32 obj_id, u32 objtype,
 		const UNIT_RESOURCE* resource, 

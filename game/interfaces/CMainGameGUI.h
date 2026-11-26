@@ -58,71 +58,71 @@ class WebBrowserView;
 
 class CMainGameGUI : public CGameGUI
 {
-	CBuildingObject*		m_pBuilding;
-	CGameObjectManager*		m_pObjMan;
-	CGameTimerLimiter*		m_pTimeLimiter;
-	CGameResourceManager*	m_pGameResourceManager;
-	bool					m_bObjectSelectAvailable;
+	CBuildingObject*		m_building;
+	CGameObjectManager*		m_obj_man;
+	CGameTimerLimiter*		m_time_limiter;
+	CGameResourceManager*	m_game_resource_manager;
+	bool					m_object_select_available;
 
-	CImageGUI*				m_pLevelBar;	
-	CTextGUI*				m_pLevelText;
+	CImageGUI*				m_level_bar;	
+	CTextGUI*				m_level_text;
 
-	CImageGUI*				m_pWaringImage;
-	CTextGUI*				m_pWaringText;
+	CImageGUI*				m_warning_image;
+	CTextGUI*				m_warning_text;
 	
-	CButtonGUI*				m_pGoHomeButton;
-	CButtonGUI*				m_pFaceBookBUtton;
+	CButtonGUI*				m_go_home_button;
+	CButtonGUI*				m_facebook_button;
 
 
-	God_Game*				m_pGame;		
+	God_Game*				m_game;		
 
-	f32						m_fAlphaRatio;
+	f32						m_alpha_ratio;
 
 	
-	static	CMainGameGUI*	m_pInstance;
+	static	CMainGameGUI*	m_instance;
 
 	//PLAYER_ID				m_playerId;
 	
 private :
 
-	virtual bool			interface_control(CEventHandler * pReceiver);
-	void					AddMeshControl(CEventHandler * pReceiver);
+	virtual bool			interfaceControl(CEventHandler * p_receiver);
+	void					addMeshControl(CEventHandler * p_receiver);
 
 public :
 	
-	CMainGameGUI(CGameObjectManager*		pObjMan);
+	CMainGameGUI(CGameObjectManager*		p_obj_man);
 	virtual	~CMainGameGUI();
 
-	static	CMainGameGUI*	GetInstance() { return m_pInstance; }  
+	static	CMainGameGUI*	getInstance() { return m_instance; }  
 
-	void					StartTimer();
-	void					EndTimerEvent();				
+	void					startTimer();
+	void					endTimerEvent();				
 
 
 
 	void					showWaveButton();
-	void					setObjectSelectAvailable(const bool bAvailable) { m_bObjectSelectAvailable = bAvailable; } 
-	const	bool			getObjectSelectAvailable() const { return m_bObjectSelectAvailable;  }
+	void					setObjectSelectAvailable(const bool b_available) { m_object_select_available = b_available; } 
+	const	bool			getObjectSelectAvailable() const { return m_object_select_available;  }
 	void					setLevelStatus(const f32 percent, const u32 level);
 
-	void					AddPlayerExp(const u32 exp);
+	void					addPlayerExp(const u32 exp);
 
-	void					FadeOutWarningMessage(const u32 timeMs);
+	void					fadeOutWarningMessage(const u32 time_ms);
 	void					playSound2D(const char* soundname, const bool loop = false);
 	void					playSound3D(const char* soundname , const vector3df& pos, const bool loop = false);
-	void					playoffAllSounds();
+	void					stopAllSounds();
 
 
-	void					EnableDoorButton(const bool on);
+	void					enableDoorButton(const bool on);
 
 
 
 
-	virtual void			GUI_Initialize();
+	virtual void			guiInitialize();
 
-	virtual	void			SetOwner(CGameObject *owner);
+	virtual	void			setOwner(CGameObject *owner);
 
 
 	//NETWORK
-	void					SetMyPlayerID(/* PLAYER_ID playerId */);
+	void					setMyPlayerId(/* PLAYER_ID playerId */);
 };

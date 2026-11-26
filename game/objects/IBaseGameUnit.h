@@ -6,8 +6,8 @@ class IBaseGameUnit
 {
 public :
 
-	virtual		bool							short_attack(CGameUnit* pTarget) = 0;
-	virtual		void							PrivateInitialize() = 0;
+	virtual		bool							shortAttack(CGameUnit* p_target) = 0;
+	virtual		void							privateInitialize() = 0;
 
 	IBaseGameUnit() {}
 	virtual  ~IBaseGameUnit() {}

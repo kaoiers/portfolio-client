@@ -17,26 +17,26 @@
 class CGameRoomGod : public CGameRoom
 {
 
-	void									initialize(const vector2di& TilePos);
+	void									initialize(const vector2di& tile_pos);
 
 public :
 
-	CGameRoomGod(OwnerType owner, u32 objtype,  u32 btype, const ROOM_RESOURCE* res, const vector2di& TilePos,
+	CGameRoomGod(OwnerType owner, u32 objtype,  u32 btype, const ROOM_RESOURCE* res, const vector2di& tile_pos,
 		const vector3df& pos,
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));
 
 
-	void						enter_control();
-	void						update_control(CEventHandler* pReceiver) ;
-	void						exit_control();
-	void						update(const u32 timeMs);
-	void						extra_node_setting(){};
+	void						enterControl();
+	void						updateControl(CEventHandler* p_receiver) ;
+	void						exitControl();
+	void						update(const u32 time_ms);
+	void						extraNodeSetting(){};
 
 
-	CGameRoomGod(OwnerType owner, u32 objtype,  u32 btype, const ROOM_RESOURCE* res, const vector2di& TilePos);
+	CGameRoomGod(OwnerType owner, u32 objtype,  u32 btype, const ROOM_RESOURCE* res, const vector2di& tile_pos);
 
-	virtual		bool						HandleMessage(const Telegram& msg) {return true;}
+	virtual		bool						handleMessage(const Telegram& msg) {return true;}
 
 	virtual ~CGameRoomGod(){};
 };

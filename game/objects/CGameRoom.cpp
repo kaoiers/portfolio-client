@@ -31,9 +31,9 @@ CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURC
 					 const vector3df& pos, 
 					 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ ) : 
-CGameObject(owner, objtype, pos, rot, scale), room_type(btype), m_rResource(res)
-,m_uWidth_cells(res->m_iWidth_cells), m_uHeight_cells(res->m_iHeight_cells),
-m_pBuildingStep(0),m_NodeIndex(-1),m_bBuildingFinished(false), m_uTotalRoomHp(1000) ,m_uRoomHp(1000), m_pGuardian(0), m_bNetLive(true)
+CGameObject(owner, objtype, pos, rot, scale), room_type(btype), m_resource(res)
+,m_room_width_cells(res->m_width_cells), m_room_height_cells(res->m_height_cells),
+m_building_step(0),m_node_index(-1),m_building_finished(false), m_total_room_hp(1000) ,m_room_hp(1000), m_guardian(0), m_net_live(true)
 {
 
 
@@ -41,18 +41,18 @@ m_pBuildingStep(0),m_NodeIndex(-1),m_bBuildingFinished(false), m_uTotalRoomHp(10
 }
 
 CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res )
-:CGameObject(owner, objtype), room_type(btype), m_rResource(res) 
-,m_uWidth_cells(res->m_iWidth_cells), m_uHeight_cells(res->m_iHeight_cells),
+:CGameObject(owner, objtype), room_type(btype), m_resource(res) 
+,m_room_width_cells(res->m_width_cells), m_room_height_cells(res->m_height_cells),
 
-m_pBuildingStep(0), m_NodeIndex(-1),m_bBuildingFinished(false), m_uTotalRoomHp(1000), m_uRoomHp(1000), m_pGuardian(0),m_bNetLive(true)
+m_building_step(0), m_node_index(-1),m_building_finished(false), m_total_room_hp(1000), m_room_hp(1000), m_guardian(0),m_net_live(true)
 {
 	
 }
 
 CGameRoom::~CGameRoom()
 {
-	if(m_pBuildingStep)
-		delete	m_pBuildingStep;
+	if(m_building_step)
+		delete	m_building_step;
 
 }
 
@@ -61,21 +61,21 @@ CGameRoom::~CGameRoom()
 /*======================================================*/
 // 건물 지어지는 과정 업데이트
 /*======================================================*/
-void CGameRoom::BuildingUpdate()
+void CGameRoom::buildingUpdate()
 {
-	if(m_pBuildingStep)
+	if(m_building_step)
 	{
-		if(m_pBuildingStep->UpdateBuilding())
+		if(m_building_step->updateBuilding())
 		{
-			SAFE_DELETE(m_pBuildingStep);
+			SAFE_DELETE(m_building_step);
 
-			m_pBuildingStep = 0;
+			m_building_step = 0;
 
-			m_bBuildingFinished = true;			
+			m_building_finished = true;			
 
-			GameResource->AddAllResources(m_rResource->NeedGold, 
-				m_rResource->NeedWood, 
-				m_rResource->NeedStone);
+			GameResource->addAllResources(m_resource->need_gold, 
+				m_resource->need_wood, 
+				m_resource->need_stone);
 
 			
 			
@@ -88,9 +88,9 @@ void CGameRoom::BuildingUpdate()
 /*======================================================*/
 // 건물 폭발 함수
 /*======================================================*/
-void	CGameRoom::Explosion()
+void	CGameRoom::explosion()
 {
-	CGameMap *pMap = CGameMap::GetInstance();
+	CGameMap *p_map = CGameMap::getInstance();
 
 	this->getMainGameGUI()->playSound2D( "explosion" );	
 
@@ -102,22 +102,22 @@ void	CGameRoom::Explosion()
 /*======================================================*/
 // 건물이 현재 위치에 지어질 수 있는지
 /*======================================================*/
-bool CGameRoom::isBuildable(const vector3df& MousePos)
+bool CGameRoom::isBuildable(const vector3df& mouse_pos)
 {
-	CGameMap *pMap = CGameMap::GetInstance();
+	CGameMap *p_map = CGameMap::getInstance();
 
-	vector2di Curtile = getTile(MousePos);
+	vector2di current_tile = getTile(mouse_pos);
 
-	Curtile.X -= 1;
-	Curtile.Y -= 1;
+	current_tile.X -= 1;
+	current_tile.Y -= 1;
 
-	for(u32 i = 0; i<m_uHeight_cells+2; i++)
+	for(u32 i = 0; i<m_room_height_cells+2; i++)
 	{
-		for(u32 j = 0; j<m_uWidth_cells+2; j++)
+		for(u32 j = 0; j<m_room_width_cells+2; j++)
 		{
-			if( !(pMap->IsNodePresent(Curtile.X + j, Curtile.Y + i)) || 
+			if( !(p_map->isNodePresent(current_tile.X + j, current_tile.Y + i)) || 
 
-				!(pMap->IsInUsableArea(Curtile.X + j, Curtile.Y + i))
+				!(p_map->isInUsableArea(current_tile.X + j, current_tile.Y + i))
 
 				/*
 				u32(pMap->getNumCellsX()) <= (Curtile.X + j)
@@ -135,7 +135,7 @@ bool CGameRoom::isBuildable(const vector3df& MousePos)
 // 		return false;
 // 	}
 
-	m_vFirstIndexTile = getTile(MousePos);
+	m_first_index_tile = getTile(mouse_pos);
 
 	return true;
 }
@@ -144,11 +144,11 @@ bool CGameRoom::isBuildable(const vector3df& MousePos)
 /*======================================================*/
 // 포지션 -> 타일 인덱스
 /*======================================================*/
-vector2di CGameRoom::getTile( const vector3df& GroundPoint )
+vector2di CGameRoom::getTile( const vector3df& ground_point )
 {
-	CGameMap*	pMap = CGameMap::GetInstance();
+	CGameMap*	p_map = CGameMap::getInstance();
 
-	vector2di tile = pMap->getTileFromPos(GroundPoint);
+	vector2di tile = p_map->getTileFromPos(ground_point);
 
 	return tile;
 }
@@ -159,9 +159,9 @@ vector2di CGameRoom::getTile( const vector3df& GroundPoint )
 /*======================================================*/
 vector3df CGameRoom::getBuildingOffset()
 {
-	vector3df  vOffset;
+	vector3df  v_offset;
 
-	return vOffset;
+	return v_offset;
 
 }
 
@@ -171,7 +171,7 @@ vector3df CGameRoom::getBuildingOffset()
 /*======================================================*/
 f32 CGameRoom::getBuildingTime()
 {
-	return m_rResource->m_iBuildingTime;
+	return m_resource->m_building_time;
 }
 
 
@@ -180,17 +180,17 @@ f32 CGameRoom::getBuildingTime()
 /*======================================================*/
 // 모든 건물해당 노드들 지우기
 /*======================================================*/
-bool CGameRoom::RemoveAllNodesForDestroy()
+bool CGameRoom::removeAllNodesForDestroy()
 {
-	CGameMap*	pMap = CGameMap::GetInstance();
+	CGameMap*	p_map = CGameMap::getInstance();
 
-	for(u32 i=0; i<m_uHeight_cells; i++)
+	for(u32 i=0; i<m_room_height_cells; i++)
  	{
-		for(u32 j=0; j<m_uWidth_cells; j++)
+		for(u32 j=0; j<m_room_width_cells; j++)
  		{			
-			if(pMap->IsNodePresent(m_vFirstIndexTile.X + j, m_vFirstIndexTile.Y + i))
+			if(p_map->isNodePresent(m_first_index_tile.X + j, m_first_index_tile.Y + i))
 			{
-				pMap->RemoveNode(m_vFirstIndexTile.X + j, m_vFirstIndexTile.Y + i);
+				p_map->removeNode(m_first_index_tile.X + j, m_first_index_tile.Y + i);
 			}
  		}
  	}
@@ -201,11 +201,11 @@ bool CGameRoom::RemoveAllNodesForDestroy()
 /*======================================================*/
 // 빌딩 중심위치 가져오기
 /*======================================================*/
-vector3df CGameRoom::GetCenterPosToBuilding()
+vector3df CGameRoom::getCenterPosToBuilding()
 {
-	vector3df  vCenter;
+	vector3df  v_center;
 
-	return vCenter;	
+	return v_center;	
 }
 
 
@@ -214,52 +214,52 @@ vector3df CGameRoom::GetCenterPosToBuilding()
 /*======================================================*/
 void CGameRoom::setOnebyOneNode()
 {
-	CGameMap* pMap = CGameMap::GetInstance();
+	CGameMap* p_map = CGameMap::getInstance();
 
-	pMap->setOnebyOneBuildingNode(m_vFirstIndexTile.X, m_vFirstIndexTile.Y);
+	p_map->setOnebyOneBuildingNode(m_first_index_tile.X, m_first_index_tile.Y);
 }
 
 
 /*======================================================*/
 // 문노드 연결하기
 /*======================================================*/
-s32 CGameRoom::LinkDoorEdges()
+s32 CGameRoom::linkDoorEdges()
 {
-	CGameMap* pMap = CGameMap::GetInstance();
-	vector2di rTile;
+	CGameMap* p_map = CGameMap::getInstance();
+	vector2di r_tile;
 
-	rTile.X  = m_vFirstIndexTile.X + (m_uWidth_cells - 1)/2;
-	rTile.Y  = m_vFirstIndexTile.Y + (m_uHeight_cells - 1);
+	r_tile.X  = m_first_index_tile.X + (m_room_width_cells - 1)/2;
+	r_tile.Y  = m_first_index_tile.Y + (m_room_height_cells - 1);
 	
 
 	if(isNotWalkableRoom())
 	{
-		vector2di newTile = m_vFirstIndexTile;
+		vector2di new_tile = m_first_index_tile;
 
-		newTile.Y += 1;
+		new_tile.Y += 1;
 
-		pMap->AddNodeByTile(m_vFirstIndexTile.X, m_vFirstIndexTile.Y);
+		p_map->addNodeByTile(m_first_index_tile.X, m_first_index_tile.Y);
 
-		pMap->LinkEdges(m_vFirstIndexTile, newTile);
+		p_map->linkEdges(m_first_index_tile, new_tile);
 
-		m_NodeIndex = pMap->getNodeIndexFromTIle(m_vFirstIndexTile.X, m_vFirstIndexTile.Y);
+		m_node_index = p_map->getNodeIndexFromTile(m_first_index_tile.X, m_first_index_tile.Y);
 
 		return -1;
 	}
 	
 	
 
-	if(m_rResource->doorVector.Y == 1)
+	if(m_resource->door_vector.Y == 1)
 	{
-		rTile.Y  = m_vFirstIndexTile.Y;
-		pMap->AddNodeAndLinkEdges(rTile.X,rTile.Y);
-		for(u32 i = 0; i<m_uHeight_cells; i++)
+		r_tile.Y  = m_first_index_tile.Y;
+		p_map->addNodeAndLinkEdges(r_tile.X,r_tile.Y);
+		for(u32 i = 0; i<m_room_height_cells; i++)
 		{
-			rTile.Y += 1;
-			if(pMap->IsNodePresent(rTile.X,rTile.Y))
+			r_tile.Y += 1;
+			if(p_map->isNodePresent(r_tile.X,r_tile.Y))
 				return -1;
 
-			pMap->AddNodeAndLinkEdges(rTile.X,rTile.Y);		
+			p_map->addNodeAndLinkEdges(r_tile.X,r_tile.Y);		
 		}
 	}
 
@@ -270,26 +270,26 @@ s32 CGameRoom::LinkDoorEdges()
 /*======================================================*/
 // 건물 건설시 건물이 마우스 따라다니게
 /*======================================================*/
-void CGameRoom::FollowMouse( CEventHandler* pReceiver )
+void CGameRoom::followMouse( CEventHandler* p_receiver )
 {
 	vector3df pos;
 
-	CGameMap *pMap = CGameMap::GetInstance();
+	CGameMap *p_map = CGameMap::getInstance();
 
-	pMap->getNodePosFromMousePos(pReceiver->getMouseUpGroundPosition() ,pos);
+	p_map->getNodePosFromMousePos(p_receiver->getMouseUpGroundPosition() ,pos);
 }
 
 /*======================================================*/
 // 지우고 노드연결하기
 /*======================================================*/
-void CGameRoom::RemoveAndLinkNodes()
+void CGameRoom::removeAndLinkNodes()
 {
 	
-	RemoveAllNodesForDestroy();
+	removeAllNodesForDestroy();
 	
-	LinkDoorEdges();
+	linkDoorEdges();
 
-	AddBoundaryLines();		
+	addBoundaryLines();		
 
 }
 
@@ -306,7 +306,7 @@ void CGameRoom::setBuildableColor( const bool buildable )
 /*======================================================*/
 void CGameRoom::makeBaseGround()
 {
-	m_pBuildingStep = new CRoomStep(this->m_rResource, this);
+	m_building_step = new CRoomStep(this->m_resource, this);
 
 }
 
@@ -315,35 +315,35 @@ void CGameRoom::makeBaseGround()
 /*======================================================*/
 const bool	CGameRoom::isBuildingCompleted()
 {
-	return m_bBuildingFinished;	
+	return m_building_finished;	
 }
 
 
 /*======================================================*/
 // 건설 시작되기
 /*======================================================*/
-void CGameRoom::BuildingStart(const u32 seconds)
+void CGameRoom::buildingStart(const u32 seconds)
 {
-	m_pBuildingStep->StartBuilding(seconds);
+	m_building_step->startBuilding(seconds);
 }
 
 
 /*======================================================*/
 // 해당 건물 엣지들 복구하기
 /*======================================================*/
-void CGameRoom::RestoreRoomAreaEdges()
+void CGameRoom::restoreRoomAreaEdges()
 {
-	RemoveAllNodesForDestroy();	
+	removeAllNodesForDestroy();	
 
-	RemoveBoundaryLines();
+	removeBoundaryLines();
 
-	CGameMap*	pMap = CGameMap::GetInstance();
+	CGameMap*	p_map = CGameMap::getInstance();
 
-	for(u32 i=0; i<m_uHeight_cells; i++)
+	for(u32 i=0; i<m_room_height_cells; i++)
 	{
-		for(u32 j=0; j<m_uWidth_cells; j++)
+		for(u32 j=0; j<m_room_width_cells; j++)
 		{			
-			pMap->AddNodeAndLinkEdges(m_vFirstIndexTile.X + j, m_vFirstIndexTile.Y + i);
+			p_map->addNodeAndLinkEdges(m_first_index_tile.X + j, m_first_index_tile.Y + i);
 		}
 	}
 }
@@ -352,7 +352,7 @@ void CGameRoom::RestoreRoomAreaEdges()
 /*======================================================*/
 // 래퍼 클래스
 /*======================================================*/
-void CGameRoom::DeleteRoom()
+void CGameRoom::deleteRoom()
 {
 	//if(CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_game)
 	//{
@@ -363,7 +363,7 @@ void CGameRoom::DeleteRoom()
 			//NetworkPacketSpace::SendDestroyRoomReqPacket(this->GetID());		
 		}
 
-		DeleteRoomReal();
+		deleteRoomReal();
 }
 
 
@@ -371,17 +371,17 @@ void CGameRoom::DeleteRoom()
 /*======================================================*/
 // 건물 지우기
 /*======================================================*/
-void CGameRoom::DeleteRoomReal()
+void CGameRoom::deleteRoomReal()
 {
 	
 
-	this->getObjectManager()->DeleteRequest(GetID());
+	this->getObjectManager()->deleteRequest(getId());
 
-	if(this->getObjectManager()->isControled(this))
+	if(this->getObjectManager()->isControlled(this))
 	{
 		this->getObjectManager()->setController(NULL);
 
-		CControllerGUI::Instance()->DisableGUI();
+		CControllerGUI::instance()->disableGui();
 	}
 
 }
@@ -390,9 +390,9 @@ void CGameRoom::DeleteRoomReal()
 /*======================================================*/
 // 건물 경계선 더하기
 /*======================================================*/
-void CGameRoom::AddBoundaryLines(const bool walkable )
+void CGameRoom::addBoundaryLines(const bool walkable )
 {
-	CGameMap*	pMap = CGameMap::GetInstance();
+	CGameMap*	p_map = CGameMap::getInstance();
 
 }
 
@@ -400,9 +400,9 @@ void CGameRoom::AddBoundaryLines(const bool walkable )
 /*======================================================*/
 // 건물 경계선 지우기
 /*======================================================*/
-void CGameRoom::RemoveBoundaryLines()
+void CGameRoom::removeBoundaryLines()
 {
-	CGameMap*	pMap = CGameMap::GetInstance();
+	CGameMap*	p_map = CGameMap::getInstance();
 }
 
 
@@ -411,9 +411,9 @@ void CGameRoom::RemoveBoundaryLines()
 /*======================================================*/
 s32 CGameRoom::getRoomNodeIndex()
 {
-	CGameMap*	pMap = CGameMap::GetInstance(); 
+	CGameMap*	p_map = CGameMap::getInstance(); 
 	
-	return pMap->getNodeIndexFromTIle(m_vFirstIndexTile.X, m_vFirstIndexTile.Y );
+	return p_map->getNodeIndexFromTile(m_first_index_tile.X, m_first_index_tile.Y );
 
 }
 
@@ -455,7 +455,7 @@ bool CGameRoom::isProductRoom()
 /*======================================================*/
 // 빌딩을 위한 위치 가져오기
 /*======================================================*/
-vector3df CGameRoom::GetFrontPosToBuilding()
+vector3df CGameRoom::getFrontPosToBuilding()
 {
 	//vector3df maxEdge = this->GetSceneNode()->getTransformedBoundingBox().MaxEdge;
 	//vector3df minEdge = this->GetSceneNode()->getTransformedBoundingBox().MinEdge;
@@ -469,7 +469,7 @@ vector3df CGameRoom::GetFrontPosToBuilding()
 /*======================================================*/
 // 룸 포지션
 /*======================================================*/
-vector3df CGameRoom::Pos()
+vector3df CGameRoom::getPos()
 {
 	return vector3df(0,0,0);
 }
@@ -489,16 +489,16 @@ vector3df CGameRoom::getIntersectPoint( const vector3df& point )
 /*======================================================*/
 // 건물에 데미지 입히기
 /*======================================================*/
-bool CGameRoom::addDamage( const u32 damage, CGameUnit*  pAttacker )
+bool CGameRoom::addDamage( const u32 damage, CGameUnit*  p_attacker )
 {
-	m_uRoomHp -= damage;
+	m_room_hp -= damage;
 	
 	if(!isAlive())
 	{
 
-		m_bNetLive = false;
+		m_net_live = false;
 
- 		CGameUnitEnemy*	pEnemy = dynamic_cast<CGameUnitEnemy*>(pAttacker);
+ 		CGameUnitEnemy*	p_enemy = dynamic_cast<CGameUnitEnemy*>(p_attacker);
  
 		//this->DeleteRoomReal();
 
@@ -519,7 +519,7 @@ bool CGameRoom::addDamage( const u32 damage, CGameUnit*  pAttacker )
 /*======================================================*/
 // 건물 지키는 위치 가져오기
 /*======================================================*/
-vector3df CGameRoom::GetGuardPos()
+vector3df CGameRoom::getGuardPos()
 {
 	return (vector3df(300,0,0));
 
@@ -529,18 +529,18 @@ vector3df CGameRoom::GetGuardPos()
 /*======================================================*/
 // 메시지 처리하기
 /*======================================================*/
-bool CGameRoom::HandleMessage( const Telegram& msg )
+bool CGameRoom::handleMessage( const Telegram& msg )
 {
-	switch(msg.Msg)
+	switch(msg.msg)
 	{
 
 	case Msg_EnemyAttackRoom :
 
 		if(isGuardianPresent())
 		{
-			CGameUnit*	pUnit = reinterpret_cast<CGameUnit* >(msg.ExtraInfo);
+			CGameUnit*	p_unit = reinterpret_cast<CGameUnit* >(msg.extra_info);
 
-			m_pGuardian->GuardRequest(pUnit->Pos());
+			m_guardian->guardRequest(p_unit->getPos());
 			
 		}
 
@@ -555,12 +555,12 @@ bool CGameRoom::HandleMessage( const Telegram& msg )
 /*======================================================*/
 // 건물 지정
 /*======================================================*/
-void CGameRoom::setOnTile( const vector2di& FirstIndexTile )
+void CGameRoom::setOnTile( const vector2di& first_index_tile )
 {
 
 }
 
-void CGameRoom::OnBuildingCompleted()
+void CGameRoom::onBuildingCompleted()
 {
 	
 

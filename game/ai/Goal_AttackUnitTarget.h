@@ -25,32 +25,32 @@ class Regulator;
 class Goal_AttackUnitTarget : public Goal_Composite<CGameUnit>
 {
 
-	Regulator*			m_pAttackRegulator;
+	Regulator*			m_attack_regulator;
 
-	bool				m_bEnemy;
+	bool				m_is_enemy;
 
-	CGameUnitEnemy*		m_pEnemy;
-	CGameUnit*			m_pTarget;
+	CGameUnitEnemy*		m_enemy;
+	CGameUnit*			m_target;
 	
 
 
 public:
 
-	Goal_AttackUnitTarget(CGameUnit* pOwner);
+	Goal_AttackUnitTarget(CGameUnit* p_owner);
 	~Goal_AttackUnitTarget() 
 	{
 
 
 	};
 
-	void Activate();
+	void activate();
 
 	
-	void ActivateForUnit(CGameUnit*	pUnit);
-	s32  Process();
-	void Terminate();
-	bool notPresent(u32 GoalType)const;
-  void StopHunting();
+	void activateForUnit(CGameUnit*	p_unit);
+	s32  process();
+	void terminate();
+	bool notPresent(u32 goal_type)const;
+  void stopHunting();
 
 };
 

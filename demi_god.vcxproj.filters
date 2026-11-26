@@ -329,7 +329,7 @@
     <ClCompile Include="game\ai\Goal_Dead.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
-    <ClCompile Include="game\ai\Goal_Enemy_ShortAttak.cpp">
+    <ClCompile Include="game\ai\Goal_Enemy_ShortAttack.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
     <ClCompile Include="game\ai\Goal_FollowPath.cpp">

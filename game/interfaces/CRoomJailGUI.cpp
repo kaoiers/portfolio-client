@@ -32,9 +32,9 @@ enum
 /*======================================================*/
 // 주인 오브젝트 설정
 /*======================================================*/
-void CRoomJailGUI::SetOwner( CGameObject *obj )
+void CRoomJailGUI::setOwner( CGameObject *obj )
 {
-	m_pOwner = dynamic_cast<CGameRoomJail *>(obj);
+	m_owner = dynamic_cast<CGameRoomJail *>(obj);
 
 		//setDamage( m_pOwner->getRoomHp() , m_pOwner->getTotalRoomHP());
 }
@@ -44,18 +44,18 @@ void CRoomJailGUI::SetOwner( CGameObject *obj )
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CRoomJailGUI::interface_control( CEventHandler* pReceiver )
+bool CRoomJailGUI::interfaceControl( CEventHandler* p_receiver )
 {
-	if(pReceiver->isClickedButtonID(COMMAND_PRISON_FREE_BUTTON))
+	if(p_receiver->isClickedButtonID(COMMAND_PRISON_FREE_BUTTON))
 	{
 		//printf("헤헤\n");
 	}
 	
-	else if(pReceiver->isClickedButtonID(COMMAND_DESTROY_BUTTON))
+	else if(p_receiver->isClickedButtonID(COMMAND_DESTROY_BUTTON))
 	{
-		m_pOwner->Explosion();	
+		m_owner->explosion();	
 
-		m_pOwner->DeleteRoom();
+		m_owner->deleteRoom();
 	}
 
 	
@@ -67,7 +67,7 @@ bool CRoomJailGUI::interface_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CRoomJailGUI::GUI_Initialize()
+void CRoomJailGUI::guiInitialize()
 {
 	//m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 }

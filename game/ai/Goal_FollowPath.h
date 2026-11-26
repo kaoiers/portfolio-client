@@ -23,15 +23,15 @@ private:
 
 public:
 
-  Goal_FollowPath(CGameUnit* pUnit);
+  Goal_FollowPath(CGameUnit* p_unit);
 
   //the usual suspects
-  void Activate();
-  s32 Process();
-  void Render();
-  void Terminate();
+  void activate();
+  s32 process();
+  void render();
+  void terminate();
 
-bool		StopSeeking();
+bool		stopSeeking();
 };
 
 #endif

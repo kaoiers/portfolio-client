@@ -26,20 +26,20 @@ public :
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));
 
 
-	virtual		void						enter_control();
+	virtual		void						enterControl();
 
-	virtual		void						update_control(CEventHandler* pReceiver) ;
+	virtual		void						updateControl(CEventHandler* p_receiver) ;
 
-	virtual		void						exit_control();
+	virtual		void						exitControl();
 
-	virtual		void						update(const u32 timeMs);
+	virtual		void						update(const u32 time_ms);
 
-	virtual		void						extra_node_setting(){};
+	virtual		void						extraNodeSetting(){};
 
 
 	CGameRoomStock(OwnerType owner,u32 objtype,  u32 btype, const ROOM_RESOURCE* res);
 
-	virtual		bool						HandleMessage(const Telegram& msg) {return true;}
+	virtual		bool						handleMessage(const Telegram& msg) {return true;}
 
 	~CGameRoomStock(){};
 };

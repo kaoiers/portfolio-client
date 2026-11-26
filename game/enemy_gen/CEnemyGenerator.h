@@ -19,31 +19,31 @@ class CGameUnitEnemy;
 
 class CEnemyGenerator
 {
-	u32					m_uEnemyGeneratePeriod;
-	u32					m_uEnemyApperPeriod;
-	line3df				m_lEnemyGenerateLine;
-	CGameMap*			m_pGameMap;
-	u32					m_uNextAppearTime;
-	u32					m_uNextGenerateTime;
-	bool				m_bGenerateFlag;
-	bool				m_bStartFlag;
+	u32					m_enemy_generate_period;
+	u32					m_enemy_appear_period;
+	line3df				m_enemy_generate_line;
+	CGameMap*			m_game_map;
+	u32					m_next_appear_time;
+	u32					m_next_generate_time;
+	bool				m_generate_flag;
+	bool				m_start_flag;
 	
 
-	u32					m_uEnemyMaxCounts;
-	u32					m_uCurrentEnemyMaxCounts;
-	u32					m_uDeadEnemies;
-	CGameUnitEnemy*		m_pEnemy;
-	bool				m_bOnWave;
-	bool				m_bCompleteWave;
+	u32					m_enemy_max_counts;
+	u32					m_current_enemy_max_counts;
+	u32					m_dead_enemies;
+	CGameUnitEnemy*		m_enemy;
+	bool				m_on_wave;
+	bool				m_complete_wave;
 
-	void				Initialize();
-	CGameUnitEnemy*		GenerateEnemy();
+	void				initialize();
+	CGameUnitEnemy*		generateEnemy();
 
 public :
 
 
-	CEnemyGenerator(CGameMap*	pMap, const u32 EnemyGeneratePeriod,
-		const  u32	EnemyApperPeriod, const u32   EnemyMaxCounts);
+	CEnemyGenerator(CGameMap*	p_map, const u32 enemy_generate_period,
+		const  u32	enemy_appear_period, const u32   enemy_max_counts);
 	
 
 
@@ -51,9 +51,9 @@ public :
 
 	void	addDeadCount();
 
-	const	line3df&	getEnemyGenerateLine() { return m_lEnemyGenerateLine; }
+	const	line3df&	getEnemyGenerateLine() { return m_enemy_generate_line; }
 
-	void	SetStartWave() {};
+	void	setStartWave() {};
 
 	bool	isInGenerate();
 };

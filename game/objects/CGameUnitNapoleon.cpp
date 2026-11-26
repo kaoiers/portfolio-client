@@ -14,17 +14,17 @@
 
 
 
-void CGameUnitNapoleon::PrivateInitialize()
+void CGameUnitNapoleon::privateInitialize()
 {
 
 }
 
-void CGameUnitNapoleon::control( CEventHandler* pReceiver )
+void CGameUnitNapoleon::control( CEventHandler* p_receiver )
 {
 
 }
 
-void CGameUnitNapoleon::OnCommand()
+void CGameUnitNapoleon::onCommand()
 {
 
 }

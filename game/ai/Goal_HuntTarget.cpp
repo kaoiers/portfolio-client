@@ -23,23 +23,23 @@
 /*======================================================*/
 //  타겟 헌팅 행동 초기화
 /*======================================================*/
-void Goal_HuntTarget::Activate()
+void Goal_HuntTarget::activate()
 {
-  m_iStatus = active;
+  m_status = active;
   
   //if this goal is reactivated then there may be some existing subgoals that
   //must be removed
-  RemoveAllSubgoals();
+  removeAllSubgoals();
 
 
 
 
-  m_pEnemyUnit = dynamic_cast<CGameUnitEnemy *>(m_pOwner);
+  m_enemy_unit = dynamic_cast<CGameUnitEnemy *>(m_owner);
   
 
-  if (m_pEnemyUnit == NULL)
+  if (m_enemy_unit == NULL)
   {
-	  m_iStatus = completed;
+	  m_status = completed;
 	  return;
 
   }
@@ -55,10 +55,10 @@ void Goal_HuntTarget::Activate()
 /*======================================================*/
 //  타겟 헌팅 행동 처리
 /*======================================================*/
-s32 Goal_HuntTarget::Process()
+s32 Goal_HuntTarget::process()
 {
   //if status is inactive, call Activate()
-  ActivateIfInactive();
+  activateIfInactive();
 
 
  // m_iStatus = ProcessSubgoals();
@@ -66,15 +66,15 @@ s32 Goal_HuntTarget::Process()
 
 
 
-	 RemoveAllSubgoals();
-	 StopHunting();
-	 m_iStatus = completed;
+	 removeAllSubgoals();
+	 stopHunting();
+	 m_status = completed;
 
 
-  return m_iStatus;
+  return m_status;
 }
 
-void Goal_HuntTarget::Render(){}
+void Goal_HuntTarget::render(){}
 
 
 
@@ -89,7 +89,7 @@ Goal_HuntTarget::~Goal_HuntTarget()
 /*======================================================*/
 //  타겟 헌팅 중지 함수
 /*======================================================*/
-void Goal_HuntTarget::StopHunting()
+void Goal_HuntTarget::stopHunting()
 {
 
 }

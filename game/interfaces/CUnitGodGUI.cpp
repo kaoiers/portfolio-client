@@ -31,9 +31,9 @@ enum
 /*======================================================*/
 // 주인 오브젝트 설정
 /*======================================================*/
-void CUnitGodGUI::SetOwner( CGameObject *obj )
+void CUnitGodGUI::setOwner( CGameObject *obj )
 {
-	m_pOwner = dynamic_cast<CGameUnitGod *>(obj);
+	m_owner = dynamic_cast<CGameUnitGod *>(obj);
 }
 
 
@@ -42,13 +42,13 @@ void CUnitGodGUI::SetOwner( CGameObject *obj )
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CUnitGodGUI::interface_control( CEventHandler* pReceiver )
+bool CUnitGodGUI::interfaceControl( CEventHandler* p_receiver )
 {
 
 
-	if(pReceiver->isClickedButtonID(COMMAND_ATTACK_BUTTON))
+	if(p_receiver->isClickedButtonID(COMMAND_ATTACK_BUTTON))
 	{
-		m_pOwner->setCommandType(com_attack);		
+		m_owner->setCommandType(com_attack);		
 	
 	
 	}

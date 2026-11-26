@@ -95,7 +95,7 @@ vector3df CCameraManager::getTarget( ) const
 /*======================================================*/
 // 초기화
 /*======================================================*/
-bool CCameraManager::Init()
+bool CCameraManager::init()
 {
 
 

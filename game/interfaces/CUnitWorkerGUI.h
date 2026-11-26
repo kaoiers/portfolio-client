@@ -45,9 +45,9 @@ class CGameUnitWorker;
 class CUnitWorkerGUI : public CGameGUI
 {
 
-	CGameUnitWorker*	m_pOwner;	
+	CGameUnitWorker*	m_owner;	
 
-	virtual bool	interface_control(CEventHandler* pReceiver);
+	virtual bool	interfaceControl(CEventHandler* p_receiver);
 
 public :
 
@@ -56,9 +56,9 @@ public :
 
 	 virtual	~CUnitWorkerGUI() {};
 
-	 virtual void	GUI_Initialize(){}
+	 virtual void	guiInitialize(){}
 
-	 virtual void	SetOwner(CGameObject *obj);
+	 virtual void	setOwner(CGameObject *obj);
 
 
 	

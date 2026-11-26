@@ -16,13 +16,13 @@
 /*======================================================*/
 //  빌딩 애니메이션 시작하기 
 /*======================================================*/
-void Goal_BuildingMotion::Activate()
+void Goal_BuildingMotion::activate()
 {
-	m_iStatus = active;
+	m_status = active;
 
-	m_pWorker = dynamic_cast<CGameUnitWorker *>(m_pOwner);
+	m_worker = dynamic_cast<CGameUnitWorker *>(m_owner);
 
-	m_pWorker->BuildingStart();
+	m_worker->buildingStart();
 
 	
 
@@ -32,21 +32,21 @@ void Goal_BuildingMotion::Activate()
 /*======================================================*/
 //  빌딩 애니메이션 처리
 /*======================================================*/
-s32 Goal_BuildingMotion::Process()
+s32 Goal_BuildingMotion::process()
 {
-	ActivateIfInactive();
+	activateIfInactive();
 
 
 
 
- 	if(m_pWorker->isBuildingCompleted())
+ 	if(m_worker->isBuildingCompleted())
  	{
 
-		m_iStatus = completed;		 
+		m_status = completed;		 
 
-		m_pWorker->PopBuildingCompletedRoom();
+		m_worker->popBuildingCompletedRoom();
 
-		m_pWorker->ObtainExp(50);
+		m_worker->obtainExp(50);
 		
  	}
 	
@@ -54,23 +54,23 @@ s32 Goal_BuildingMotion::Process()
 	{
 		//if(!(m_pWorker->GetAnimationMgr()->IsOnAnimation(ANI_WORKING)))
 		{
-			m_pWorker->setCurrentAni(ANI_WORKING, false);
+			m_worker->setCurrentAni(ANI_WORKING, false);
 		}
 	}
 
-	m_pWorker->SetHeading(vector3df(0,0,1));
+	m_worker->setHeading(vector3df(0,0,1));
 
 
-	return m_iStatus;
+	return m_status;
 }
 
 
 /*======================================================*/
 //  빌딩 애니메이션 끝내기
 /*======================================================*/
-void Goal_BuildingMotion::Terminate()
+void Goal_BuildingMotion::terminate()
 {
-	m_iStatus = completed;		 
+	m_status = completed;		 
 
 	//m_pWorker->PopBuildingCompletedRoom();
 
@@ -81,7 +81,7 @@ void Goal_BuildingMotion::Terminate()
 
 }
 
-Goal_BuildingMotion::Goal_BuildingMotion( CGameUnit* pUnit ) : Goal<CGameUnit>(pUnit, goal_buildingMotion)
+Goal_BuildingMotion::Goal_BuildingMotion( CGameUnit* p_unit ) : Goal<CGameUnit>(p_unit, goal_buildingMotion)
 {
 
 }

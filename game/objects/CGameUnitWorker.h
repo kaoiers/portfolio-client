@@ -21,26 +21,26 @@ class CGameRoomProductBase;
 
 class CGameUnitWorker : public CGameUnit
 {
-	virtual		void		PrivateInitialize();
+	virtual		void		privateInitialize();
 
-	bool					m_bBuildingComplete;
+	bool					m_building_complete;
 
-	CGameRoom*				m_pControlRoom;
+	CGameRoom*				m_control_room;
 
-	CGameRoom*				m_pBuildRoom;
+	CGameRoom*				m_build_room;
 
-	CGameRoomProductBase*	m_pProductRoom;
+	CGameRoomProductBase*	m_product_room;
 
-	bool					m_bFixRoomToGround;
-
-
-	bool					m_bNetworkOnBuilding;
-	vector3df	m_vNetworkOnBuildingPos;
+	bool					m_fix_room_to_ground;
 
 
+	bool					m_network_on_building;
+	vector3df	m_network_on_building_pos;
 
-	void					BuildingControl(CEventHandler* pReceiver);
-	void					CollectingControl(CEventHandler* pReceiver);
+
+
+	void					buildingControl(CEventHandler* p_receiver);
+	void					collectingControl(CEventHandler* p_receiver);
 
 	
 
@@ -48,14 +48,14 @@ public :
 
 
 
-	virtual		void		control(CEventHandler* pReceiver) {};
-	virtual		void		OnCommand() {};
-	virtual		void		update(u32 timeMs);
-	virtual		bool		short_attack(CGameUnit* pTarget); 
-	virtual		bool		long_attack(CGameUnit*	pTarget) { return false; } 
-	virtual		void		enter_control();
-	virtual		void		update_control(CEventHandler* pReceiver);
-	virtual		void		exit_control();	
+	virtual		void		control(CEventHandler* p_receiver) {};
+	virtual		void		onCommand() {};
+	virtual		void		update(u32 time_ms);
+	virtual		bool		shortAttack(CGameUnit* p_target); 
+	virtual		bool		longAttack(CGameUnit*	p_target) { return false; } 
+	virtual		void		enterControl();
+	virtual		void		updateControl(CEventHandler* p_receiver);
+	virtual		void		exitControl();	
 
 
 
@@ -72,44 +72,44 @@ public :
 
 public :
 
-	void					AddGoal_Building(const vector3df& pos);
-	const	bool			isBuildingComplete() { return m_bBuildingComplete; }
-	void					setBuildingComplete(const bool comp = true) {m_bBuildingComplete = comp; }
-	void					RemoveSubGoals();
+	void					addGoalBuilding(const vector3df& pos);
+	const	bool			isBuildingComplete() { return m_building_complete; }
+	void					setBuildingComplete(const bool comp = true) {m_building_complete = comp; }
+	void					removeSubGoals();
 	
-	void					AddBuilding(BuildingTypes  roomType);
+	void					addBuilding(BuildingTypes  room_type);
 	
 	
 	const	bool			isBuildingCompleted() ;
-	void					BuildingStart();
-	void					UpdateBuildingRoom();	
+	void					buildingStart();
+	void					updateBuildingRoom();	
 
 
-	CGameRoom*				getCurrentBuildingRoom() { return m_pBuildRoom; }
+	CGameRoom*				getCurrentBuildingRoom() { return m_build_room; }
 	CGameRoom*				getBackRoom();
 	
-	void					setCurrentBuildingRoom(CGameRoom* pRoom) {m_pBuildRoom = pRoom;  }
-	void					setCurrentControlRoom(CGameRoom* pRoom) {m_pControlRoom = pRoom;  }
+	void					setCurrentBuildingRoom(CGameRoom* p_room) {m_build_room = p_room;  }
+	void					setCurrentControlRoom(CGameRoom* p_room) {m_control_room = p_room;  }
 
-	bool					getCurrentControlRoom() { return (m_pControlRoom != 0); }
-	void					WorkingAnimation(const vector3df& dir);
-	void					OffWorkingAnimation();
+	bool					getCurrentControlRoom() { return (m_control_room != 0); }
+	void					workingAnimation(const vector3df& dir);
+	void					offWorkingAnimation();
 
-	void					PushControlCompletedRoom();
-	void					PopBuildingCompletedRoom();
+	void					pushControlCompletedRoom();
+	void					popBuildingCompletedRoom();
 	
-	void					CancelBuilding();
-	void					CancelControl();
+	void					cancelBuilding();
+	void					cancelControl();
 
-	void					CollectingComplete();
+	void					collectingComplete();
 
 
 public :
 	
-	void					OnNetWorkBuildCommand();
-	void					OnNetWorkBuildStartCommand(u32 seconds);
-	void					OnNetWorkBuildStartViewCommand(CGameRoom*	pRoom);
-	void					OnNetWorkBuildCompleteViewCommand();
+	void					onNetworkBuildCommand();
+	void					onNetworkBuildStartCommand(u32 seconds);
+	void					onNetworkBuildStartViewCommand(CGameRoom*	p_room);
+	void					onNetworkBuildCompleteViewCommand();
 	
 
 };

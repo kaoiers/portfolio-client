@@ -23,24 +23,24 @@ class Goal_MoveToPosition : public Goal_Composite<CGameUnit>
 private:
 
   //the position the bot wants to reach
-	vector3df m_vDestination;
+	vector3df m_destination;
 
 public:
 
-  Goal_MoveToPosition(CGameUnit* pUnit, vector3df   pos):  
-            Goal_Composite<CGameUnit>(pUnit, goal_move_to_position),
-            m_vDestination(pos)
+  Goal_MoveToPosition(CGameUnit* p_unit, vector3df   pos):  
+            Goal_Composite<CGameUnit>(p_unit, goal_move_to_position),
+            m_destination(pos)
   {}
 
  //the usual suspects
-  void Activate();
-  s32  Process();
-  void Terminate();
+  void activate();
+  s32  process();
+  void terminate();
 
   //this goal is able to accept messages
-  bool HandleMessage(const Telegram& msg);
+  bool handleMessage(const Telegram& msg);
 
-  void Render();
+  void render();
 };
 
 

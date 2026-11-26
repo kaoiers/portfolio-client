@@ -14,5 +14,5 @@ class IPlugin
     virtual const std::string & GetName() = 0;
     virtual const std::string & GetExportName() = 0;
 
-    virtual bool Export( const char * pData ) = 0;
+    virtual bool Export( const char * p_data ) = 0;
 };

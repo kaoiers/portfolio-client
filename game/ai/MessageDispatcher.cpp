@@ -20,7 +20,7 @@
 
 using std::set;
 
-MessageDispatcher* MessageDispatcher::Instance()
+MessageDispatcher* MessageDispatcher::getInstance()
 {
   static MessageDispatcher instance; 
   
@@ -28,90 +28,90 @@ MessageDispatcher* MessageDispatcher::Instance()
 }
 
 
-void MessageDispatcher::Discharge(CGameObject* pReceiver, const Telegram& telegram)
+void MessageDispatcher::discharge(CGameObject* p_receiver, const Telegram& telegram)
 {
  
 }
 
 
-void MessageDispatcher::DispatchMsg(double       delay,
+void MessageDispatcher::dispatchMsg(double       delay,
                                     s32          sender,
                                     s32          receiver,
                                     s32          msg,
-                                    void*        AdditionalInfo = NULL)
+                                    void*        additional_info = NULL)
 {
 
 
-  CGameObject* pReceiver = EntityMgr->GetObjectFromID(receiver);
+  CGameObject* p_receiver = EntityMgr->getObjectFromId(receiver);
 
 
-  if (pReceiver == NULL)
+  if (p_receiver == NULL)
   {
     return;
   }
   
 
-  Telegram telegram(0, sender, receiver, msg, AdditionalInfo);
+  Telegram telegram(0, sender, receiver, msg, additional_info);
   
                     
   if (delay <= 0.0)                                                        
   {
 
-    Discharge(pReceiver, telegram);
+    discharge(p_receiver, telegram);
   }
 
   else
   {
-	  double CurrentTime = 0;
+	  double current_time = 0;
 
-    telegram.DispatchTime = CurrentTime + delay * 1000;
+    telegram.dispatch_time = current_time + delay * 1000;
 
-    PriorityQ.insert(telegram);
+    priority_q.insert(telegram);
 
 	
   }
 }
 
 
-void MessageDispatcher::DispatchDelayedMessages()
+void MessageDispatcher::dispatchDelayedMessages()
 { 
 
-	double CurrentTime = 0;
+	double current_time = 0;
 
 
-  while( !PriorityQ.empty() &&
-	     (PriorityQ.begin()->DispatchTime < CurrentTime) && 
-         (PriorityQ.begin()->DispatchTime > 0) )
+  while( !priority_q.empty() &&
+	     (priority_q.begin()->dispatch_time < current_time) && 
+         (priority_q.begin()->dispatch_time > 0) )
   {
 
-    const Telegram& telegram = *PriorityQ.begin();
+    const Telegram& telegram = *priority_q.begin();
 
 
-    CGameObject* pReceiver = EntityMgr->GetObjectFromID(telegram.Receiver);
+    CGameObject* p_receiver = EntityMgr->getObjectFromId(telegram.receiver);
 
 
-	if(pReceiver)
-		Discharge(pReceiver, telegram);
+	if(p_receiver)
+		discharge(p_receiver, telegram);
 
-    PriorityQ.erase(PriorityQ.begin());
+    priority_q.erase(priority_q.begin());
   }
 }
 
-void MessageDispatcher::DispatchMessageToAllObjects( double delay, s32 sender, s32 msg, void* ExtraInfo )
+void MessageDispatcher::dispatchMessageToAllObjects( double delay, s32 sender, s32 msg, void* extra_info )
 {
 
-	CGameObject* pSender = EntityMgr->GetObjectFromID(sender);
+	CGameObject* p_sender = EntityMgr->getObjectFromId(sender);
 
 
-	if (pSender == NULL)
+	if (p_sender == NULL)
 	{
 		return;
 	}
 
 
-	Telegram telegram(0, sender, 0, msg, ExtraInfo);
+	Telegram telegram(0, sender, 0, msg, extra_info);
 
-	pSender->getObjectManager()->DispatchMsg(telegram);
+	p_sender->getObjectManager()->dispatchMsg(telegram);
 
 
 

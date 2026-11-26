@@ -21,18 +21,18 @@ private :
 
 
 
-	virtual		void		PrivateInitialize();
+	virtual		void		privateInitialize();
 
 
 
 public :
 
-	virtual		void		update(u32 timeMs);
+	virtual		void		update(u32 time_ms);
 
-	virtual		bool		short_attack(CGameUnit* pTarget); 
+	virtual		bool		shortAttack(CGameUnit* p_target); 
 
 
-	CGameUnitEnemySoldier(CEnemyGenerator* pGenerator,  OwnerType owner,u32 obj_id, u32 objtype,
+	CGameUnitEnemySoldier(CEnemyGenerator* p_generator,  OwnerType owner,u32 obj_id, u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 
@@ -40,7 +40,7 @@ public :
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
-	CGameUnitEnemySoldier(CEnemyGenerator* pGenerator, OwnerType owner,u32 objtype,
+	CGameUnitEnemySoldier(CEnemyGenerator* p_generator, OwnerType owner,u32 objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 

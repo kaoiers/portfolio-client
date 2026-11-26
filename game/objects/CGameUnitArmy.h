@@ -20,34 +20,34 @@ class CGameUnitArmy : public CGameUnit
 {
 	
 
-	CGameRoom*				m_pGuardRoom;
+	CGameRoom*				m_guard_room;
 
 
-	bool					m_bCommandNone;
+	bool					m_command_none;
 
-	bool					m_bGoingRoom;
-
-public :
-
-	void					Arbitrate();
-	void					GuardRequest(const vector3df& pos);
-
-
+	bool					m_going_room;
 
 public :
 
-	virtual		void		update(u32 timeMs);
-
-	virtual		bool		short_attack(CGameUnit* pTarget); 
-
-	virtual		bool		long_attack(CGameUnit*	pTarget) { return false; } 
+	void					arbitrate();
+	void					guardRequest(const vector3df& pos);
 
 
-	virtual void			enter_control();
 
-	virtual void			update_control(CEventHandler* pReceiver);
+public :
 
-	virtual void			exit_control();	
+	virtual		void		update(u32 time_ms);
+
+	virtual		bool		shortAttack(CGameUnit* p_target); 
+
+	virtual		bool		longAttack(CGameUnit*	p_target) { return false; } 
+
+
+	virtual void			enterControl();
+
+	virtual void			updateControl(CEventHandler* p_receiver);
+
+	virtual void			exitControl();	
 
 
 public :

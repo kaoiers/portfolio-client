@@ -32,9 +32,9 @@ CGameRoomStock::CGameRoomStock(OwnerType owner, u32 objtype, u32 btype, const RO
 /*======================================================*/
 // 컨트롤 초기화
 /*======================================================*/
-void CGameRoomStock::enter_control()
+void CGameRoomStock::enterControl()
 {
-	CControllerGUI::Instance()->setCurrentControlGUI(this);
+	CControllerGUI::instance()->setCurrentControlGUI(this);
 
 }
 
@@ -42,7 +42,7 @@ void CGameRoomStock::enter_control()
 /*======================================================*/
 // 컨트롤 업데이트
 /*======================================================*/
-void CGameRoomStock::update_control( CEventHandler* pReceiver )
+void CGameRoomStock::updateControl( CEventHandler* p_receiver )
 {
 
 }
@@ -51,7 +51,7 @@ void CGameRoomStock::update_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 컨트롤 종료
 /*======================================================*/
-void CGameRoomStock::exit_control()
+void CGameRoomStock::exitControl()
 {
 
 }
@@ -60,8 +60,8 @@ void CGameRoomStock::exit_control()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameRoomStock::update( const u32 timeMs )
+void CGameRoomStock::update( const u32 time_ms )
 {
-	BuildingUpdate();
+	buildingUpdate();
 
 }

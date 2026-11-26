@@ -20,28 +20,28 @@
 struct Telegram
 {
   //the entity that sent this telegram
-  s32          Sender;
+  s32          sender;
 
   //the entity that is to receive this telegram
-  s32          Receiver;
+  s32          receiver;
 
   //the message itself. These are all enumerated in the file
   //"MessageTypes.h"
-  s32          Msg;
+  s32          msg;
 
   //messages can be dispatched immediately or delayed for a specified amount
   //of time. If a delay is necessary this field is stamped with the time 
   //the message should be dispatched.
-  double       DispatchTime;
+  double       dispatch_time;
 
   //any additional information that may accompany the message
-  void*        ExtraInfo;
+  void*        extra_info;
 
 
-  Telegram():DispatchTime(-1),
-                  Sender(-1),
-                  Receiver(-1),
-                  Msg(-1)
+  Telegram():dispatch_time(-1),
+                  sender(-1),
+                  receiver(-1),
+                  msg(-1)
   {}
 
 
@@ -49,11 +49,11 @@ struct Telegram
            s32    sender,
            s32    receiver,
            s32    msg,
-           void*  info = NULL): DispatchTime(time),
-                               Sender(sender),
-                               Receiver(receiver),
-                               Msg(msg),
-                               ExtraInfo(info)
+           void*  info = NULL): dispatch_time(time),
+                               sender(sender),
+                               receiver(receiver),
+                               msg(msg),
+                               extra_info(info)
   {}
  
 };
@@ -63,15 +63,15 @@ struct Telegram
 //operator needs to be overloaded so that the PQ can sort the telegrams
 //by time priority. Note how the times must be smaller than
 //SmallestDelay apart before two Telegrams are considered unique.
-const double SmallestDelay = 0.25;
+const double smallest_delay = 0.25;
 
 
 inline bool operator==(const Telegram& t1, const Telegram& t2)
 {
-  return ( fabs(t1.DispatchTime-t2.DispatchTime) < SmallestDelay) &&
-          (t1.Sender == t2.Sender)        &&
-          (t1.Receiver == t2.Receiver)    &&
-          (t1.Msg == t2.Msg);
+  return ( fabs(t1.dispatch_time-t2.dispatch_time) < smallest_delay) &&
+          (t1.sender == t2.sender)        &&
+          (t1.receiver == t2.receiver)    &&
+          (t1.msg == t2.msg);
 }
 
 inline bool operator<(const Telegram& t1, const Telegram& t2)
@@ -83,14 +83,14 @@ inline bool operator<(const Telegram& t1, const Telegram& t2)
 
   else
   {
-    return  (t1.DispatchTime < t2.DispatchTime);
+    return  (t1.dispatch_time < t2.dispatch_time);
   }
 }
 
 inline std::ostream& operator<<(std::ostream& os, const Telegram& t)
 {
-  os << "time: " << t.DispatchTime << "  Sender: " << t.Sender
-     << "   Receiver: " << t.Receiver << "   Msg: " << t.Msg;
+  os << "time: " << t.dispatch_time << "  Sender: " << t.sender
+     << "   Receiver: " << t.receiver << "   Msg: " << t.msg;
 
   return os;
 }
@@ -98,7 +98,7 @@ inline std::ostream& operator<<(std::ostream& os, const Telegram& t)
 //handy helper function for dereferencing the ExtraInfo field of the Telegram 
 //to the required type.
 template <class T>
-inline T DereferenceToType(void* p)
+inline T dereferenceToType(void* p)
 {
   return *(T*)(p);
 }

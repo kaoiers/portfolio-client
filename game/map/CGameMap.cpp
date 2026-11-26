@@ -24,20 +24,20 @@
 
 CGameMap::CGameMap(CGameObjectManager* man)
 :	
-m_pObjMan(man),
-m_pTerrain(0),
-m_pGrid(0),
-m_dCellWidth(0), 
-m_dCellHeight(0),
-m_fTotalWidth(0),
-m_fTotalHeight(0),
-m_iCellsX(0),
-m_iCellsZ(0),
-m_dCellSpaceNeighborhoodRange(0),
-m_pBoundaryManager(0),
-m_pEnemyGenerator(0),
-m_vMinUsableTile(vector2di(0,0)), 
-m_vMaxUsableTile(vector2di(0,0))
+m_obj_man(man),
+m_terrain(0),
+m_grid(0),
+m_cell_width(0), 
+m_cell_height(0),
+m_total_width(0),
+m_total_height(0),
+m_cells_x(0),
+m_cells_z(0),
+m_cell_space_neighborhood_range(0),
+m_boundary_manager(0),
+m_enemy_generator(0),
+m_min_usable_tile(vector2di(0,0)), 
+m_max_usable_tile(vector2di(0,0))
 {
 
 
@@ -45,35 +45,35 @@ m_vMaxUsableTile(vector2di(0,0))
 
 CGameMap::~CGameMap()
 {	
-	SAFE_DELETE(m_pEnemyGenerator);
+	SAFE_DELETE(m_enemy_generator);
 }
 
 
 /*======================================================*/
 // 게임 배치 초기화
 /*======================================================*/
-bool CGameMap::init( s32 cellsX, s32 cellsZ, s32 PartitionX,  s32 PartitionZ, f32 cwidth /*= 300.0f */, f32 cheight /*= 300.0f*/ )
+bool CGameMap::init( s32 cells_x, s32 cells_z, s32 partition_x,  s32 partition_z, f32 cwidth /*= 300.0f */, f32 cheight /*= 300.0f*/ )
 {
-	m_iCellsX = cellsX;
-	m_iCellsZ = cellsZ;
+	m_cells_x = cells_x;
+	m_cells_z = cells_z;
 
-	m_dCellWidth = cwidth;
-	m_dCellHeight = cheight;
+	m_cell_width = cwidth;
+	m_cell_height = cheight;
 
-	m_fTotalHeight = m_iCellsZ * m_dCellHeight;
-	m_fTotalWidth = m_iCellsX * m_dCellWidth;
-	m_dCellSpaceNeighborhoodRange = (m_dCellHeight + m_dCellWidth) /2.0;
-
-
-	
-
-	m_pTerrain = m_pObjMan->AddTerrainMap(object_mine, m_iCellsX, m_iCellsZ, m_dCellWidth, m_dCellHeight);	
+	m_total_height = m_cells_z * m_cell_height;
+	m_total_width = m_cells_x * m_cell_width;
+	m_cell_space_neighborhood_range = (m_cell_height + m_cell_width) /2.0;
 
 
 	
-	CreateGraph();
-	PartitionNavGraph( PartitionX,  PartitionZ);	
-	DisplayObjectsByDepth(15, 30, 3);
+
+	m_terrain = m_obj_man->addTerrainMap(object_mine, m_cells_x, m_cells_z, m_cell_width, m_cell_height);	
+
+
+	
+	createGraph();
+	partitionNavGraph( partition_x,  partition_z);	
+	displayObjectsByDepth(15, 30, 3);
 
 
 
@@ -82,9 +82,9 @@ bool CGameMap::init( s32 cellsX, s32 cellsZ, s32 PartitionX,  s32 PartitionZ, f3
 	//신전 배치
 	//
 	//////////////////////////////////////////////////////////////////////////////////////////////
-	CGameObjectManager*  objMan =   CGameObjectManager::GetInstance();
-	CGameRoom* pRoom = 0;			
-	pRoom = objMan->AddRoomOnTile(object_mine, BUILDING_GOD, vector2di(28, 31));
+	CGameObjectManager*  obj_man =   CGameObjectManager::getInstance();
+	CGameRoom* p_room = 0;			
+	p_room = obj_man->addRoomOnTile(object_mine, BUILDING_GOD, vector2di(28, 31));
 
 
 
@@ -94,9 +94,9 @@ bool CGameMap::init( s32 cellsX, s32 cellsZ, s32 PartitionX,  s32 PartitionZ, f3
 	//
 	//////////////////////////////////////////////////////////////////////////////////////////////
 
-	objMan->AddUnit(object_mine, 0, UNIT_WORKER1 , this->getNodePos(35,35) );
+	obj_man->addUnit(object_mine, 0, UNIT_WORKER1 , this->getNodePos(35,35) );
 
-	objMan->AddUnit(object_mine, 0, UNIT_GOD_TIGER , this->getNodePos(29,35));
+	obj_man->addUnit(object_mine, 0, UNIT_GOD_TIGER , this->getNodePos(29,35));
 
 	return true;
 }
@@ -106,15 +106,15 @@ bool CGameMap::init( s32 cellsX, s32 cellsZ, s32 PartitionX,  s32 PartitionZ, f3
 /*======================================================*/
 // 적군 생성기 만들기
 /*======================================================*/
-void CGameMap::CreateEnemyGenerator()
+void CGameMap::createEnemyGenerator()
 {
-	if(m_pEnemyGenerator)
+	if(m_enemy_generator)
 	{
-		SAFE_DELETE(m_pEnemyGenerator);
-		m_pEnemyGenerator = NULL;
+		SAFE_DELETE(m_enemy_generator);
+		m_enemy_generator = NULL;
 	}
 
-	m_pEnemyGenerator =	new CEnemyGenerator(this, 5, 4, 2);
+	m_enemy_generator =	new CEnemyGenerator(this, 5, 4, 2);
 
 
 }
@@ -122,29 +122,29 @@ void CGameMap::CreateEnemyGenerator()
 /*======================================================*/
 // 나무와 바위 배치하기
 /*======================================================*/
-void CGameMap::DisplayObjectsByDepth( u32 xOffset, u32 yOffset, u32 depth )
+void CGameMap::displayObjectsByDepth( u32 x_offset, u32 y_offset, u32 depth )
 {
 
 
-	m_vMinUsableTile = vector2di(xOffset,yOffset);
-	m_vMaxUsableTile = vector2di(m_iCellsX-xOffset-1, m_iCellsZ-yOffset-1);
+	m_min_usable_tile = vector2di(x_offset,y_offset);
+	m_max_usable_tile = vector2di(m_cells_x-x_offset-1, m_cells_z-y_offset-1);
 
-	s32 godRoomX = s32(f32(m_vMinUsableTile.X + m_vMaxUsableTile.X)/2.0f);
-	s32 godRoomZ = m_vMinUsableTile.Y+2;
+	s32 god_room_x = s32(f32(m_min_usable_tile.X + m_max_usable_tile.X)/2.0f);
+	s32 god_room_z = m_min_usable_tile.Y+2;
 
 	
-	CreateEnemyGenerator(); //순서유의
+	createEnemyGenerator(); //순서유의
 
 
- 	CCameraManager*	cameraMan = CAppContext::GetGodGame()->getCameraManager();
- 	vector3df topleftpos(getPosByTile(m_vMinUsableTile.X , m_vMinUsableTile.Y));
- 	vector3df bottomrightpos(getPosByTile(m_vMaxUsableTile.X , m_vMaxUsableTile.Y));
- 	cameraMan->setBoundary(vector2df(topleftpos.X, topleftpos.Z), 
+ 	CCameraManager*	camera_man = CAppContext::getGodGame()->getCameraManager();
+ 	vector3df topleftpos(getPosByTile(m_min_usable_tile.X , m_min_usable_tile.Y));
+ 	vector3df bottomrightpos(getPosByTile(m_max_usable_tile.X , m_max_usable_tile.Y));
+ 	camera_man->setBoundary(vector2df(topleftpos.X, topleftpos.Z), 
  		vector2df(bottomrightpos.X, bottomrightpos.Z));
 
 	for(u32 i=0; i<depth; i++)
 	{
-		DisplayObjects(xOffset-i, yOffset-i);
+		displayObjects(x_offset-i, y_offset-i);
 	}
 }
 
@@ -153,17 +153,17 @@ void CGameMap::DisplayObjectsByDepth( u32 xOffset, u32 yOffset, u32 depth )
 /*======================================================*/
 // 웨이브 시작하기
 /*======================================================*/
-void CGameMap::StartEnemyGenerate()
+void CGameMap::startEnemyGenerate()
 {
 
-	m_pEnemyGenerator->SetStartWave();
+	m_enemy_generator->setStartWave();
 
 }
 
 /*======================================================*/
 // 바위 나무 배치하기
 /*======================================================*/
-void CGameMap::DisplayObjects( u32 xOffset, u32 yOffset)
+void CGameMap::displayObjects( u32 x_offset, u32 y_offset)
 {
 
 
@@ -173,7 +173,7 @@ void CGameMap::DisplayObjects( u32 xOffset, u32 yOffset)
 /*======================================================*/
 // 길찾기용 그래프 생성하기 
 /*======================================================*/
-void CGameMap::CreateGraph()
+void CGameMap::createGraph()
 {
 
 }
@@ -200,9 +200,9 @@ void CGameMap::render()
 	//m_pShieldManager->drawAll();
 }
 
-CGameMap * CGameMap::GetInstance()
+CGameMap * CGameMap::getInstance()
 {
-	return CAppContext::GetGodGame()->getGameMap();
+	return CAppContext::getGodGame()->getGameMap();
 }
 
 
@@ -210,7 +210,7 @@ CGameMap * CGameMap::GetInstance()
 /*======================================================*/
 // 네비게이션 그래프 파티션으로 나누기
 /*======================================================*/
-void CGameMap::PartitionNavGraph(const s32 x, const s32 y)
+void CGameMap::partitionNavGraph(const s32 x, const s32 y)
 {
 
 	//m_pSpacePartition->RenderCells(CAppContext::GetDevice());
@@ -223,7 +223,7 @@ void CGameMap::PartitionNavGraph(const s32 x, const s32 y)
 /*======================================================*/
 // 섹션 초기화
 /*======================================================*/
-bool CGameMap::SectionInit( u32 tilesX, u32 tilesZ, f32 Height, f32 Width )
+bool CGameMap::sectionInit( u32 tiles_x, u32 tiles_z, f32 height, f32 width )
 {
 
 	return true;
@@ -234,12 +234,12 @@ bool CGameMap::SectionInit( u32 tilesX, u32 tilesZ, f32 Height, f32 Width )
 /*======================================================*/
 // 마우스 포지션 -> 가까운 노드 포지션
 /*======================================================*/
-bool CGameMap::getNodePosFromMousePos( const vector3df& groundPoint, vector3df& tilePos )
+bool CGameMap::getNodePosFromMousePos( const vector3df& ground_point, vector3df& tile_pos )
 {
 
-	vector2di tile = getTileFromPos(groundPoint);
+	vector2di tile = getTileFromPos(ground_point);
 
-	tilePos = getPosByTile(tile.X, tile.Y);
+	tile_pos = getPosByTile(tile.X, tile.Y);
 
 	return true;
 }
@@ -249,13 +249,13 @@ bool CGameMap::getNodePosFromMousePos( const vector3df& groundPoint, vector3df& 
 /*======================================================*/
 // 포지션 -> 타일 인덱스
 /*======================================================*/
-vector2di CGameMap::getTileFromPos( const vector3df& groundPoint )
+vector2di CGameMap::getTileFromPos( const vector3df& ground_point )
 {
 	vector2di tile;
 
-	tile.X =  s32(ceil((groundPoint.X + (m_fTotalWidth/2.0f)) /m_dCellWidth)) - 1 ;
+	tile.X =  s32(ceil((ground_point.X + (m_total_width/2.0f)) /m_cell_width)) - 1 ;
 
-	tile.Y =  -s32(ceil((groundPoint.Z - (m_fTotalHeight/2.0f)) /m_dCellHeight)) ;
+	tile.Y =  -s32(ceil((ground_point.Z - (m_total_height/2.0f)) /m_cell_height)) ;
 
 	return tile;
 }
@@ -264,9 +264,9 @@ vector2di CGameMap::getTileFromPos( const vector3df& groundPoint )
 /*======================================================*/
 // 노드 존재하는지
 /*======================================================*/
-bool CGameMap::IsNodePresent( const s32 x, const s32 y )
+bool CGameMap::isNodePresent( const s32 x, const s32 y )
 {
-	s32 NodeIndex = getNodeIndexFromTIle(x, y) ;
+	s32 node_index = getNodeIndexFromTile(x, y) ;
 
 	return false;
 }
@@ -276,10 +276,10 @@ bool CGameMap::IsNodePresent( const s32 x, const s32 y )
 /*======================================================*/
 // 유효 지역에 있는지
 /*======================================================*/
-bool CGameMap::IsInUsableArea( const s32 x, const s32 y )
+bool CGameMap::isInUsableArea( const s32 x, const s32 y )
 {
-	return (m_vMinUsableTile.X < x && m_vMinUsableTile.Y < y 
-		&& m_vMaxUsableTile.X > x && m_vMaxUsableTile.Y > y  );
+	return (m_min_usable_tile.X < x && m_min_usable_tile.Y < y 
+		&& m_max_usable_tile.X > x && m_max_usable_tile.Y > y  );
 }
 
 
@@ -287,30 +287,30 @@ bool CGameMap::IsInUsableArea( const s32 x, const s32 y )
 /*======================================================*/
 // 노드에 링크가 다 연결되어 있는지
 /*======================================================*/
-bool CGameMap::IsNodeAllLinked( const s32 x, const s32 y )
+bool CGameMap::isNodeAllLinked( const s32 x, const s32 y )
 {
-	s32	TotalLinkedEdgesNumber = 0;
+	s32	total_linked_edges_number = 0;
 
-	s32 to = getNodeIndexFromTIle(x, y);
+	s32 to = getNodeIndexFromTile(x, y);
 
 	for(s32 i=-1; i<=1; i++)
 	{
 		for(s32 j=-1; j<=1; j++)
 		{
-			s32 nodeX = x+j;
-			s32 nodeZ = y+i;
+			s32 node_x = x+j;
+			s32 node_z = y+i;
 
-			if(nodeX < 0 || nodeZ < 0) continue;
+			if(node_x < 0 || node_z < 0) continue;
 
-			if(nodeX >= m_iCellsX || nodeZ >= m_iCellsZ) continue;
+			if(node_x >= m_cells_x || node_z >= m_cells_z) continue;
 
 			if( (abs(i) == 1 && abs(j) == 1) || (i==0 && j==0) ) continue;
 
-			s32 from = getNodeIndexFromTIle(nodeX, nodeZ) ;
+			s32 from = getNodeIndexFromTile(node_x, node_z) ;
 		}
 	}
 
-	if(TotalLinkedEdgesNumber == 1)
+	if(total_linked_edges_number == 1)
 	{
 		return false;
 	}
@@ -323,9 +323,9 @@ bool CGameMap::IsNodeAllLinked( const s32 x, const s32 y )
 /*======================================================*/
 // 노드 삭제하기
 /*======================================================*/
-bool CGameMap::RemoveNode( const s32 x, const s32 y )
+bool CGameMap::removeNode( const s32 x, const s32 y )
 {
-	s32 idx = y*m_iCellsX+x;
+	s32 idx = y*m_cells_x+x;
 	
 	return true;
 }
@@ -336,7 +336,7 @@ bool CGameMap::RemoveNode( const s32 x, const s32 y )
 /*======================================================*/
 vector3df CGameMap::getNodePos( const s32 x, const s32 y )
 {
-	s32 NodeIndex = y*m_iCellsX+x;
+	s32 node_index = y*m_cells_x+x;
 
 	return vector3df(0,0,0);
 }
@@ -348,9 +348,9 @@ vector3df CGameMap::getNodePos( const s32 x, const s32 y )
 /*======================================================*/
 // 타일 인덱스로 노드 추가하기 
 /*======================================================*/
-bool CGameMap::AddNodeByTile( const s32 x, const s32 y)
+bool CGameMap::addNodeByTile( const s32 x, const s32 y)
 {
-	s32 idx = y*m_iCellsX+x;
+	s32 idx = y*m_cells_x+x;
 
 	return true;
 }
@@ -364,9 +364,9 @@ vector3df CGameMap::getPosByTile( const s32 x, const s32 y )
 {
 	vector3df pos;
 
-	pos.X = -(m_fTotalWidth/2.0f) + (x* m_dCellWidth) + (m_dCellWidth/2.0f);
+	pos.X = -(m_total_width/2.0f) + (x* m_cell_width) + (m_cell_width/2.0f);
 	pos.Y = 0.0f;
-	pos.Z = (m_fTotalHeight/2.0f) - (y* m_dCellHeight) - (m_dCellHeight/2.0f);
+	pos.Z = (m_total_height/2.0f) - (y* m_cell_height) - (m_cell_height/2.0f);
 
 	return pos;
 }
@@ -375,29 +375,29 @@ vector3df CGameMap::getPosByTile( const s32 x, const s32 y )
 /*======================================================*/
 // 노드 추가하고 엣지 연결하기
 /*======================================================*/
-bool CGameMap::AddNodeAndLinkEdges( const s32 x, const s32 y )
+bool CGameMap::addNodeAndLinkEdges( const s32 x, const s32 y )
 {	
-	AddNodeByTile(x, y);
+	addNodeByTile(x, y);
 
-	vector2di tileA(x, y);
+	vector2di tile_a(x, y);
 
 	for(s32 i=-1; i<=1; i++)
 	{
 		for(s32 j=-1; j<=1; j++)
 		{
-			s32 nodeX = x+j;
-			s32 nodeZ = y+i;
+			s32 node_x = x+j;
+			s32 node_z = y+i;
 
-			if(nodeX < 0 || nodeZ < 0) continue;
+			if(node_x < 0 || node_z < 0) continue;
 
-			if(nodeX >= m_iCellsX || nodeZ >= m_iCellsZ) continue;
+			if(node_x >= m_cells_x || node_z >= m_cells_z) continue;
 
 			if( (abs(i) == 1 && abs(j) == 1) || (i==0 && j==0) ) continue;
 
-			if(IsNodePresent( nodeX , nodeZ ))
+			if(isNodePresent( node_x , node_z ))
 			{
-				vector2di tileB(nodeX, nodeZ);
-				LinkEdges(tileA, tileB);				
+				vector2di tile_b(node_x, node_z);
+				linkEdges(tile_a, tile_b);				
 			}
 		}
 	}
@@ -409,29 +409,29 @@ bool CGameMap::AddNodeAndLinkEdges( const s32 x, const s32 y )
 /*======================================================*/
 // 노드 추가하고 엣지 연결하기 
 /*======================================================*/
-bool CGameMap::AddNodeAndLinkEdgesForDoor( const s32 x, const s32 y, const vector3df& pos)
+bool CGameMap::addNodeAndLinkEdgesForDoor( const s32 x, const s32 y, const vector3df& pos)
 {
-	s32 idx = y*m_iCellsX+x;
+	s32 idx = y*m_cells_x+x;
 
-	vector2di tileA(x, y);
+	vector2di tile_a(x, y);
 
 	for(s32 i=-1; i<=1; i++)
 	{
 		for(s32 j=-1; j<=1; j++)
 		{
-			s32 nodeX = x+j;
-			s32 nodeZ = y+i;
+			s32 node_x = x+j;
+			s32 node_z = y+i;
 
-			if(nodeX < 0 || nodeZ < 0) continue;
+			if(node_x < 0 || node_z < 0) continue;
 
-			if(nodeX >= m_iCellsX || nodeZ >= m_iCellsZ) continue;
+			if(node_x >= m_cells_x || node_z >= m_cells_z) continue;
 
 			if( (abs(i) == 1 && abs(j) == 1) || (i==0 && j==0) ) continue;
 
-			if(IsNodePresent( nodeX , nodeZ ))
+			if(isNodePresent( node_x , node_z ))
 			{
-				vector2di tileB(nodeX, nodeZ);
-				LinkEdges(tileA, tileB);				
+				vector2di tile_b(node_x, node_z);
+				linkEdges(tile_a, tile_b);				
 			}
 		}
 	}
@@ -446,7 +446,7 @@ bool CGameMap::AddNodeAndLinkEdgesForDoor( const s32 x, const s32 y, const vecto
 /*======================================================*/
 bool CGameMap::isPathObstructed(const vector3df& A,
                                  const vector3df& B,
-								 f32    BoundingRadius) const
+								 f32    bounding_radius) const
 {
  
 
@@ -467,9 +467,9 @@ bool CGameMap::isInBoundaries( const vector3df& point,s32 return_idx )
 /*======================================================*/
 // 셀에 노드 추가하기
 /*======================================================*/
-void CGameMap::AddNodeToCellSpace( const s32 x, const s32 y )
+void CGameMap::addNodeToCellSpace( const s32 x, const s32 y )
 {
-	s32 NodeIndex = y*m_iCellsX+x;
+	s32 node_index = y*m_cells_x+x;
 }
 
 
@@ -477,9 +477,9 @@ void CGameMap::AddNodeToCellSpace( const s32 x, const s32 y )
 /*======================================================*/
 // 타일 인덱스 -> 노드 인덱스
 /*======================================================*/
-s32 CGameMap::getNodeIndexFromTIle( const s32 x, const s32 y ) const
+s32 CGameMap::getNodeIndexFromTile( const s32 x, const s32 y ) const
 {
-	return y*m_iCellsX+x;
+	return y*m_cells_x+x;
 
 }
 
@@ -492,7 +492,7 @@ s32 CGameMap::getNodeIndexFromTIle( const s32 x, const s32 y ) const
 /*======================================================*/
 vector3df CGameMap::getBottomRightUsablePos()
 {
-	return getPosByTile(m_vMaxUsableTile.X , m_vMaxUsableTile.Y);
+	return getPosByTile(m_max_usable_tile.X , m_max_usable_tile.Y);
 }
 
 
@@ -517,7 +517,7 @@ void CGameMap::removeAllTrees()
 /*======================================================*/
 // 신수 부활 처리기 작동시키기
 /*======================================================*/
-void CGameMap::GodDeadEvent()
+void CGameMap::godDeadEvent()
 {
 	//CMainGameGUI::GetInstance()->WarningMessage(L"신수가 30초 후에 부활합니다");
 	//m_pGodResurrection->begin(30);
@@ -527,7 +527,7 @@ void CGameMap::GodDeadEvent()
 /*======================================================*/
 // 일꾼 부활 처리기 작동시키기
 /*======================================================*/
-void CGameMap::WorkerDeadEvent()
+void CGameMap::workerDeadEvent()
 {
 	//CMainGameGUI::GetInstance()->WarningMessage(L"일꾼이 30초 후에 부활합니다");
 	//m_pWorkerResurrection->begin(30);

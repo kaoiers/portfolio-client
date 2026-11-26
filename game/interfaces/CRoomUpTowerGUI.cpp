@@ -32,10 +32,10 @@ enum {
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CRoomUpTowerGUI::interface_control( CEventHandler* pReceiver )
+bool CRoomUpTowerGUI::interfaceControl( CEventHandler* p_receiver )
 {
 
-	if(pReceiver->isClickedButtonID(COMMAND_BUILDING_CANCEL ))
+	if(p_receiver->isClickedButtonID(COMMAND_BUILDING_CANCEL ))
 	{
 		
 	}
@@ -48,7 +48,7 @@ bool CRoomUpTowerGUI::interface_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CRoomUpTowerGUI::GUI_Initialize()
+void CRoomUpTowerGUI::guiInitialize()
 {
 	//m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 }
@@ -59,7 +59,7 @@ void CRoomUpTowerGUI::GUI_Initialize()
 /*======================================================*/
 // 주인 오브젝트 설정
 /*======================================================*/
-void CRoomUpTowerGUI::SetOwner( CGameObject *obj )
+void CRoomUpTowerGUI::setOwner( CGameObject *obj )
 {
 	
 	//setDamage( m_pOwner->getRoomHp() , m_pOwner->getTotalRoomHP());

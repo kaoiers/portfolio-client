@@ -28,7 +28,7 @@
 /*======================================================*/
 // 개별 초기화
 /*======================================================*/
-void CGameUnitWorker::PrivateInitialize()
+void CGameUnitWorker::privateInitialize()
 {}
 
 
@@ -38,7 +38,7 @@ void CGameUnitWorker::PrivateInitialize()
 /*======================================================*/
 //근거리 공격
 /*======================================================*/
-bool CGameUnitWorker::short_attack( CGameUnit* pTarget )
+bool CGameUnitWorker::shortAttack( CGameUnit* p_target )
 {
 	
 
@@ -53,29 +53,29 @@ CGameUnitWorker::CGameUnitWorker(OwnerType owner, u32 obj_id, u32 objtype,
 								 , const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/
 								 , const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ )
 								  : CGameUnit(owner , objtype, resource, attribute ,unittype, unit_mine, pos, rot, scale)
-								  ,m_bBuildingComplete(false), m_pControlRoom(0), m_pBuildRoom(0),m_pProductRoom(0), m_bFixRoomToGround(false), m_bNetworkOnBuilding(false)
+								  ,m_building_complete(false), m_control_room(0), m_build_room(0),m_product_room(0), m_fix_room_to_ground(false), m_network_on_building(false)
 {
-	CGameResourceManager::GetInstance()->addUnitCounts();	
+	CGameResourceManager::getInstance()->addUnitCounts();	
 	
 
 }
 
 CGameUnitWorker::~CGameUnitWorker()
 {
-	CGameResourceManager::GetInstance()->SubstractUnitCounts();	
+	CGameResourceManager::getInstance()->subtractUnitCounts();	
 
-	CGameMap::GetInstance()->WorkerDeadEvent();
+	CGameMap::getInstance()->workerDeadEvent();
 
-	RemoveSubGoals();
+	removeSubGoals();
 }
 
 
 /*======================================================*/
 // 빌딩 목표 추가
 /*======================================================*/
-void CGameUnitWorker::AddGoal_Building( const vector3df& pos )
+void CGameUnitWorker::addGoalBuilding( const vector3df& pos )
 {
-	m_pBrain->AddGoal_Building(pos);
+	m_brain->addGoalBuilding(pos);
 }
 
 
@@ -83,7 +83,7 @@ void CGameUnitWorker::AddGoal_Building( const vector3df& pos )
 /*======================================================*/
 // 빌딩 시작하기
 /*======================================================*/
-void CGameUnitWorker::BuildingStart()
+void CGameUnitWorker::buildingStart()
 {
 //===========================================================
 //패킷 보내기(네트워크관련)
@@ -93,16 +93,16 @@ void CGameUnitWorker::BuildingStart()
 // 		SendPacketStartBuildingReq(m_pBuildRoom, this);
 // 	}
 
-	m_pBuildRoom->BuildingStart(10);
+	m_build_room->buildingStart(10);
 }
 
 
 /*======================================================*/
 // 컨트롤 종료
 /*======================================================*/
-void CGameUnitWorker::exit_control()
+void CGameUnitWorker::exitControl()
 {
-	CControllerGUI::Instance()->DisableGUI();
+	CControllerGUI::instance()->disableGui();
 }
 
 
@@ -110,28 +110,28 @@ void CGameUnitWorker::exit_control()
 /*======================================================*/
 // 컨트롤 시작
 /*======================================================*/
-void CGameUnitWorker::enter_control()
+void CGameUnitWorker::enterControl()
 {
-	CControllerGUI::Instance()->setWorkerGUI(this);
+	CControllerGUI::instance()->setWorkerGUI(this);
 }
 
 
 /*======================================================*/
 // 컨트롤 업데이트
 /*======================================================*/
-void CGameUnitWorker::update_control( CEventHandler* pReceiver )
+void CGameUnitWorker::updateControl( CEventHandler* p_receiver )
 {
-	BuildingControl(pReceiver);
+	buildingControl(p_receiver);
 
-	CollectingControl(pReceiver);
+	collectingControl(p_receiver);
 
-	if(pReceiver->isMouseROneClick() 
-		&& !m_pControlRoom 
-		&& !m_pBuildRoom 
+	if(p_receiver->isMouseROneClick() 
+		&& !m_control_room 
+		&& !m_build_room 
 		&& this->getCommandType() == com_none
-		&& !pReceiver->isCursorOnGUI())
+		&& !p_receiver->isCursorOnGUI())
 	{
-		m_pBrain->AddGoal_MoveToPosition(pReceiver->getMouseUpGroundPosition());	
+		m_brain->addGoalMoveToPosition(p_receiver->getMouseUpGroundPosition());	
 	}	 
 }
 
@@ -139,28 +139,28 @@ void CGameUnitWorker::update_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 빌딩용 컨트롤
 /*======================================================*/
-void CGameUnitWorker::BuildingControl( CEventHandler* pReceiver )
+void CGameUnitWorker::buildingControl( CEventHandler* p_receiver )
 {
-	if(m_pControlRoom && this->getCommandType() == com_building && !m_bFixRoomToGround)
+	if(m_control_room && this->getCommandType() == com_building && !m_fix_room_to_ground)
 	{
-		m_pControlRoom->FollowMouse(pReceiver);
+		m_control_room->followMouse(p_receiver);
 
-		if(m_pControlRoom->isBuildable(pReceiver->getMouseUpGroundPosition()))
+		if(m_control_room->isBuildable(p_receiver->getMouseUpGroundPosition()))
 		{
-			m_pControlRoom->setBuildableColor(true);
+			m_control_room->setBuildableColor(true);
 
-			if(pReceiver->isMouseLOneClick() && !pReceiver->isCursorOnGUI())
+			if(p_receiver->isMouseLOneClick() && !p_receiver->isCursorOnGUI())
 			{
-				m_pControlRoom->RemoveAndLinkNodes();
+				m_control_room->removeAndLinkNodes();
 
 				
 				//OnNetWorkBuildStartViewCommand(m_pControlRoom);
 
-				m_pBuildRoom = m_pControlRoom;
+				m_build_room = m_control_room;
 
 				
 
-				this->AddGoal_Building(m_pControlRoom->GetFrontPosToBuilding());
+				this->addGoalBuilding(m_control_room->getFrontPosToBuilding());
 
 				//m_pControlRoom = 0;
 				
@@ -180,10 +180,10 @@ void CGameUnitWorker::BuildingControl( CEventHandler* pReceiver )
 
 				//m_bFixRoomToGround = true;
 
-				m_pControlRoom->makeBaseGround();
-				PushControlCompletedRoom();	
+				m_control_room->makeBaseGround();
+				pushControlCompletedRoom();	
 
-				m_bFixRoomToGround = false;
+				m_fix_room_to_ground = false;
 
 				
 
@@ -196,15 +196,15 @@ void CGameUnitWorker::BuildingControl( CEventHandler* pReceiver )
 
 		}else
 		{
-			m_pControlRoom->setBuildableColor(false);			
+			m_control_room->setBuildableColor(false);			
 
 		}
 
 
 
- 		if(pReceiver->isMouseRUp())
+ 		if(p_receiver->isMouseRUp())
  		{
- 			CancelBuilding();		
+ 			cancelBuilding();		
  		}
 
 
@@ -218,11 +218,11 @@ void CGameUnitWorker::BuildingControl( CEventHandler* pReceiver )
 /*======================================================*/
 // 빌딩 추가하기
 /*======================================================*/
-void CGameUnitWorker::AddBuilding( BuildingTypes roomType )
+void CGameUnitWorker::addBuilding( BuildingTypes room_type )
 {
-	if(!m_pControlRoom && !m_pBuildRoom)
+	if(!m_control_room && !m_build_room)
 	{
-		m_pControlRoom = this->getObjectManager()->AddRoom(object_mine, roomType, 0, this);
+		m_control_room = this->getObjectManager()->addRoom(object_mine, room_type, 0, this);
 
 		this->getObjectManager()->setControlState(true);
 
@@ -237,27 +237,27 @@ void CGameUnitWorker::AddBuilding( BuildingTypes roomType )
 /*======================================================*/
 const	bool CGameUnitWorker::isBuildingCompleted() 
 {
-	return m_pBuildRoom->isBuildingCompleted();
+	return m_build_room->isBuildingCompleted();
 }
 
 
 /*======================================================*/
 // 컨트롤 완료된 룸 추가하기
 /*======================================================*/
-void CGameUnitWorker::PushControlCompletedRoom()
+void CGameUnitWorker::pushControlCompletedRoom()
 {
-	m_pBuildRoom = m_pControlRoom;	
+	m_build_room = m_control_room;	
 
-	m_pControlRoom = 0;	
+	m_control_room = 0;	
 
 	this->getObjectManager()->setControlState(false);
 
 	this->setCommandType(com_none);
 
 	
-	if(m_pBuildRoom && !isBuildingCompleted())
+	if(m_build_room && !isBuildingCompleted())
 	{
-		AddGoal_Building(m_pBuildRoom->GetFrontPosToBuilding());
+		addGoalBuilding(m_build_room->getFrontPosToBuilding());
 	}
 
 }
@@ -267,13 +267,13 @@ void CGameUnitWorker::PushControlCompletedRoom()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameUnitWorker::update(u32 timeMs)
+void CGameUnitWorker::update(u32 time_ms)
 {
-	UpdateMoveMent(timeMs);
+	updateMovement(time_ms);
 
-	UpdateBuildingRoom();
+	updateBuildingRoom();
 
-	m_pBrain->Process();
+	m_brain->process();
 
 }
 
@@ -283,9 +283,9 @@ void CGameUnitWorker::update(u32 timeMs)
 /*======================================================*/
 // 빌딩완료된 룸 빼기
 /*======================================================*/
-void CGameUnitWorker::PopBuildingCompletedRoom()
+void CGameUnitWorker::popBuildingCompletedRoom()
 {
-	m_pBuildRoom = 0;	
+	m_build_room = 0;	
 }
 
 
@@ -294,19 +294,19 @@ void CGameUnitWorker::PopBuildingCompletedRoom()
 /*======================================================*/
 // 빌딩 취소
 /*======================================================*/
-void CGameUnitWorker::CancelBuilding()
+void CGameUnitWorker::cancelBuilding()
 {
-	m_pBrain->AddGoal_MoveToPosition(this->Pos());
+	m_brain->addGoalMoveToPosition(this->getPos());
 
-	if(m_pBuildRoom)
+	if(m_build_room)
 	{
-		m_pBuildRoom->DeleteRoom();	
-		m_pBuildRoom = 0;	
+		m_build_room->deleteRoom();	
+		m_build_room = 0;	
 	}
 
 
-	if(m_pControlRoom)
-		CancelControl();
+	if(m_control_room)
+		cancelControl();
 	
 }
 
@@ -316,14 +316,14 @@ void CGameUnitWorker::CancelBuilding()
 /*======================================================*/
 // 네트워크용
 /*======================================================*/
-void CGameUnitWorker::OnNetWorkBuildCommand()
+void CGameUnitWorker::onNetworkBuildCommand()
 {
 	//m_pControlRoom->RemoveAndLinkNodes();
 	//m_pControlRoom->makeBaseGround();
-	m_pControlRoom->makeBaseGround();
-	PushControlCompletedRoom();	
+	m_control_room->makeBaseGround();
+	pushControlCompletedRoom();	
 
-	m_bFixRoomToGround = false;
+	m_fix_room_to_ground = false;
 
 	
 }
@@ -334,21 +334,21 @@ void CGameUnitWorker::OnNetWorkBuildCommand()
 /*======================================================*/
 // 네트워크용
 /*======================================================*/
-void CGameUnitWorker::OnNetWorkBuildStartCommand(u32 seconds)
+void CGameUnitWorker::onNetworkBuildStartCommand(u32 seconds)
 {
-	m_pBuildRoom->BuildingStart(seconds);
+	m_build_room->buildingStart(seconds);
 }
 
 
 /*======================================================*/
 // 빌딩 컨트롤 취소하기
 /*======================================================*/
-void CGameUnitWorker::CancelControl()
+void CGameUnitWorker::cancelControl()
 {
-	if(m_pControlRoom)
+	if(m_control_room)
 	{
-		this->getObjectManager()->DeleteRequest(m_pControlRoom->GetID());					
-		m_pControlRoom = 0;
+		this->getObjectManager()->deleteRequest(m_control_room->getId());					
+		m_control_room = 0;
 		//this->setObjectType(com_none);
 	}
 
@@ -362,44 +362,44 @@ void CGameUnitWorker::CancelControl()
 /*======================================================*/
 CGameRoom* CGameUnitWorker::getBackRoom()
 {
-	return m_pBuildRoom;
+	return m_build_room;
 }
 
 /*======================================================*/
 // 하위 목표 삭제
 /*======================================================*/
-void CGameUnitWorker::RemoveSubGoals()
+void CGameUnitWorker::removeSubGoals()
 {
-	m_pBrain->RemoveAllSubgoals();
+	m_brain->removeAllSubgoals();
 }
 
 
 /*======================================================*/
 // 채집 완료 완료
 /*======================================================*/
-void CGameUnitWorker::CollectingComplete()
+void CGameUnitWorker::collectingComplete()
 {
 
 	//네트워크관련 
 	//NetworkPacketSpace::SendCollectCompleteReqPacket(m_pProductRoom->GetID());
 	//m_pProductRoom->CollectProduct();
-	this->ObtainExp(70);
+	this->obtainExp(70);
 }
 
 
 /*======================================================*/
 // 채집 컨트롤 처리
 /*======================================================*/
-void CGameUnitWorker::CollectingControl( CEventHandler* pReceiver )
+void CGameUnitWorker::collectingControl( CEventHandler* p_receiver )
 {
 	if(this->getCommandType() == com_collection)
 	{
-		if(pReceiver->isMouseLOneClick())
+		if(p_receiver->isMouseLOneClick())
 		{	
 
 		}
 
-		else if(pReceiver->isMouseRUp())
+		else if(p_receiver->isMouseRUp())
 		{
 			this->setCommandType(com_none);
 
@@ -412,7 +412,7 @@ void CGameUnitWorker::CollectingControl( CEventHandler* pReceiver )
 /*======================================================*/
 // 워킹 애니메이션
 /*======================================================*/
-void CGameUnitWorker::WorkingAnimation(const vector3df& dir)
+void CGameUnitWorker::workingAnimation(const vector3df& dir)
 {
 
 }
@@ -420,7 +420,7 @@ void CGameUnitWorker::WorkingAnimation(const vector3df& dir)
 /*======================================================*/
 // 워킹 애니메이션 끄기
 /*======================================================*/
-void CGameUnitWorker::OffWorkingAnimation()
+void CGameUnitWorker::offWorkingAnimation()
 {
 
 }
@@ -429,38 +429,38 @@ void CGameUnitWorker::OffWorkingAnimation()
 /*======================================================*/
 // 네트워크용
 /*======================================================*/
-void CGameUnitWorker::OnNetWorkBuildStartViewCommand(CGameRoom*	pRoom )
+void CGameUnitWorker::onNetworkBuildStartViewCommand(CGameRoom*	p_room )
 {
-	m_bNetworkOnBuilding = true;
+	m_network_on_building = true;
 
-	m_vNetworkOnBuildingPos = pRoom->GetFrontPosToBuilding();
+	m_network_on_building_pos = p_room->getFrontPosToBuilding();
 }
 
 
 /*======================================================*/
 // 네트워크용
 /*======================================================*/
-void CGameUnitWorker::OnNetWorkBuildCompleteViewCommand()
+void CGameUnitWorker::onNetworkBuildCompleteViewCommand()
 {
-	m_bNetworkOnBuilding = false;
-	OffWorkingAnimation();
+	m_network_on_building = false;
+	offWorkingAnimation();
 }
 
 
 /*======================================================*/
 // 업데이트 빌딩하기
 /*======================================================*/
-void CGameUnitWorker::UpdateBuildingRoom()
+void CGameUnitWorker::updateBuildingRoom()
 {
-	if(m_bNetworkOnBuilding && getOwnerType() == object_frined)
+	if(m_network_on_building && getOwnerType() == object_frined)
 	{
-		if(this->isAtPosition(m_vNetworkOnBuildingPos))
+		if(this->isAtPosition(m_network_on_building_pos))
 		{
 
-			SetHeading((m_vNetworkOnBuildingPos - Pos()).normalize() );
+			setHeading((m_network_on_building_pos - getPos()).normalize() );
 
 
-			WorkingAnimation(vector3df(0,0,0));
+			workingAnimation(vector3df(0,0,0));
 		}
 	}
 

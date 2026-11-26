@@ -26,35 +26,35 @@ class Goal_Think : public Goal_Composite<CGameUnit >
 
 public:
 
-	Goal_Think(CGameUnit* pUnit);
+	Goal_Think(CGameUnit* p_unit);
 	~Goal_Think();
 
 	
-	void Arbitrate();
-	void EnemyInit();
-	void ArmyInit();
+	void arbitrate();
+	void enemyInit();
+	void armyInit();
 
-	bool notPresent(u32 GoalType)const;
+	bool notPresent(u32 goal_type)const;
 
-	s32  Process();
-	void Activate();
-	void Terminate(){}
+	s32  process();
+	void activate();
+	void terminate(){}
 
-	void RemoveSubGoals();
+	void removeSubGoals();
 
 	//top level goal types
-	void AddGoal_MoveToPosition(vector3df pos);
-	void AddGoal_GetItem(u32 ItemType);
-	void AddGoal_Explore();
-	void AddGoal_Die();
-	void AddGoal_Building(const vector3df& pos);
-	void AddGoal_Collecting(const vector3df& pos);
-	void AddGoal_HuntTarget();
-	void AddGoal_UnitHuntTarget();
-	void AddGoal_AttackTargetForEnemy();
-	void AddGoal_GoingHome();
-	void AddGoal_AttackTarget();
-	void QueueGoal_MoveToPosition(vector3df pos);
+	void addGoalMoveToPosition(vector3df pos);
+	void addGoalGetItem(u32 item_type);
+	void addGoalExplore();
+	void addGoalDie();
+	void addGoalBuilding(const vector3df& pos);
+	void addGoalCollecting(const vector3df& pos);
+	void addGoalHuntTarget();
+	void addGoalUnitHuntTarget();
+	void addGoalAttackTargetForEnemy();
+	void addGoalGoingHome();
+	void addGoalAttackTarget();
+	void queueGoalMoveToPosition(vector3df pos);
 
 
 };

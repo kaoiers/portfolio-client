@@ -19,9 +19,9 @@ class CGameUnitGod;
 class CUnitGodGUI : public CGameGUI
 {
 
-	CGameUnitGod*	m_pOwner;	
+	CGameUnitGod*	m_owner;	
 
-	virtual bool	interface_control(CEventHandler* pReceiver);
+	virtual bool	interfaceControl(CEventHandler* p_receiver);
 
 public :
 
@@ -30,9 +30,9 @@ public :
 
 	virtual	~CUnitGodGUI() {};
 
-	virtual void	GUI_Initialize(){}
+	virtual void	guiInitialize(){}
 
-	virtual void	SetOwner(CGameObject *obj);
+	virtual void	setOwner(CGameObject *obj);
 };
 
 

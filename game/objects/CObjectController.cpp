@@ -30,7 +30,7 @@ CObjectController*		CObjectController::instance = NULL;
 
 
 
-CObjectController::CObjectController() : m_pController(0), m_pOwner(0), m_bControlState(0), m_pPlugInParticle(0)
+CObjectController::CObjectController() : m_controller(0), m_owner(0), m_control_state(0), m_plug_in_particle(0)
 {
 
 	
@@ -58,7 +58,7 @@ CObjectController::CObjectController() : m_pController(0), m_pOwner(0), m_bContr
 /*======================================================*/
 // 인스턴트
 /*======================================================*/
-CObjectController* CObjectController::GetInstance()
+CObjectController* CObjectController::getInstance()
 {
 	return instance;
 }
@@ -67,25 +67,25 @@ CObjectController* CObjectController::GetInstance()
 /*======================================================*/
 // 컨트롤 설정
 /*======================================================*/
-void CObjectController::setController( IBaseController * pController )
+void CObjectController::setController( IBaseController * p_controller )
 {
-	if( m_pController != pController)
+	if( m_controller != p_controller)
 	{
-		if(m_pController)
+		if(m_controller)
 		{
-			m_pController->exit_control();
-			CControllerGUI::Instance()->DisableGUI();
+			m_controller->exitControl();
+			CControllerGUI::instance()->disableGui();
 		}
 
-		m_pController = pController;
+		m_controller = p_controller;
 
-		pController->enter_control();	
+		p_controller->enterControl();	
 
-		m_pOwner = dynamic_cast<CGameObject *>(m_pController);		
+		m_owner = dynamic_cast<CGameObject *>(m_controller);		
 
-		CommonEnterControlForType(m_pOwner->getObjectType());
+		commonEnterControlForType(m_owner->getObjectType());
 
-		m_bControlState = false;
+		m_control_state = false;
 	}
 }
 
@@ -95,11 +95,11 @@ void CObjectController::setController( IBaseController * pController )
 /*======================================================*/
 void CObjectController::update()
 {
-	if(m_pController)
+	if(m_controller)
 	{
-		CommonUpdateControlForType(m_pOwner->getObjectType());
+		commonUpdateControlForType(m_owner->getObjectType());
 
-		m_pController->update_control(CAppContext::GetGodGame()->getEventHandler());
+		m_controller->updateControl(CAppContext::getGodGame()->getEventHandler());
 
 
 	}
@@ -109,14 +109,14 @@ void CObjectController::update()
 /*======================================================*/
 // 컨트롤 중인지
 /*======================================================*/
-bool CObjectController::IsOnControlState() const
+bool CObjectController::isOnControlState() const
 {
-	if(m_pController == 0)
+	if(m_controller == 0)
 	{
 		return false;		
 	}
 
-	CGameObject* obj = dynamic_cast<CGameObject *>(m_pController);
+	CGameObject* obj = dynamic_cast<CGameObject *>(m_controller);
 
 	if(obj->getCommandType() != com_none)
 	{
@@ -132,14 +132,14 @@ bool CObjectController::IsOnControlState() const
 /*======================================================*/
 bool CObjectController::isPossessed( CGameObject * obj )
 {
-	return (m_pOwner == obj);
+	return (m_owner == obj);
 }
 
 
 /*======================================================*/
 // 타입마다 컨트롤 설정
 /*======================================================*/
-void CObjectController::CommonEnterControlForType( const u32 type )
+void CObjectController::commonEnterControlForType( const u32 type )
 {
 	switch(type)
 	{
@@ -163,7 +163,7 @@ void CObjectController::CommonEnterControlForType( const u32 type )
 /*======================================================*/
 // 컨트롤별 컨트롤 업데이트
 /*======================================================*/
-void CObjectController::CommonUpdateControlForType( const u32 type )
+void CObjectController::commonUpdateControlForType( const u32 type )
 {
 	switch(type)
 	{
@@ -186,18 +186,18 @@ void CObjectController::CommonUpdateControlForType( const u32 type )
 /*======================================================*/
 // 컨트롤러 무효화
 /*======================================================*/
-void CObjectController::NullifyController()
+void CObjectController::nullifyController()
 {
-	if(m_pController)
+	if(m_controller)
 	{
-		m_pController->exit_control();
+		m_controller->exitControl();
 
-		m_pOwner = 0;
+		m_owner = 0;
 	}
 
-	CControllerGUI::Instance()->DisableGUI();
+	CControllerGUI::instance()->disableGui();
 
 
-	m_pController = 0;
+	m_controller = 0;
 
 }

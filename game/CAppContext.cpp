@@ -18,24 +18,24 @@
 /*======================================================*/
 // 게임 인스턴스 가져오기
 /*======================================================*/
-God_Game* CAppContext::GetGodGame()
+God_Game* CAppContext::getGodGame()
 {
-	return God_Game::GetInstance();
+	return God_Game::getInstance();
 }
 
 
 /*======================================================*/
 // 옵션 정보 가져오기
 /*======================================================*/
-CGodOption* CAppContext::GetGodOption()
+CGodOption* CAppContext::getGodOption()
 {
-	return CGodOption::GetInstance();
+	return CGodOption::getInstance();
 }
 
 /*======================================================*/
 // 그림용 인스턴스 가져오기
 /*======================================================*/
-CShapeDrawer* CAppContext::GetShapeDrawer()
+CShapeDrawer* CAppContext::getShapeDrawer()
 {
 	return nullptr;
 

@@ -22,7 +22,7 @@
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CEnemyGenerator::Initialize()
+void CEnemyGenerator::initialize()
 {
 
 }
@@ -34,25 +34,25 @@ void CEnemyGenerator::Initialize()
 /*======================================================*/
 // 적군 생성하기
 /*======================================================*/
-CGameUnitEnemy* CEnemyGenerator::GenerateEnemy()
+CGameUnitEnemy* CEnemyGenerator::generateEnemy()
 {
-	s32 DIstanceOffset = s32(m_lEnemyGenerateLine.getLength());
+	s32 distance_offset = s32(m_enemy_generate_line.getLength());
 
-	DIstanceOffset = rand() % DIstanceOffset;
+	distance_offset = rand() % distance_offset;
 		 
- 	vector3df GeneratePos = m_lEnemyGenerateLine.start + 
-		(vector3df(1,0,0) * f32(DIstanceOffset) );
+ 	vector3df generate_pos = m_enemy_generate_line.start + 
+		(vector3df(1,0,0) * f32(distance_offset) );
 
-	GeneratePos.Y = 0.0f;
+	generate_pos.Y = 0.0f;
 
-		CGameUnitEnemy*	pEnemy = m_pGameMap->getObjectManager()->AddUnitEnemy(GeneratePos, this);
+		CGameUnitEnemy*	p_enemy = m_game_map->getObjectManager()->addUnitEnemy(generate_pos, this);
 	 
-		vector3df vDestination = vector3df(0, 0, 
-			m_pGameMap->getTopLeftUsablePos().Z);
+		vector3df v_destination = vector3df(0, 0, 
+			m_game_map->getTopLeftUsablePos().Z);
 
-		pEnemy->AddGoal_MoveToPosition(vDestination);
+		p_enemy->addGoalMoveToPosition(v_destination);
 
-		m_pEnemy = pEnemy;
+		m_enemy = p_enemy;
 
 
 	return NULL;	
@@ -60,16 +60,16 @@ CGameUnitEnemy* CEnemyGenerator::GenerateEnemy()
 
 
 
-CEnemyGenerator::CEnemyGenerator(CGameMap * pMap, const u32 EnemyGeneratePeriod, const u32 EnemyApperPeriod, const u32 EnemyMaxCounts) 
-	: m_pGameMap(pMap)
+CEnemyGenerator::CEnemyGenerator(CGameMap * p_map, const u32 enemy_generate_period, const u32 enemy_appear_period, const u32 enemy_max_counts) 
+	: m_game_map(p_map)
 {
 		srand((s32)time(NULL));
 
-		vector3df tl = m_pGameMap->getTopLeftUsablePos();
-		vector3df br = m_pGameMap->getBottomRightUsablePos();
+		vector3df tl = m_game_map->getTopLeftUsablePos();
+		vector3df br = m_game_map->getBottomRightUsablePos();
 
-		m_lEnemyGenerateLine.start = vector3df(tl.X, 0.0f, br.Z);
-		m_lEnemyGenerateLine.end = vector3df(br.X, 0.0f, br.Z);
+		m_enemy_generate_line.start = vector3df(tl.X, 0.0f, br.Z);
+		m_enemy_generate_line.end = vector3df(br.X, 0.0f, br.Z);
 }
 
 CEnemyGenerator::~CEnemyGenerator()
@@ -88,7 +88,7 @@ CEnemyGenerator::~CEnemyGenerator()
 /*======================================================*/
 bool CEnemyGenerator::isInGenerate()
 {
-	return (!m_bCompleteWave);
+	return (!m_complete_wave);
 }
 
 
@@ -99,11 +99,11 @@ bool CEnemyGenerator::isInGenerate()
 /*======================================================*/
 void CEnemyGenerator::addDeadCount()
 {
-	m_uDeadEnemies--;	
+	m_dead_enemies--;	
 
-	if(m_uDeadEnemies == 0)
+	if(m_dead_enemies == 0)
 	{
-		m_bCompleteWave = true;
+		m_complete_wave = true;
 
 	}
 }

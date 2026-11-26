@@ -23,10 +23,10 @@ class IBaseController
 
 public :
 
-	virtual void	enter_control() = 0;
-	virtual void	update_control(CEventHandler* pReceiver) = 0;
-	virtual void	exit_control() = 0;	
-	virtual	void	OnCommand() = 0;
+	virtual void	enterControl() = 0;
+	virtual void	updateControl(CEventHandler* p_receiver) = 0;
+	virtual void	exitControl() = 0;	
+	virtual	void	onCommand() = 0;
 	//virtual	void	update(const u32 timeMs) = 0;
 
 

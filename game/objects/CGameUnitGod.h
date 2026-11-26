@@ -19,36 +19,36 @@ class Regulator;
 
 class CGameUnitGod : public CGameUnit
 {
-	virtual		void		PrivateInitialize();
+	virtual		void		privateInitialize();
 
-	bool					m_bMoveFlag;
+	bool					m_move_flag;
 
-	bool					m_bCommandNone;
+	bool					m_command_none;
 
-	Regulator*				m_pArbitrateRegulator;
-
-public :
-
-	virtual		void		control(CEventHandler* pReceiver) {};
-
-	virtual		void		OnCommand() {};
-
-	virtual		void		update(u32 timeMs);
-
-	virtual		bool		short_attack(CGameUnit* pTarget); 
-
-	virtual		bool		long_attack(CGameUnit*	pTarget) { return false; } 
-
-	virtual		void		enter_control();
-
-	virtual		void			update_control(CEventHandler* pReceiver);
-
-	virtual		void			exit_control(){};	
-
+	Regulator*				m_arbitrate_regulator;
 
 public :
 
-	void					Arbitrate();
+	virtual		void		control(CEventHandler* p_receiver) {};
+
+	virtual		void		onCommand() {};
+
+	virtual		void		update(u32 time_ms);
+
+	virtual		bool		shortAttack(CGameUnit* p_target); 
+
+	virtual		bool		longAttack(CGameUnit*	p_target) { return false; } 
+
+	virtual		void		enterControl();
+
+	virtual		void			updateControl(CEventHandler* p_receiver);
+
+	virtual		void			exitControl(){};	
+
+
+public :
+
+	void					arbitrate();
 
 	CGameUnitGod(OwnerType owner, u32 obj_id, u32 objtype,
 		const UNIT_RESOURCE* resource, 

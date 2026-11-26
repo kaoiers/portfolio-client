@@ -26,7 +26,7 @@ class CGameObject;
 
 
 //to make life easier...
-#define Dispatcher MessageDispatcher::Instance()
+#define Dispatcher MessageDispatcher::getInstance()
 
 //to make code easier to read
 const double SEND_MSG_IMMEDIATELY = 0.0;
@@ -41,12 +41,12 @@ private:
   //a std::set is used as the container for the delayed messages
   //because of the benefit of automatic sorting and avoidance
   //of duplicates. Messages are sorted by their dispatch time.
-  std::set<Telegram> PriorityQ;
+  std::set<Telegram> priority_q;
 
   //this method is utilized by DispatchMsg or DispatchDelayedMessages.
   //This method calls the message handling member function of the receiving
   //entity, pReceiver, with the newly created telegram
-  void Discharge(CGameObject* pReceiver, const Telegram& msg);
+  void discharge(CGameObject* p_receiver, const Telegram& msg);
 
   MessageDispatcher(){}
 
@@ -56,23 +56,23 @@ private:
 
 public:
 
-  static MessageDispatcher* Instance();
+  static MessageDispatcher* getInstance();
 
   //send a message to another agent. Receiving agent is referenced by ID.
-  void DispatchMsg(double      delay,
+  void dispatchMsg(double      delay,
                    s32         sender,
                    s32         receiver,
                    s32         msg,
-                   void*       ExtraInfo);
+                   void*       extra_info);
 
   //send out any delayed messages. This method is called each time through   
   //the main game loop.
-  void DispatchDelayedMessages();
+  void dispatchDelayedMessages();
 
-  void DispatchMessageToAllObjects(double      delay,
+  void dispatchMessageToAllObjects(double      delay,
 	  s32         sender,
 	  s32         msg,
-	  void*       ExtraInfo);
+	  void*       extra_info);
 
 
 };

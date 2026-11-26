@@ -24,29 +24,29 @@ class Goal_SeekToPosition : public Goal<CGameUnit>
 private:
 
 	//the position the bot is moving to
-	vector3df	m_vPosition;
+	vector3df	m_position;
 
 	//the approximate time the bot should take to travel the target location
-	double					m_dTimeToReachPos;
+	double					m_time_to_reach_pos;
 
 	//this records the time this goal was activated
-	double					m_dStartTime;
+	double					m_start_time;
 
-	Regulator*				m_pUpdateSendMovePacketRegulator;
+	Regulator*				m_update_send_move_packet_regulator;
 
 	//returns true if a bot gets stuck
 	bool      isStuck()const;
 
-	bool		StopSeeking();
+	bool		stopSeeking();
 
 public:
 
-	Goal_SeekToPosition(CGameUnit* pUnit, vector3df target);
+	Goal_SeekToPosition(CGameUnit* p_unit, vector3df target);
 
 	//the usual suspects
-	void Activate();
-	s32  Process();
-	void Terminate();
+	void activate();
+	s32  process();
+	void terminate();
 	
 };
 

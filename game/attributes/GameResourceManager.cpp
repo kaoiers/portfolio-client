@@ -16,22 +16,22 @@
 
 
 
-CGameResourceManager* CGameResourceManager::m_pInstance = NULL;
+CGameResourceManager* CGameResourceManager::m_instance = NULL;
 
-CGameResourceManager::CGameResourceManager(u32 unitLimits) : m_pGameGlobalResource(new GlobalResource()), 
-m_iFlag(0), 
-TimeDescendentInterval(5), 
-LastUpdatedTime(0),
-m_uCurrentPlayerLevel(1),
-m_uCurrentPlayerExp(0),
-m_uUnitCounts(0),
-m_uInitialExp(100),
-m_uTotalUnitCounts(unitLimits)
+CGameResourceManager::CGameResourceManager(u32 unit_limits) : m_game_global_resource(new GlobalResource()), 
+m_flag(0), 
+time_descendent_interval(5), 
+last_updated_time(0),
+m_current_player_level(1),
+m_current_player_exp(0),
+m_unit_counts(0),
+m_initial_exp(100),
+m_total_unit_counts(unit_limits)
 {
 
 
 
-	m_pInstance = this;
+	m_instance = this;
 }
 
 
@@ -40,7 +40,7 @@ m_uTotalUnitCounts(unitLimits)
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CGameResourceManager::Init()
+void CGameResourceManager::init()
 {
 
 
@@ -50,16 +50,16 @@ void CGameResourceManager::Init()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameResourceManager::update(u32 timeMs )
+void CGameResourceManager::update(u32 time_ms )
 {
-	if(!IsAllResourcesSetting())
+	if(!isAllResourcesSetting())
 	{
-		if(timeMs >= LastUpdatedTime + TimeDescendentInterval)
+		if(time_ms >= last_updated_time + time_descendent_interval)
 		{
-			LastUpdatedTime = timeMs;
+			last_updated_time = time_ms;
 
-			IncreaseStatusCycle();
-			DecreaseStatusCycle();		
+			increaseStatusCycle();
+			decreaseStatusCycle();		
 		}
 	}
 
@@ -71,22 +71,22 @@ void CGameResourceManager::update(u32 timeMs )
 /*======================================================*/
 // 목표 수치 표시 증기 시키기 
 /*======================================================*/
-void CGameResourceManager::IncreaseStatusCycle()
+void CGameResourceManager::increaseStatusCycle()
 {
 
-	if(m_pGameGlobalResource->crop < CurrentCrop)
+	if(m_game_global_resource->crop < current_crop)
 	{
-		CurrentCrop--;
+		current_crop--;
 	}
 
-	if(m_pGameGlobalResource->lumber < CurrentWood)
+	if(m_game_global_resource->lumber < current_wood)
 	{
-		CurrentWood--;
+		current_wood--;
 	}
 
-	if(m_pGameGlobalResource->stone < CurrentStone)
+	if(m_game_global_resource->stone < current_stone)
 	{
-		CurrentStone--;
+		current_stone--;
 	}
 }
 
@@ -94,32 +94,32 @@ void CGameResourceManager::IncreaseStatusCycle()
 /*======================================================*/
 // 목표 수치 표시 감소 시키기
 /*======================================================*/
-void CGameResourceManager::DecreaseStatusCycle()
+void CGameResourceManager::decreaseStatusCycle()
 {
-	if(m_pGameGlobalResource->crop > CurrentCrop)
+	if(m_game_global_resource->crop > current_crop)
 	{
-		CurrentCrop++;
+		current_crop++;
 	}
 
-	if(m_pGameGlobalResource->lumber > CurrentWood)
+	if(m_game_global_resource->lumber > current_wood)
 	{
-		CurrentWood++;
+		current_wood++;
 	}
 
-	if(m_pGameGlobalResource->stone > CurrentStone)
+	if(m_game_global_resource->stone > current_stone)
 	{
-		CurrentStone++;
+		current_stone++;
 	}
 }
 
 /*======================================================*/
 // 모든 수치들이 목표 수치로 세팅 되었는지
 /*======================================================*/
-bool CGameResourceManager::IsAllResourcesSetting() const
+bool CGameResourceManager::isAllResourcesSetting() const
 {
-	return !((m_pGameGlobalResource->stone != CurrentStone) 
-		|| (m_pGameGlobalResource->lumber != CurrentWood) 
-		|| (m_pGameGlobalResource->crop != CurrentCrop));
+	return !((m_game_global_resource->stone != current_stone) 
+		|| (m_game_global_resource->lumber != current_wood) 
+		|| (m_game_global_resource->crop != current_crop));
 
 }
 
@@ -127,17 +127,17 @@ bool CGameResourceManager::IsAllResourcesSetting() const
 /*======================================================*/
 // 경험치 추가하기
 /*======================================================*/
-void CGameResourceManager::AddPlayerExp( u32 exp )
+void CGameResourceManager::addPlayerExp( u32 exp )
 {
-	if(CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_game ||
-		CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_intro
+	if(CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_game ||
+		CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_intro
 		)
 	{
-		IncreaseExp(exp);
-		CMainGameGUI* pGUI = CMainGameGUI::GetInstance();
-		f32 a = f32(s32(m_uCurrentPlayerExp));
-		f32 b = f32(getMaxPlayerExp(m_uCurrentPlayerLevel));
-		pGUI->setLevelStatus( a/b , m_uCurrentPlayerLevel);		
+		increaseExp(exp);
+		CMainGameGUI* p_gui = CMainGameGUI::getInstance();
+		f32 a = f32(s32(m_current_player_exp));
+		f32 b = f32(getMaxPlayerExp(m_current_player_level));
+		p_gui->setLevelStatus( a/b , m_current_player_level);		
 	}
 }
 
@@ -145,23 +145,23 @@ void CGameResourceManager::AddPlayerExp( u32 exp )
 /*======================================================*/
 // 경험치 추가하기
 /*======================================================*/
-void CGameResourceManager::IncreaseExp( u32 exp )
+void CGameResourceManager::increaseExp( u32 exp )
 {
-	u32 maxExp =  getMaxPlayerExp(m_uCurrentPlayerLevel);
+	u32 max_exp =  getMaxPlayerExp(m_current_player_level);
 
-	u32 tempExp = m_uCurrentPlayerExp + exp;
+	u32 temp_exp = m_current_player_exp + exp;
 
-	if(maxExp <= tempExp)
+	if(max_exp <= temp_exp)
 	{
-		m_uCurrentPlayerLevel++;
-		m_uCurrentPlayerExp = 0;
-		IncreaseExp((tempExp - maxExp));
+		m_current_player_level++;
+		m_current_player_exp = 0;
+		increaseExp((temp_exp - max_exp));
 		
 	}
 	
 	else
 	{
-		m_uCurrentPlayerExp = tempExp;
+		m_current_player_exp = temp_exp;
 	}
 
 	
@@ -177,7 +177,7 @@ u32 CGameResourceManager::getMaxPlayerExp(u32 level)
 	if(level == 0)
 		return 0;
 
-	return (100 * u32(pow(double(level), 1.2)) + m_uInitialExp);
+	return (100 * u32(pow(double(level), 1.2)) + m_initial_exp);
 }
 
 
@@ -185,7 +185,7 @@ u32 CGameResourceManager::getMaxPlayerExp(u32 level)
 /*======================================================*/
 // 네트워크용 
 /*======================================================*/
-void CGameResourceManager::OnNetworkSetResources(u32 crop,
+void CGameResourceManager::onNetworkSetResources(u32 crop,
 												 u32 woods,
 												 u32 gold )
 {
@@ -194,7 +194,7 @@ void CGameResourceManager::OnNetworkSetResources(u32 crop,
 	temp.lumber = woods;
 	temp.stone = gold;
 
-	(*m_pGameGlobalResource) = temp;
+	(*m_game_global_resource) = temp;
 
 	//printf("[리소스]진짜 보내주나??\n");
 }
@@ -205,7 +205,7 @@ void CGameResourceManager::OnNetworkSetResources(u32 crop,
 /*======================================================*/
 bool CGameResourceManager::isOnMyGame()
 {
-	return (CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_game);
+	return (CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_game);
 
 }
 
@@ -216,7 +216,7 @@ bool CGameResourceManager::isOnMyGame()
 /*======================================================*/
 void CGameResourceManager::addUnitCounts()
 {
-	m_uUnitCounts++;
+	m_unit_counts++;
 
 }
 
@@ -224,7 +224,7 @@ void CGameResourceManager::addUnitCounts()
 /*======================================================*/
 // 유닛 수 빼기
 /*======================================================*/
-void CGameResourceManager::SubstractUnitCounts()
+void CGameResourceManager::subtractUnitCounts()
 {
-	m_uUnitCounts--;
+	m_unit_counts--;
 }

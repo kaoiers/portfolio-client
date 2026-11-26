@@ -25,13 +25,13 @@ class CParticleManager;
 
 class CObjectController : public UnCopyable
 {
-	IBaseController*							m_pController;
+	IBaseController*							m_controller;
 
-	CParticleManager*							m_pPlugInParticle;
+	CParticleManager*							m_plug_in_particle;
 
-	CGameObject*								m_pOwner;
+	CGameObject*								m_owner;
 
-	bool										m_bControlState;
+	bool										m_control_state;
 
 
 	static				CObjectController*		instance;
@@ -42,31 +42,31 @@ class CObjectController : public UnCopyable
 
 public :
 
-	static				CObjectController*		GetInstance();
+	static				CObjectController*		getInstance();
 	
 	CObjectController();
 	~CObjectController() {};
 
-	void				setController(IBaseController * pController);
+	void				setController(IBaseController * p_controller);
 
-	void				NullifyController();
+	void				nullifyController();
 
-	CGameObject*		getOwner() { return m_pOwner; }
+	CGameObject*		getOwner() { return m_owner; }
 
-	IBaseController*	getController() const { return m_pController; }
+	IBaseController*	getController() const { return m_controller; }
 
 	void				getMouseClicked(); 	
 
 	bool				isPossessed(CGameObject * obj);
 
-	bool				IsOnControlState() const;
+	bool				isOnControlState() const;
 
-	void				setControlState(const bool state) { m_bControlState = state;}
+	void				setControlState(const bool state) { m_control_state = state;}
 
 	void				update();
 
-	void				CommonEnterControlForType(const u32 type);
-	void				CommonUpdateControlForType(const u32 type);
+	void				commonEnterControlForType(const u32 type);
+	void				commonUpdateControlForType(const u32 type);
 
 
 };

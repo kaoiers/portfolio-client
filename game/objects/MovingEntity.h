@@ -22,25 +22,25 @@ enum {clockwise = 1, anticlockwise = -1};
 class MovingEntity :public CGameObject
 {
 
-#define Node GetSceneNode()
+#define Node getSceneNode()
 
 protected:
  
-  vector3df		m_vVelocity;
+  vector3df		m_velocity;
 
-  f32				m_dMass;
+  f32				m_movement_mass;
  
-  f32				m_dMaxSpeed;
+  f32				m_movement_max_speed;
  
-  f32				m_dMaxForce;
+  f32				m_movement_max_force;
  
-  f32				m_dMaxTurnRate;
+  f32				m_max_turn_rate;
 
-  f32				m_dBoundingRadius;
+  f32				m_bounding_radius;
 
-  f32				m_dNormalSpeed;
+  f32				m_movement_normal_speed;
 
-  u32				m_uLastUpdatedTime;
+  u32				m_last_updated_time;
 
 public:
 
@@ -54,12 +54,12 @@ public:
 		const	vector3df& rot,
 		const	vector3df& scale)
 		:CGameObject(owner, objtype, pos, rot, scale),
-		m_dMass(mass),
-		m_dMaxSpeed(max_speed),
-		m_dMaxTurnRate(turn_rate),
-		m_dMaxForce(max_force),
-		m_dNormalSpeed(nspeed),
-		m_uLastUpdatedTime(0)
+		m_movement_mass(mass),
+		m_movement_max_speed(max_speed),
+		m_max_turn_rate(turn_rate),
+		m_movement_max_force(max_force),
+		m_movement_normal_speed(nspeed),
+		m_last_updated_time(0)
   {
     
     	
@@ -76,12 +76,12 @@ MovingEntity(OwnerType owner,u32 obj_id,
 			 const	vector3df& rot,
 			 const	vector3df& scale)
 			 :CGameObject(owner, obj_id, objtype, pos, rot, scale),
-			 m_dMass(mass),
-			 m_dMaxSpeed(max_speed),
-			 m_dMaxTurnRate(turn_rate),
-			 m_dMaxForce(max_force),
-			 m_dNormalSpeed(nspeed),
-			 m_uLastUpdatedTime(0)
+			 m_movement_mass(mass),
+			 m_movement_max_speed(max_speed),
+			 m_max_turn_rate(turn_rate),
+			 m_movement_max_force(max_force),
+			 m_movement_normal_speed(nspeed),
+			 m_last_updated_time(0)
 {
 
 
@@ -95,45 +95,45 @@ MovingEntity(OwnerType owner,u32 obj_id,
 
   virtual	void				render(){};
 
-  virtual	void				OnCommand(){};
+  virtual	void				onCommand(){};
 
-  virtual	void				update(u32 timeMs){};
+  virtual	void				update(u32 time_ms){};
 
  
   //accessors
-  vector3df Velocity()const{return m_vVelocity;}
-  void      SetVelocity(const vector3df& NewVel){m_vVelocity = NewVel;}
+  vector3df getVelocity()const{return m_velocity;}
+  void      setVelocity(const vector3df& new_vel){m_velocity = new_vel;}
   
-  f32  GetMass()const{return m_dMass;}
+  f32  getMass()const{return m_movement_mass;}
 
-  vector3df Pos() {return vector3df(0,0,0); }
-  void		SetPos(vector3df& pos) { }
+  vector3df getPos() {return vector3df(0,0,0); }
+  void		setPos(vector3df& pos) { }
 
 
-  f32	GetNormalSpeed() const {return m_dNormalSpeed; }
+  f32	getNormalSpeed() const {return m_movement_normal_speed; }
 
   
-  vector3df Side(); 
+  vector3df getSide(); 
 
-  f32  MaxSpeed()const{return m_dMaxSpeed;}                       
-  void      SetMaxSpeed(f32 new_speed){m_dMaxSpeed = new_speed;}
+  f32  maxSpeed()const{return m_movement_max_speed;}                       
+  void      setMaxSpeed(f32 new_speed){m_movement_max_speed = new_speed;}
   
-  f32  MaxForce()const{return m_dMaxForce;}
-  void      SetMaxForce(f32 mf){m_dMaxForce = mf;}
+  f32  maxForce()const{return m_movement_max_force;}
+  void      setMaxForce(f32 mf){m_movement_max_force = mf;}
 
-  bool      IsSpeedMaxedOut()const{return m_dMaxSpeed*m_dMaxSpeed >= m_vVelocity.getLength();}
-  f32  Speed()const{return m_vVelocity.getLength();}
-  f32  GetSpeedSq()const{return m_vVelocity.getLength();}
+  bool      isSpeedMaxedOut()const{return m_movement_max_speed*m_movement_max_speed >= m_velocity.getLength();}
+  f32  getSpeed()const{return m_velocity.getLength();}
+  f32  getSpeedSq()const{return m_velocity.getLength();}
   
-  vector3df Heading();
-  void      SetHeading(const vector3df& new_heading);
-  bool      RotateHeadingToFacePosition(vector3df target);
+  vector3df getHeading();
+  void      setHeading(const vector3df& new_heading);
+  bool      rotateHeadingToFacePosition(vector3df target);
 
-  f32  GetMaxTurnRate()const{return m_dMaxTurnRate;}
-  void      SetMaxTurnRate(f32 val){m_dMaxTurnRate = val;}
+  f32  getMaxTurnRate()const{return m_max_turn_rate;}
+  void      setMaxTurnRate(f32 val){m_max_turn_rate = val;}
 
 
-  inline	double	CalculateTimeToReachPosition(vector3df& pos);
+  inline	double	calculateTimeToReachPosition(vector3df& pos);
   inline	bool	isAtPosition(const vector3df& pos);
 
   
@@ -143,7 +143,7 @@ MovingEntity(OwnerType owner,u32 obj_id,
 /*======================================================*/
 // 전방을 목표방향으로 돌리기
 /*======================================================*/
-inline bool MovingEntity::RotateHeadingToFacePosition(vector3df target)
+inline bool MovingEntity::rotateHeadingToFacePosition(vector3df target)
 {
   
   
@@ -154,16 +154,16 @@ inline bool MovingEntity::RotateHeadingToFacePosition(vector3df target)
 /*======================================================*/
 // 전방을 목표방향으로 바꾸기
 /*======================================================*/
-inline void MovingEntity::SetHeading(const vector3df& new_heading)
+inline void MovingEntity::setHeading(const vector3df& new_heading)
 {
 
 	vector3df offset = new_heading;// - Pos();
 
 	offset.normalize();
 
-	vector3df nodeRotation = offset;
+	vector3df node_rotation = offset;
 	 
-	nodeRotation.X = 0.0f;
+	node_rotation.X = 0.0f;
 	 
 
   //the side vector must always be perpendicular to the heading
@@ -174,7 +174,7 @@ inline void MovingEntity::SetHeading(const vector3df& new_heading)
 /*======================================================*/
 // 전방 벡터 가져오기
 /*======================================================*/
-inline vector3df MovingEntity::Heading() 
+inline vector3df MovingEntity::getHeading() 
 {
 
 
@@ -189,7 +189,7 @@ inline vector3df MovingEntity::Heading()
 /*======================================================*/
 // 사이드 벡터 가져오기
 /*======================================================*/
-inline vector3df MovingEntity::Side() 
+inline vector3df MovingEntity::getSide() 
 {
 	
 	vector3df vside(0, 1, 2); 
@@ -203,9 +203,9 @@ inline vector3df MovingEntity::Side()
 /*======================================================*/
 // 포지션에 도달할 수 있는 시간 구하기
 /*======================================================*/
-inline double MovingEntity::CalculateTimeToReachPosition( vector3df& pos )
+inline double MovingEntity::calculateTimeToReachPosition( vector3df& pos )
 {
-	return ((Pos() -pos).getLength()) / (MaxSpeed());
+	return ((getPos() -pos).getLength()) / (maxSpeed());
 }
 
 
@@ -216,7 +216,7 @@ inline	bool MovingEntity::isAtPosition(const vector3df& pos)
 {
 	const static double tolerance = 10;
 
-	return (Pos() - pos).getLength() < (tolerance * tolerance);
+	return (getPos() - pos).getLength() < (tolerance * tolerance);
 }
 
 

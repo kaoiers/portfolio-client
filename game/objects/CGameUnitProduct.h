@@ -18,25 +18,25 @@
 class CGameUnitProduct
 {
 
-	CGameRoomWaiting*	m_pWaitingRoom;
-	UnitTypes			m_CurrentUnitType;
-	u32		m_uDestinationTime;
-	u32		m_uProductTIme;
-	f32			m_fPercentage;
+	CGameRoomWaiting*	m_waiting_room;
+	UnitTypes			m_current_unit_type;
+	u32		m_destination_time;
+	u32		m_product_duration;
+	f32			m_percentage;
 
-	void		CompleteProcessing();
+	void		completeProcessing();
 
 public :
 
-	void				BeginProcessing(UnitTypes Type);
-	void				UpdateProcessing(u32 Ms);
-	void				CancelProcessing();
-	f32		getPercentage() { return m_fPercentage; }
+	void				beginProcessing(UnitTypes type);
+	void				updateProcessing(u32 ms);
+	void				cancelProcessing();
+	f32		getPercentage() { return m_percentage; }
 
-	bool				isOnProcessing() { return (m_uDestinationTime > 0); }
+	bool				isOnProcessing() { return (m_destination_time > 0); }
 	
 
-	CGameUnitProduct(CGameRoomWaiting* pRoom ) :m_pWaitingRoom(pRoom), m_CurrentUnitType(UNIT_COUNTS), m_uDestinationTime(0),m_uProductTIme(0),m_fPercentage(0) {}
+	CGameUnitProduct(CGameRoomWaiting* p_room ) :m_waiting_room(p_room), m_current_unit_type(UNIT_COUNTS), m_destination_time(0),m_product_duration(0),m_percentage(0) {}
 	~CGameUnitProduct(){};
 };
 
@@ -44,12 +44,12 @@ public :
 /*======================================================*/
 // 유닛 생성시 처리
 /*======================================================*/
-inline void CGameUnitProduct::BeginProcessing( UnitTypes Type )
+inline void CGameUnitProduct::beginProcessing( UnitTypes type )
 {
-	m_CurrentUnitType = Type;
+	m_current_unit_type = type;
 	
 
-	m_uProductTIme *= 1000;
+	m_product_duration *= 1000;
 
 }
 
@@ -57,17 +57,17 @@ inline void CGameUnitProduct::BeginProcessing( UnitTypes Type )
 /*======================================================*/
 // 유닛 생성과정 업데이트
 /*======================================================*/
-inline void CGameUnitProduct::UpdateProcessing( u32 currentTime )
+inline void CGameUnitProduct::updateProcessing( u32 current_time )
 {
-	if(m_uDestinationTime > 0)
+	if(m_destination_time > 0)
 	{
-		if(currentTime >= m_uDestinationTime )
+		if(current_time >= m_destination_time )
 		{
-			CompleteProcessing();
+			completeProcessing();
 
 		}
 
-		m_fPercentage =  f32(m_uDestinationTime - currentTime)/f32(m_uProductTIme); 		
+		m_percentage =  f32(m_destination_time - current_time)/f32(m_product_duration); 		
 	}
 
 }
@@ -76,27 +76,27 @@ inline void CGameUnitProduct::UpdateProcessing( u32 currentTime )
 /*======================================================*/
 // 프로세싱 완료시 처리
 /*======================================================*/
-inline void CGameUnitProduct::CompleteProcessing()
+inline void CGameUnitProduct::completeProcessing()
 {
-	m_pWaitingRoom->CreateArmy(m_CurrentUnitType);
-	m_pWaitingRoom->HideProcessing();
-	m_uDestinationTime = 0;
-	m_uProductTIme = 0;
-	m_fPercentage = 0.0f;
-	m_CurrentUnitType = UNIT_COUNTS;
+	m_waiting_room->createArmy(m_current_unit_type);
+	m_waiting_room->hideProcessing();
+	m_destination_time = 0;
+	m_product_duration = 0;
+	m_percentage = 0.0f;
+	m_current_unit_type = UNIT_COUNTS;
 }
 
 
 /*======================================================*/
 // 유닛 생산 처리 중지하기
 /*======================================================*/
-inline void CGameUnitProduct::CancelProcessing()
+inline void CGameUnitProduct::cancelProcessing()
 {
-	m_pWaitingRoom->HideProcessing();
-	m_uDestinationTime = 0;
-	m_uProductTIme = 0;
-	m_fPercentage = 0.0f;
-	m_CurrentUnitType = UNIT_COUNTS;
+	m_waiting_room->hideProcessing();
+	m_destination_time = 0;
+	m_product_duration = 0;
+	m_percentage = 0.0f;
+	m_current_unit_type = UNIT_COUNTS;
 }
 
 

@@ -22,17 +22,17 @@ class Goal_ShortAttack : public Goal<CGameUnit>
 private:
 
 
-	CGameUnit*		m_pTarget;		
+	CGameUnit*		m_target;		
 
 
 public:
 
-	Goal_ShortAttack(CGameUnit* pUnit, CGameUnit* pTarget);
+	Goal_ShortAttack(CGameUnit* p_unit, CGameUnit* p_target);
 
 	//the usual suspects
-	void Activate();
-	s32  Process();
-	void Terminate();
+	void activate();
+	s32  process();
+	void terminate();
 
 };
 

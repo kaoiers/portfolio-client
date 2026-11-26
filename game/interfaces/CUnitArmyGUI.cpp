@@ -30,11 +30,11 @@ enum
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CUnitArmyGUI::interface_control( CEventHandler* pReceiver )
+bool CUnitArmyGUI::interfaceControl( CEventHandler* p_receiver )
 {
-	if(pReceiver->isClickedButtonID(COMMAND_ARMY_BUILDING_DEFENCE_BUTTON))
+	if(p_receiver->isClickedButtonID(COMMAND_ARMY_BUILDING_DEFENCE_BUTTON))
 	{
-		m_pOwner->setCommandType(com_room_guard);
+		m_owner->setCommandType(com_room_guard);
 	}
 
 	return true;
@@ -43,7 +43,7 @@ bool CUnitArmyGUI::interface_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CUnitArmyGUI::GUI_Initialize()
+void CUnitArmyGUI::guiInitialize()
 {
 
 
@@ -53,8 +53,8 @@ void CUnitArmyGUI::GUI_Initialize()
 /*======================================================*/
 // 주인 오브젝트 설정
 /*======================================================*/
-void CUnitArmyGUI::SetOwner( CGameObject *obj )
+void CUnitArmyGUI::setOwner( CGameObject *obj )
 {
-	m_pOwner = dynamic_cast<CGameUnitArmy *>(obj);
+	m_owner = dynamic_cast<CGameUnitArmy *>(obj);
 
 }

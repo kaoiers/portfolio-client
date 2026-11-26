@@ -22,31 +22,31 @@ private:
 
 protected:
 
-  SubgoalList   m_SubGoals;
+  SubgoalList   m_sub_goals;
 
-  s32  ProcessSubgoals();
+  s32  processSubgoals();
 
-  bool ForwardMessageToFrontMostSubgoal(const Telegram& msg);
+  bool forwardMessageToFrontMostSubgoal(const Telegram& msg);
 
 
 public:
 
-  Goal_Composite(entity_type* pE, s32 type):Goal<entity_type>(pE,type){}
+  Goal_Composite(entity_type* p_e, s32 type):Goal<entity_type>(p_e,type){}
 
-  virtual ~Goal_Composite(){RemoveAllSubgoals();}
+  virtual ~Goal_Composite(){removeAllSubgoals();}
 
-  virtual void Activate() = 0;
+  virtual void activate() = 0;
 
-  virtual s32  Process() = 0;
+  virtual s32  process() = 0;
 
-  virtual void Terminate() = 0;
+  virtual void terminate() = 0;
 
-  virtual bool HandleMessage(const Telegram& msg)
-  { return ForwardMessageToFrontMostSubgoal(msg);}
+  virtual bool handleMessage(const Telegram& msg)
+  { return forwardMessageToFrontMostSubgoal(msg);}
 
-  void         AddSubgoal(Goal<entity_type>* g);
+  void         addSubgoal(Goal<entity_type>* g);
 
-  void         RemoveAllSubgoals();
+  void         removeAllSubgoals();
 
 };
 
@@ -58,17 +58,17 @@ public:
 // 하위 목표들 지우기
 /*======================================================*/
 template <class entity_type>
-void Goal_Composite<entity_type>::RemoveAllSubgoals()
+void Goal_Composite<entity_type>::removeAllSubgoals()
 {
-  for (SubgoalList::iterator it = m_SubGoals.begin(); it != m_SubGoals.end();        ++it)
+  for (SubgoalList::iterator it = m_sub_goals.begin(); it != m_sub_goals.end();        ++it)
   {
 
-		(*it)->Terminate();
+		(*it)->terminate();
     
 		SAFE_DELETE(*it);
   }
 
-  m_SubGoals.clear();
+  m_sub_goals.clear();
 }
  
 
@@ -76,30 +76,30 @@ void Goal_Composite<entity_type>::RemoveAllSubgoals()
 // 하위 목표들 실행시키기
 /*======================================================*/
 template <class entity_type>
-s32 Goal_Composite<entity_type>::ProcessSubgoals()
+s32 Goal_Composite<entity_type>::processSubgoals()
 { 
   //remove all completed and failed goals from the front of the subgoal list
-  while (!m_SubGoals.empty() &&
-         (m_SubGoals.front()->isComplete() || m_SubGoals.front()->hasFailed()))
+  while (!m_sub_goals.empty() &&
+         (m_sub_goals.front()->isComplete() || m_sub_goals.front()->hasFailed()))
   {    
-    m_SubGoals.front()->Terminate();
-    delete m_SubGoals.front(); 
-    m_SubGoals.pop_front();
+    m_sub_goals.front()->terminate();
+    delete m_sub_goals.front(); 
+    m_sub_goals.pop_front();
   }
 
 
 
-  if (!m_SubGoals.empty())
+  if (!m_sub_goals.empty())
   {
 
 
-    s32 StatusOfSubGoals = m_SubGoals.front()->Process();
-    if (StatusOfSubGoals == completed && m_SubGoals.size() > 1)
+    s32 status_of_sub_goals = m_sub_goals.front()->process();
+    if (status_of_sub_goals == completed && m_sub_goals.size() > 1)
     {
       return active;
     }
 
-    return StatusOfSubGoals;
+    return status_of_sub_goals;
   }
   
   else
@@ -114,10 +114,10 @@ s32 Goal_Composite<entity_type>::ProcessSubgoals()
 // 하위 목표 추가하기
 /*======================================================*/
 template <class entity_type>
-void Goal_Composite<entity_type>::AddSubgoal(Goal<entity_type>* g)
+void Goal_Composite<entity_type>::addSubgoal(Goal<entity_type>* g)
 {   
   //add the new goal to the front of the list
-  m_SubGoals.push_front(g);
+  m_sub_goals.push_front(g);
   
 }
 
@@ -127,11 +127,11 @@ void Goal_Composite<entity_type>::AddSubgoal(Goal<entity_type>* g)
 // 메시지 하위 목표들로 포워딩
 /*======================================================*/
 template <class entity_type>
-bool Goal_Composite<entity_type>::ForwardMessageToFrontMostSubgoal(const Telegram& msg)
+bool Goal_Composite<entity_type>::forwardMessageToFrontMostSubgoal(const Telegram& msg)
 {
-  if (!m_SubGoals.empty())
+  if (!m_sub_goals.empty())
   {
-    return m_SubGoals.front()->HandleMessage(msg);
+    return m_sub_goals.front()->handleMessage(msg);
   }
 
    return false;

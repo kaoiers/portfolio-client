@@ -21,9 +21,9 @@ class CGameUnitArmy;
 class CUnitArmyGUI : public CGameGUI
 {
 
-	CGameUnitArmy*	m_pOwner;	
+	CGameUnitArmy*	m_owner;	
 
-	virtual bool	interface_control(CEventHandler* pReceiver);
+	virtual bool	interfaceControl(CEventHandler* p_receiver);
 
 public :
 
@@ -32,9 +32,9 @@ public :
 
 	   virtual	~CUnitArmyGUI() {};
 
-	   virtual void	GUI_Initialize();
+	   virtual void	guiInitialize();
 
-	   virtual void	SetOwner(CGameObject *obj);
+	   virtual void	setOwner(CGameObject *obj);
 
 
 	 

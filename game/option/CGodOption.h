@@ -15,11 +15,11 @@
 
 class CGodOption : private UnCopyable
 {
-	bool	m_bUseSound;				//	사운드
-	bool	m_bUseShader;				//	쉐이더
-	bool	m_bUseShadow;				//	그림자
-	bool	m_bUseVolume;				//	볼륨
-	bool    m_bUseFullScreen;			//	풀스크린
+	bool	m_use_sound;				//	사운드
+	bool	m_use_shader;				//	쉐이더
+	bool	m_use_shadow;				//	그림자
+	bool	m_use_volume;				//	볼륨
+	bool    m_use_full_screen;			//	풀스크린
 
 
 	
@@ -28,11 +28,11 @@ class CGodOption : private UnCopyable
 public :
 
 	CGodOption() : 
-		m_bUseSound(false),
-		m_bUseShader(false),
-		m_bUseShadow(false),
-		m_bUseVolume(false),
-		m_bUseFullScreen(false)
+		m_use_sound(false),
+		m_use_shader(false),
+		m_use_shadow(false),
+		m_use_volume(false),
+		m_use_full_screen(false)
 		
 	{
 	}
@@ -40,20 +40,20 @@ public :
 	~CGodOption()
 	{};
 
-	void	setUseSound(bool _on) { m_bUseSound = _on; }
-	void	setUseShader(bool _on) { m_bUseShader = _on; }
-	void	setUseShadow(bool _on) { m_bUseShadow = _on;}
-	void	setUseVolume(bool _on) { m_bUseVolume = _on;}
-	void    setUseFullScreen(bool _on) { m_bUseFullScreen = _on;}
+	void	setUseSound(bool _on) { m_use_sound = _on; }
+	void	setUseShader(bool _on) { m_use_shader = _on; }
+	void	setUseShadow(bool _on) { m_use_shadow = _on;}
+	void	setUseVolume(bool _on) { m_use_volume = _on;}
+	void    setUseFullScreen(bool _on) { m_use_full_screen = _on;}
 
-	const bool	 isSoundOn() const { return m_bUseSound; }
-	const bool   isShaderOn() const  { return m_bUseShader; }
-	const bool	 isShadowOn() const { return m_bUseShadow; }
-	const bool	 isVolumeOn() const { return m_bUseVolume; }
-	const bool   isFullScreen() const { return m_bUseFullScreen; }
+	const bool	 isSoundOn() const { return m_use_sound; }
+	const bool   isShaderOn() const  { return m_use_shader; }
+	const bool	 isShadowOn() const { return m_use_shadow; }
+	const bool	 isVolumeOn() const { return m_use_volume; }
+	const bool   isFullScreen() const { return m_use_full_screen; }
 	
 
-	static	CGodOption*		GetInstance();
+	static	CGodOption*		getInstance();
 
 };
 

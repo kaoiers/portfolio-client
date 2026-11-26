@@ -22,14 +22,14 @@
 
 
 
-Goal_TraverseEdge::Goal_TraverseEdge(CGameUnit* pUnit,
+Goal_TraverseEdge::Goal_TraverseEdge(CGameUnit* p_unit,
                            
-                                     bool       LastEdge):
+                                     bool       last_edge):
 
-                                Goal<CGameUnit>(pUnit, goal_traverse_edge),
+                                Goal<CGameUnit>(p_unit, goal_traverse_edge),
                                 
-                                m_dTimeExpected(0.0),
-                                m_bLastEdgeInPath(LastEdge)
+                                m_time_expected(0.0),
+                                m_last_edge_in_path(last_edge)
                                 
 {
 
@@ -41,9 +41,9 @@ Goal_TraverseEdge::Goal_TraverseEdge(CGameUnit* pUnit,
 
                                              
 
-void Goal_TraverseEdge::Activate()
+void Goal_TraverseEdge::activate()
 {
-  m_iStatus = active;
+  m_status = active;
   
 
 
@@ -55,10 +55,10 @@ void Goal_TraverseEdge::Activate()
 
 
 
-s32 Goal_TraverseEdge::Process()
+s32 Goal_TraverseEdge::process()
 {
   //if status is inactive, call Activate()
-  ActivateIfInactive();
+  activateIfInactive();
   
   //if the bot has become stuck return failure
 
@@ -71,7 +71,7 @@ s32 Goal_TraverseEdge::Process()
 
   if (isStuck())
   {
-    m_iStatus = failed;
+    m_status = failed;
   }
   
   //if the bot has reached the end of the edge return completed
@@ -80,14 +80,14 @@ s32 Goal_TraverseEdge::Process()
   
   }
 
-  return m_iStatus;
+  return m_status;
 }
 
 bool Goal_TraverseEdge::isStuck()const
 {  
-	double TimeTaken = 0;// Clock->GetCurrentTime() - m_dStartTime;
+	double time_taken = 0;// Clock->GetCurrentTime() - m_dStartTime;
 
-  if (TimeTaken > m_dTimeExpected)
+  if (time_taken > m_time_expected)
   {
    // debug_con << "BOT " << m_pOwner->ID() << " IS STUCK!!" << "";
 
@@ -98,7 +98,7 @@ bool Goal_TraverseEdge::isStuck()const
 }
 
 
-void Goal_TraverseEdge::Terminate()
+void Goal_TraverseEdge::terminate()
 {
   //turn off steering behaviors.
   

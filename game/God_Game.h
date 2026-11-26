@@ -21,7 +21,7 @@ class CObjectResourceManager;
 class PluginManager;
 class CGameMap;
 
-void WarningBox(const std::wstring str);
+void warningBox(const std::wstring str);
 struct PACKET_ACCOUNT_LOGIN_CL_LN_REQ;
 
 
@@ -39,55 +39,55 @@ public :
 
 private :
 
-	GameState							m_eGameState;
+	GameState							m_game_state;
 
 
-	std::unique_ptr<CGameObjectManager>					m_pObjectManager;
-	std::unique_ptr<CCameraManager>						m_pCameraManager;
-	std::unique_ptr<CEventHandler>						m_pEventHandler;
-	std::unique_ptr<CGUIManager>						m_pGUIManager;
-	std::unique_ptr<PluginManager>						m_pPlugInManager;
-	std::unique_ptr<CGameMap>							m_pGameMap;
+	std::unique_ptr<CGameObjectManager>					m_object_manager;
+	std::unique_ptr<CCameraManager>						m_camera_manager;
+	std::unique_ptr<CEventHandler>						m_event_handler;
+	std::unique_ptr<CGUIManager>						m_gui_manager;
+	std::unique_ptr<PluginManager>						m_plug_in_manager;
+	std::unique_ptr<CGameMap>							m_game_map;
 	
-	bool								m_bRunning;
+	bool								m_running;
 
 public :
 
-	bool								Initialize();
-	bool								GameLoading();
-	bool								GameReset();
+	bool								initialize();
+	bool								gameLoading();
+	bool								gameReset();
 
-	void								setGameState(const GameState state) {m_eGameState = state; }
+	void								setGameState(const GameState state) {m_game_state = state; }
 
 
-	const	bool						isRunning() {return m_bRunning;}
-	void								setRunning(const bool r) { m_bRunning = r; }
+	const	bool						isRunning() {return m_running;}
+	void								setRunning(const bool r) { m_running = r; }
 
 
 	void								render();
-	void								upadte(u32 timeMs);
+	void								update(u32 time_ms);
 	bool								control();
 
 
 
 
-	CGameObjectManager*					getObjectManager()			{return m_pObjectManager.get(); }
-	CCameraManager*						getCameraManager()			{return m_pCameraManager.get(); }
-	CEventHandler*						getEventHandler()			{return m_pEventHandler.get();}
-	CGUIManager*						getGUIManager()				{return m_pGUIManager.get();}
+	CGameObjectManager*					getObjectManager()			{return m_object_manager.get(); }
+	CCameraManager*						getCameraManager()			{return m_camera_manager.get(); }
+	CEventHandler*						getEventHandler()			{return m_event_handler.get();}
+	CGUIManager*						getGUIManager()				{return m_gui_manager.get();}
 
-	CGameMap*							getGameMap()				{return m_pGameMap.get(); }
-	PluginManager*						getPluginManager()			{return m_pPlugInManager.get(); }
+	CGameMap*							getGameMap()				{return m_game_map.get(); }
+	PluginManager*						getPluginManager()			{return m_plug_in_manager.get(); }
 
-	void								DrawScneneForInterface();	
-	void								ClearGame(const GameState	state );
-	void								playSound(const char *sundName, const bool loop /*= true*/);
-	const GameState						getCurrentGameState() { return m_eGameState; }
+	void								drawSceneForInterface();	
+	void								clearGame(const GameState	state );
+	void								playSound(const char *sound_name, const bool loop /*= true*/);
+	const GameState						getCurrentGameState() { return m_game_state; }
 	
 	God_Game();
 	~God_Game(); 
 	
 public :
 
-	static God_Game* GetInstance();
+	static God_Game* getInstance();
 };

@@ -15,8 +15,8 @@
 
 
 
-Goal_SeekToPosition::Goal_SeekToPosition( CGameUnit* pUnit, vector3df target )
-:Goal<CGameUnit>(pUnit, goal_seek_to_position) , m_vPosition(target), m_dTimeToReachPos(0.0), m_pUpdateSendMovePacketRegulator(0)
+Goal_SeekToPosition::Goal_SeekToPosition( CGameUnit* p_unit, vector3df target )
+:Goal<CGameUnit>(p_unit, goal_seek_to_position) , m_position(target), m_time_to_reach_pos(0.0), m_update_send_move_packet_regulator(0)
 {
 	
 }
@@ -25,20 +25,20 @@ Goal_SeekToPosition::Goal_SeekToPosition( CGameUnit* pUnit, vector3df target )
 /*======================================================*/
 //  타겟 포지션으로 이동시키기 시작
 /*======================================================*/
-void Goal_SeekToPosition::Activate()
+void Goal_SeekToPosition::activate()
 {
-	m_iStatus = active;	
+	m_status = active;	
 
 	//record the time the bot starts this goal
-	m_dStartTime = 0;// Clock->GetCurrentTime();
+	m_start_time = 0;// Clock->GetCurrentTime();
 
 	//This value is used to determine if the bot becomes stuck 	
-	m_dTimeToReachPos = m_pOwner->CalculateTimeToReachPosition(m_vPosition);
+	m_time_to_reach_pos = m_owner->calculateTimeToReachPosition(m_position);
 
 	//factor in a margin of error for any reactive behavior
-	const double MarginOfError = 1.0;
+	const double margin_of_error = 1.0;
 
-	m_dTimeToReachPos += MarginOfError;
+	m_time_to_reach_pos += margin_of_error;
 
 	//m_pUpdateSendMovePacketRegulator->Initialize();
 // 
@@ -54,15 +54,15 @@ void Goal_SeekToPosition::Activate()
 /*======================================================*/
 //  도착 검사 처리
 /*======================================================*/
-s32 Goal_SeekToPosition::Process()
+s32 Goal_SeekToPosition::process()
 {
 	//if status is inactive, call Activate()
-	ActivateIfInactive();
+	activateIfInactive();
 
 	//test to see if the bot has become stuck
 	if (isStuck())
 	{
-		m_iStatus = failed;
+		m_status = failed;
 	}
 
 	//test to see if the bot has reached the waypoint. If so terminate the goal
@@ -74,21 +74,21 @@ s32 Goal_SeekToPosition::Process()
 // 		}
 
 
-		if (m_pOwner->isAtPosition(m_vPosition))
+		if (m_owner->isAtPosition(m_position))
 		{
-			m_iStatus = completed;
+			m_status = completed;
 
 // 			if(m_pOwner->getOwnerType() == object_mine)
 // 				NetworkPacketSpace::SendUnitMovetoPositionPacket(m_pOwner->GetID(), m_vPosition);
 
 
-			StopSeeking();
+			stopSeeking();
 
 
 		}
 	}
 
-	return m_iStatus;
+	return m_status;
 }
 
 
@@ -96,12 +96,12 @@ s32 Goal_SeekToPosition::Process()
 // 종료
 /*======================================================*/
 
-void Goal_SeekToPosition::Terminate()
+void Goal_SeekToPosition::terminate()
 {
 
-	m_pUpdateSendMovePacketRegulator = 0;
+	m_update_send_move_packet_regulator = 0;
 
-	m_iStatus = completed;
+	m_status = completed;
 
 	
 
@@ -123,11 +123,11 @@ bool Goal_SeekToPosition::isStuck() const
 /*======================================================*/
 //  멈추기
 /*======================================================*/
-bool Goal_SeekToPosition::StopSeeking()
+bool Goal_SeekToPosition::stopSeeking()
 {
 
 	
-	m_pOwner->SetVelocity(vector3df(0,0,0));
+	m_owner->setVelocity(vector3df(0,0,0));
 
 	
 

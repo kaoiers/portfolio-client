@@ -25,12 +25,12 @@ private:
 
 public:
 
-	Goal_Dead(CGameUnit* pUnit);
+	Goal_Dead(CGameUnit* p_unit);
 
 	//the usual suspects
-	void Activate();
-	s32  Process();
-	void Terminate();
+	void activate();
+	s32  process();
+	void terminate();
 	
 };
 

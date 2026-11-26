@@ -36,14 +36,14 @@ enum{
 /*======================================================*/
 // 친구 리스트 리셋
 /*======================================================*/
-void CRoomCommunityGUI::ResetFriendsList()
+void CRoomCommunityGUI::resetFriendsList()
 {
 
 
 
 	for(u32 i=0; i < friend_button_counts; i++)
 	{
-		u32 idx = ((m_uCurrent_page - 1) * friend_button_counts) + i;
+		u32 idx = ((m_current_page - 1) * friend_button_counts) + i;
 	
 
 	}
@@ -53,17 +53,17 @@ void CRoomCommunityGUI::ResetFriendsList()
 /*======================================================*/
 // 인터페이스 컨트롤
 /*======================================================*/
-bool CRoomCommunityGUI::interface_control( CEventHandler* pReceiver )
+bool CRoomCommunityGUI::interfaceControl( CEventHandler* p_receiver )
 {
 
 	//m_pFriendName[0]->getPosition();
 
 
-	if(pReceiver->isClickedButtonID(COMMAND_BUILDING_CANCEL))
+	if(p_receiver->isClickedButtonID(COMMAND_BUILDING_CANCEL))
 	{
-		m_pOwner->Explosion();	
+		m_owner->explosion();	
 
-		m_pOwner->DeleteRoom();
+		m_owner->deleteRoom();
 	}
 
 
@@ -76,17 +76,17 @@ bool CRoomCommunityGUI::interface_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CRoomCommunityGUI::GUI_Initialize()
+void CRoomCommunityGUI::guiInitialize()
 {
 	//m_pDamageText = dynamic_cast<CTextGUI*>(FindElementByID(COMMAND_BUIDING_DAMAGE_TEXT));
 
-	CGUIManager*	pGUIMan =  CGUIManager::GetInstance();
+	CGUIManager*	p_gui_man =  CGUIManager::getInstance();
 
 
-	s32 startPosX = -390;
-	s32 startPosY = 580;
+	s32 start_pos_x = -390;
+	s32 start_pos_y = 580;
 
-	u32 ImagesizeX = 90;
+	u32 image_size_x = 90;
 
 	u32 button_id = COMMAND_BUIDING_DAMAGE_TEXT+1;
 
@@ -114,13 +114,13 @@ void CRoomCommunityGUI::GUI_Initialize()
 /*======================================================*/
 // 주인 오프벡트 설정
 /*======================================================*/
-void CRoomCommunityGUI::SetOwner( CGameObject *obj )
+void CRoomCommunityGUI::setOwner( CGameObject *obj )
 {
-	m_pOwner = dynamic_cast<CGameRoomCommunity* >(obj);
+	m_owner = dynamic_cast<CGameRoomCommunity* >(obj);
 
-	setDamage( m_pOwner->getRoomHp() , m_pOwner->getTotalRoomHP());
+	setDamage( m_owner->getRoomHp() , m_owner->getTotalRoomHP());
 
-	ResetFriendsList();
+	resetFriendsList();
 }
 
 
@@ -150,12 +150,12 @@ void CRoomCommunityGUI::addFriendList( const char* friend_name, u32 friend_id, c
 /*======================================================*/
 // 사진 설정
 /*======================================================*/
-void CRoomCommunityGUI::setFriendPicture( u32 friend_id, size_t stream_size, char* pStream )
+void CRoomCommunityGUI::setFriendPicture( u32 friend_id, size_t stream_size, char* p_stream )
 {
 
 }
 
 
 CRoomCommunityGUI::CRoomCommunityGUI( position2d<s16> rect /*= position2di(0,0)*/ ) :
-CGameGUI(rect),  friend_button_id(COMMAND_BUIDING_DAMAGE_TEXT+1), m_uCurrent_page(1) {}
+CGameGUI(rect),  friend_button_id(COMMAND_BUIDING_DAMAGE_TEXT+1), m_current_page(1) {}
 

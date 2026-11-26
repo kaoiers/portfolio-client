@@ -52,25 +52,25 @@
 // 	return (new PACKET_GAME_WAVE_START_CL_AG_REQ());
 // }
 
-CMainGameGUI	*CMainGameGUI::m_pInstance = NULL;
+CMainGameGUI	*CMainGameGUI::m_instance = NULL;
 
 
 
 
-CMainGameGUI::CMainGameGUI(CGameObjectManager*	pObjMan) : 
+CMainGameGUI::CMainGameGUI(CGameObjectManager*	p_obj_man) : 
 CGameGUI(position2d<s16>(0, 0)),
-m_pBuilding(NULL), 
-m_pObjMan(pObjMan), 
-m_bObjectSelectAvailable(true), 
-m_pGameResourceManager(0), 
-m_pLevelBar(0),
-m_fAlphaRatio(0.0f)
+m_building(NULL), 
+m_obj_man(p_obj_man), 
+m_object_select_available(true), 
+m_game_resource_manager(0), 
+m_level_bar(0),
+m_alpha_ratio(0.0f)
 {
 	
 
-	m_pInstance = this;
+	m_instance = this;
 
-	m_pGame = CAppContext::GetGodGame();
+	m_game = CAppContext::getGodGame();
 	
 	//m_playerId		= INVALID_PLAYER_ID;
 
@@ -84,9 +84,9 @@ m_fAlphaRatio(0.0f)
 /*======================================================*/
 // GUI 별도 초기화
 /*======================================================*/
-void CMainGameGUI::GUI_Initialize()
+void CMainGameGUI::guiInitialize()
 {
-	Show();
+	show();
 	
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -106,7 +106,7 @@ void CMainGameGUI::GUI_Initialize()
 /*======================================================*/
 // 인터페이스 주인 오브젝트 설정
 /*======================================================*/
-void CMainGameGUI::SetOwner( CGameObject *owner )
+void CMainGameGUI::setOwner( CGameObject *owner )
 {
 
 }
@@ -117,20 +117,20 @@ void CMainGameGUI::SetOwner( CGameObject *owner )
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CMainGameGUI::interface_control( CEventHandler * pReceiver )
+bool CMainGameGUI::interfaceControl( CEventHandler * p_receiver )
 {
 	
 
 	u32 millyseconds = 0;
 
-	FadeOutWarningMessage(millyseconds);
+	fadeOutWarningMessage(millyseconds);
 
-	if(m_pGameResourceManager)
-		m_pGameResourceManager->update(millyseconds);
+	if(m_game_resource_manager)
+		m_game_resource_manager->update(millyseconds);
 
-	if(pReceiver->isMouseLUp() 
-		&& !pReceiver->isCursorOnGUI() 
-		&& !m_pObjMan->isOnControlState() && CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_game )
+	if(p_receiver->isMouseLUp() 
+		&& !p_receiver->isCursorOnGUI() 
+		&& !m_obj_man->isOnControlState() && CAppContext::getGodGame()->getCurrentGameState() == God_Game::on_game )
 	{	
 		CGameObject *obj = nullptr; // m_pObjMan->getPicker()->getMouseOverObject(pReceiver);
 		
@@ -141,7 +141,7 @@ bool CMainGameGUI::interface_control( CEventHandler * pReceiver )
 
 				if(unit->getAllyType() == unit_mine)
 				{
-					m_pObjMan->setController(unit);
+					m_obj_man->setController(unit);
 					
 				}
 			}
@@ -150,7 +150,7 @@ bool CMainGameGUI::interface_control( CEventHandler * pReceiver )
 			{
 				CGameRoom* room = dynamic_cast<CGameRoom *>(obj);
 
-				m_pObjMan->setController(room);
+				m_obj_man->setController(room);
 			}
 		}
 	}
@@ -166,7 +166,7 @@ bool CMainGameGUI::interface_control( CEventHandler * pReceiver )
 
 CMainGameGUI::~CMainGameGUI()
 {
-	SAFE_DELETE(m_pGameResourceManager);
+	SAFE_DELETE(m_game_resource_manager);
 }
 
 
@@ -177,7 +177,7 @@ CMainGameGUI::~CMainGameGUI()
 /*======================================================*/
 void CMainGameGUI::showWaveButton()
 {
-	IGUIObject*	pButton =  FindElementByID(GUI_MAINMENU_WAVESTART_BUTTON);
+	IGUIObject*	p_button =  findElementById(GUI_MAINMENU_WAVESTART_BUTTON);
 }
 
 
@@ -185,9 +185,9 @@ void CMainGameGUI::showWaveButton()
 /*======================================================*/
 // 타이머 시작하기
 /*======================================================*/
-void CMainGameGUI::StartTimer()
+void CMainGameGUI::startTimer()
 {
-	IGUIObject* pTextGUI = FindElementByID(GUI_MAINMENU_TIME_TEXT);
+	IGUIObject* p_text_gui = findElementById(GUI_MAINMENU_TIME_TEXT);
 }
 
 
@@ -196,9 +196,9 @@ void CMainGameGUI::StartTimer()
 /*======================================================*/
 // 타이머 이벤트 끝내기
 /*======================================================*/
-void CMainGameGUI::EndTimerEvent()
+void CMainGameGUI::endTimerEvent()
 {
-	CGameMap::GetInstance()->StartEnemyGenerate();	
+	CGameMap::getInstance()->startEnemyGenerate();	
 	
 
 
@@ -219,9 +219,9 @@ void CMainGameGUI::setLevelStatus( const f32 percent, const u32 level )
 /*======================================================*/
 // 경험치 더하기
 /*======================================================*/
-void CMainGameGUI::AddPlayerExp( const u32 exp )
+void CMainGameGUI::addPlayerExp( const u32 exp )
 {
-	m_pGameResourceManager->AddPlayerExp(exp);
+	m_game_resource_manager->addPlayerExp(exp);
 }
 
 
@@ -231,18 +231,18 @@ void CMainGameGUI::AddPlayerExp( const u32 exp )
 /*======================================================*/
 // 경고메시지창 사라지게 하기
 /*======================================================*/
-void CMainGameGUI::FadeOutWarningMessage(const u32 timeMs)
+void CMainGameGUI::fadeOutWarningMessage(const u32 time_ms)
 {
-	static u32 preTime = 0;
+	static u32 pre_time = 0;
 
-	if(preTime == 0)
-		preTime = timeMs;
+	if(pre_time == 0)
+		pre_time = time_ms;
 
-	f32 delta = f32(timeMs - preTime)/1000.0f;
-	preTime = timeMs;
-	m_fAlphaRatio = m_fAlphaRatio - delta * 100.0f; 
+	f32 delta = f32(time_ms - pre_time)/1000.0f;
+	pre_time = time_ms;
+	m_alpha_ratio = m_alpha_ratio - delta * 100.0f; 
 
-	if(m_fAlphaRatio >= 0.0f)
+	if(m_alpha_ratio >= 0.0f)
 	{
 	}
 }
@@ -253,7 +253,7 @@ void CMainGameGUI::FadeOutWarningMessage(const u32 timeMs)
 /*======================================================*/
 void CMainGameGUI::playSound2D( const char* soundname , const bool loop)
 {	
-	m_pGame->playSound(soundname, loop);		
+	m_game->playSound(soundname, loop);		
 }
 
 
@@ -276,7 +276,7 @@ void CMainGameGUI::playSound3D( const char* soundname , const vector3df& pos , c
 /*======================================================*/
 // 사운드 종료
 /*======================================================*/
-void CMainGameGUI::playoffAllSounds()
+void CMainGameGUI::stopAllSounds()
 {
 
 }
@@ -287,7 +287,7 @@ void CMainGameGUI::playoffAllSounds()
 /*======================================================*/
 // 놀러가기 버튼 활성화
 /*======================================================*/
-void CMainGameGUI::EnableDoorButton( const bool on )
+void CMainGameGUI::enableDoorButton( const bool on )
 {
 
 }

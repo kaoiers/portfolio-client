@@ -20,7 +20,7 @@ public:
 
 	CCameraManager();	
 	virtual ~CCameraManager();
-	bool	Init();
+	bool	init();
 
 	void setPosition(const vector3df &pos);
 	vector3df getPosition() const;

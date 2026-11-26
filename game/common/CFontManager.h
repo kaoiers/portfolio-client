@@ -33,7 +33,7 @@ public :
 		FONT_TYPE_COUNT
 	};
 
-	s32*							m_pFont[FONT_TYPE_COUNT];
+	s32*							m_font[FONT_TYPE_COUNT];
 
 public :
 

@@ -40,12 +40,12 @@
 
 
 
-CControllerGUI* CControllerGUI::pInstance = NULL;
+CControllerGUI* CControllerGUI::p_instance = NULL;
 
 CControllerGUI::CControllerGUI() : 
-m_pCurrentGUI(0)
+m_current_gui(0)
 {
-	pInstance = this;	
+	p_instance = this;	
 }
 
 
@@ -56,34 +56,34 @@ CControllerGUI::~CControllerGUI() {}
 /*======================================================*/
 // 신수GUI 컨트롤 지정
 /*======================================================*/
-void CControllerGUI::setGodGUI( CGameUnitGod* pGod )
+void CControllerGUI::setGodGUI( CGameUnitGod* p_god )
 {
-	m_pUnitGodGUI->SetOwner(pGod); 
-	SetGUIController(m_pUnitGodGUI);
+	m_unit_god_gui->setOwner(p_god); 
+	setGuiController(m_unit_god_gui);
 }
 
 
 /*======================================================*/
 // 일꾼 GUI 컨트롤 지정
 /*======================================================*/
-void CControllerGUI::setWorkerGUI( CGameUnitWorker* pWorker )
+void CControllerGUI::setWorkerGUI( CGameUnitWorker* p_worker )
 {
-	m_pUnitWorkerGUI->SetOwner(pWorker); 
-	SetGUIController(m_pUnitWorkerGUI);
-	m_pUnitWorkerGUI->showGroup("building_main", false);
-	m_pUnitWorkerGUI->showGroup("building1", false);		
-	m_pUnitWorkerGUI->showGroup("building2", false);
-	m_pUnitWorkerGUI->showGroup("base", true);
+	m_unit_worker_gui->setOwner(p_worker); 
+	setGuiController(m_unit_worker_gui);
+	m_unit_worker_gui->showGroup("building_main", false);
+	m_unit_worker_gui->showGroup("building1", false);		
+	m_unit_worker_gui->showGroup("building2", false);
+	m_unit_worker_gui->showGroup("base", true);
 }
 
 
 /*======================================================*/
 // 병사 GUI 컨트롤 지정
 /*======================================================*/
-void CControllerGUI::setArmyGUI( CGameUnitArmy* pArmy )
+void CControllerGUI::setArmyGUI( CGameUnitArmy* p_army )
 {
-	m_pUnitArmyGUI->SetOwner(pArmy);
-	SetGUIController(m_pUnitArmyGUI);
+	m_unit_army_gui->setOwner(p_army);
+	setGuiController(m_unit_army_gui);
 
 }
 
@@ -91,16 +91,16 @@ void CControllerGUI::setArmyGUI( CGameUnitArmy* pArmy )
 /*======================================================*/
 // 현재 GUI 지정
 /*======================================================*/
-void CControllerGUI::SetGUIController( CGameGUI* pGUI )
+void CControllerGUI::setGuiController( CGameGUI* p_gui )
 {
-	if(m_pCurrentGUI)
+	if(m_current_gui)
 	{
-		m_pCurrentGUI->Hide();
+		m_current_gui->hide();
 	}
 
-	m_pCurrentGUI = pGUI;
+	m_current_gui = p_gui;
 
-	m_pCurrentGUI->Show();
+	m_current_gui->show();
 
 }
 
@@ -108,9 +108,9 @@ void CControllerGUI::SetGUIController( CGameGUI* pGUI )
 /*======================================================*/
 // 인스턴스
 /*======================================================*/
-CControllerGUI* CControllerGUI::Instance()
+CControllerGUI* CControllerGUI::instance()
 {
-	return pInstance;
+	return p_instance;
 
 }
 
@@ -119,14 +119,14 @@ CControllerGUI* CControllerGUI::Instance()
 /*======================================================*/
 // 비활성화 시키기
 /*======================================================*/
-void CControllerGUI::DisableGUI()
+void CControllerGUI::disableGui()
 {
-	if(m_pCurrentGUI)
+	if(m_current_gui)
 	{
-		m_pCurrentGUI->Hide();
+		m_current_gui->hide();
 	}
 
-	m_pCurrentGUI = 0;
+	m_current_gui = 0;
 
 }
 

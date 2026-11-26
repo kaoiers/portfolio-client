@@ -14,32 +14,32 @@
 #include "../shader/CLightEffectManager.h"
 #include "../map/CGameMap.h"
 
-void AddEarthMesh(CGameRoom* pRoom);
-void AddTorchFireParticle(CGameRoom* pRoom,  const vector3df& pos);
+void addEarthMesh(CGameRoom* p_room);
+void addTorchFireParticle(CGameRoom* p_room,  const vector3df& pos);
 
 
-CGameRoomGod::CGameRoomGod(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res, const vector2di& TilePos,
+CGameRoomGod::CGameRoomGod(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res, const vector2di& tile_pos,
 						   const vector3df& pos, 
 						   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 						   const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ )
 						    : CGameRoom(owner, objtype, btype, res, pos, rot, scale) 
 {
-	initialize(TilePos);
+	initialize(tile_pos);
 }
-CGameRoomGod::CGameRoomGod(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res, const vector2di& TilePos)
+CGameRoomGod::CGameRoomGod(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res, const vector2di& tile_pos)
 : CGameRoom(owner, objtype, btype, res)
 {
-	initialize(TilePos);
+	initialize(tile_pos);
 }
 
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CGameRoomGod::initialize( const vector2di& TilePos )
+void CGameRoomGod::initialize( const vector2di& tile_pos )
 {
-	AddTorchFireParticle(this, vector3df(-180,200,-380));
-	AddTorchFireParticle(this, vector3df(190,200,-380));
-	AddEarthMesh(this);
+	addTorchFireParticle(this, vector3df(-180,200,-380));
+	addTorchFireParticle(this, vector3df(190,200,-380));
+	addEarthMesh(this);
 
 
 //  	m_vFirstIndexTile = TilePos;
@@ -71,7 +71,7 @@ void CGameRoomGod::initialize( const vector2di& TilePos )
 /*======================================================*/
 // 컨트롤 초기화
 /*======================================================*/
-void CGameRoomGod::enter_control()
+void CGameRoomGod::enterControl()
 {
 
 }
@@ -80,7 +80,7 @@ void CGameRoomGod::enter_control()
 /*======================================================*/
 // 컨트롤 업데이트
 /*======================================================*/
-void CGameRoomGod::update_control( CEventHandler* pReceiver )
+void CGameRoomGod::updateControl( CEventHandler* p_receiver )
 {
 
 }
@@ -89,7 +89,7 @@ void CGameRoomGod::update_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 컨트롤 종료
 /*======================================================*/
-void CGameRoomGod::exit_control()
+void CGameRoomGod::exitControl()
 {
 
 }
@@ -98,9 +98,9 @@ void CGameRoomGod::exit_control()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameRoomGod::update( const u32 timeMs )
+void CGameRoomGod::update( const u32 time_ms )
 {
-	BuildingUpdate();
+	buildingUpdate();
 
 	//printf("%0.2f, %0.2f\n", this->GetSceneNode()->getTransformedBoundingBox().MaxEdge.X, this->GetSceneNode()->getTransformedBoundingBox().MaxEdge.Z );
 	//printf("%0.2f, %0.2f\n\n", this->GetSceneNode()->getTransformedBoundingBox().MinEdge.X, this->GetSceneNode()->getTransformedBoundingBox().MinEdge.Z );
@@ -119,7 +119,7 @@ void CGameRoomGod::update( const u32 timeMs )
 
 
 
-void AddEarthMesh(CGameRoom* pRoom)
+void addEarthMesh(CGameRoom* p_room)
 {	
 	
 	
@@ -135,7 +135,7 @@ void AddEarthMesh(CGameRoom* pRoom)
 
 
 
-void AddTorchFireParticle(CGameRoom* pRoom,  const vector3df& pos)
+void addTorchFireParticle(CGameRoom* p_room,  const vector3df& pos)
 {
 	//ISceneNode* parent=0, s32 id=-1,
 	//		const vector3df& position = vector3df(0,0,0),

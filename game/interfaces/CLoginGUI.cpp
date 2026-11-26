@@ -24,7 +24,7 @@ CLoginGUI::CLoginGUI( position2d<s16> rect /*= position2di(0,0)*/ ) : CGameGUI(r
 /*======================================================*/
 // 초기화
 /*======================================================*/
-void CLoginGUI::GUI_Initialize()
+void CLoginGUI::guiInitialize()
 {
 	//에디트박스 모두 공란 설정
 }
@@ -33,7 +33,7 @@ void CLoginGUI::GUI_Initialize()
 /*======================================================*/
 // 로긴 위도우 보이기
 /*======================================================*/
-void CLoginGUI::ShowLoginWindow( const bool bshow )
+void CLoginGUI::showLoginWindow( const bool bshow )
 {
 	
 }
@@ -42,7 +42,7 @@ void CLoginGUI::ShowLoginWindow( const bool bshow )
 /*======================================================*/
 // 회원가입윈도우 보이기
 /*======================================================*/
-void CLoginGUI::ShowJoinWindow( const bool bshow )
+void CLoginGUI::showJoinWindow( const bool bshow )
 {
 	
 }
@@ -52,20 +52,20 @@ void CLoginGUI::ShowJoinWindow( const bool bshow )
 /*======================================================*/
 // 로긴 윈도우 보이기
 /*======================================================*/
-void CLoginGUI::ShowLoginWindowGUI( const bool bshow )
+void CLoginGUI::showLoginWindowGui( const bool bshow )
 {
 	if(bshow)
 	{
-		Show();
-		ShowLoginWindow(true);			
-		ShowJoinWindow(false);
+		show();
+		showLoginWindow(true);			
+		showJoinWindow(false);
 
 	}
 	else if(!bshow)
 	{
-		ShowLoginWindow(false);
-		ShowJoinWindow(true);
-		Hide();
+		showLoginWindow(false);
+		showJoinWindow(true);
+		hide();
 	}
 }
 
@@ -73,33 +73,33 @@ void CLoginGUI::ShowLoginWindowGUI( const bool bshow )
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CLoginGUI::interface_control( CEventHandler* pReceiver )
+bool CLoginGUI::interfaceControl( CEventHandler* p_receiver )
 {
-	if(pReceiver->isClickedButtonID(GUI_LOGIN_BUTTON_SIGNUP))
+	if(p_receiver->isClickedButtonID(GUI_LOGIN_BUTTON_SIGNUP))
 	{
-		ShowLoginWindow(false);
-		ShowJoinWindow(true);				
+		showLoginWindow(false);
+		showJoinWindow(true);				
 	}
-	else if(pReceiver->isClickedButtonID(GUI_JOIN_BUTTON_BACK))
+	else if(p_receiver->isClickedButtonID(GUI_JOIN_BUTTON_BACK))
 	{
-		ShowLoginWindow(true);
-		ShowJoinWindow(false);			
+		showLoginWindow(true);
+		showJoinWindow(false);			
 	}
-	else if(pReceiver->isClickedButtonID(GUI_LOGIN_BUTTON_OK))
+	else if(p_receiver->isClickedButtonID(GUI_LOGIN_BUTTON_OK))
 	{
 
 
 
 
 		
-		this->Hide();
+		this->hide();
 		
-		CAppContext::GetGodGame()->GameLoading();
+		CAppContext::getGodGame()->gameLoading();
 
 
 
 	}
-	else if(pReceiver->isClickedButtonID(GUI_JOIN_BUTTON_CONFIRM))
+	else if(p_receiver->isClickedButtonID(GUI_JOIN_BUTTON_CONFIRM))
 	{
 	}
 

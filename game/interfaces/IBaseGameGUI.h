@@ -12,11 +12,11 @@ public :
 	IBaseGameGUI() {}
 	virtual ~IBaseGameGUI() {}
 
-	virtual	bool			interface_control(CEventHandler* m_pReceiver) = 0;
+	virtual	bool			interfaceControl(CEventHandler* m_receiver) = 0;
 
-	virtual void			GUI_Initialize() = 0;
+	virtual void			guiInitialize() = 0;
 
-	virtual void			SetOwner(CGameObject *owner) = 0;
+	virtual void			setOwner(CGameObject *owner) = 0;
 
-	virtual void			setDamage(const u32	damage, const u32	Totaldamage) = 0;
+	virtual void			setDamage(const u32	damage, const u32	total_damage) = 0;
 };

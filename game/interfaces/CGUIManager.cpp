@@ -20,45 +20,45 @@
 #include "CControllerGUI.h"
 //#include "CWebDialog.h"
 
-CGUIManager* CGUIManager::m_pInstance = NULL;
+CGUIManager* CGUIManager::m_instance = NULL;
 
 
 
 
 CGUIManager::CGUIManager()
-: m_pMouseCursorGUI(0), m_pMainGameGUI(0), m_pPopUpGUI(0), m_pWebDialog(NULL)
+: m_mouse_cursor_gui(0), m_main_game_gui(0), m_pop_up_gui(0), m_web_dialog(NULL)
 {
-	m_pInstance = this;
+	m_instance = this;
 
-	m_pFontManager = new CFontManager();	
+	m_font_manager = new CFontManager();	
 }
 
 CGUIManager::~CGUIManager()
 {
-	for( GUIMap::iterator it = m_pGUIs.begin(); it != m_pGUIs.end(); ++it )
+	for( GUIMap::iterator it = m_guis.begin(); it != m_guis.end(); ++it )
 	{
 		SAFE_DELETE(it->second);
 	}
 
-	m_pGUIs.clear();
+	m_guis.clear();
 
-	delete	m_pFontManager;
+	delete	m_font_manager;
 }
 
 
 /*======================================================*/
 // 모든 오브젝트 컨트롤
 /*======================================================*/
-bool CGUIManager::control( CEventHandler* pReceiver )
+bool CGUIManager::control( CEventHandler* p_receiver )
 {
 	GUIMap::iterator itr;
 
-	for(itr = m_pGUIs.begin(); itr != m_pGUIs.end(); itr++)
+	for(itr = m_guis.begin(); itr != m_guis.end(); itr++)
 	{
 		if(!(itr->second)->isEnable()) continue;
 		
 		
-		(itr->second)->control(pReceiver);			
+		(itr->second)->control(p_receiver);			
 	}
 	
 	return true;
@@ -81,20 +81,20 @@ bool CGUIManager::render()
 /*======================================================*/
 // 아이디로 GUI 등록하기
 /*======================================================*/
-void CGUIManager::RegisterGUIByID( CGameGUI *pGui )
+void CGUIManager::registerGuiById( CGameGUI *p_gui )
 {
-	m_pGUIs[pGui->GetID()] = pGui;
+	m_guis[p_gui->getId()] = p_gui;
 }
 
 
 /*======================================================*/
 // 아이디로부터 인터페이스 찾기
 /*======================================================*/
-CGameGUI* CGUIManager::FindInterfaceFromID( s32 cid )
+CGameGUI* CGUIManager::findInterfaceFromId( s32 cid )
 {
-	GUIMap::iterator itr = m_pGUIs.find(cid);
+	GUIMap::iterator itr = m_guis.find(cid);
 	
-	if(itr != m_pGUIs.end())
+	if(itr != m_guis.end())
 	{
 		return itr->second;
 	}
@@ -106,12 +106,12 @@ CGameGUI* CGUIManager::FindInterfaceFromID( s32 cid )
 /*======================================================*/
 // Register and initialize the GUI.
 /*======================================================*/
-void CGUIManager::Interface_Init(CGameGUI* BaseGUI)
+void CGUIManager::interfaceInit(CGameGUI* BaseGUI)
 {
 	if(BaseGUI)
 	{
-		RegisterGUIByID(BaseGUI);
-		BaseGUI->GUI_Initialize();	
+		registerGuiById(BaseGUI);
+		BaseGUI->guiInitialize();	
 	}
 }
 
@@ -121,7 +121,7 @@ void CGUIManager::Interface_Init(CGameGUI* BaseGUI)
 /*======================================================*/
 // 인터페이스 불러오기
 /*======================================================*/
-bool CGUIManager::GameLoading( )
+bool CGUIManager::gameLoading( )
 {
 
 
@@ -136,9 +136,9 @@ bool CGUIManager::GameLoading( )
 u32 CGUIManager::getLastGUIID()
 {
 	GUIMap::iterator itr;
-	itr = m_pGUIs.end();
+	itr = m_guis.end();
 	itr--;
-	return (itr->second)->GetID();	
+	return (itr->second)->getId();	
 }
 
 
@@ -148,11 +148,11 @@ u32 CGUIManager::getLastGUIID()
 /*======================================================*/
 // GUI가 눌렸는지
 /*======================================================*/
-bool CGUIManager::IsPressed()
+bool CGUIManager::isPressed()
 {
 	GUIMap::iterator itr;
 
-	for(itr = m_pGUIs.begin(); itr != m_pGUIs.end(); itr++)
+	for(itr = m_guis.begin(); itr != m_guis.end(); itr++)
 	{
 		if((itr->second)->isClicked() == true)
 		{
@@ -166,15 +166,15 @@ bool CGUIManager::IsPressed()
 /*======================================================*/
 // 이벤트 전 
 /*======================================================*/
-bool CGUIManager::PostEvent( const SEvent& event )
+bool CGUIManager::postEvent( const SEvent& event )
 {
 	GUIMap::iterator itr;
 
-	for(itr = m_pGUIs.begin(); itr != m_pGUIs.end(); itr++)
+	for(itr = m_guis.begin(); itr != m_guis.end(); itr++)
 	{
 		if((itr->second)->isEnable())
 		{
- 			(itr->second)->PostEvent(event);
+ 			(itr->second)->postEvent(event);
 		}				
 	}
 	

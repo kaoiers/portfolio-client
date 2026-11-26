@@ -22,7 +22,7 @@
 /*======================================================*/
 // 개별 초기화
 /*======================================================*/
-void CGameUnitGod::PrivateInitialize()
+void CGameUnitGod::privateInitialize()
 {
 
 }
@@ -31,11 +31,11 @@ void CGameUnitGod::PrivateInitialize()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameUnitGod::update( u32 timeMs )
+void CGameUnitGod::update( u32 time_ms )
 {
-	UpdateMoveMent(timeMs);
+	updateMovement(time_ms);
 
-	m_pBrain->Process();
+	m_brain->process();
 
 	if(this->getOwnerType() == object_mine)
 	{
@@ -48,7 +48,7 @@ void CGameUnitGod::update( u32 timeMs )
 /*======================================================*/
 //근거리 공격
 /*======================================================*/
-bool CGameUnitGod::short_attack( CGameUnit* pTarget )
+bool CGameUnitGod::shortAttack( CGameUnit* p_target )
 {
 	
 	return false;
@@ -59,9 +59,9 @@ bool CGameUnitGod::short_attack( CGameUnit* pTarget )
 /*======================================================*/
 // 컨트롤 도입 처리
 /*======================================================*/
-void CGameUnitGod::enter_control()
+void CGameUnitGod::enterControl()
 {
-	CControllerGUI::Instance()->setGodGUI(this);
+	CControllerGUI::instance()->setGodGUI(this);
 
 }
 
@@ -75,22 +75,22 @@ CGameUnitGod::CGameUnitGod(OwnerType owner, u32 obj_id, u32 objtype,
 						   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 						   const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ )
 						   : CGameUnit(owner, objtype, resource, attribute ,unittype,unit_mine, pos, rot, scale), 
-						   m_bMoveFlag(false), m_pArbitrateRegulator(0), m_bCommandNone(false)
+						   m_move_flag(false), m_arbitrate_regulator(0), m_command_none(false)
 {
 
 	
-	m_pBrain->ArmyInit();
+	m_brain->armyInit();
 
-	CGameResourceManager::GetInstance()->addUnitCounts();	
+	CGameResourceManager::getInstance()->addUnitCounts();	
 
 }
 
 CGameUnitGod::~CGameUnitGod()
 {
 
-	CGameMap::GetInstance()->GodDeadEvent();
+	CGameMap::getInstance()->godDeadEvent();
 
-	CGameResourceManager::GetInstance()->SubstractUnitCounts();		
+	CGameResourceManager::getInstance()->subtractUnitCounts();		
 
 }
 
@@ -98,35 +98,35 @@ CGameUnitGod::~CGameUnitGod()
 /*======================================================*/
 // 컨트롤 업데이트
 /*======================================================*/
-void CGameUnitGod::update_control( CEventHandler* pReceiver )
+void CGameUnitGod::updateControl( CEventHandler* p_receiver )
 {
-	if(m_bCommandNone && pReceiver->isMouseLUp())
+	if(m_command_none && p_receiver->isMouseLUp())
 	{
 		this->setCommandType(com_none);
-		m_bCommandNone = false;		
+		m_command_none = false;		
 	}
 
 
 	if(this->getCommandType() == com_none)
 	{
-		if(pReceiver->isMouseROneClick())
+		if(p_receiver->isMouseROneClick())
 		{
-			 m_pBrain->AddGoal_MoveToPosition(pReceiver->getMouseUpGroundPosition());
+			 m_brain->addGoalMoveToPosition(p_receiver->getMouseUpGroundPosition());
 
-			 m_bMoveFlag =  true;
+			 m_move_flag =  true;
 		}
 	}
 	
 
 	if(this->getCommandType() == com_attack)
 	{
-		if(pReceiver->isMouseLOneClick())
+		if(p_receiver->isMouseLOneClick())
 		{
-			m_pBrain->AddGoal_MoveToPosition(pReceiver->getMouseUpGroundPosition());
+			m_brain->addGoalMoveToPosition(p_receiver->getMouseUpGroundPosition());
 
-			m_bMoveFlag =  false;
+			m_move_flag =  false;
 
-			m_bCommandNone = true;
+			m_command_none = true;
 		}
 	}
 
@@ -139,7 +139,7 @@ void CGameUnitGod::update_control( CEventHandler* pReceiver )
 /*======================================================*/
 // 행동 중재
 /*======================================================*/
-void CGameUnitGod::Arbitrate()
+void CGameUnitGod::arbitrate()
 {	
 // 	if(this->isAlive() && !m_bMoveFlag)
 // 	{

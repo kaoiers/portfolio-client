@@ -19,7 +19,7 @@ struct CAnimation_Info;
 
 struct BASIC_OBJECT_RESOURCE
 {
-	std::vector<CAnimation_Info *> m_Animations;
+	std::vector<CAnimation_Info *> m_animations;
 };
 
 
@@ -27,31 +27,31 @@ struct BASIC_OBJECT_RESOURCE
 struct ROOM_RESOURCE :  BASIC_OBJECT_RESOURCE
 {
 	
-	u32				m_iWidth_cells;
-	u32				m_iHeight_cells;
-	vector3di		doorVector;
-	f32				m_iBuildingTime;
-	s16				NeedGold;
-	s16				NeedStone;
-	s16				NeedWood;
+	u32				m_width_cells;
+	u32				m_height_cells;
+	vector3di		door_vector;
+	f32				m_building_time;
+	s16				need_gold;
+	s16				need_stone;
+	s16				need_wood;
 };
 
 
 struct UNIT_RESOURCE :   BASIC_OBJECT_RESOURCE
 {
-	f32				m_fMax_Speed;
-	f32				m_fNormal_Speed;
-	f32				m_fMass;
-	f32				m_fTurnRate;
-	f32				m_fMaxForce;
-	f32				m_fHitRange;
-	u32				m_uAttackFrm1;
-	u32				m_uAttackFrm2;
-	f32				m_fRadius;
-	vector3df		m_vWeaponPos;
-	vector3df		m_vWeaponScale;
-	u32				m_uWeaponJointNumber;
-	u32				m_uProdcutTime;
+	f32				m_max_speed;
+	f32				m_normal_speed;
+	f32				m_mass;
+	f32				m_turn_rate;
+	f32				m_max_force;
+	f32				m_hit_range;
+	u32				m_attack_frm1;
+	u32				m_attack_frm2;
+	f32				m_radius;
+	vector3df		m_weapon_pos;
+	vector3df		m_weapon_scale;
+	u32				m_weapon_joint_number;
+	u32				m_production_time;
 };
 
 

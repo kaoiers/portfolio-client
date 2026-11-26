@@ -21,13 +21,13 @@
 //  죽는 애니메이션  시작
 /*======================================================*/
 
-void Goal_Dead::Activate()
+void Goal_Dead::activate()
 {
-	m_iStatus = active;
+	m_status = active;
 
 // 	if(!(m_pOwner->GetAnimationMgr()->IsOnAnimation(ANI_WALK)))
 // 	{
-	m_pOwner->setCurrentAni(ANI_DIE, false);
+	m_owner->setCurrentAni(ANI_DIE, false);
 //	}	
 
 	
@@ -37,21 +37,21 @@ void Goal_Dead::Activate()
 /*======================================================*/
 //  죽는 애니메이션 조작
 /*======================================================*/
-s32  Goal_Dead::Process()
+s32  Goal_Dead::process()
 {
-	ActivateIfInactive();
+	activateIfInactive();
 
-	return m_iStatus;
+	return m_status;
 }
 
-void Goal_Dead::Terminate()
+void Goal_Dead::terminate()
 {
-	m_iStatus = completed;
+	m_status = completed;
 }
 
 
 
-Goal_Dead::Goal_Dead( CGameUnit* pUnit ) : Goal<CGameUnit>(pUnit, goal_die)
+Goal_Dead::Goal_Dead( CGameUnit* p_unit ) : Goal<CGameUnit>(p_unit, goal_die)
 {
 
 }
