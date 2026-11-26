@@ -16,13 +16,13 @@ class IBaseController;
 class CEventHandler;
 class CObjectSelector;
 class CGameObject;
-class CControllerGUI;
+class ISelectionView;
 class CParticleManager;
 
 class CObjectController : public UnCopyable
 {
     IBaseController* m_controller;
-    CControllerGUI* m_selection_view;
+    ISelectionView* m_selection_view;
 
     CParticleManager* m_plug_in_particle;
 
@@ -31,7 +31,7 @@ class CObjectController : public UnCopyable
     bool m_control_state;
 
 public:
-    explicit CObjectController(CControllerGUI* selection_view = nullptr);
+    explicit CObjectController(ISelectionView* selection_view = nullptr);
     ~CObjectController() = default;
 
     void setController(IBaseController * p_controller);

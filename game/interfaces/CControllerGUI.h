@@ -12,6 +12,7 @@
 #define CUNIT_CONTROLLER_GUI_H
 
 #include <memory>
+#include "../controller/ISelectionView.h"
 
 class CGameGUI;
 class CUnitGodGUI;
@@ -37,7 +38,7 @@ class CGameUnitWorker;
 
 class CGameObject;
 
-class CControllerGUI
+class CControllerGUI : public ISelectionView
 {
     CGameGUI* m_current_gui;
     std::unique_ptr<CUnitGodGUI> m_unit_god_gui;
@@ -58,14 +59,10 @@ class CControllerGUI
 
     void setGuiController(CGameGUI* p_gui);
 
-    static CControllerGUI* p_instance;
-
 public:
     CControllerGUI();
 
     ~CControllerGUI();
-
-    static CControllerGUI* instance();
 
     void setGodGUI(CGameUnitGod* p_god);
 
@@ -80,6 +77,8 @@ public:
     CRoomCommunityGUI* getCommunityGUI() { return m_room_community_gui.get(); }
 
     void disableGui();
+    void showSelection(CGameObject* object) override { setCurrentControlGUI(object); }
+    void clearSelection() override { disableGui(); }
 };
 
 #endif

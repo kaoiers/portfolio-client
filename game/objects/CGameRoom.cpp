@@ -16,13 +16,10 @@
 #include "CGameObjectManager.h"
 #include "CRoomStep.h"
 #include "../attributes/GameResourceManager.h"
-#include "../interfaces/CControllerGUI.h"
 #include "../shader/CLightEffectManager.h"
 #include "../ai/God_Messages.h"
 #include "../ai/MessageDispatcher.h"
 #include "CGameUnitArmy.h"
-#include "../interfaces/CMainGameGUI.h"
-#include "../interfaces/IGameGUI.h"
 #include "CGameUnitEnemy.h"
 #include "../God_Game.h"
 

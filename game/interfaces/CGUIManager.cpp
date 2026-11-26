@@ -24,7 +24,7 @@
 CGUIManager* CGUIManager::m_instance = nullptr;
 
 CGUIManager::CGUIManager()
-    : m_mouse_cursor_gui(0), m_main_game_gui(0), m_pop_up_gui(0), m_web_dialog(nullptr)
+    : m_mouse_cursor_gui(0), m_main_game_gui(nullptr), m_pop_up_gui(0), m_web_dialog(nullptr)
 {
     m_instance = this;
 
@@ -41,6 +41,7 @@ CGUIManager::~CGUIManager()
 
     m_guis.clear();
 
+    m_main_game_gui.reset();
     m_controller_gui.reset();
     m_font_manager.reset();
     if (m_instance == this)
@@ -60,6 +61,9 @@ bool CGUIManager::control( CEventHandler* p_receiver)
 
         (itr->second)->control(p_receiver);
     }
+
+    if (m_main_game_gui && m_main_game_gui->isEnable())
+        m_main_game_gui->control(p_receiver);
 
     if (auto* selected = m_controller_gui->getCurrentControlGUI(); selected && selected->isEnable())
         selected->control(p_receiver);
@@ -114,8 +118,10 @@ void CGUIManager::interfaceInit(CGameGUI* BaseGUI)
 /*======================================================*/
 // 인터페이스 불러오기
 /*======================================================*/
-bool CGUIManager::gameLoading()
+bool CGUIManager::gameLoading(CGameResourceManager& resources, CGameObjectManager& objects, God_Game& game)
 {
+    m_main_game_gui = std::make_unique<CMainGameGUI>(resources, objects, game);
+    m_main_game_gui->guiInitialize();
     return true;
 }
 

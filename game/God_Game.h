@@ -25,6 +25,7 @@ class CPathPlanner;
 class CObjectResourceManager;
 class PluginManager;
 class CGameMap;
+class CGameResourceManager;
 
 struct PACKET_ACCOUNT_LOGIN_CL_LN_REQ;
 
@@ -42,6 +43,7 @@ public:
 private:
     GameState m_game_state;
 
+    std::unique_ptr<CGameResourceManager> m_resources;
     std::unique_ptr<CGameObjectManager> m_object_manager;
     std::unique_ptr<CCameraManager> m_camera_manager;
     std::unique_ptr<CEventHandler> m_event_handler;

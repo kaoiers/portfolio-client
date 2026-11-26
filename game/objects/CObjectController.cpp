@@ -20,10 +20,10 @@
 #include "../PlugIn/plugin.h"
 #include "../shader/CLightEffectManager.h"
 #include "CGameRoom.h"
-#include "../interfaces/CControllerGUI.h"
+#include "../controller/ISelectionView.h"
 #include "CGameUnit.h"
 
-CObjectController::CObjectController(CControllerGUI* selection_view) : m_controller(0), m_selection_view(selection_view), m_owner(0), m_control_state(0), m_plug_in_particle(0)
+CObjectController::CObjectController(ISelectionView* selection_view) : m_controller(0), m_selection_view(selection_view), m_owner(0), m_control_state(0), m_plug_in_particle(0)
 {
 }
 
@@ -38,7 +38,7 @@ void CObjectController::setController( IBaseController * p_controller)
         {
             m_controller->exitControl();
             if (auto* gui = m_selection_view)
-                gui->disableGui();
+                gui->clearSelection();
         }
 
         m_controller = p_controller;
@@ -49,7 +49,7 @@ void CObjectController::setController( IBaseController * p_controller)
 
         commonEnterControlForType(m_owner->getObjectType());
         if (m_selection_view)
-            m_selection_view->setCurrentControlGUI(m_owner);
+            m_selection_view->showSelection(m_owner);
 
         m_control_state = false;
     }
@@ -148,7 +148,7 @@ void CObjectController::nullifyController()
     }
 
     if (auto* gui = m_selection_view)
-        gui->disableGui();
+        gui->clearSelection();
 
     m_controller = nullptr;
     m_owner = nullptr;

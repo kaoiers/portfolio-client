@@ -12,7 +12,6 @@
 #include "GameResourceManager.h"
 #include "../CAppcontext.h"
 #include "../God_Game.h"
-#include "../interfaces/CMainGameGUI.h"
 
 CGameResourceManager* CGameResourceManager::m_instance = nullptr;
 
@@ -27,6 +26,12 @@ CGameResourceManager::CGameResourceManager(u32 unit_limits) : m_game_global_reso
     m_total_unit_counts(unit_limits)
 {
     m_instance = this;
+}
+
+CGameResourceManager::~CGameResourceManager()
+{
+    if (m_instance == this)
+        m_instance = nullptr;
 }
 
 /*======================================================*/
@@ -115,10 +120,6 @@ void CGameResourceManager::addPlayerExp( u32 exp)
     )
     {
         increaseExp(exp);
-        CMainGameGUI* p_gui = CMainGameGUI::getInstance();
-        f32 a = f32(s32(m_current_player_exp));
-        f32 b = f32(getMaxPlayerExp(m_current_player_level));
-        p_gui->setLevelStatus( a/b, m_current_player_level);
     }
 }
 
@@ -147,7 +148,7 @@ void CGameResourceManager::increaseExp( u32 exp)
 /*======================================================*/
 // 현제래벨 경험치 최대치 가져오기
 /*======================================================*/
-u32 CGameResourceManager::getMaxPlayerExp(u32 level)
+u32 CGameResourceManager::getMaxPlayerExp(u32 level) const
 {
     if (level == 0)
         return 0;

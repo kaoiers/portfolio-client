@@ -29,8 +29,6 @@
 #include "../objects/CGameRoomCommunity.h"
 #include "../objects/CGameRoomStock.h"
 
-CControllerGUI* CControllerGUI::p_instance = nullptr;
-
 CControllerGUI::CControllerGUI() :
     m_current_gui(nullptr),
     m_unit_god_gui(std::make_unique<CUnitGodGUI>()),
@@ -41,7 +39,6 @@ CControllerGUI::CControllerGUI() :
     m_room_stock_gui(std::make_unique<CRoomStockGUI>()),
     m_room_up_tower_gui(std::make_unique<CRoomUpTowerGUI>())
 {
-    p_instance = this;
     m_unit_god_gui->hide();
     m_unit_worker_gui->hide();
     m_unit_army_gui->hide();
@@ -51,11 +48,7 @@ CControllerGUI::CControllerGUI() :
     m_room_up_tower_gui->hide();
 }
 
-CControllerGUI::~CControllerGUI()
-{
-    if (p_instance == this)
-        p_instance = nullptr;
-}
+CControllerGUI::~CControllerGUI() = default;
 
 /*======================================================*/
 // 신수GUI 컨트롤 지정
@@ -103,14 +96,6 @@ void CControllerGUI::setGuiController( CGameGUI* p_gui)
 
     if (m_current_gui)
         m_current_gui->show();
-}
-
-/*======================================================*/
-// 인스턴스
-/*======================================================*/
-CControllerGUI* CControllerGUI::instance()
-{
-    return p_instance;
 }
 
 /*======================================================*/

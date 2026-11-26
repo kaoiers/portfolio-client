@@ -14,7 +14,6 @@
 #include "../God_Game.h"
 #include "CGameObject.h"
 #include "../eventhandle/CEventHandleManager.h"
-#include "../interfaces/CGUIManager.h"
 #include "../ai/Goal_Think.h"
 #include "../ai/God_Messages.h"
 #include "../ai/MessageDispatcher.h"
@@ -23,7 +22,6 @@
 #include "CGameRoom.h"
 #include "CGameUnitEnemy.h"
 #include "../shader/CLightEffectManager.h"
-#include "../interfaces/CMainGameGUI.h"
 
 CGameUnit::CGameUnit(OwnerType owner, u32 obj_id, u32 objtype, const UNIT_RESOURCE* resource,
     const GAMEUNIT_ATTRIBUTE* attribute,

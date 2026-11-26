@@ -16,7 +16,6 @@
 
 #define GameResource CGameResourceManager::getInstance()
 
-class CTextGUI;
 
 struct GlobalResource
 {
@@ -38,19 +37,15 @@ class CGameResourceManager
     const u32 time_descendent_interval;
 
     u32 last_updated_time;
-    u32 current_crop, current_stone, current_wood;
+    u32 current_crop = 0, current_stone = 0, current_wood = 0;
 
-    CTextGUI* text_gold;
-    CTextGUI* text_lumber;
-    CTextGUI* text_stone;
-    CTextGUI* text_unit;
 
     static CGameResourceManager* m_instance;
 
 public:
     CGameResourceManager(u32 unit_limits = 10);
 
-    ~CGameResourceManager() = default;
+    ~CGameResourceManager();
 
     void init();
 
@@ -64,12 +59,14 @@ public:
     void addPlayerExp(u32 exp);
     void increaseExp( u32 exp);
     u32 getCurrentLevel() const { return m_current_player_level; }
+    u32 getCurrentExp() const { return m_current_player_exp; }
+    GlobalResource getResources() const { return *m_game_global_resource; }
 
     void addUnitCounts();
     void subtractUnitCounts();
     u32 getUnitCounts() const { return m_unit_counts; }
     u32 getTotalUnitCounts() const { return m_total_unit_counts; }
-    u32 getMaxPlayerExp(u32 level);
+    u32 getMaxPlayerExp(u32 level) const;
 
     inline void addAllResources(s32 g, s32 l, s32 s)
     {

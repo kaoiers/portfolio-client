@@ -16,6 +16,9 @@
 #include <map>
 
 class CGameGUI;
+class CGameResourceManager;
+class CGameObjectManager;
+class God_Game;
 
 class CFontManager;
 class CMainGameGUI;
@@ -32,7 +35,7 @@ class CWebDialog;
 class CGUIManager
 {
     std::unique_ptr<CFontManager> m_font_manager;
-    CMainGameGUI* m_main_game_gui;
+    std::unique_ptr<CMainGameGUI> m_main_game_gui;
     COptionGUI* m_option_gui;
     CMouseCursorGUI* m_mouse_cursor_gui;
     CLoginGUI* m_login_gui;
@@ -64,7 +67,7 @@ public:
     void interfaceInit(CGameGUI* BaseGUI);
 
 public:
-    bool gameLoading();
+    bool gameLoading(CGameResourceManager& resources, CGameObjectManager& objects, God_Game& game);
 
     bool gameLoadingComplete() { return true; };
 
@@ -73,7 +76,7 @@ public:
     bool render();
 
     COptionGUI* getOptionGUI() const { return m_option_gui; }
-    CMainGameGUI* getMainGameGUI() const { return m_main_game_gui; }
+    CMainGameGUI* getMainGameGUI() const { return m_main_game_gui.get(); }
     CMouseCursorGUI* getMouseCursorGUI() const { return m_mouse_cursor_gui; }
     CLoginGUI* getLoginGUI() const { return m_login_gui; }
     CDialogBox* getDialogGui() const { return m_dialog_box_gui; }

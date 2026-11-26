@@ -20,7 +20,6 @@
 #include "../God_Game.h"
 #include "../camera/CCameraManager.h"
 #include "../enemy_gen/CEnemyGenerator.h"
-#include "../interfaces/CMainGameGUI.h"
 
 namespace
 {

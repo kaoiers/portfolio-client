@@ -12,7 +12,6 @@
 #define DEF_BUILDINGSTEP
 
 #include "../CAppcontext.h"
-#include "../interfaces/CGUIManager.h"
 #include "../shader/CLightEffectManager.h"
 
 class CRoomStep

@@ -36,20 +36,10 @@
 
 #include "../PlugIn/PluginManager.h"
 
-CMainGameGUI *CMainGameGUI::m_instance = nullptr;
-
-CMainGameGUI::CMainGameGUI(CGameObjectManager* p_obj_man) :
-    CGameGUI(position2d<s16>(0, 0)),
-    m_building(nullptr),
-    m_obj_man(p_obj_man),
-    m_object_select_available(true),
-    m_game_resource_manager(0),
-    m_level_bar(0),
-    m_alpha_ratio(0.0f)
+CMainGameGUI::CMainGameGUI(CGameResourceManager& resources, CGameObjectManager& objects, God_Game& game)
+    : CGameGUI(position2d<s16>(0, 0)), m_view_model(resources, objects, game), m_game(game)
 {
-    m_instance = this;
-
-    m_game = CAppContext::getGodGame();
+    m_view_model.setObserver([this](const MainGameViewState& state) { m_view_state = state; });
 }
 
 /*======================================================*/
@@ -73,48 +63,15 @@ void CMainGameGUI::setOwner( CGameObject *owner)
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
-bool CMainGameGUI::interfaceControl( CEventHandler * p_receiver)
+bool CMainGameGUI::interfaceControl(CEventHandler* p_receiver)
 {
-    u32 millyseconds = 0;
-
-    fadeOutWarningMessage(millyseconds);
-
-    if (m_game_resource_manager)
-        m_game_resource_manager->update(millyseconds);
-
-    if (p_receiver->isMouseLUp()
-        && !p_receiver->isCursorOnGUI()
-        && !m_obj_man->isOnControlState() && CAppContext::getGodGame()->getCurrentGameState() == God_Game::GameState::on_game)
-    {
-        CGameObject *obj = nullptr; // m_pObjMan->getPicker()->getMouseOverObject(pReceiver);
-
-        {
-            if (obj->getObjectType() == GODTYPE_UNIT)
-            {
-                CGameUnit* unit = dynamic_cast<CGameUnit *>(obj);
-
-                if (unit->getAllyType() == unit_mine)
-                {
-                    m_obj_man->setController(unit);
-                }
-            }
-
-            else if (obj->getObjectType() == GODTYPE_BUILDING)
-            {
-                CGameRoom* room = dynamic_cast<CGameRoom *>(obj);
-
-                m_obj_man->setController(room);
-            }
-        }
-    }
-
-    return true;
+    refreshView();
+    // Picking is engine-specific and unavailable in the source-only sample.
+    // A renderer can forward the picked object via selectObject().
+    return p_receiver != nullptr;
 }
 
-CMainGameGUI::~CMainGameGUI()
-{
-    SAFE_DELETE(m_game_resource_manager);
-}
+CMainGameGUI::~CMainGameGUI() = default;
 
 /*======================================================*/
 // 웨이브 버튼 보이기
@@ -137,14 +94,15 @@ void CMainGameGUI::startTimer()
 /*======================================================*/
 void CMainGameGUI::endTimerEvent()
 {
-    CGameMap::getInstance()->startEnemyGenerate();
+    m_view_model.requestWave();
 }
 
 /*======================================================*/
 // 레벨 상태 설정
 /*======================================================*/
-void CMainGameGUI::setLevelStatus( const f32 percent, const u32 level)
+void CMainGameGUI::setLevelStatus(const f32, const u32)
 {
+    refreshView();
 }
 
 /*======================================================*/
@@ -152,7 +110,7 @@ void CMainGameGUI::setLevelStatus( const f32 percent, const u32 level)
 /*======================================================*/
 void CMainGameGUI::addPlayerExp( const u32 exp)
 {
-    m_game_resource_manager->addPlayerExp(exp);
+    m_view_model.requestAddExp(exp);
 }
 
 /*======================================================*/
@@ -179,7 +137,7 @@ void CMainGameGUI::fadeOutWarningMessage(const u32 time_ms)
 /*======================================================*/
 void CMainGameGUI::playSound2D( const char* soundname, const bool loop)
 {
-    m_game->playSound(soundname, loop);
+    m_game.playSound(soundname, loop);
 }
 
 /*======================================================*/
@@ -199,6 +157,7 @@ void CMainGameGUI::stopAllSounds()
 /*======================================================*/
 // 놀러가기 버튼 활성화
 /*======================================================*/
-void CMainGameGUI::enableDoorButton( const bool on)
+void CMainGameGUI::enableDoorButton(const bool on)
 {
+    m_view_model.setDoorEnabled(on);
 }

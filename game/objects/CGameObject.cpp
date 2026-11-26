@@ -18,9 +18,6 @@
 #include "CGameObjectManager.h"
 #include "../ai/MessageDispatcher.h"
 #include "../shader/CLightEffectManager.h"
-#include "../interfaces/CMainGameGUI.h"
-#include "../interfaces/CControllerGUI.h"
-#include "../interfaces/CGUIManager.h"
 
 u32 CGameObject::m_next_valid_id = 1;
 

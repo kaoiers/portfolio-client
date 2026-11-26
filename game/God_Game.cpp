@@ -17,6 +17,7 @@
 #include "CAppcontext.h"
 #include "controller/EnumPickingType.h"
 #include "interfaces/CGUIManager.h"
+#include "interfaces/CControllerGUI.h"
 #include "PlugIn/PluginManager.h"
 
 #include "map/CGameMap.h"
@@ -25,6 +26,7 @@
 #include "interfaces/CLoginGUI.h"
 #include "shader/CLightEffectManager.h"
 #include "interfaces/CMainGameGUI.h"
+#include "attributes/GameResourceManager.h"
 #include "option/CGodOption.h"
 
 namespace
@@ -54,11 +56,13 @@ bool God_Game::gameLoading()
 {
     m_object_manager.reset();
     m_game_map.reset();
+    m_gui_manager.reset();
+    m_resources = std::make_unique<CGameResourceManager>();
     m_gui_manager = std::make_unique<CGUIManager>();
     m_event_handler = std::make_unique<CEventHandler>();
     m_object_manager = std::make_unique<CGameObjectManager>(m_gui_manager->getUnitController());
     m_object_manager->setSoundSink([this](const char* name, bool loop) { playSound(name, loop); });
-    m_gui_manager->gameLoading();
+    m_gui_manager->gameLoading(*m_resources, *m_object_manager, *this);
     m_camera_manager = std::make_unique<CCameraManager>();
     m_camera_manager->init();
     m_game_map = std::make_unique<CGameMap>(*m_object_manager, *m_camera_manager);

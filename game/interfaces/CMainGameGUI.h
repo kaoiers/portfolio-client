@@ -8,7 +8,9 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+#pragma once
 #include "IGameGUI.h"
+#include "viewmodel/MainGameViewModel.h"
 
 class CBuildingObject;
 class CGameObject;
@@ -51,43 +53,29 @@ class WebBrowserView;
 
 class CMainGameGUI : public CGameGUI
 {
-    CBuildingObject* m_building;
-    CGameObjectManager* m_obj_man;
-    CGameTimerLimiter* m_time_limiter;
-    CGameResourceManager* m_game_resource_manager;
-    bool m_object_select_available;
-
-    CImageGUI* m_level_bar;
-    CTextGUI* m_level_text;
-
-    CImageGUI* m_warning_image;
-    CTextGUI* m_warning_text;
-
-    CButtonGUI* m_go_home_button;
-    CButtonGUI* m_facebook_button;
-
-    God_Game* m_game;
-
-    f32 m_alpha_ratio;
-
-    static CMainGameGUI* m_instance;
+    MainGameViewModel m_view_model;
+    MainGameViewState m_view_state;
+    God_Game& m_game;
+    f32 m_alpha_ratio = 0.0f;
 
 private:
     virtual bool interfaceControl(CEventHandler * p_receiver);
-    void addMeshControl(CEventHandler * p_receiver);
 
 public:
-    CMainGameGUI(CGameObjectManager* p_obj_man);
+    CMainGameGUI(CGameResourceManager& resources, CGameObjectManager& objects, God_Game& game);
     virtual ~CMainGameGUI();
 
-    static CMainGameGUI* getInstance() { return m_instance; }
+    const MainGameViewState& getViewState() const { return m_view_state; }
+    void refreshView() { m_view_model.refresh(); }
+    bool selectObject(CGameObject* object) { return m_view_model.requestSelect(object); }
+    void setDamage(u32, u32) override {}
 
     void startTimer();
     void endTimerEvent();
 
     void showWaveButton();
-    void setObjectSelectAvailable(const bool b_available) { m_object_select_available = b_available; }
-    const bool getObjectSelectAvailable() const { return m_object_select_available; }
+    void setObjectSelectAvailable(const bool b_available) { m_view_model.setSelectionAvailable(b_available); }
+    const bool getObjectSelectAvailable() const { return m_view_state.selection_available; }
     void setLevelStatus(const f32 percent, const u32 level);
 
     void addPlayerExp(const u32 exp);

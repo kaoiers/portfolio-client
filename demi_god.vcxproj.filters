@@ -150,6 +150,9 @@
     <ClInclude Include="game\interfaces\CUnitWorkerGUI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="game\interfaces\viewmodel\MainGameViewModel.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
     <ClInclude Include="game\interfaces\CMainGameGUI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
@@ -282,6 +285,9 @@
     <ClInclude Include="game\objects\EnumObjectType.h">
       <Filter>Source Files\OBJECT</Filter>
     </ClInclude>
+    <ClInclude Include="game\controller\ISelectionView.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="game\controller\EnumPickingType.h">
       <Filter>Source Files\EVENT</Filter>
     </ClInclude>
@@ -396,6 +402,9 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="game\interfaces\CUnitWorkerGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\viewmodel\MainGameViewModel.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="game\interfaces\CMainGameGUI.cpp">

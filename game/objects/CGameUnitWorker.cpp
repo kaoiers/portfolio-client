@@ -15,8 +15,6 @@
 #include "../eventhandle/CEventHandleManager.h"
 
 #include "../ai/God_Messages.h"
-#include "../interfaces/CControllerGUI.h"
-#include "../interfaces/CMainGameGUI.h"
 
 #include "../ai/Goal_Think.h"
 #include "CGameObjectManager.h"

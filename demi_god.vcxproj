@@ -182,6 +182,7 @@
     <ClInclude Include="game\CAppcontext.h" />
     <ClInclude Include="game\common\CFontManager.h" />
     <ClInclude Include="game\common\UncopyableUtil.h" />
+    <ClInclude Include="game\controller\ISelectionView.h" />
     <ClInclude Include="game\controller\EnumPickingType.h" />
     <ClInclude Include="game\enemy_gen\CEnemyGenerator.h" />
     <ClInclude Include="game\eventhandle\CEventHandleManager.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="game\interfaces\CControllerGUI.h" />
     <ClInclude Include="game\interfaces\CGUIManager.h" />
     <ClInclude Include="game\interfaces\CLoginGUI.h" />
+    <ClInclude Include="game\interfaces\viewmodel\MainGameViewModel.h" />
     <ClInclude Include="game\interfaces\CMainGameGUI.h" />
     <ClInclude Include="game\interfaces\CRoomCommunityGUI.h" />
     <ClInclude Include="game\interfaces\CRoomGUI.h" />
@@ -272,6 +274,7 @@
     <ClCompile Include="game\interfaces\CControllerGUI.cpp" />
     <ClCompile Include="game\interfaces\CGUIManager.cpp" />
     <ClCompile Include="game\interfaces\CLoginGUI.cpp" />
+    <ClCompile Include="game\interfaces\viewmodel\MainGameViewModel.cpp" />
     <ClCompile Include="game\interfaces\CMainGameGUI.cpp" />
     <ClCompile Include="game\interfaces\CRoomCommunityGUI.cpp" />
     <ClCompile Include="game\interfaces\viewmodel\RoomViewModel.cpp" />

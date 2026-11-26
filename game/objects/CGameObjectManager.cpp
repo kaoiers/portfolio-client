@@ -32,7 +32,7 @@
 #include "CObjectController.h"
 #include "../ai/MessageDispatcher.h"
 
-CGameObjectManager::CGameObjectManager(CControllerGUI* selection_view)
+CGameObjectManager::CGameObjectManager(ISelectionView* selection_view)
 {
     m_dispatcher = std::make_unique<MessageDispatcher>(*this);
     m_object_controller = std::make_unique<CObjectController>(selection_view);

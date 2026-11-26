@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CGameUnitArmy.h"
-#include "../interfaces/CControllerGUI.h"
 
 #include "../eventhandle/CEventHandleManager.h"
 #include "../ai/Goal_Think.h"

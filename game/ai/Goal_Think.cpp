@@ -23,7 +23,6 @@
 #include "Goal_GoingHome.h"
 #include "Goal_AttackUnitTarget.h"
 #include "../map/CGameMap.h"
-#include "../interfaces/CMainGameGUI.h"
 
 Goal_Think::Goal_Think(CGameUnit* p_unit):Goal_Composite<CGameUnit>(p_unit, goal_think)
 {

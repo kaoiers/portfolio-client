@@ -44,7 +44,7 @@ struct Telegram;
 class MessageDispatcher;
 
 class CObjectController;
-class CControllerGUI;
+class ISelectionView;
 
 class CGameObjectManager
 {
@@ -62,7 +62,7 @@ using ObjectMap = std::map<u32, std::unique_ptr<CGameObject>>;
     std::function<void(const char*, bool)> m_sound_sink;
 
 public:
-    explicit CGameObjectManager(CControllerGUI* selection_view = nullptr);
+    explicit CGameObjectManager(ISelectionView* selection_view = nullptr);
 
     ~CGameObjectManager();
 
