@@ -13,19 +13,24 @@
 #pragma warning (disable:4786)
 
 #include "Goal_Composite.h"
+#include "../navigation/AsyncPathfinder.h"
 
 class CGameUnit;
+class CGameMap;
 
 class Goal_MoveToPosition : public Goal_Composite<CGameUnit>
 {
 private:
     //the position the bot wants to reach
     vector3df m_destination;
+    CGameMap* m_map;
+    std::future<AsyncPathResult> m_pending_path;
+    std::uint64_t m_path_revision = 0;
 
 public:
-    Goal_MoveToPosition(CGameUnit* p_unit, vector3df pos):
+    Goal_MoveToPosition(CGameUnit* p_unit, vector3df pos, CGameMap* map = nullptr):
     Goal_Composite<CGameUnit>(p_unit, goal_move_to_position),
-    m_destination(pos)
+    m_destination(pos), m_map(map)
     {}
 
     void activate() override;

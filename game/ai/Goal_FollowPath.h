@@ -13,14 +13,16 @@
 #pragma warning (disable:4786)
 
 #include "Goal_Composite.h"
+#include <vector>
 
 class CGameUnit;
 
 class Goal_FollowPath : public Goal_Composite<CGameUnit>
 {
 private:
+    std::vector<vector3df> m_waypoints;
 public:
-    Goal_FollowPath(CGameUnit* p_unit);
+    Goal_FollowPath(CGameUnit* p_unit, std::vector<vector3df> waypoints);
 
     void activate() override;
     s32 process() override;

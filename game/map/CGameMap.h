@@ -22,13 +22,14 @@ class CEnemyGenerator;
 class CExplosionSystem;
 
 #include "../../basicType.h"
-#include "../navigation/AStar.h"
+#include "../navigation/AsyncPathfinder.h"
 #include <memory>
 #include "../common/UncopyableUtil.h"
 
 class CGameMap : private UnCopyable
 {
     NavigationGrid m_navigation_grid;
+    AsyncPathfinder m_pathfinder;
     std::uint64_t m_navigation_revision = 0;
     CGameObjectManager* m_obj_man;
     CCameraManager* m_camera_manager;
@@ -90,6 +91,8 @@ public:
     bool isNodePresent(const s32 x, const s32 y);
     PathResult findPath(GridPoint start, GridPoint goal) const { return AStar::find(m_navigation_grid, start, goal); }
     std::uint64_t getNavigationRevision() const { return m_navigation_revision; }
+    std::future<AsyncPathResult> requestPathAsync(GridPoint start, GridPoint goal)
+    { return m_pathfinder.request(m_navigation_grid, m_navigation_revision, start, goal); }
     bool isNodeAllLinked(const s32 x, const s32 y);
     bool isInUsableArea(const s32 x, const s32 y);
 

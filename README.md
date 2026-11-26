@@ -72,6 +72,34 @@ flowchart TD
 
 ViewModel은 메인 스레드의 프레임 갱신 시 변경된 값만 알립니다. 객체 수명 토큰을 통해 삭제된 유닛에 대한 참조를 무효화하며 모델을 공동 소유하지 않습니다. 엔진 렌더러가 없는 상태에서도 표시 데이터 및 명령 전달을 테스트할 수 있습니다. 건물 UI와 메인 게임 UI도 동일한 스냅샷 방식으로 갱신합니다. 건물의 사운드 요청은 GUI를 경유하지 않고 composition root의 사운드 처리 경계로 전달합니다. Model 소스는 구체 GUI 클래스를 참조하지 않습니다. 엔진 의존 오브젝트 생성·피킹·실제 렌더링 및 일부 기존 기능은 여전히 스텁입니다.
 
+## 비동기 타일 경로 탐색
+
+- `ThreadPool`: 고정 작업 스레드, mutex, condition_variable, future, 종료 시 대기 작업 완료 및 join.
+- `NavigationGrid` / `AStar`: 4방향 타일 이동, Manhattan 휴리스틱, 장애물 우회와 최단 경로 복원.
+- `AsyncPathfinder`: 맵 스냅샷과 revision을 값으로 전달하고 결과를 future로 반환.
+- `Goal_MoveToPosition`: 메인 스레드에서 non-blocking polling, 오래된 revision 재탐색, `Goal_FollowPath` 경유점 연결.
+
+```mermaid
+flowchart TD
+    G[Move goal] --> S[Grid snapshot]
+    S --> Q[Thread pool]
+    Q --> A[A-star search]
+    A --> F[Future result]
+    F --> V[Revision check]
+    V --> P[Follow-path goal]
+```
+
+작업 스레드는 유닛·GUI·실시간 맵 객체에 접근하지 않습니다. 경로 요청 및 결과 적용은 메인 스레드에서 이루어집니다. 실제 엔진의 이동/충돌/렌더링은 제거된 상태이므로 통합 테스트는 좌표를 직접 변경하여 경유점 순서와 완료 상태를 검증합니다. 기본 워커 수는 2개이며, 작업 큐는 아직 별도의 용량 제한이나 우선순위를 두지 않습니다.
+
+독립 테스트 실행:
+
+```sh
+g++ -std=c++17 -pthread tests/thread_pool_tests.cpp -o thread_pool_tests
+./thread_pool_tests
+g++ -std=c++17 tests/astar_tests.cpp -o astar_tests
+./astar_tests
+```
+
 ## 외부 참고 코드 및 출처
 
 - **Mat Buckland** — AI 프로그래밍 예제 코드. `game/ai/Goal_UnitHuntTarget.h`에 남아 있는 원본 저작자 표기(`Goal_HuntTarget.h`, `www.ai-junkie.com`)를 보존했습니다.

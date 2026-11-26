@@ -11,11 +11,13 @@
 #include <stdafx.h>
 #include "Goal_FollowPath.h"
 #include "../objects/CGameUnit.h"
-#include "Goal_TraverseEdge.h"
+#include "Goal_SeekToPosition.h"
+#include <utility>
 #include <string>
 
 Goal_FollowPath::
-Goal_FollowPath(CGameUnit* p_unit):Goal_Composite<CGameUnit>(p_unit, goal_follow_path)
+Goal_FollowPath(CGameUnit* p_unit, std::vector<vector3df> waypoints)
+    : Goal_Composite<CGameUnit>(p_unit, goal_follow_path), m_waypoints(std::move(waypoints))
 {
 }
 
@@ -25,7 +27,9 @@ Goal_FollowPath(CGameUnit* p_unit):Goal_Composite<CGameUnit>(p_unit, goal_follow
 void Goal_FollowPath::activate()
 {
     m_status = active;
-    //remove the edge from the path
+    removeAllSubgoals();
+    for (auto it = m_waypoints.rbegin(); it != m_waypoints.rend(); ++it)
+        addSubgoal(std::make_unique<Goal_SeekToPosition>(m_owner, *it));
 }
 
 /*======================================================*/
@@ -37,23 +41,16 @@ s32 Goal_FollowPath::process()
 
     m_status = processSubgoals();
 
-    //if there are no subgoals present check to see if the path still has edges.
-    //remaining. If it does then call activate to grab the next edge.
-    if (m_status == completed)
-    {
-        activate();
-    }
-
-    else if (m_status == completed)
-    {
+    if (m_status == completed || m_status == failed)
         stopSeeking();
-    }
 
     return m_status;
 }
 
 void Goal_FollowPath::terminate()
 {
+    removeAllSubgoals();
+    stopSeeking();
 }
 
 /*======================================================*/
