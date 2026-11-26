@@ -83,9 +83,9 @@ public:
 
     virtual void terminate() = 0;
 
-    virtual bool handleMessage(const Telegram& msg) { return false; }
+    virtual bool handleMessage(const Telegram&) { return false; }
 
-    virtual void addSubgoal(std::unique_ptr<Goal<entity_type>> g)
+    virtual void addSubgoal(std::unique_ptr<Goal<entity_type>>)
     {
         throw std::runtime_error("Cannot add goals to atomic goals");
     }

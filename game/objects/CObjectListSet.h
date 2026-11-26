@@ -24,7 +24,7 @@ class CObjectListSet
     {
         typename std::list<entity_type >::iterator itr = m_entity_list.begin();
 
-        for (itr; itr != m_entity_list.end(); itr++)
+        for (; itr != m_entity_list.end(); ++itr)
         {
             if ((*itr) == entity)
             {
@@ -48,7 +48,7 @@ public:
     {
         typename std::list<entity_type >::iterator itr = m_entity_list.begin();
 
-        for (itr; itr != m_entity_list.end(); itr++)
+        for (; itr != m_entity_list.end(); ++itr)
         {
             if ((*itr) == entity)
             {

@@ -36,20 +36,21 @@ struct Telegram
     //any additional information that may accompany the message
     void* extra_info;
 
-    Telegram():dispatch_time(-1),
-    sender(-1),
+    Telegram():sender(-1),
     receiver(-1),
-    msg(-1)
+    msg(-1),
+    dispatch_time(-1),
+    extra_info(nullptr)
     {}
 
     Telegram(double time,
         s32 sender,
         s32 receiver,
         s32 msg,
-        void* info = nullptr): dispatch_time(time),
-    sender(sender),
+        void* info = nullptr): sender(sender),
     receiver(receiver),
     msg(msg),
+    dispatch_time(time),
     extra_info(info)
     {}
 };

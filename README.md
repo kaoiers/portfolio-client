@@ -37,7 +37,18 @@ flowchart TD
 
 - Visual Studio에서 `demi_god.vcxproj`를 열고 C++ 데스크톱 개발 워크로드와 Windows SDK를 설치합니다. 프로젝트의 도구 집합은 v145로 설정되어 있습니다. 해당 도구 집합이 있는 환경에서 Debug 또는 Release 구성을 선택하여 빌드합니다.
 - 현재 검증은 GCC C++17과 로컬 Windows API 검사 전용 대체 헤더로 61개 소스의 컴파일과 링크를 확인한 것입니다. 대체 헤더는 저장소에 포함되지 않으며 Windows 네이티브 빌드나 게임 실행을 보증하지 않습니다.
-- 독립 테스트는 렌더링 엔진과 Windows SDK 없이 실행하도록 구성합니다.
+- 독립 테스트는 렌더링 엔진과 Windows SDK 없이 실행할 수 있습니다.
+
+### 독립 테스트 실행
+
+저장소 루트에서 C++17 컴파일러로 실행합니다.
+
+```sh
+g++ -std=c++17 -Wall -Wextra -I. tests/core_tests.cpp -o core_tests
+./core_tests
+```
+
+테스트 범위: Goal 합성 및 소유권, Telegram 비교와 페이로드, 오브젝트 집합의 중복 방지 및 삭제.
 
 ## 외부 참고 코드 및 출처
 
