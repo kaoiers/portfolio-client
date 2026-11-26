@@ -24,7 +24,6 @@
 #include "objects/CObjectController.h"
 #include "objects/CGameUnit.h"
 #include "interfaces/CLoginGUI.h"
-//#include "PacketAccount.h"
 #include "shader/CLightEffectManager.h"
 #include "interfaces/CMainGameGUI.h"
 #include "option/CGodOption.h"
@@ -100,12 +99,9 @@ void God_Game::render()
 	{
 		if(CAppContext::GetGodOption()->isShaderOn())
 		{
-			//ShaderEffect->drawAll();
 		}
 		else
 		{
-			//CAppContext::GetDevice()->getSceneManager()->drawAll();
-			//ShapeDrawer->draw();
 		}
 		if(m_pGameMap)
 			m_pGameMap->render();
@@ -113,7 +109,6 @@ void God_Game::render()
 
 	}else
 	{
-		//CAppContext::GetDevice()->getSceneManager()->drawAll();
 	}
 
 
@@ -128,10 +123,6 @@ void God_Game::render()
 /*======================================================*/
 void God_Game::upadte(u32 timeMs)
 {
-//#ifdef NETWORK_ON
-	//if(m_pNetworkManager)
-	//	m_pNetworkManager->Update();
-//#endif
 
 
 	if(m_eGameState == on_game || m_eGameState == on_friend)
@@ -177,14 +168,12 @@ bool God_Game::control()
 /*======================================================*/
 void God_Game::DrawScneneForInterface()
 {
-	//pDriver->beginScene();
 
 	if(m_pGUIManager)
 	{
 		m_pGUIManager->render();
 	}
 
-	//pDriver->endScene();
 }
 
 
@@ -239,6 +228,5 @@ void God_Game::playSound( const char *sundName, const bool loop /*= true*/ )
 /*======================================================*/
 void WarningBox( const std::wstring str )
 {
-	//CAppContext::GetGodGame()->getGUIManager()->WarningBox(str);	
 }
 

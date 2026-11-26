@@ -87,15 +87,10 @@ bool CLoginGUI::interface_control( CEventHandler* pReceiver )
 	}
 	else if(pReceiver->isClickedButtonID(GUI_LOGIN_BUTTON_OK))
 	{
-		//std::tr1::shared_ptr<PACKET_ACCOUNT_LOGIN_CL_LN_REQ> account(CreateLoginPacket());
-
-		//NETWORK
-		//PACKET_ACCOUNT_LOGIN_CL_LN_REQ* account = new PACKET_ACCOUNT_LOGIN_CL_LN_REQ();
 
 
 
-		//strcpy_s(account->m_nickname, GetMuiltiByteStringOfEditBox(FindElementByID(GUI_LOGIN_EDIT_ID)).c_str());
-		//strcpy_s(account->m_password, GetMuiltiByteStringOfEditBox(FindElementByID(GUI_LOGIN_EDIT_PASSWORD)).c_str());
+
 		
 		this->Hide();
 		
@@ -106,18 +101,6 @@ bool CLoginGUI::interface_control( CEventHandler* pReceiver )
 	}
 	else if(pReceiver->isClickedButtonID(GUI_JOIN_BUTTON_CONFIRM))
 	{
-		//NETWORK
-// 		stringc password1 = GetMuiltiByteStringOfEditBox(FindElementByID(GUI_JOIN_EDIT_NEWPASSWORD)),
-// 			password2 = GetMuiltiByteStringOfEditBox(FindElementByID(GUI_JOIN_EDIT_NEWPASSWORD_CONFIRM));
-// 
-// 		if(password1 == password2)
-// 		{
-// 			std::tr1::shared_ptr<PACKET_ACCOUNT_MAKEACCOUNT_CL_LN_REQ> account(CreateMakeAccountPacket());
-// 			strcpy_s(account->m_nickname, GetMuiltiByteStringOfEditBox(FindElementByID(GUI_JOIN_EDIT_NEWID)).c_str());
-// 			strcpy_s(account->m_password, GetMuiltiByteStringOfEditBox(FindElementByID(GUI_JOIN_EDIT_NEWPASSWORD)).c_str());
-// 			CNetworkManager* pNetwork = CAppContext::GetGodGame()->getNetworkManager();				
-// 			pNetwork->SendPacket(account.get() , sizeof(PACKET_ACCOUNT_MAKEACCOUNT_CL_LN_REQ));
-// 		}
 	}
 
 	return true;
