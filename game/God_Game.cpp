@@ -196,9 +196,3 @@ void God_Game::playSound( const char *sound_name, const bool loop /*= true*/)
 {
 }
 
-/*======================================================*/
-// 경고 박스 띄우기
-/*======================================================*/
-void warningBox( const std::wstring str)
-{
-}

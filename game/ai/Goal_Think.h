@@ -36,7 +36,7 @@ public:
 
     //top level goal types
     void addGoalMoveToPosition(vector3df pos);
-    void addGoalGetItem(u32 item_type);
+
     void addGoalExplore();
     void addGoalDie();
     void addGoalBuilding(const vector3df& pos);
@@ -46,7 +46,7 @@ public:
     void addGoalAttackTargetForEnemy();
     void addGoalGoingHome();
     void addGoalAttackTarget();
-    void queueGoalMoveToPosition(vector3df pos);
+
 };
 
 #endif

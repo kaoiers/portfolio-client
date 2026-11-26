@@ -26,7 +26,6 @@ class CObjectResourceManager;
 class PluginManager;
 class CGameMap;
 
-void warningBox(const std::wstring str);
 struct PACKET_ACCOUNT_LOGIN_CL_LN_REQ;
 
 class God_Game : private UnCopyable

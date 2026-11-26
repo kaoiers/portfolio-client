@@ -29,10 +29,3 @@ CGodOption* CAppContext::getGodOption()
     return CGodOption::getInstance();
 }
 
-/*======================================================*/
-// 그림용 인스턴스 가져오기
-/*======================================================*/
-CShapeDrawer* CAppContext::getShapeDrawer()
-{
-    return nullptr;
-}

@@ -14,12 +14,11 @@
 
 class CGodOption;
 class God_Game;
-class CShapeDrawer;
 
 class CAppContext : public UnCopyable
 {
 public:
     static God_Game *getGodGame();
-    static CShapeDrawer* getShapeDrawer();
+
     static CGodOption* getGodOption();
 };

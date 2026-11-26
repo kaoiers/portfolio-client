@@ -158,9 +158,6 @@ void Goal_Think::addGoalExplore()
     }
 }
 
-void Goal_Think::addGoalGetItem(u32 item_type)
-{
-}
 
 /*======================================================*/
 // 하위 목표로 공격하기 추가
@@ -174,9 +171,6 @@ void Goal_Think::addGoalAttackTarget()
     }
 }
 
-void Goal_Think::queueGoalMoveToPosition(vector3df pos)
-{
-}
 
 /*======================================================*/
 // 하위 목표로 죽기 추가
