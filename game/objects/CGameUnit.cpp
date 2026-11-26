@@ -99,7 +99,8 @@ void CGameUnit::initWeapon()
 /*======================================================*/
 bool CGameUnit::handleMessage( const Telegram& msg)
 {
-    m_brain->handleMessage(msg);
+    if (m_brain)
+        m_brain->handleMessage(msg);
 
     switch (msg.msg)
     {
@@ -143,7 +144,7 @@ bool CGameUnit::handleMessage( const Telegram& msg)
             {
                 if (this->getUnitType() != UNIT_WORKER1)
                 {
-                    if (m_brain->notPresent(goal_attack_target) && m_brain->notPresent(goal_move_to_position))
+                    if (m_brain && m_brain->notPresent(goal_attack_target) && m_brain->notPresent(goal_move_to_position))
                     {
                     }
                 }
@@ -246,7 +247,7 @@ void CGameUnit::dispatchMessageKill( CGameUnit* p_target)
 {
     void *killed_target = reinterpret_cast<CGameUnit *>(p_target);
 
-    Dispatcher->dispatchMessageToAllObjects(SEND_MSG_IMMEDIATELY, SENDER_ID_IRRELEVANT, Msg_UnitDead, killed_target);
+    getObjectManager()->getMessageDispatcher().dispatchMessageToAllObjects(SEND_MSG_IMMEDIATELY, SENDER_ID_IRRELEVANT, Msg_UnitDead, killed_target);
 }
 
 /*======================================================*/

@@ -120,7 +120,7 @@ void God_Game::update(u32 time_ms)
     {
         //순서유의
         if (m_object_manager)
-            m_object_manager->update(m_event_handler.get());
+            m_object_manager->update(m_event_handler.get(), time_ms);
 
         if (m_game_map)
             m_game_map->update(time_ms);

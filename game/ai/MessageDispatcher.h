@@ -10,59 +10,36 @@
 
 #ifndef MESSAGE_DISPATCHER_H
 #define MESSAGE_DISPATCHER_H
-#pragma warning (disable:4786)
 
-#include <set>
-
+#include <map>
 #include "Telegram.h"
 
-class CGameObject;
+class CGameObjectManager;
 
-//to make life easier...
-#define Dispatcher MessageDispatcher::getInstance()
+inline constexpr double SEND_MSG_IMMEDIATELY = 0.0;
+inline constexpr s32 NO_ADDITIONAL_INFO = 0;
+inline constexpr s32 SENDER_ID_IRRELEVANT = -1;
 
-//to make code easier to read
-const double SEND_MSG_IMMEDIATELY = 0.0;
-const s32 NO_ADDITIONAL_INFO = 0;
-const s32 SENDER_ID_IRRELEVANT = -1;
-
+// One dispatcher per object manager. Delay is in seconds; frame updates are in milliseconds.
 class MessageDispatcher
 {
-private:
-    //a std::set is used as the container for the delayed messages
-    //because of the benefit of automatic sorting and avoidance
-    //of duplicates. Messages are sorted by their dispatch time.
-    std::set<Telegram> priority_q;
-
-    //this method is utilized by DispatchMsg or DispatchDelayedMessages.
-    //This method calls the message handling member function of the receiving
-    //entity, pReceiver, with the newly created telegram
-    void discharge(CGameObject* p_receiver, const Telegram& msg);
-
-    MessageDispatcher() {}
-
-    //copy ctor and assignment should be private
-    MessageDispatcher(const MessageDispatcher&);
-    MessageDispatcher& operator=(const MessageDispatcher&);
-
 public:
-    static MessageDispatcher* getInstance();
+    explicit MessageDispatcher(CGameObjectManager& manager);
+    MessageDispatcher(const MessageDispatcher&) = delete;
+    MessageDispatcher& operator=(const MessageDispatcher&) = delete;
 
-    //send a message to another agent. Receiving agent is referenced by ID.
-    void dispatchMsg(double delay,
-        s32 sender,
-        s32 receiver,
-        s32 msg,
-        void* extra_info);
+    // Payloads are borrowed during immediate delivery only.
+    bool dispatchMsg(double delay, s32 sender, s32 receiver, s32 msg, void* extra_info = nullptr);
+    bool dispatchMessageToAllObjects(double delay, s32 sender, s32 msg, void* extra_info = nullptr);
+    void dispatchDelayedMessages(u32 elapsed_ms);
+    void cancelReceiver(u32 id);
+    void clear();
 
-    //send out any delayed messages. This method is called each time through
-    //the main game loop.
-    void dispatchDelayedMessages();
-
-    void dispatchMessageToAllObjects(double delay,
-        s32 sender,
-        s32 msg,
-        void* extra_info);
+private:
+    CGameObjectManager& m_manager;
+    double m_time_ms = 0.0;
+    // Equivalent keys preserve insertion order, including identical messages.
+    std::multimap<double, Telegram> m_pending;
 };
 
 #endif

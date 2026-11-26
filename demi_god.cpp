@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "game/God_Game.h"
+#include <chrono>
 
 int main()
 {
@@ -13,11 +14,15 @@ int main()
         return false;
     }
 
+    auto previous = std::chrono::steady_clock::now();
     while (god_game->isRunning())
     {
         god_game->control();
 
-        god_game->update(0);
+        const auto now = std::chrono::steady_clock::now();
+        const auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - previous);
+        previous += elapsed;
+        god_game->update(static_cast<u32>(elapsed.count()));
 
         god_game->render();
     }

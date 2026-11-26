@@ -92,9 +92,8 @@ bool CGameObject::isPossessed()
 /*======================================================*/
 bool CGameObject::sendMessageToAllObjects( double delay, s32 sender, s32 msg, void* extra_info)
 {
-    Dispatcher->dispatchMessageToAllObjects(delay, sender, msg, extra_info);
-
-    return true;
+    return m_object_manager &&
+        m_object_manager->getMessageDispatcher().dispatchMessageToAllObjects(delay, sender, msg, extra_info);
 }
 
 /*======================================================*/

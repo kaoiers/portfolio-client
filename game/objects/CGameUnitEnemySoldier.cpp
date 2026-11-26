@@ -70,7 +70,7 @@ bool CGameUnitEnemySoldier::shortAttack( CGameUnit* p_target)
             if (this->getOwnerType() == object_mine)
                 p_target->sendDamageReq(getAttack(), this);
 
-            Dispatcher->dispatchMsg(0.0, 0, p_target->getId(), MSG_I_DAMAGED_YOU, this);
+            getObjectManager()->getMessageDispatcher().dispatchMsg(0.0, 0, p_target->getId(), MSG_I_DAMAGED_YOU, this);
 
             m_hit_once = true;
         }

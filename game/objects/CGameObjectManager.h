@@ -14,6 +14,7 @@
 #include <memory>
 #include <map>
 #include <list>
+#include <vector>
 
 #include "CObjectListSet.h"
 #include "EnumObjectType.h"
@@ -38,7 +39,7 @@ class CObjectSelector;
 class CEnemyGenerator;
 struct Telegram;
 
-#define EntityMgr CGameObjectManager::getInstance()
+class MessageDispatcher;
 
 class CObjectController;
 
@@ -54,12 +55,7 @@ using ObjectMap = std::map<u32, std::unique_ptr<CGameObject>>;
     std::vector<CGameRoom* > m_room_set;
 
     std::unique_ptr<CObjectController> m_object_controller;
-
-private:
-    static CGameObjectManager * m_instance;
-
-public:
-    static CGameObjectManager* getInstance();
+    std::unique_ptr<MessageDispatcher> m_dispatcher;
 
 public:
     CGameObjectManager();
@@ -105,7 +101,7 @@ public:
 public:
     bool control(CEventHandler *p_receiver);
 
-    void update(CEventHandler* event_handler);
+    void update(CEventHandler* event_handler, u32 elapsed_ms = 0);
 
     void render();
 
@@ -120,7 +116,8 @@ public:
     void setControlState(const bool on = true);
 
 public:
-    void dispatchMsg(const Telegram& msg);
+    MessageDispatcher& getMessageDispatcher() { return *m_dispatcher; }
+    std::vector<u32> getObjectIds() const;
 
     bool init();
 

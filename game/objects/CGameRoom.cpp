@@ -463,7 +463,8 @@ bool CGameRoom::isBuildable(const vector3df& mouse_pos)
             {
                 CGameUnit* p_unit = reinterpret_cast<CGameUnit* >(msg.extra_info);
 
-                m_guardian->guardRequest(p_unit->getPos());
+                if (p_unit)
+                    m_guardian->guardRequest(p_unit->getPos());
         }
 
             break;

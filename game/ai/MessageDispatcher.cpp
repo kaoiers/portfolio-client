@@ -11,81 +11,76 @@
 #include <stdafx.h>
 #include "MessageDispatcher.h"
 #include "../objects/CGameObject.h"
-#include "../CAppcontext.h"
 #include "../objects/CGameObjectManager.h"
 
-using std::set;
+#include <cmath>
 
-MessageDispatcher* MessageDispatcher::getInstance()
-{
-    static MessageDispatcher instance;
-
-    return &instance;
-}
-
-void MessageDispatcher::discharge(CGameObject* p_receiver, const Telegram& telegram)
+MessageDispatcher::MessageDispatcher(CGameObjectManager& manager)
+    : m_manager(manager)
 {
 }
 
-void MessageDispatcher::dispatchMsg(double delay,
-    s32 sender,
-    s32 receiver,
-    s32 msg,
-    void* additional_info = nullptr)
+bool MessageDispatcher::dispatchMsg(double delay, s32 sender, s32 receiver, s32 msg, void* extra_info)
 {
-    CGameObject* p_receiver = EntityMgr->getObjectFromId(receiver);
+    if (!std::isfinite(delay) || (delay > 0.0 && extra_info))
+        return false;
 
-    if (p_receiver == nullptr)
-    {
-        return;
-    }
-
-    Telegram telegram(0, sender, receiver, msg, additional_info);
+    auto* object = m_manager.getObjectFromId(static_cast<u32>(receiver));
+    if (!object)
+        return false;
 
     if (delay <= 0.0)
     {
-        discharge(p_receiver, telegram);
+        object->handleMessage(Telegram(m_time_ms, sender, receiver, msg, extra_info));
+        return true;
     }
 
-    else
+    const double due = m_time_ms + delay * 1000.0;
+    if (!std::isfinite(due))
+        return false;
+    m_pending.emplace(due, Telegram(due, sender, receiver, msg));
+    return true;
+}
+
+bool MessageDispatcher::dispatchMessageToAllObjects(double delay, s32 sender, s32 msg, void* extra_info)
+{
+    if (!std::isfinite(delay) || (delay > 0.0 && extra_info))
+        return false;
+    if (sender != SENDER_ID_IRRELEVANT && !m_manager.getObjectFromId(static_cast<u32>(sender)))
+        return false;
+
+    // Snapshot IDs so message handlers may request deletion without invalidating iteration.
+    const auto ids = m_manager.getObjectIds();
+    bool accepted = false;
+    for (u32 id : ids)
+        accepted = dispatchMsg(delay, sender, static_cast<s32>(id), msg, extra_info) || accepted;
+    return accepted;
+}
+
+void MessageDispatcher::dispatchDelayedMessages(u32 elapsed_ms)
+{
+    m_time_ms += elapsed_ms;
+    while (!m_pending.empty() && m_pending.begin()->first <= m_time_ms)
     {
-        double current_time = 0;
-
-        telegram.dispatch_time = current_time + delay * 1000;
-
-        priority_q.insert(telegram);
+        const Telegram telegram = m_pending.begin()->second;
+        m_pending.erase(m_pending.begin()); // Remove before calling potentially reentrant handlers.
+        if (auto* object = m_manager.getObjectFromId(static_cast<u32>(telegram.receiver)))
+            object->handleMessage(telegram);
     }
 }
 
-void MessageDispatcher::dispatchDelayedMessages()
+void MessageDispatcher::cancelReceiver(u32 id)
 {
-    double current_time = 0;
-
-    while ( !priority_q.empty() &&
-        (priority_q.begin()->dispatch_time < current_time) &&
-        (priority_q.begin()->dispatch_time > 0))
+    for (auto it = m_pending.begin(); it != m_pending.end();)
     {
-        const Telegram& telegram = *priority_q.begin();
-
-        CGameObject* p_receiver = EntityMgr->getObjectFromId(telegram.receiver);
-
-        if (p_receiver)
-            discharge(p_receiver, telegram);
-
-        priority_q.erase(priority_q.begin());
+        if (static_cast<u32>(it->second.receiver) == id)
+            it = m_pending.erase(it);
+        else
+            ++it;
     }
 }
 
-void MessageDispatcher::dispatchMessageToAllObjects( double delay, s32 sender, s32 msg, void* extra_info)
+void MessageDispatcher::clear()
 {
-    CGameObject* p_sender = EntityMgr->getObjectFromId(sender);
-
-    if (p_sender == nullptr)
-    {
-        return;
-    }
-
-    Telegram telegram(0, sender, 0, msg, extra_info);
-
-    p_sender->getObjectManager()->dispatchMsg(telegram);
+    m_pending.clear();
 }

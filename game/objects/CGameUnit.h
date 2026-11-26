@@ -47,7 +47,7 @@ protected:
 
     CPathPlanner* m_path_planner;
 
-    Goal_Think* m_brain;
+    Goal_Think* m_brain = nullptr;
 
     Regulator* m_target_selection_regulator;
 

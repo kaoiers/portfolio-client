@@ -87,7 +87,9 @@ void testTelegram()
     Telegram first(1.0, 1, 2, 3, &payload);
     Telegram near(1.1, 1, 2, 3, &payload);
     Telegram later(2.0, 1, 2, 3, &payload);
-    require(first == near, "near-identical telegrams compare equal");
+    require(!(first == near), "distinct timestamps remain distinct");
+    require(first < near && near < later, "message timestamps are ordered");
+    require(first == Telegram(1.0, 1, 2, 3, &payload), "same identity compares equal");
     require(first < later, "earlier telegram sorts first");
     require(dereferenceToType<int>(first.extra_info) == 42, "payload access");
 }

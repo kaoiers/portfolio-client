@@ -32,11 +32,9 @@
 #include "CObjectController.h"
 #include "../ai/MessageDispatcher.h"
 
-CGameObjectManager * CGameObjectManager::m_instance = nullptr;
-
 CGameObjectManager::CGameObjectManager()
 {
-    m_instance = this;
+    m_dispatcher = std::make_unique<MessageDispatcher>(*this);
     m_object_controller = std::make_unique<CObjectController>();
 }
 
@@ -44,8 +42,7 @@ CGameObjectManager::~CGameObjectManager()
 {
     removeAllObjects();
     m_object_controller.reset();
-    if (m_instance == this)
-        m_instance = nullptr;
+
 }
 
 /*======================================================*/
@@ -68,6 +65,7 @@ bool CGameObjectManager::removeObject(u32 cid)
     if (auto* room = dynamic_cast<CGameRoom*>(object))
         removeRoomFromSet(room);
 
+    m_dispatcher->cancelReceiver(cid);
     m_map_id_character.erase(it);
     return true;
 }
@@ -101,14 +99,7 @@ void CGameObjectManager::removeAllObjects()
     for (u32 id : ids)
         removeObject(id);
     m_delete_queue.clear();
-}
-
-/*======================================================*/
-// 인스턴스
-/*======================================================*/
-CGameObjectManager* CGameObjectManager::getInstance()
-{
-    return m_instance;
+    m_dispatcher->clear();
 }
 
 /*======================================================*/
@@ -201,9 +192,9 @@ bool CGameObjectManager::control( CEventHandler *p_receiver)
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameObjectManager::update(CEventHandler* event_handler)
+void CGameObjectManager::update(CEventHandler* event_handler, u32 elapsed_ms)
 {
-    Dispatcher->dispatchDelayedMessages();
+    m_dispatcher->dispatchDelayedMessages(elapsed_ms);
 
     m_object_controller->update(event_handler);
 
@@ -279,14 +270,13 @@ bool CGameObjectManager::isValidId(u32 obj_id)
 /*======================================================*/
 // 메시지 보내기
 /*======================================================*/
-void CGameObjectManager::dispatchMsg( const Telegram& msg)
+std::vector<u32> CGameObjectManager::getObjectIds() const
 {
-    ObjectMap::iterator itr;
-
-    for (itr = m_map_id_character.begin(); itr != m_map_id_character.end(); itr++)
-    {
-        (itr->second)->handleMessage(msg);
-    }
+    std::vector<u32> ids;
+    ids.reserve(m_map_id_character.size());
+    for (const auto& entry : m_map_id_character)
+        ids.push_back(entry.first);
+    return ids;
 }
 
 /*======================================================*/

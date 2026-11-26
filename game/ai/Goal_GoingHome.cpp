@@ -54,7 +54,7 @@ s32 Goal_GoingHome::process()
     {
         m_owner->getObjectManager()->clearMemoryFromObject( m_owner);
 
-        Dispatcher->dispatchMsg(0.0, 1, m_owner->getId(), Msg_YouDead, nullptr);
+        m_owner->getObjectManager()->getMessageDispatcher().dispatchMsg(0.0, 1, m_owner->getId(), Msg_YouDead, nullptr);
     }
 
     //if any of the subgoals have failed then this goal re-plans

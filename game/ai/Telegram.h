@@ -14,7 +14,7 @@
 #include "../../basicType.h"
 
 #include <ostream>
-#include <cmath>
+#include <tuple>
 
 struct Telegram
 {
@@ -55,31 +55,17 @@ struct Telegram
     {}
 };
 
-//these telegrams will be stored in a priority queue. Therefore the >
-//operator needs to be overloaded so that the PQ can sort the telegrams
-//by time priority. Note how the times must be smaller than
-//SmallestDelay apart before two Telegrams are considered unique.
-const double smallest_delay = 0.25;
-
-inline bool operator==(const Telegram& t1, const Telegram& t2)
+// Compare message identity fields exactly. Scheduling uses its own time-keyed queue.
+inline bool operator==(const Telegram& lhs, const Telegram& rhs)
 {
-    return ( fabs(t1.dispatch_time-t2.dispatch_time) < smallest_delay) &&
-    (t1.sender == t2.sender) &&
-    (t1.receiver == t2.receiver) &&
-    (t1.msg == t2.msg);
+    return std::tie(lhs.dispatch_time, lhs.sender, lhs.receiver, lhs.msg) ==
+        std::tie(rhs.dispatch_time, rhs.sender, rhs.receiver, rhs.msg);
 }
 
-inline bool operator<(const Telegram& t1, const Telegram& t2)
+inline bool operator<(const Telegram& lhs, const Telegram& rhs)
 {
-    if (t1 == t2)
-    {
-        return false;
-    }
-
-    else
-    {
-        return (t1.dispatch_time < t2.dispatch_time);
-    }
+    return std::tie(lhs.dispatch_time, lhs.sender, lhs.receiver, lhs.msg) <
+        std::tie(rhs.dispatch_time, rhs.sender, rhs.receiver, rhs.msg);
 }
 
 inline std::ostream& operator<<(std::ostream& os, const Telegram& t)
