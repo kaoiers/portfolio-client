@@ -26,13 +26,18 @@
 #include "CGameUnitEnemy.h"
 #include "../God_Game.h"
 
+namespace
+{
+    constexpr u32 INITIAL_ROOM_HP = 1000;
+}
+
 CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res,
     const vector3df& pos,
     const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/,
     const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/) :
     CGameObject(owner, objtype, pos, rot, scale), room_type(btype), m_resource(res)
 , m_room_width_cells(res->m_width_cells), m_room_height_cells(res->m_height_cells),
-    m_building_step(nullptr), m_node_index(-1), m_building_finished(false), m_total_room_hp(1000), m_room_hp(1000), m_guardian(0), m_net_live(true)
+    m_building_step(nullptr), m_node_index(-1), m_building_finished(false), m_total_room_hp(INITIAL_ROOM_HP), m_room_hp(INITIAL_ROOM_HP), m_guardian(0), m_net_live(true)
 {
 }
 
@@ -40,7 +45,7 @@ CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURC
     :CGameObject(owner, objtype), room_type(btype), m_resource(res)
 , m_room_width_cells(res->m_width_cells), m_room_height_cells(res->m_height_cells),
 
-    m_building_step(nullptr), m_node_index(-1), m_building_finished(false), m_total_room_hp(1000), m_room_hp(1000), m_guardian(0), m_net_live(true)
+    m_building_step(nullptr), m_node_index(-1), m_building_finished(false), m_total_room_hp(INITIAL_ROOM_HP), m_room_hp(INITIAL_ROOM_HP), m_guardian(0), m_net_live(true)
 {
 }
 

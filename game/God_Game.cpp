@@ -27,6 +27,14 @@
 #include "interfaces/CMainGameGUI.h"
 #include "option/CGodOption.h"
 
+namespace
+{
+    constexpr s32 INITIAL_MAP_CELLS_X = 60;
+    constexpr s32 INITIAL_MAP_CELLS_Z = 80;
+    constexpr s32 INITIAL_MAP_PARTITION_X = 10;
+    constexpr s32 INITIAL_MAP_PARTITION_Z = 10;
+}
+
 God_Game::God_Game()
     :
     m_game_state(GameState::on_intro),
@@ -53,7 +61,8 @@ bool God_Game::gameLoading()
 
     setGameState(God_Game::GameState::on_game);
 
-    m_game_map->init(60, 80, 10, 10);
+    m_game_map->init(INITIAL_MAP_CELLS_X, INITIAL_MAP_CELLS_Z,
+        INITIAL_MAP_PARTITION_X, INITIAL_MAP_PARTITION_Z);
     m_gui_manager->gameLoadingComplete();
 
     return true;

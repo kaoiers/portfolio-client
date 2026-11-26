@@ -20,6 +20,13 @@
 #include "../enemy_gen/CEnemyGenerator.h"
 #include "../interfaces/CMainGameGUI.h"
 
+namespace
+{
+    constexpr u32 ENEMY_GENERATE_PERIOD = 5;
+    constexpr u32 ENEMY_APPEAR_PERIOD = 4;
+    constexpr u32 INITIAL_ENEMY_MAX_COUNT = 2;
+}
+
 CGameMap::CGameMap(CGameObjectManager* man)
     :
     m_obj_man(man),
@@ -97,7 +104,8 @@ void CGameMap::createEnemyGenerator()
         m_enemy_generator.reset();
     }
 
-    m_enemy_generator = std::make_unique<CEnemyGenerator>(this, 5, 4, 2);
+    m_enemy_generator = std::make_unique<CEnemyGenerator>(this, ENEMY_GENERATE_PERIOD,
+        ENEMY_APPEAR_PERIOD, INITIAL_ENEMY_MAX_COUNT);
 }
 
 /*======================================================*/
