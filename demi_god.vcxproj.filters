@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\AI">
+      <UniqueIdentifier>{ec4a3b6a-3887-4a3c-9f78-77267be5a502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{770f4679-125a-4409-8364-91235248588b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OBJECT">
+      <UniqueIdentifier>{c6e08a79-3b6a-4a76-97c9-190badfaf98a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MAP">
+      <UniqueIdentifier>{d9501d27-274f-49f1-b731-b42447bd1e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UNIT">
+      <UniqueIdentifier>{a17131fe-be74-43a5-943b-f81a0ff612e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CAMERA">
+      <UniqueIdentifier>{f07545d3-109f-4513-99c4-9ef9deb3d0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\PLUGIN">
+      <UniqueIdentifier>{e412fdf7-cd16-4ee4-a117-0a614230bd0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LIGHT">
+      <UniqueIdentifier>{63c4e249-3c33-44e3-a2ef-14d5592c2049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FONT">
+      <UniqueIdentifier>{5471e71c-f897-42ee-9bb5-20f01ceb6aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EVENT">
+      <UniqueIdentifier>{ff676a4a-4f75-49c1-8d83-04ae2c6d54f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ETC">
+      <UniqueIdentifier>{706155d5-75f5-4f2e-9996-e06f50e3289f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="basicType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\God_Game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_AttackTarget.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_AttackUnitTarget.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_Building.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_BuildingMotion.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_Collecting.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_Composite.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_Dead.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_Enemy_ShortAttack.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_FollowPath.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_GoingHome.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_HuntTarget.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_MoveToPosition.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_SeekToPosition.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_ShortAttack.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_Think.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_TraverseEdge.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Goal_UnitHuntTarget.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CRoomCommunityGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CRoomJailGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CRoomStockGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CRoomUpTowerGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CUnitArmyGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CUnitGodGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CUnitWorkerGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CMainGameGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CGUIManager.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameObject.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameObjectManager.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameRoom.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameRoomCommunity.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameRoomGod.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameRoomJail.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameRoomProduct.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameRoomStock.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnit.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitArmy.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\attributes\CGameUnitAttribute.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitBunny.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitEnemy.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitEnemySoldier.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitGod.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitNapoleon.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitProduct.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitTiger.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CGameUnitWorker.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\camera\CCameraManager.h">
+      <Filter>Source Files\CAMERA</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\IBaseController.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\IGameGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\PlugIn\PluginManager.h">
+      <Filter>Source Files\PLUGIN</Filter>
+    </ClInclude>
+    <ClInclude Include="game\PlugIn\plugin.h">
+      <Filter>Source Files\PLUGIN</Filter>
+    </ClInclude>
+    <ClInclude Include="game\map\CGameMap.h">
+      <Filter>Source Files\MAP</Filter>
+    </ClInclude>
+    <ClInclude Include="game\shader\CLightEffectManager.h">
+      <Filter>Source Files\LIGHT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\common\CFontManager.h">
+      <Filter>Source Files\FONT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\God_Messages.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\MessageDispatcher.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\enemy_gen\CEnemyGenerator.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CObjectListSet.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CLoginGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\CControllerGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\ai\Telegram.h">
+      <Filter>Source Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CObjectController.h">
+      <Filter>Source Files\EVENT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\eventhandle\CEventHandleManager.h">
+      <Filter>Source Files\EVENT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\EnumGUITypes.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\EnumObjectType.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\controller\EnumPickingType.h">
+      <Filter>Source Files\EVENT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\MovingEntity.h">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\SGameUnitAttributeResources.h">
+      <Filter>Source Files\UNIT</Filter>
+    </ClInclude>
+    <ClInclude Include="game\attributes\GameResourceManager.h">
+      <Filter>Source Files\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\CRoomStep.h">
+      <Filter>Source Files\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="game\option\CGodOption.h">
+      <Filter>Source Files\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="game\CAppcontext.h">
+      <Filter>Source Files\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="game\objects\SObjectResources.h">
+      <Filter>Source Files\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="game\common\UncopyableUtil.h">
+      <Filter>Source Files\ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="demi_god.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\God_Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_AttackTarget.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_AttackUnitTarget.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_Building.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_BuildingMotion.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_Collecting.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_Dead.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_Enemy_ShortAttak.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_FollowPath.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_GoingHome.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_HuntTarget.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_MoveToPosition.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_SeekToPosition.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_ShortAttack.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_Think.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_TraverseEdge.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\Goal_UnitHuntTarget.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CRoomCommunityGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CRoomJailGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CRoomStockGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CRoomUpTowerGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CUnitArmyGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CUnitGodGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CUnitWorkerGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CMainGameGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CGUIManager.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameObject.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameObjectManager.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameRoom.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameRoomCommunity.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameRoomJail.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameRoomGod.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameRoomStock.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnit.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitArmy.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\attributes\CGameUnitAttribute.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitBunny.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitEnemy.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitEnemySoldier.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitGod.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitNapoleon.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitTiger.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CGameUnitWorker.cpp">
+      <Filter>Source Files\UNIT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\camera\CCameraManager.cpp">
+      <Filter>Source Files\CAMERA</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\IGameGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\PlugIn\PluginManager.cpp">
+      <Filter>Source Files\PLUGIN</Filter>
+    </ClCompile>
+    <ClCompile Include="game\map\CGameMap.cpp">
+      <Filter>Source Files\MAP</Filter>
+    </ClCompile>
+    <ClCompile Include="game\shader\CLightEffectManager.cpp">
+      <Filter>Source Files\LIGHT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\common\CFontManager.cpp">
+      <Filter>Source Files\FONT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\ai\MessageDispatcher.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\enemy_gen\CEnemyGenerator.cpp">
+      <Filter>Source Files\OBJECT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CLoginGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\CControllerGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\CObjectController.cpp">
+      <Filter>Source Files\EVENT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\eventhandle\CEventHandleManager.cpp">
+      <Filter>Source Files\EVENT</Filter>
+    </ClCompile>
+    <ClCompile Include="game\attributes\GameResourceManager.cpp">
+      <Filter>Source Files\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="game\CAppContext.cpp">
+      <Filter>Source Files\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="game\objects\RoomStep.cpp">
+      <Filter>Source Files\ETC</Filter>
+    </ClCompile>
+    <ClCompile Include="game\option\CGodOption.cpp">
+      <Filter>Source Files\ETC</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="demi_god.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CF394599-62A8-4463-9207-75CB1B5EEBE1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>demi_god</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="basicType.h" />
+    <ClInclude Include="game\ai\Goal.h" />
+    <ClInclude Include="game\ai\Goal_AttackTarget.h" />
+    <ClInclude Include="game\ai\Goal_AttackUnitTarget.h" />
+    <ClInclude Include="game\ai\Goal_Building.h" />
+    <ClInclude Include="game\ai\Goal_BuildingMotion.h" />
+    <ClInclude Include="game\ai\Goal_Collecting.h" />
+    <ClInclude Include="game\ai\Goal_Composite.h" />
+    <ClInclude Include="game\ai\Goal_Dead.h" />
+    <ClInclude Include="game\ai\Goal_Enemy_ShortAttack.h" />
+    <ClInclude Include="game\ai\Goal_FollowPath.h" />
+    <ClInclude Include="game\ai\Goal_GoingHome.h" />
+    <ClInclude Include="game\ai\Goal_HuntTarget.h" />
+    <ClInclude Include="game\ai\Goal_MoveToPosition.h" />
+    <ClInclude Include="game\ai\Goal_SeekToPosition.h" />
+    <ClInclude Include="game\ai\Goal_ShortAttack.h" />
+    <ClInclude Include="game\ai\Goal_Think.h" />
+    <ClInclude Include="game\ai\Goal_TraverseEdge.h" />
+    <ClInclude Include="game\ai\Goal_UnitHuntTarget.h" />
+    <ClInclude Include="game\ai\God_Messages.h" />
+    <ClInclude Include="game\ai\MessageDispatcher.h" />
+    <ClInclude Include="game\ai\Telegram.h" />
+    <ClInclude Include="game\attributes\CGameUnitAttribute.h" />
+    <ClInclude Include="game\attributes\GameResourceManager.h" />
+    <ClInclude Include="game\camera\CCameraManager.h" />
+    <ClInclude Include="game\CAppcontext.h" />
+    <ClInclude Include="game\common\CFontManager.h" />
+    <ClInclude Include="game\common\UncopyableUtil.h" />
+    <ClInclude Include="game\controller\EnumPickingType.h" />
+    <ClInclude Include="game\enemy_gen\CEnemyGenerator.h" />
+    <ClInclude Include="game\eventhandle\CEventHandleManager.h" />
+    <ClInclude Include="game\God_Game.h" />
+    <ClInclude Include="game\interfaces\CControllerGUI.h" />
+    <ClInclude Include="game\interfaces\CGUIManager.h" />
+    <ClInclude Include="game\interfaces\CLoginGUI.h" />
+    <ClInclude Include="game\interfaces\CMainGameGUI.h" />
+    <ClInclude Include="game\interfaces\CRoomCommunityGUI.h" />
+    <ClInclude Include="game\interfaces\CRoomJailGUI.h" />
+    <ClInclude Include="game\interfaces\CRoomStockGUI.h" />
+    <ClInclude Include="game\interfaces\CRoomUpTowerGUI.h" />
+    <ClInclude Include="game\interfaces\CUnitArmyGUI.h" />
+    <ClInclude Include="game\interfaces\CUnitGodGUI.h" />
+    <ClInclude Include="game\interfaces\CUnitWorkerGUI.h" />
+    <ClInclude Include="game\interfaces\EnumGUITypes.h" />
+    <ClInclude Include="game\interfaces\IGameGUI.h" />
+    <ClInclude Include="game\map\CGameMap.h" />
+    <ClInclude Include="game\objects\CGameObject.h" />
+    <ClInclude Include="game\objects\CGameObjectManager.h" />
+    <ClInclude Include="game\objects\CGameRoom.h" />
+    <ClInclude Include="game\objects\CGameRoomCommunity.h" />
+    <ClInclude Include="game\objects\CGameRoomGod.h" />
+    <ClInclude Include="game\objects\CGameRoomJail.h" />
+    <ClInclude Include="game\objects\CGameRoomProduct.h" />
+    <ClInclude Include="game\objects\CGameRoomStock.h" />
+    <ClInclude Include="game\objects\CGameUnit.h" />
+    <ClInclude Include="game\objects\CGameUnitArmy.h" />
+    <ClInclude Include="game\objects\CGameUnitBunny.h" />
+    <ClInclude Include="game\objects\CGameUnitEnemy.h" />
+    <ClInclude Include="game\objects\CGameUnitEnemySoldier.h" />
+    <ClInclude Include="game\objects\CGameUnitGod.h" />
+    <ClInclude Include="game\objects\CGameUnitNapoleon.h" />
+    <ClInclude Include="game\objects\CGameUnitProduct.h" />
+    <ClInclude Include="game\objects\CGameUnitTiger.h" />
+    <ClInclude Include="game\objects\CGameUnitWorker.h" />
+    <ClInclude Include="game\objects\CObjectController.h" />
+    <ClInclude Include="game\objects\CObjectListSet.h" />
+    <ClInclude Include="game\objects\CRoomStep.h" />
+    <ClInclude Include="game\objects\EnumObjectType.h" />
+    <ClInclude Include="game\objects\IBaseController.h" />
+    <ClInclude Include="game\objects\MovingEntity.h" />
+    <ClInclude Include="game\objects\SGameUnitAttributeResources.h" />
+    <ClInclude Include="game\objects\SObjectResources.h" />
+    <ClInclude Include="game\option\CGodOption.h" />
+    <ClInclude Include="game\PlugIn\plugin.h" />
+    <ClInclude Include="game\PlugIn\PluginManager.h" />
+    <ClInclude Include="game\shader\CLightEffectManager.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="demi_god.cpp" />
+    <ClCompile Include="game\ai\Goal_AttackTarget.cpp" />
+    <ClCompile Include="game\ai\Goal_AttackUnitTarget.cpp" />
+    <ClCompile Include="game\ai\Goal_Building.cpp" />
+    <ClCompile Include="game\ai\Goal_BuildingMotion.cpp" />
+    <ClCompile Include="game\ai\Goal_Collecting.cpp" />
+    <ClCompile Include="game\ai\Goal_Dead.cpp" />
+    <ClCompile Include="game\ai\Goal_Enemy_ShortAttak.cpp" />
+    <ClCompile Include="game\ai\Goal_FollowPath.cpp" />
+    <ClCompile Include="game\ai\Goal_GoingHome.cpp" />
+    <ClCompile Include="game\ai\Goal_HuntTarget.cpp" />
+    <ClCompile Include="game\ai\Goal_MoveToPosition.cpp" />
+    <ClCompile Include="game\ai\Goal_SeekToPosition.cpp" />
+    <ClCompile Include="game\ai\Goal_ShortAttack.cpp" />
+    <ClCompile Include="game\ai\Goal_Think.cpp" />
+    <ClCompile Include="game\ai\Goal_TraverseEdge.cpp" />
+    <ClCompile Include="game\ai\Goal_UnitHuntTarget.cpp" />
+    <ClCompile Include="game\ai\MessageDispatcher.cpp" />
+    <ClCompile Include="game\attributes\CGameUnitAttribute.cpp" />
+    <ClCompile Include="game\attributes\GameResourceManager.cpp" />
+    <ClCompile Include="game\camera\CCameraManager.cpp" />
+    <ClCompile Include="game\CAppContext.cpp" />
+    <ClCompile Include="game\common\CFontManager.cpp" />
+    <ClCompile Include="game\enemy_gen\CEnemyGenerator.cpp" />
+    <ClCompile Include="game\eventhandle\CEventHandleManager.cpp" />
+    <ClCompile Include="game\God_Game.cpp" />
+    <ClCompile Include="game\interfaces\CControllerGUI.cpp" />
+    <ClCompile Include="game\interfaces\CGUIManager.cpp" />
+    <ClCompile Include="game\interfaces\CLoginGUI.cpp" />
+    <ClCompile Include="game\interfaces\CMainGameGUI.cpp" />
+    <ClCompile Include="game\interfaces\CRoomCommunityGUI.cpp" />
+    <ClCompile Include="game\interfaces\CRoomJailGUI.cpp" />
+    <ClCompile Include="game\interfaces\CRoomStockGUI.cpp" />
+    <ClCompile Include="game\interfaces\CRoomUpTowerGUI.cpp" />
+    <ClCompile Include="game\interfaces\CUnitArmyGUI.cpp" />
+    <ClCompile Include="game\interfaces\CUnitGodGUI.cpp" />
+    <ClCompile Include="game\interfaces\CUnitWorkerGUI.cpp" />
+    <ClCompile Include="game\interfaces\IGameGUI.cpp" />
+    <ClCompile Include="game\map\CGameMap.cpp" />
+    <ClCompile Include="game\objects\CGameObject.cpp" />
+    <ClCompile Include="game\objects\CGameObjectManager.cpp" />
+    <ClCompile Include="game\objects\CGameRoom.cpp" />
+    <ClCompile Include="game\objects\CGameRoomCommunity.cpp" />
+    <ClCompile Include="game\objects\CGameRoomGod.cpp" />
+    <ClCompile Include="game\objects\CGameRoomJail.cpp" />
+    <ClCompile Include="game\objects\CGameRoomStock.cpp" />
+    <ClCompile Include="game\objects\CGameUnit.cpp" />
+    <ClCompile Include="game\objects\CGameUnitArmy.cpp" />
+    <ClCompile Include="game\objects\CGameUnitBunny.cpp" />
+    <ClCompile Include="game\objects\CGameUnitEnemy.cpp" />
+    <ClCompile Include="game\objects\CGameUnitEnemySoldier.cpp" />
+    <ClCompile Include="game\objects\CGameUnitGod.cpp" />
+    <ClCompile Include="game\objects\CGameUnitNapoleon.cpp" />
+    <ClCompile Include="game\objects\CGameUnitTiger.cpp" />
+    <ClCompile Include="game\objects\CGameUnitWorker.cpp" />
+    <ClCompile Include="game\objects\CObjectController.cpp" />
+    <ClCompile Include="game\objects\RoomStep.cpp" />
+    <ClCompile Include="game\option\CGodOption.cpp" />
+    <ClCompile Include="game\PlugIn\PluginManager.cpp" />
+    <ClCompile Include="game\shader\CLightEffectManager.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="demi_god.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

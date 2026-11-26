@@ -1,0 +1,43 @@
+﻿//////////////////////////////////////////////////////////////////////////
+// 
+// by Hwang Ki-Young, 2011/08/11
+//
+// File Name : CLongTimeRegulator.h
+// 
+// 폰트 생성
+//
+//////////////////////////////////////////////////////////////////////////
+
+class CFontManager
+{
+
+public :
+
+	enum eFONT_TYPE
+	{
+		FONTTYPE_FOR_GAMESTATUS,
+		FONTTYPE_FOR_CHARACTERDAMAGE,
+		FONT_TYPE3,
+		FONTTYPE_FOR_BUILDINGPROCESS,
+		FONTTYPE_SMALL_MAINMENU,
+
+		FONTTYPE_SMALL_MAINMENU14,
+		FONTTYPE_SMALL_MAINMENU16,
+		FONTTYPE_SMALL_MAINMENU18,
+		FONTTYPE_SMALL_MAINMENU20,
+		FONT_TYPE4,
+
+
+		FONTTYPE_FOR_TIME,
+
+		FONT_TYPE_COUNT
+	};
+
+	int*							m_pFont[FONT_TYPE_COUNT];
+
+public :
+
+	CFontManager();
+	virtual ~CFontManager();
+
+};

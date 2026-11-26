@@ -1,0 +1,71 @@
+﻿//////////////////////////////////////////////////////////////////////////
+// 
+// by Hwang Ki-Young, 2011/09/30
+//
+// File Name : CGameRoomJail.cpp
+// 
+// 감옥 클래스
+// 
+//////////////////////////////////////////////////////////////////////////
+
+
+
+#include <stdafx.h>
+#include "CGameRoomJail.h"
+#include "../interfaces/CControllerGUI.h"
+
+
+CGameRoomJail::CGameRoomJail(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res, 
+							 const vector3df& pos, 
+							 const vector3df& rot, 
+							 const vector3df& scale)
+							 : CGameRoom(owner, objtype, btype, res, pos, rot, scale)
+{
+
+}
+
+CGameRoomJail::CGameRoomJail(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
+ : CGameRoom(owner, objtype, btype, res)
+{
+
+}
+
+
+/*======================================================*/
+// 컨트롤 초기화
+/*======================================================*/
+void CGameRoomJail::enter_control()
+{
+	CControllerGUI::Instance()->setCurrentControlGUI(this);
+
+	
+
+}
+
+/*======================================================*/
+// 컨트롤 어데이트
+/*======================================================*/
+void CGameRoomJail::update_control( CEventHandler* pReceiver )
+{
+
+}
+
+
+/*======================================================*/
+// 컨트롤 종료
+/*======================================================*/
+void CGameRoomJail::exit_control()
+{
+	
+
+}
+
+
+/*======================================================*/
+// 업데이트
+/*======================================================*/
+void CGameRoomJail::update( const u32 timeMs )
+{
+	BuildingUpdate();
+
+}
