@@ -11,6 +11,7 @@
 #ifndef CGAME_ROOM_H
 #define CGAME_ROOM_H
 
+#include <memory>
 #include "CGameObject.h"
 #include "IBaseController.h"
 
@@ -24,7 +25,7 @@ class CGameRoom : public CGameObject, public IBaseController
 {
     const ROOM_RESOURCE* m_resource;
     u32 m_room_width_cells, m_room_height_cells;
-    CRoomStep* m_building_step;
+    std::unique_ptr<CRoomStep> m_building_step;
     u32 m_total_room_hp;
     u32 m_room_hp;
     CGameUnitArmy* m_guardian;

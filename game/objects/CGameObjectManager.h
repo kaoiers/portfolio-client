@@ -11,6 +11,7 @@
 #ifndef GAME_OBJECT_MANAGER_H
 #define GAME_OBJECT_MANAGER_H
 
+#include <memory>
 #include <map>
 #include <list>
 
@@ -57,7 +58,7 @@ class CGameObjectManager
 
     std::vector<CGameRoom* > m_room_set;
 
-    CObjectController* m_object_controller;
+    std::unique_ptr<CObjectController> m_object_controller;
 
 private:
     static CGameObjectManager * m_instance;

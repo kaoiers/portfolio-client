@@ -20,6 +20,7 @@ class CGameRoomGod;
 class CEnemyGenerator;
 class CExplosionSystem;
 
+#include <memory>
 #include "../common/UncopyableUtil.h"
 
 class CGameMap : private UnCopyable
@@ -31,7 +32,7 @@ class CGameMap : private UnCopyable
     CGridSceneNode* m_grid;
 
     CBoundaryManager* m_boundary_manager;
-    CEnemyGenerator* m_enemy_generator;
+    std::unique_ptr<CEnemyGenerator> m_enemy_generator;
 
     f32 m_cell_width, m_cell_height;
     f32 m_total_height, m_total_width;

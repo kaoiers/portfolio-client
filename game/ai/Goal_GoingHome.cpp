@@ -38,7 +38,7 @@ void Goal_GoingHome::activate()
 
     vector3df v_des;// = l.getClosestPoint(pEnemy->Pos());
 
-    addSubgoal(new Goal_MoveToPosition(m_owner, v_des));
+    addSubgoal(std::make_unique<Goal_MoveToPosition>(m_owner, v_des));
 }
 
 /*======================================================*/

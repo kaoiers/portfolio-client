@@ -16,7 +16,7 @@ template <class entity_type>
 class Goal_Composite : public Goal<entity_type>
 {
 private:
-    typedef std::list<Goal<entity_type>* > SubgoalList;
+    using SubgoalList = std::list<std::unique_ptr<Goal<entity_type>>>;
 
 protected:
     SubgoalList m_sub_goals;
@@ -39,7 +39,7 @@ public:
     virtual bool handleMessage(const Telegram& msg)
     { return forwardMessageToFrontMostSubgoal(msg); }
 
-    void addSubgoal(Goal<entity_type>* g);
+    void addSubgoal(std::unique_ptr<Goal<entity_type>> g);
 
     void removeAllSubgoals();
 };
@@ -54,7 +54,6 @@ void Goal_Composite<entity_type>::removeAllSubgoals()
     {
         (*it)->terminate();
 
-        SAFE_DELETE(*it);
     }
 
     m_sub_goals.clear();
@@ -71,7 +70,6 @@ s32 Goal_Composite<entity_type>::processSubgoals()
         (m_sub_goals.front()->isComplete() || m_sub_goals.front()->hasFailed()))
     {
         m_sub_goals.front()->terminate();
-        delete m_sub_goals.front();
         m_sub_goals.pop_front();
     }
 
@@ -96,10 +94,10 @@ s32 Goal_Composite<entity_type>::processSubgoals()
 // 하위 목표 추가하기
 /*======================================================*/
 template <class entity_type>
-void Goal_Composite<entity_type>::addSubgoal(Goal<entity_type>* g)
+void Goal_Composite<entity_type>::addSubgoal(std::unique_ptr<Goal<entity_type>> g)
 {
     //add the new goal to the front of the list
-    m_sub_goals.push_front(g);
+    m_sub_goals.push_front(std::move(g));
 }
 
 /*======================================================*/

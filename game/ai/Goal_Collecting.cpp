@@ -25,7 +25,7 @@ void Goal_Collecting::activate()
     //make sure the subgoal list is clear.
     removeAllSubgoals();
 
-    addSubgoal(new Goal_MoveToPosition(m_owner, m_destination));
+    addSubgoal(std::make_unique<Goal_MoveToPosition>(m_owner, m_destination));
 }
 
 /*======================================================*/

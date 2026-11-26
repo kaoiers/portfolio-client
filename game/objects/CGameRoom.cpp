@@ -32,7 +32,7 @@ CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURC
     const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/) :
     CGameObject(owner, objtype, pos, rot, scale), room_type(btype), m_resource(res)
 , m_room_width_cells(res->m_width_cells), m_room_height_cells(res->m_height_cells),
-    m_building_step(0), m_node_index(-1), m_building_finished(false), m_total_room_hp(1000), m_room_hp(1000), m_guardian(0), m_net_live(true)
+    m_building_step(nullptr), m_node_index(-1), m_building_finished(false), m_total_room_hp(1000), m_room_hp(1000), m_guardian(0), m_net_live(true)
 {
 }
 
@@ -40,14 +40,13 @@ CGameRoom::CGameRoom(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURC
     :CGameObject(owner, objtype), room_type(btype), m_resource(res)
 , m_room_width_cells(res->m_width_cells), m_room_height_cells(res->m_height_cells),
 
-    m_building_step(0), m_node_index(-1), m_building_finished(false), m_total_room_hp(1000), m_room_hp(1000), m_guardian(0), m_net_live(true)
+    m_building_step(nullptr), m_node_index(-1), m_building_finished(false), m_total_room_hp(1000), m_room_hp(1000), m_guardian(0), m_net_live(true)
 {
 }
 
 CGameRoom::~CGameRoom()
 {
-    if (m_building_step)
-        delete m_building_step;
+    m_building_step.reset();
 }
 
 /*======================================================*/
@@ -59,9 +58,7 @@ void CGameRoom::buildingUpdate()
     {
         if (m_building_step->updateBuilding())
         {
-            SAFE_DELETE(m_building_step);
-
-            m_building_step = 0;
+            m_building_step.reset();
 
             m_building_finished = true;
 
@@ -267,7 +264,7 @@ bool CGameRoom::isBuildable(const vector3df& mouse_pos)
 /*======================================================*/
     void CGameRoom::makeBaseGround()
     {
-        m_building_step = new CRoomStep(this->m_resource, this);
+        m_building_step = std::make_unique<CRoomStep>(this->m_resource, this);
 }
 
 /*======================================================*/

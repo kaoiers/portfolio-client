@@ -16,7 +16,7 @@
 
 CGameResourceManager* CGameResourceManager::m_instance = NULL;
 
-CGameResourceManager::CGameResourceManager(u32 unit_limits) : m_game_global_resource(new GlobalResource()),
+CGameResourceManager::CGameResourceManager(u32 unit_limits) : m_game_global_resource(std::make_unique<GlobalResource>()),
     m_flag(0),
     time_descendent_interval(5),
     last_updated_time(0),

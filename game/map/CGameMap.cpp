@@ -33,7 +33,7 @@ CGameMap::CGameMap(CGameObjectManager* man)
     m_cells_z(0),
     m_cell_space_neighborhood_range(0),
     m_boundary_manager(0),
-    m_enemy_generator(0),
+    m_enemy_generator(nullptr),
     m_min_usable_tile(vector2di(0, 0)),
     m_max_usable_tile(vector2di(0, 0))
 {
@@ -41,7 +41,7 @@ CGameMap::CGameMap(CGameObjectManager* man)
 
 CGameMap::~CGameMap()
 {
-    SAFE_DELETE(m_enemy_generator);
+    m_enemy_generator.reset();
 }
 
 /*======================================================*/
@@ -94,11 +94,10 @@ void CGameMap::createEnemyGenerator()
 {
     if (m_enemy_generator)
     {
-        SAFE_DELETE(m_enemy_generator);
-        m_enemy_generator = NULL;
+        m_enemy_generator.reset();
     }
 
-    m_enemy_generator = new CEnemyGenerator(this, 5, 4, 2);
+    m_enemy_generator = std::make_unique<CEnemyGenerator>(this, 5, 4, 2);
 }
 
 /*======================================================*/

@@ -134,7 +134,7 @@ void Goal_Think::addGoalMoveToPosition(vector3df pos)
         if ((CGameMap::getInstance()->isWalkableWall(idx)))
         {
             removeAllSubgoals();
-            addSubgoal( new Goal_MoveToPosition(m_owner, pos));
+            addSubgoal(std::make_unique<Goal_MoveToPosition>(m_owner, pos));
 
             return;
         }
@@ -143,7 +143,7 @@ void Goal_Think::addGoalMoveToPosition(vector3df pos)
     else
     {
         removeAllSubgoals();
-        addSubgoal( new Goal_MoveToPosition(m_owner, pos));
+        addSubgoal(std::make_unique<Goal_MoveToPosition>(m_owner, pos));
     }
 }
 
@@ -170,7 +170,7 @@ void Goal_Think::addGoalAttackTarget()
     if (notPresent(goal_attack_target))
     {
         removeAllSubgoals();
-        addSubgoal( new Goal_AttackTarget(m_owner));
+        addSubgoal(std::make_unique<Goal_AttackTarget>(m_owner));
     }
 }
 
@@ -184,7 +184,7 @@ void Goal_Think::queueGoalMoveToPosition(vector3df pos)
 void Goal_Think::addGoalDie()
 {
     removeAllSubgoals();
-    addSubgoal( new Goal_Dead(m_owner));
+    addSubgoal(std::make_unique<Goal_Dead>(m_owner));
 }
 
 /*======================================================*/
@@ -194,7 +194,7 @@ void Goal_Think::addGoalCollecting( const vector3df& pos)
 {
     removeAllSubgoals();
 
-    addSubgoal(new Goal_Collecting(m_owner, pos));
+    addSubgoal(std::make_unique<Goal_Collecting>(m_owner, pos));
 }
 
 /*======================================================*/
@@ -204,7 +204,7 @@ void Goal_Think::addGoalBuilding( const vector3df& pos)
 {
     removeAllSubgoals();
 
-    addSubgoal(new Goal_Building(m_owner, pos));
+    addSubgoal(std::make_unique<Goal_Building>(m_owner, pos));
 }
 
 /*======================================================*/
@@ -223,7 +223,7 @@ void Goal_Think::addGoalHuntTarget()
     if (notPresent(goal_hunt_target))
     {
         removeAllSubgoals();
-        addSubgoal(new Goal_HuntTarget(m_owner));
+        addSubgoal(std::make_unique<Goal_HuntTarget>(m_owner));
     }
 }
 
@@ -235,7 +235,7 @@ void Goal_Think::addGoalGoingHome()
     if (notPresent(goal_goinghome))
     {
         removeAllSubgoals();
-        addSubgoal(new Goal_GoingHome(m_owner));
+        addSubgoal(std::make_unique<Goal_GoingHome>(m_owner));
     }
 }
 
@@ -247,7 +247,7 @@ void Goal_Think::addGoalUnitHuntTarget()
     if (notPresent(goal_unithunt_target))
     {
         removeAllSubgoals();
-        addSubgoal(new Goal_UnitHuntTarget(m_owner));
+        addSubgoal(std::make_unique<Goal_UnitHuntTarget>(m_owner));
     }
 }
 
@@ -259,6 +259,6 @@ void Goal_Think::addGoalAttackTargetForEnemy()
     if (notPresent(goal_attack_target))
     {
         removeAllSubgoals();
-        addSubgoal( new Goal_AttackUnitTarget(m_owner));
+        addSubgoal(std::make_unique<Goal_AttackUnitTarget>(m_owner));
     }
 }

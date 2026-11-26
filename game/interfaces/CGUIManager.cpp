@@ -26,7 +26,7 @@ CGUIManager::CGUIManager()
 {
     m_instance = this;
 
-    m_font_manager = new CFontManager();
+    m_font_manager = std::make_unique<CFontManager>();
 }
 
 CGUIManager::~CGUIManager()
@@ -38,7 +38,7 @@ CGUIManager::~CGUIManager()
 
     m_guis.clear();
 
-    delete m_font_manager;
+    m_font_manager.reset();
 }
 
 /*======================================================*/

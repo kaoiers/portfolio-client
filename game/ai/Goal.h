@@ -9,6 +9,7 @@
 // 기본 목적 클래스
 //
 //////////////////////////////////////////////////////////////////////////
+#include <memory>
 #include <stdexcept>
 #include <string>
 
@@ -82,7 +83,7 @@ public:
 
     virtual bool handleMessage(const Telegram& msg) { return false; }
 
-    virtual void addSubgoal(Goal<entity_type>* g)
+    virtual void addSubgoal(std::unique_ptr<Goal<entity_type>> g)
     {
         throw std::runtime_error("Cannot add goals to atomic goals");
     }

@@ -8,6 +8,7 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+#include <memory>
 #include "IGameGUI.h"
 #include "../common/CFontManager.h"
 #include <map>
@@ -26,7 +27,7 @@ class CWebDialog;
 
 class CGUIManager
 {
-    CFontManager* m_font_manager;
+    std::unique_ptr<CFontManager> m_font_manager;
     CMainGameGUI* m_main_game_gui;
     COptionGUI* m_option_gui;
     CMouseCursorGUI* m_mouse_cursor_gui;

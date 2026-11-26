@@ -8,6 +8,8 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+#include <memory>
+
 #define GameResource CGameResourceManager::getInstance()
 
 class CTextGUI;
@@ -21,7 +23,7 @@ struct GlobalResource
 
 class CGameResourceManager
 {
-    GlobalResource* m_game_global_resource;
+    std::unique_ptr<GlobalResource> m_game_global_resource;
     u32 m_current_player_level;
     u32 m_current_player_exp;
     const u32 m_initial_exp;
@@ -44,10 +46,7 @@ class CGameResourceManager
 public:
     CGameResourceManager(u32 unit_limits = 10);
 
-    ~CGameResourceManager()
-    {
-        SAFE_DELETE(m_game_global_resource);
-    }
+    ~CGameResourceManager() = default;
 
     void init();
 

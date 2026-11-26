@@ -65,7 +65,7 @@ bool Goal_MoveToPosition::handleMessage(const Telegram& msg)
             //clear any existing goals
             removeAllSubgoals();
 
-            addSubgoal(new Goal_FollowPath(m_owner));
+            addSubgoal(std::make_unique<Goal_FollowPath>(m_owner));
 
             return true; //msg handled
 

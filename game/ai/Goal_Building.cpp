@@ -22,9 +22,9 @@ void Goal_Building::activate()
     //make sure the subgoal list is clear.
     removeAllSubgoals();
 
-    addSubgoal(new Goal_BuildingMotion(m_owner));
+    addSubgoal(std::make_unique<Goal_BuildingMotion>(m_owner));
 
-    addSubgoal(new Goal_MoveToPosition(m_owner, m_destination));
+    addSubgoal(std::make_unique<Goal_MoveToPosition>(m_owner, m_destination));
 }
 
 /*======================================================*/

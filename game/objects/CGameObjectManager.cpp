@@ -36,12 +36,12 @@ CGameObjectManager * CGameObjectManager::m_instance = NULL;
 CGameObjectManager::CGameObjectManager()
 {
     m_instance = this;
-    m_object_controller = new CObjectController();
+    m_object_controller = std::make_unique<CObjectController>();
 }
 
 CGameObjectManager::~CGameObjectManager()
 {
-    SAFE_DELETE(m_object_controller);
+    m_object_controller.reset();
 
     m_map_id_character.clear();
     m_delete_queue.clear();
