@@ -12,6 +12,9 @@
 #define GOAL_COMPOSITE_H
 #include "Goal.h"
 
+#include <list>
+#include <utility>
+
 template <class entity_type>
 class Goal_Composite : public Goal<entity_type>
 {

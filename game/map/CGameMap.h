@@ -20,6 +20,7 @@ class CGameRoomGod;
 class CEnemyGenerator;
 class CExplosionSystem;
 
+#include "../../basicType.h"
 #include <memory>
 #include "../common/UncopyableUtil.h"
 

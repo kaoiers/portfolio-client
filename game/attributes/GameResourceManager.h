@@ -8,6 +8,10 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
+#include "../../basicType.h"
+
 #include <memory>
 
 #define GameResource CGameResourceManager::getInstance()

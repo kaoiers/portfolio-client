@@ -8,10 +8,14 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
+#include "../../basicType.h"
+
 #include <memory>
-#include "IGameGUI.h"
-#include "../common/CFontManager.h"
 #include <map>
+
+class CGameGUI;
 
 class CFontManager;
 class CMainGameGUI;

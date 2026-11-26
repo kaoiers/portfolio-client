@@ -9,6 +9,8 @@
 // 기본 목적 클래스
 //
 //////////////////////////////////////////////////////////////////////////
+#include "../../basicType.h"
+
 #include <memory>
 #include <stdexcept>
 #include <string>

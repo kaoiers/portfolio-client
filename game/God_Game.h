@@ -8,7 +8,13 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
+#include "../basicType.h"
 #include "common/UncopyableUtil.h"
+
+#include <memory>
+#include <string>
 
 class CGameObjectManager;
 class CCameraManager;

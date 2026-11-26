@@ -10,6 +10,8 @@
 
 #include <stdafx.h>
 #include "CGUIManager.h"
+#include "IGameGUI.h"
+#include "../common/CFontManager.h"
 
 #include "../CAppcontext.h"
 #include "../God_Game.h"

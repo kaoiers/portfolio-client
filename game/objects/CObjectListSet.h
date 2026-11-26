@@ -11,6 +11,8 @@
 #ifndef ENTITY_GROUP
 #define ENTITY_GROUP
 
+#include <list>
+
 template <typename entity_type>
 class CObjectListSet
 {
