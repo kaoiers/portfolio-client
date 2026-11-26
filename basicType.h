@@ -10,6 +10,9 @@
 
 #pragma once
 
+#include <cmath>
+#include <type_traits>
+
 #define SAFE_DELETE(a) if(a!=0) delete a
 
 typedef short s16;
@@ -17,89 +20,138 @@ typedef int s32;
 typedef float f32;
 typedef unsigned int u32;
 
+// Integer coordinates use a floating-point result for distances and normalization.
+template<typename T>
+using vector_length_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
+
 template<typename T>
 class vector2d
 {
 public:
-    vector2d() {}
-    vector2d(T _x, T _y) : X(_x), Y(_y) {};
+    using length_type = vector_length_t<T>;
 
-    T X, Y;
+    constexpr vector2d() = default;
+    constexpr vector2d(T x, T y) : X(x), Y(y) {}
+
+    constexpr vector2d operator+(const vector2d& rhs) const { return {X + rhs.X, Y + rhs.Y}; }
+    constexpr vector2d operator-(const vector2d& rhs) const { return {X - rhs.X, Y - rhs.Y}; }
+    constexpr vector2d operator*(T scale) const { return {X * scale, Y * scale}; }
+
+    constexpr length_type dot(const vector2d& rhs) const
+    {
+        return static_cast<length_type>(X) * rhs.X + static_cast<length_type>(Y) * rhs.Y;
+    }
+    constexpr length_type getLengthSquared() const { return dot(*this); }
+    length_type getLength() const { return std::hypot(static_cast<length_type>(X), static_cast<length_type>(Y)); }
+
+    vector2d<length_type> normalize() const
+    {
+        const auto length = getLength();
+        return length > 0 && std::isfinite(length)
+            ? vector2d<length_type>{X / length, Y / length}
+            : vector2d<length_type>{};
+    }
+
+    T X{}, Y{};
 };
+
+template<typename T>
+constexpr vector2d<T> operator*(T scale, const vector2d<T>& value)
+{
+    return value * scale;
+}
 
 template<typename T>
 class vector3d
 {
 public:
-    vector3d() {}
+    using length_type = vector_length_t<T>;
 
-    vector3d(T _x, T _y, T _z) : X(_x), Y(_y), Z(_z) {};
+    constexpr vector3d() = default;
+    constexpr vector3d(T x, T y, T z) : X(x), Y(y), Z(z) {}
 
-    T getLength() const { return 1; }
-    const vector3d<T> normalize() const { return *this; }
+    constexpr vector3d operator+(const vector3d& rhs) const { return {X + rhs.X, Y + rhs.Y, Z + rhs.Z}; }
+    constexpr vector3d operator-(const vector3d& rhs) const { return {X - rhs.X, Y - rhs.Y, Z - rhs.Z}; }
+    constexpr vector3d operator*(T scale) const { return {X * scale, Y * scale, Z * scale}; }
 
-    vector3d<T> operator*(const T& a)
+    constexpr length_type dot(const vector3d& rhs) const
     {
-        return *this;
+        return static_cast<length_type>(X) * rhs.X +
+            static_cast<length_type>(Y) * rhs.Y + static_cast<length_type>(Z) * rhs.Z;
+    }
+    constexpr vector3d cross(const vector3d& rhs) const
+    {
+        return {Y * rhs.Z - Z * rhs.Y, Z * rhs.X - X * rhs.Z, X * rhs.Y - Y * rhs.X};
+    }
+    constexpr length_type getLengthSquared() const { return dot(*this); }
+    length_type getLength() const
+    {
+        return std::hypot(static_cast<length_type>(X), static_cast<length_type>(Y), static_cast<length_type>(Z));
     }
 
-    T X, Y, Z;
+    // A zero vector remains zero; normalization does not modify the original.
+    vector3d<length_type> normalize() const
+    {
+        const auto length = getLength();
+        return length > 0 && std::isfinite(length)
+            ? vector3d<length_type>{X / length, Y / length, Z / length}
+            : vector3d<length_type>{};
+    }
+
+    T X{}, Y{}, Z{};
 };
 
 template<typename T>
-vector3d<T> operator+(const vector3d<T>& a, const vector3d<T>& b)
+constexpr vector3d<T> operator*(T scale, const vector3d<T>& value)
 {
-    return a;
-}
-
-template<typename T>
-vector3d<T> operator-(const vector3d<T>& a, const vector3d<T>& b)
-{
-    return a;
-}
-
-template<typename T>
-const vector3d<T> operator*(const T& a, const vector3d<T>& b)
-{
-    return b;
+    return value * scale;
 }
 
 template<typename T>
 class position2d
 {
 public:
-    position2d() {}
-    position2d(T _x, T _y) : X(_x), Y(_y) {};
+    constexpr position2d() = default;
+    constexpr position2d(T x, T y) : X(x), Y(y) {}
 
-    T X, Y;
+    T X{}, Y{};
 };
 
 template<typename T>
 class position3d
 {
 public:
-    position3d(T _x, T _y, T _z) : X(_x), Y(_y), Z(_z) {};
+    constexpr position3d() = default;
+    constexpr position3d(T x, T y, T z) : X(x), Y(y), Z(z) {}
 
-    T X, Y, Z;
+    T X{}, Y{}, Z{};
 };
 
 template<typename T>
 class line2d
 {
 public:
-    line2d() {}
     vector2d<T> start, end;
 
-    T getLength() const { return 0; }
+    vector_length_t<T> getLength() const
+    {
+        using R = vector_length_t<T>;
+        return std::hypot(static_cast<R>(end.X) - start.X, static_cast<R>(end.Y) - start.Y);
+    }
 };
 
 template<typename T>
 class line3d
 {
 public:
-    line3d() {}
     vector3d<T> start, end;
-    T getLength() const { return 0; }
+
+    vector_length_t<T> getLength() const
+    {
+        using R = vector_length_t<T>;
+        return std::hypot(static_cast<R>(end.X) - start.X,
+            static_cast<R>(end.Y) - start.Y, static_cast<R>(end.Z) - start.Z);
+    }
 };
 
 struct SEvent

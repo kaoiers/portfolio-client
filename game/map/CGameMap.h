@@ -88,7 +88,7 @@ public:
     bool isNodeAllLinked(const s32 x, const s32 y);
     bool isInUsableArea(const s32 x, const s32 y);
 
-    vector3df getTopLeftUsablePos() { return vector3df(0, 0, 0); };
+    vector3df getTopLeftUsablePos();
     vector3df getBottomRightUsablePos();
     CGameRoomGod* getGodRoom() { return m_god_room; }
     CGameObjectManager* getObjectManager() { return m_obj_man; }

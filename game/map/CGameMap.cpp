@@ -9,6 +9,8 @@
 //////////////////////////////////////////////////////////////////////////
 
 #include <stdafx.h>
+#include <cmath>
+#include <limits>
 
 #include "CGameMap.h"
 #include "../objects/CGameObjectManager.h"
@@ -57,6 +59,12 @@ CGameMap::~CGameMap()
 /*======================================================*/
 bool CGameMap::init( s32 cells_x, s32 cells_z, s32 partition_x, s32 partition_z, f32 cwidth /*= 300.0f */, f32 cheight /*= 300.0f*/)
 {
+    if (cells_x <= 0 || cells_z <= 0 || cwidth <= 0 || cheight <= 0 ||
+        !std::isfinite(cwidth) || !std::isfinite(cheight) ||
+        !std::isfinite(cells_x * cwidth) || !std::isfinite(cells_z * cheight) ||
+        static_cast<long long>(cells_x) * cells_z > (std::numeric_limits<s32>::max)())
+        return false;
+
     m_cells_x = cells_x;
     m_cells_z = cells_z;
 
@@ -191,6 +199,9 @@ bool CGameMap::getNodePosFromMousePos( const vector3df& ground_point, vector3df&
 {
     vector2di tile = getTileFromPos(ground_point);
 
+    if (getNodeIndexFromTile(tile.X, tile.Y) < 0)
+        return false;
+
     tile_pos = getPosByTile(tile.X, tile.Y);
 
     return true;
@@ -201,13 +212,18 @@ bool CGameMap::getNodePosFromMousePos( const vector3df& ground_point, vector3df&
 /*======================================================*/
 vector2di CGameMap::getTileFromPos( const vector3df& ground_point)
 {
-    vector2di tile;
+    if (m_cell_width <= 0 || m_cell_height <= 0 ||
+        !std::isfinite(ground_point.X) || !std::isfinite(ground_point.Z))
+        return {-1, -1};
 
-    tile.X = s32(ceil((ground_point.X + (m_total_width/2.0f)) /m_cell_width)) - 1;
+    // X increases to the right; tile Y increases toward negative world Z.
+    // Left/top boundaries are inclusive; right/bottom boundaries are exclusive.
+    const double x = std::floor((static_cast<double>(ground_point.X) + m_total_width / 2.0) / m_cell_width);
+    const double y = std::floor((m_total_height / 2.0 - static_cast<double>(ground_point.Z)) / m_cell_height);
+    if (x < 0 || x >= m_cells_x || y < 0 || y >= m_cells_z)
+        return {-1, -1};
 
-    tile.Y = -s32(ceil((ground_point.Z - (m_total_height/2.0f)) /m_cell_height));
-
-    return tile;
+    return {static_cast<s32>(x), static_cast<s32>(y)};
 }
 
 /*======================================================*/
@@ -278,9 +294,7 @@ bool CGameMap::removeNode( const s32 x, const s32 y)
 /*======================================================*/
 vector3df CGameMap::getNodePos( const s32 x, const s32 y)
 {
-    s32 node_index = y*m_cells_x+x;
-
-    return vector3df(0, 0, 0);
+    return getPosByTile(x, y);
 }
 
 /*======================================================*/
@@ -404,12 +418,19 @@ void CGameMap::addNodeToCellSpace( const s32 x, const s32 y)
 /*======================================================*/
 s32 CGameMap::getNodeIndexFromTile( const s32 x, const s32 y) const
 {
-    return y*m_cells_x+x;
+    if (x < 0 || x >= m_cells_x || y < 0 || y >= m_cells_z)
+        return -1;
+    return y * m_cells_x + x;
 }
 
 /*======================================================*/
 // 게임 가능 지역 오른쪽 하위 모서리 포지션 가져오기
 /*======================================================*/
+vector3df CGameMap::getTopLeftUsablePos()
+{
+    return getPosByTile(m_min_usable_tile.X, m_min_usable_tile.Y);
+}
+
 vector3df CGameMap::getBottomRightUsablePos()
 {
     return getPosByTile(m_max_usable_tile.X, m_max_usable_tile.Y);
