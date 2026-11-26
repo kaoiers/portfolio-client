@@ -1,9 +1,9 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/08/06
 //
 // File Name : Goal_FollowPath.h
-// 
+//
 // 복합 목적 : 길따라 움직이기
 //
 //////////////////////////////////////////////////////////////////////////
@@ -19,19 +19,15 @@ class CGameUnit;
 class Goal_FollowPath : public Goal_Composite<CGameUnit>
 {
 private:
-
-
 public:
+    Goal_FollowPath(CGameUnit* p_unit);
 
-  Goal_FollowPath(CGameUnit* p_unit);
+    void activate();
+    s32 process();
+    void render();
+    void terminate();
 
-  void activate();
-  s32 process();
-  void render();
-  void terminate();
-
-bool		stopSeeking();
+    bool stopSeeking();
 };
 
 #endif
-

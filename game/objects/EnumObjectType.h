@@ -5,117 +5,103 @@
 
 enum ONTILE_TYPE
 {
-	TILE_NOTHING = 0,
-	TILE_BUILDING 
+    TILE_NOTHING = 0,
+    TILE_BUILDING
 };
 
-
-typedef enum 
+typedef enum
 {
-	object_mine = 0xaa,
-	object_frined	
-	
+    object_mine = 0xaa,
+    object_frined
+
 }OwnerType;
 
-
-enum OBJ_TYPE 
+enum OBJ_TYPE
 {
-	GODTYPE_BUILDING = 1, 
+    GODTYPE_BUILDING = 1,
 
-	GODTYPE_UNIT,
+    GODTYPE_UNIT,
 
-	GODTYPE_BLOCK,
+    GODTYPE_BLOCK,
 
-	GODTYPE_TERRAIN_MAP
+    GODTYPE_TERRAIN_MAP
 };
 
-
-typedef enum 
+typedef enum
 {
-	BUILDING_JAIL = 0,
+    BUILDING_JAIL = 0,
 
-	BUILDING_TRAP,
-	
-	BUILDING_GOD,
+    BUILDING_TRAP,
 
-	BUILDING_TOWER,
-	
-	BUILDING_WAREHOUSE,
+    BUILDING_GOD,
 
-	BUILDING_WAITINGROOM,
+    BUILDING_TOWER,
 
-	BUILDING_FARM,
+    BUILDING_WAREHOUSE,
 
-	BUILDING_GOLD,
+    BUILDING_WAITINGROOM,
 
-	BUILDING_WOOD,
+    BUILDING_FARM,
 
-	BUILDING_FRIEND,
+    BUILDING_GOLD,
 
-	BUILDING_COUNTS
+    BUILDING_WOOD,
 
-}BuildingTypes ;
+    BUILDING_FRIEND,
 
-typedef enum 
+    BUILDING_COUNTS
+
+}BuildingTypes;
+
+typedef enum
 {
-	UNIT_TEST_DWARF = 0,
-	
+    UNIT_TEST_DWARF = 0,
 
-	UNIT_GOD_TIGER = 1,
-	
-	UNIT_WORKER1 = 2,
-	
-	UNIT_ENEMY_SOLDIER,
-	
+    UNIT_GOD_TIGER = 1,
 
-	UNIT_ARMY_BUNNY,
+    UNIT_WORKER1 = 2,
 
-	UNIT_ARMY_NAPOLEON,
+    UNIT_ENEMY_SOLDIER,
 
-	UNIT_ARMY_TIGER,
+    UNIT_ARMY_BUNNY,
 
+    UNIT_ARMY_NAPOLEON,
 
-	
+    UNIT_ARMY_TIGER,
 
-	UNIT_COUNTS
-
+    UNIT_COUNTS
 
 }UnitTypes;
 
-
-typedef enum 
+typedef enum
 {
+    PRODUCT_GOLD = 0,
 
-	PRODUCT_GOLD = 0,
+    PRODUCT_WHEAT,
 
-	PRODUCT_WHEAT,
+    PRODUCT_BARLEY,
 
-	PRODUCT_BARLEY,
+    PRODUCT_WILLOW,
 
-	PRODUCT_WILLOW,
+    PRODUCT_WALNUT,
 
-	PRODUCT_WALNUT,
+    PRODUCT_BRONZE,
 
-	PRODUCT_BRONZE,
+    PRODUCT_SILVER,
 
-	PRODUCT_SILVER,
-	
-	PRODUCT_COUNTS
-
+    PRODUCT_COUNTS
 
 }ProductTypes;
 
-
-
-typedef enum  
+typedef enum
 {
-	com_none = 0,
-	com_building,
-	com_collection,
-	com_attack,
-	com_room_guard
-	//com_
-	
-}Command_Type;	
+    com_none = 0,
+    com_building,
+    com_collection,
+    com_attack,
+    com_room_guard
+    //com_
+
+}Command_Type;
 
 #endif

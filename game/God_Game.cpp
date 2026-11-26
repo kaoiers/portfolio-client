@@ -1,11 +1,11 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/01/30
 //
 // File Name : God_Game.cpp
-// 
+//
 // 게임 메인
-// 
+//
 //////////////////////////////////////////////////////////////////////////
 
 #include <stdafx.h>
@@ -19,7 +19,6 @@
 #include "interfaces/CGUIManager.h"
 #include "PlugIn/PluginManager.h"
 
-
 #include "map/CGameMap.h"
 #include "objects/CObjectController.h"
 #include "objects/CGameUnit.h"
@@ -28,42 +27,36 @@
 #include "interfaces/CMainGameGUI.h"
 #include "option/CGodOption.h"
 
-
-God_Game::God_Game() 
-: 
-m_game_state(on_intro),
-m_running(true)
+God_Game::God_Game()
+    :
+    m_game_state(on_intro),
+    m_running(true)
 {
-
 }
-
-
 
 God_Game::~God_Game()
 {
-	
 }
-
 
 /*======================================================*/
 // 게임 로딩 처리
 /*======================================================*/
 bool God_Game::gameLoading()
 {
-	m_gui_manager = std::make_unique<CGUIManager>();
-	m_event_handler = std::make_unique<CEventHandler>();
-	m_object_manager = std::make_unique<CGameObjectManager>();
-	m_gui_manager->gameLoading();	
-	m_camera_manager = std::make_unique<CCameraManager>();
-	m_camera_manager->init();
-	m_game_map		= std::make_unique<CGameMap>(getObjectManager());
-	
-	setGameState(God_Game::on_game);	
-	
-	m_game_map->init(60, 80,  10, 10);
-	m_gui_manager->gameLoadingComplete();
+    m_gui_manager = std::make_unique<CGUIManager>();
+    m_event_handler = std::make_unique<CEventHandler>();
+    m_object_manager = std::make_unique<CGameObjectManager>();
+    m_gui_manager->gameLoading();
+    m_camera_manager = std::make_unique<CCameraManager>();
+    m_camera_manager->init();
+    m_game_map = std::make_unique<CGameMap>(getObjectManager());
 
-	return true;
+    setGameState(God_Game::on_game);
+
+    m_game_map->init(60, 80, 10, 10);
+    m_gui_manager->gameLoadingComplete();
+
+    return true;
 }
 
 /*======================================================*/
@@ -71,162 +64,132 @@ bool God_Game::gameLoading()
 /*======================================================*/
 bool God_Game::gameReset()
 {
-
-
-
-	return true;
-
+    return true;
 }
-
 
 /*======================================================*/
 // 초기화
 /*======================================================*/
 bool God_Game::initialize()
 {
-	gameLoading();
+    gameLoading();
 
-	return true;
+    return true;
 }
-
 
 /*======================================================*/
 // 렌더링
 /*======================================================*/
 void God_Game::render()
 {
-	if(m_game_state == on_game || m_game_state == on_friend)
-	{
-		if(CAppContext::getGodOption()->isShaderOn())
-		{
-		}
-		else
-		{
-		}
-		if(m_game_map)
-			m_game_map->render();
+    if (m_game_state == on_game || m_game_state == on_friend)
+    {
+        if (CAppContext::getGodOption()->isShaderOn())
+        {
+        }
+        else
+        {
+        }
+        if (m_game_map)
+            m_game_map->render();
 
+    }
+    else
+    {
+    }
 
-	}else
-	{
-	}
-
-
-
-	if(m_gui_manager)
-		m_gui_manager->render();
-
-}	
+    if (m_gui_manager)
+        m_gui_manager->render();
+}
 
 /*======================================================*/
 // 업데이트
 /*======================================================*/
 void God_Game::update(u32 time_ms)
 {
+    if (m_game_state == on_game || m_game_state == on_friend)
+    {
+        //순서유의
+        if (m_object_manager)
+            m_object_manager->update();
 
+        if (m_game_map)
+            m_game_map->update(time_ms);
+    }
 
-	if(m_game_state == on_game || m_game_state == on_friend)
-	{
-		//순서유의
-		if(m_object_manager)
-			m_object_manager->update();
-
-
-		if(m_game_map)
-			m_game_map->update(time_ms);
-	}
-
-	if(m_event_handler)
-		m_event_handler->update();	
+    if (m_event_handler)
+        m_event_handler->update();
 }
-
-
-
 
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
 bool God_Game::control()
 {
-	if(m_gui_manager)
-		m_gui_manager->control(m_event_handler.get());			
-	
-	if(m_game_state == on_game || m_game_state == on_friend)
-	{
-		if(m_object_manager)
-			m_object_manager->control(m_event_handler.get());
-	}
+    if (m_gui_manager)
+        m_gui_manager->control(m_event_handler.get());
 
-	return true;
+    if (m_game_state == on_game || m_game_state == on_friend)
+    {
+        if (m_object_manager)
+            m_object_manager->control(m_event_handler.get());
+    }
+
+    return true;
 }
-
-
-
 
 /*======================================================*/
 // 인터페이스 렌더링
 /*======================================================*/
 void God_Game::drawSceneForInterface()
 {
-
-	if(m_gui_manager)
-	{
-		m_gui_manager->render();
-	}
-
+    if (m_gui_manager)
+    {
+        m_gui_manager->render();
+    }
 }
-
-
 
 /*======================================================*/
 // 인스턴스
 /*======================================================*/
 God_Game* God_Game::getInstance()
 {
-	static std::unique_ptr<God_Game> instance = std::make_unique<God_Game >();
+    static std::unique_ptr<God_Game> instance = std::make_unique<God_Game >();
 
-	return instance.get();
+    return instance.get();
 }
-
-
 
 /*======================================================*/
 // 게임 초기화
 /*======================================================*/
-void God_Game::clearGame(const GameState state )
+void God_Game::clearGame(const GameState state)
 {
-	m_game_state = state;
+    m_game_state = state;
 
-	m_game_map->removeAllTrees();
+    m_game_map->removeAllTrees();
 
-	m_object_manager->setController(NULL);
+    m_object_manager->setController(NULL);
 
-	m_object_manager->removeAllObjects();
+    m_object_manager->removeAllObjects();
 
-	m_camera_manager->init();
+    m_camera_manager->init();
 
-	if(m_game_state == on_friend)
-		m_gui_manager->getMainGameGUI()->enableDoorButton(true);
-	else
-		m_gui_manager->getMainGameGUI()->enableDoorButton(false);
+    if (m_game_state == on_friend)
+        m_gui_manager->getMainGameGUI()->enableDoorButton(true);
+    else
+        m_gui_manager->getMainGameGUI()->enableDoorButton(false);
 }
-
 
 /*======================================================*/
 // 사운드 플레이
 /*======================================================*/
-void God_Game::playSound( const char *sound_name, const bool loop /*= true*/ )
+void God_Game::playSound( const char *sound_name, const bool loop /*= true*/)
 {
-	
 }
-
-
-
 
 /*======================================================*/
 // 경고 박스 띄우기
 /*======================================================*/
-void warningBox( const std::wstring str )
+void warningBox( const std::wstring str)
 {
 }
-

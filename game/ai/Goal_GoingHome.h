@@ -1,9 +1,9 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/05/08
 //
 // File Name : Goal_GOingHome.h
-// 
+//
 // 복합 목적 : 집에 가기
 //
 //////////////////////////////////////////////////////////////////////////
@@ -17,29 +17,20 @@
 
 class CGameUnit;
 
-
-
 class Goal_GoingHome : public Goal_Composite<CGameUnit>
 {
 private:
-
-	
-
 public:
+    Goal_GoingHome(CGameUnit* p_unit):
+    Goal_Composite<CGameUnit>(p_unit, goal_goinghome) {}
 
-	Goal_GoingHome(CGameUnit* p_unit):  
-	  Goal_Composite<CGameUnit>(p_unit, goal_goinghome){}
+    void activate();
+    s32 process();
+    void terminate() {}
 
-	  void activate();
-	  s32  process();
-	  void terminate(){}
+    bool handleMessage(const Telegram& msg);
 
-	  bool handleMessage(const Telegram& msg);
-
-	  void render();
+    void render();
 };
 
-
-
-
-#endif 
+#endif

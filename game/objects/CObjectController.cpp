@@ -1,13 +1,12 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/06/22
 //
 // File Name : CObjectController.cpp
-// 
+//
 // 오브젝트 컨트롤 관리
-// 
+//
 //////////////////////////////////////////////////////////////////////////
-
 
 #include <stdafx.h>
 #include "../CAppcontext.h"
@@ -24,175 +23,141 @@
 #include "../interfaces/CControllerGUI.h"
 #include "CGameUnit.h"
 
-
-
-CObjectController*		CObjectController::instance = NULL;
-
-
+CObjectController* CObjectController::instance = NULL;
 
 CObjectController::CObjectController() : m_controller(0), m_owner(0), m_control_state(0), m_plug_in_particle(0)
 {
+    //m_pSpotLight->set
 
-	
-
-	
-
-	
-	
-
-
-
-	//m_pSpotLight->set
-
-
-	instance = this;
+    instance = this;
 }
-
-
 
 /*======================================================*/
 // 인스턴트
 /*======================================================*/
 CObjectController* CObjectController::getInstance()
 {
-	return instance;
+    return instance;
 }
-
 
 /*======================================================*/
 // 컨트롤 설정
 /*======================================================*/
-void CObjectController::setController( IBaseController * p_controller )
+void CObjectController::setController( IBaseController * p_controller)
 {
-	if( m_controller != p_controller)
-	{
-		if(m_controller)
-		{
-			m_controller->exitControl();
-			CControllerGUI::instance()->disableGui();
-		}
+    if ( m_controller != p_controller)
+    {
+        if (m_controller)
+        {
+            m_controller->exitControl();
+            CControllerGUI::instance()->disableGui();
+        }
 
-		m_controller = p_controller;
+        m_controller = p_controller;
 
-		p_controller->enterControl();	
+        p_controller->enterControl();
 
-		m_owner = dynamic_cast<CGameObject *>(m_controller);		
+        m_owner = dynamic_cast<CGameObject *>(m_controller);
 
-		commonEnterControlForType(m_owner->getObjectType());
+        commonEnterControlForType(m_owner->getObjectType());
 
-		m_control_state = false;
-	}
+        m_control_state = false;
+    }
 }
-
 
 /*======================================================*/
 // 업데이트
 /*======================================================*/
 void CObjectController::update()
 {
-	if(m_controller)
-	{
-		commonUpdateControlForType(m_owner->getObjectType());
+    if (m_controller)
+    {
+        commonUpdateControlForType(m_owner->getObjectType());
 
-		m_controller->updateControl(CAppContext::getGodGame()->getEventHandler());
-
-
-	}
+        m_controller->updateControl(CAppContext::getGodGame()->getEventHandler());
+    }
 }
-
 
 /*======================================================*/
 // 컨트롤 중인지
 /*======================================================*/
 bool CObjectController::isOnControlState() const
 {
-	if(m_controller == 0)
-	{
-		return false;		
-	}
+    if (m_controller == 0)
+    {
+        return false;
+    }
 
-	CGameObject* obj = dynamic_cast<CGameObject *>(m_controller);
+    CGameObject* obj = dynamic_cast<CGameObject *>(m_controller);
 
-	if(obj->getCommandType() != com_none)
-	{
-		return true;
-	}
+    if (obj->getCommandType() != com_none)
+    {
+        return true;
+    }
 
-
-	return false;
+    return false;
 }
 
 /*======================================================*/
 // 개체가 컨트롤을 가지고 있는지
 /*======================================================*/
-bool CObjectController::isPossessed( CGameObject * obj )
+bool CObjectController::isPossessed( CGameObject * obj)
 {
-	return (m_owner == obj);
+    return (m_owner == obj);
 }
-
 
 /*======================================================*/
 // 타입마다 컨트롤 설정
 /*======================================================*/
-void CObjectController::commonEnterControlForType( const u32 type )
+void CObjectController::commonEnterControlForType( const u32 type)
 {
-	switch(type)
-	{
-	case GODTYPE_UNIT : 
-		{
+    switch (type)
+    {
+    case GODTYPE_UNIT :
+        {
+        }
 
-		
-		}		
+        break;
 
-		break;
-		
-	case GODTYPE_BUILDING : 
+    case GODTYPE_BUILDING :
 
-			
-		break; 
-	}
-
+        break;
+    }
 }
-
 
 /*======================================================*/
 // 컨트롤별 컨트롤 업데이트
 /*======================================================*/
-void CObjectController::commonUpdateControlForType( const u32 type )
+void CObjectController::commonUpdateControlForType( const u32 type)
 {
-	switch(type)
-	{
+    switch (type)
+    {
+    case GODTYPE_UNIT :
+        break;
 
-	case GODTYPE_UNIT : 
-		break; 
+    case GODTYPE_BUILDING :
 
-	case GODTYPE_BUILDING : 
+        break;
 
-		break;
+    default :
 
-	default : 
-
-
-		break;
-	}
+        break;
+    }
 }
-
 
 /*======================================================*/
 // 컨트롤러 무효화
 /*======================================================*/
 void CObjectController::nullifyController()
 {
-	if(m_controller)
-	{
-		m_controller->exitControl();
+    if (m_controller)
+    {
+        m_controller->exitControl();
 
-		m_owner = 0;
-	}
+        m_owner = 0;
+    }
 
-	CControllerGUI::instance()->disableGui();
+    CControllerGUI::instance()->disableGui();
 
-
-	m_controller = 0;
-
+    m_controller = 0;
 }

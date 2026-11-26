@@ -1,13 +1,12 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/02/26
 //
 // File Name : CGameObjectManager.h
-// 
+//
 // 게임 오브젝트 관리
-// 
+//
 //////////////////////////////////////////////////////////////////////////
-
 
 #ifndef GAME_OBJECT_MANAGER_H
 #define GAME_OBJECT_MANAGER_H
@@ -18,171 +17,133 @@
 #include "CObjectListSet.h"
 #include "EnumObjectType.h"
 
+class CGameObject;
+struct CAnimation_Info;
+class CBuildingBlock;
+class CBuildingObject;
 
+class CGameRoom;
+class CGameRoomGod;
 
-class	CGameObject;
-struct  CAnimation_Info;
-class   CBuildingBlock;
-class	CBuildingObject;
+class CGameUnit;
+class CGameUnitArmy;
+class CGameUnitEnemy;
 
-class	CGameRoom;
-class	CGameRoomGod;
-
-
-class	CGameUnit;
-class   CGameUnitArmy;
-class	CGameUnitEnemy;
-
-
-class   CEventHandler;
-class	CAppContext;
-class	CTerrainObject;
-class	IBaseController;
-class	CObjectSelector;
-class	CEnemyGenerator;
-struct	Telegram;
-
-
-
-
+class CEventHandler;
+class CAppContext;
+class CTerrainObject;
+class IBaseController;
+class CObjectSelector;
+class CEnemyGenerator;
+struct Telegram;
 
 #define EntityMgr CGameObjectManager::getInstance()
 
-
 class CObjectController;
-
-
 
 class CGameObjectManager
 {
-
 #define	ObjectMap std::map<u32 , CGameObject *>
 
-	ObjectMap										m_map_id_character;
+    ObjectMap m_map_id_character;
 
-
-#define NodeObjMap std::map<ISceneNode *, CGameObject *>	
-
-
+#define NodeObjMap std::map<ISceneNode *, CGameObject *>
 
 #define	 deletion_queue	std::list<u32>
 
-	deletion_queue										m_delete_queue;
+    deletion_queue m_delete_queue;
 
-	std::vector<CGameUnit* >						m_unit_set;
+    std::vector<CGameUnit* > m_unit_set;
 
-	std::vector<CGameRoom* >						m_room_set;
+    std::vector<CGameRoom* > m_room_set;
 
-	CObjectController*								m_object_controller;
-
-
-
+    CObjectController* m_object_controller;
 
 private:
-	static CGameObjectManager * m_instance;
+    static CGameObjectManager * m_instance;
 
 public:
-	static CGameObjectManager* getInstance();
+    static CGameObjectManager* getInstance();
 
 public:
+    CGameObjectManager();
 
-	CGameObjectManager();
+    ~CGameObjectManager();
 
-	~CGameObjectManager();
+    ObjectMap getObjIDMap() { return m_map_id_character; }
 
-	ObjectMap			getObjIDMap() { return m_map_id_character; }
+    bool removeObject(u32 cid);
 
-	bool				removeObject(u32 cid);
+    void removeAllObjects();
 
-	void				removeAllObjects();
+    CGameObject* getObjectFromId(u32 cid);
 
-	CGameObject*		getObjectFromId(u32 cid);
+    void deleteRequest(s32 idkey);
 
-	void				deleteRequest(s32 idkey);
+    void removeDeleteQueue();
 
-	void				removeDeleteQueue();
-
-	bool				isValidId(u32 obj_id);
-
-
+    bool isValidId(u32 obj_id);
 
 public:
+    void registerObject(CGameObject *obj);
 
-	void				registerObject(CGameObject *obj);
+    void registerBySceneNode(CGameObject *obj) {};
 
-	void				registerBySceneNode(CGameObject *obj) {};
+    void registerById(CGameObject *obj);
 
-	void				registerById(CGameObject *obj);
+    void unregisterObject(CGameObject *obj);
 
-	void				unregisterObject(CGameObject *obj);
-
-	void				unregisterById(CGameObject *obj);
-
-
+    void unregisterById(CGameObject *obj);
 
 public:
+    CGameUnitEnemy* addUnitEnemy(OwnerType owner, u32 unit_id, UnitTypes Unittype,
+        const vector3df& pos, const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
+    CGameUnitEnemy* addUnitEnemy(const vector3df& pos, CEnemyGenerator* p_generator);
 
-	CGameUnitEnemy*		addUnitEnemy(OwnerType owner, u32 unit_id, UnitTypes Unittype,
-		const vector3df& pos, const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
+    CGameUnit* addUnit(OwnerType owner, u32 unit_id, UnitTypes Unittype,
+        const vector3df& pos, const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
-	CGameUnitEnemy*		addUnitEnemy(const vector3df& pos, CEnemyGenerator* p_generator);
+    CGameUnitArmy* addUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
+        const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
+    CGameRoom* addRoom(OwnerType owner, const BuildingTypes Roomtype, u32 room_id = 0, CGameUnit* p_worker = 0);
 
-	CGameUnit*			addUnit(OwnerType owner, u32 unit_id, UnitTypes Unittype,
-		const vector3df& pos, const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
+    CGameRoom* addRoomOnTile(OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile, u32 room_id = 0);
 
-	CGameUnitArmy*		addUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
-		const vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
+    CGameRoomGod* addGodRoom(OwnerType owner, const vector2di& tile_pos);
 
+    CTerrainObject* addTerrainMap(OwnerType owner, s32 cx, s32 cz, f32 sx, f32 sz) { return nullptr; };
 
-	CGameRoom*			addRoom(OwnerType owner, const BuildingTypes Roomtype, u32 room_id = 0, CGameUnit* p_worker = 0);
+public:
+    bool control(CEventHandler *p_receiver);
 
-	CGameRoom*			addRoomOnTile(OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile, u32 room_id = 0);
+    void update();
 
+    void render();
 
+    bool drop();
 
-	CGameRoomGod*		addGodRoom(OwnerType owner, const vector2di& tile_pos);
+    void setController(IBaseController* controller);
 
-	CTerrainObject*		addTerrainMap(OwnerType owner, s32 cx, s32 cz, f32 sx, f32 sz) { return nullptr; };
+    bool isControlled(CGameObject* obj) const;
 
+    bool isOnControlState();
 
-public :
+    void setControlState(const bool on = true);
 
-	bool				control(CEventHandler *p_receiver);
+public:
+    void dispatchMsg(const Telegram& msg);
 
-	void				update();
+    bool init();
 
-	void				render();
+    void removeUnitFromSet(CGameUnit* p_unit);
 
-	bool				drop();
+    void removeRoomFromSet(CGameRoom* p_room);
 
-	void				setController(IBaseController* controller);
+    void clearMemoryFromObject(CGameObject* p_obj);
 
-	bool				isControlled(CGameObject* obj) const;
-
-	bool				isOnControlState();
-
-	void				setControlState(const bool on = true);
-
-public :
-
-	void				dispatchMsg(const Telegram& msg);
-
-	bool				init();
-
-	
-	void				removeUnitFromSet(CGameUnit* p_unit);
-
-	void				removeRoomFromSet(CGameRoom* p_room);
-
-	void				clearMemoryFromObject(CGameObject* p_obj);
-
-	void				clearTargetFromObject( CGameObject* p_obj );
+    void clearTargetFromObject( CGameObject* p_obj);
 };
-
-
-
-
 
 #endif

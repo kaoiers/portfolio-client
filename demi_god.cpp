@@ -6,26 +6,23 @@
 
 int main()
 {
-	God_Game *god_game = God_Game::getInstance();
+    God_Game *god_game = God_Game::getInstance();
 
-	if (!god_game->initialize())
-	{
-		return false;
-	}
+    if (!god_game->initialize())
+    {
+        return false;
+    }
 
-	while (god_game->isRunning())
-	{
+    while (god_game->isRunning())
+    {
+        god_game->control();
 
-		god_game->control();
+        god_game->update(0);
 
-		god_game->update(0);
+        god_game->render();
+    }
 
-		god_game->render();
-
-	}
-
-	god_game->gameReset();
+    god_game->gameReset();
 
     return 0;
 }
-

@@ -1,9 +1,9 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/05/25
 //
 // File Name : Goal_Dead.h
-// 
+//
 // 단일 목적 : 유닛 죽기
 //
 //////////////////////////////////////////////////////////////////////////
@@ -20,17 +20,12 @@ class CGameUnit;
 class Goal_Dead : public Goal<CGameUnit>
 {
 private:
-
-
-
 public:
+    Goal_Dead(CGameUnit* p_unit);
 
-	Goal_Dead(CGameUnit* p_unit);
-
-	void activate();
-	s32  process();
-	void terminate();
-	
+    void activate();
+    s32 process();
+    void terminate();
 };
 
 #endif

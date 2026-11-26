@@ -1,9 +1,9 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/08/06
 //
 // File Name : Goal_Collecting.h
-// 
+//
 // 복합 목적 : 자원 채집 하기
 //
 //////////////////////////////////////////////////////////////////////////
@@ -18,36 +18,27 @@
 class CGameUnit;
 class CGameUnitWorker;
 
-
 class Goal_Collecting : public Goal_Composite<CGameUnit>
 {
 private:
+    CGameUnitWorker* m_worker;
 
-	CGameUnitWorker*	m_worker;
-
-
-
-
-	//the position the bot wants to reach
-	vector3df m_destination;
+    //the position the bot wants to reach
+    vector3df m_destination;
 
 public:
+    Goal_Collecting(CGameUnit* p_unit, vector3df pos):
+    Goal_Composite<CGameUnit>(p_unit, goal_collecting),
+    m_destination(pos)
+    {}
 
-	Goal_Collecting(CGameUnit* p_unit, vector3df   pos):  
-	  Goal_Composite<CGameUnit>(p_unit, 	goal_collecting),
-		  m_destination(pos)
-	  {}
+    void activate();
+    s32 process();
+    void terminate();
 
-	  void activate();
-	  s32  process();
-	  void terminate();
+    bool handleMessage(const Telegram& msg);
 
-	  bool handleMessage(const Telegram& msg);
-
-	  void render();
+    void render();
 };
 
-
-
-
-#endif 
+#endif

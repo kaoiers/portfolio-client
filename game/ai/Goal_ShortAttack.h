@@ -1,9 +1,9 @@
 ﻿//////////////////////////////////////////////////////////////////////////
-// 
+//
 // by Hwang Ki-Young, 2011/06/09
 //
 // File Name : Goal_ShortAttack.h
-// 
+//
 // 단일 목적 : 근거리 공격(아군)
 //
 //////////////////////////////////////////////////////////////////////////
@@ -20,19 +20,14 @@ class CGameUnit;
 class Goal_ShortAttack : public Goal<CGameUnit>
 {
 private:
-
-
-	CGameUnit*		m_target;		
-
+    CGameUnit* m_target;
 
 public:
+    Goal_ShortAttack(CGameUnit* p_unit, CGameUnit* p_target);
 
-	Goal_ShortAttack(CGameUnit* p_unit, CGameUnit* p_target);
-
-	void activate();
-	s32  process();
-	void terminate();
-
+    void activate();
+    s32 process();
+    void terminate();
 };
 
 #endif

@@ -4,11 +4,10 @@ class CGameUnit;
 
 class IBaseGameUnit
 {
-public :
+public:
+    virtual bool shortAttack(CGameUnit* p_target) = 0;
+    virtual void privateInitialize() = 0;
 
-	virtual		bool							shortAttack(CGameUnit* p_target) = 0;
-	virtual		void							privateInitialize() = 0;
-
-	IBaseGameUnit() {}
-	virtual  ~IBaseGameUnit() {}
+    IBaseGameUnit() {}
+    virtual ~IBaseGameUnit() {}
 };
