@@ -155,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\threading\ThreadPool.h" />
+    <ClInclude Include="game\navigation\NavigationGrid.h" />
+    <ClInclude Include="game\navigation\AStar.h" />
     <ClInclude Include="basicType.h" />
     <ClInclude Include="game\ai\Goal.h" />
     <ClInclude Include="game\ai\Goal_AttackTarget.h" />

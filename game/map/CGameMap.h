@@ -22,11 +22,14 @@ class CEnemyGenerator;
 class CExplosionSystem;
 
 #include "../../basicType.h"
+#include "../navigation/AStar.h"
 #include <memory>
 #include "../common/UncopyableUtil.h"
 
 class CGameMap : private UnCopyable
 {
+    NavigationGrid m_navigation_grid;
+    std::uint64_t m_navigation_revision = 0;
     CGameObjectManager* m_obj_man;
     CCameraManager* m_camera_manager;
 
@@ -85,6 +88,8 @@ public:
 
     bool getNodePosFromMousePos(const vector3df& ground_point, vector3df& tile_pos);
     bool isNodePresent(const s32 x, const s32 y);
+    PathResult findPath(GridPoint start, GridPoint goal) const { return AStar::find(m_navigation_grid, start, goal); }
+    std::uint64_t getNavigationRevision() const { return m_navigation_revision; }
     bool isNodeAllLinked(const s32 x, const s32 y);
     bool isInUsableArea(const s32 x, const s32 y);
 

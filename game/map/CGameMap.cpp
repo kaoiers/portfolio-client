@@ -61,7 +61,7 @@ bool CGameMap::init( s32 cells_x, s32 cells_z, s32 partition_x, s32 partition_z,
     if (cells_x <= 0 || cells_z <= 0 || cwidth <= 0 || cheight <= 0 ||
         !std::isfinite(cwidth) || !std::isfinite(cheight) ||
         !std::isfinite(cells_x * cwidth) || !std::isfinite(cells_z * cheight) ||
-        static_cast<long long>(cells_x) * cells_z > (std::numeric_limits<s32>::max)())
+        static_cast<std::uint64_t>(cells_x) * cells_z > NavigationGrid::MAX_CELLS)
         return false;
 
     m_cells_x = cells_x;
@@ -161,6 +161,8 @@ void CGameMap::displayObjects( u32 x_offset, u32 y_offset)
 /*======================================================*/
 void CGameMap::createGraph()
 {
+    m_navigation_grid = NavigationGrid(m_cells_x, m_cells_z);
+    ++m_navigation_revision;
 }
 
 /*======================================================*/
@@ -230,9 +232,7 @@ vector2di CGameMap::getTileFromPos( const vector3df& ground_point)
 /*======================================================*/
 bool CGameMap::isNodePresent( const s32 x, const s32 y)
 {
-    s32 node_index = getNodeIndexFromTile(x, y);
-
-    return false;
+    return m_navigation_grid.walkable({x, y});
 }
 
 /*======================================================*/
@@ -283,8 +283,12 @@ bool CGameMap::isNodeAllLinked( const s32 x, const s32 y)
 /*======================================================*/
 bool CGameMap::removeNode( const s32 x, const s32 y)
 {
-    s32 idx = y*m_cells_x+x;
-
+    if (!m_navigation_grid.contains({x, y})) return false;
+    if (m_navigation_grid.walkable({x, y}))
+    {
+        m_navigation_grid.setBlocked({x, y}, true);
+        ++m_navigation_revision;
+    }
     return true;
 }
 
@@ -299,10 +303,14 @@ vector3df CGameMap::getNodePos( const s32 x, const s32 y)
 /*======================================================*/
 // 타일 인덱스로 노드 추가하기
 /*======================================================*/
-bool CGameMap::addNodeByTile( const s32 x, const s32 y)
+bool CGameMap::addNodeByTile(const s32 x, const s32 y)
 {
-    s32 idx = y*m_cells_x+x;
-
+    if (!m_navigation_grid.contains({x, y})) return false;
+    if (!m_navigation_grid.walkable({x, y}))
+    {
+        m_navigation_grid.setBlocked({x, y}, false);
+        ++m_navigation_revision;
+    }
     return true;
 }
 

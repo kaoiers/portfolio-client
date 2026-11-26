@@ -60,6 +60,12 @@
     <ClInclude Include="game\threading\ThreadPool.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\navigation\NavigationGrid.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\navigation\AStar.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="basicType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
