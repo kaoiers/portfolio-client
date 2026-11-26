@@ -50,7 +50,7 @@ public :
 
 	virtual		void		control(CEventHandler* pReceiver) {};
 	virtual		void		OnCommand() {};
-	virtual		void		update(const u32& timeMs);
+	virtual		void		update(u32 timeMs);
 	virtual		bool		short_attack(CGameUnit* pTarget); 
 	virtual		bool		long_attack(CGameUnit*	pTarget) { return false; } 
 	virtual		void		enter_control();
@@ -59,7 +59,7 @@ public :
 
 
 
-	CGameUnitWorker(const OwnerType& owner, unsigned int obj_id, unsigned int objtype, 
+	CGameUnitWorker(OwnerType owner, unsigned int obj_id, unsigned int objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 
@@ -77,7 +77,7 @@ public :
 	void					setBuildingComplete(const bool comp = true) {m_bBuildingComplete = comp; }
 	void					RemoveSubGoals();
 	
-	void					AddBuilding(const BuildingTypes&  roomType);
+	void					AddBuilding(BuildingTypes  roomType);
 	
 	
 	const	bool			isBuildingCompleted() ;
@@ -107,7 +107,7 @@ public :
 public :
 	
 	void					OnNetWorkBuildCommand();
-	void					OnNetWorkBuildStartCommand(const unsigned int& seconds);
+	void					OnNetWorkBuildStartCommand(unsigned int seconds);
 	void					OnNetWorkBuildStartViewCommand(CGameRoom*	pRoom);
 	void					OnNetWorkBuildCompleteViewCommand();
 	

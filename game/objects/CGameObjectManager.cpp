@@ -214,7 +214,7 @@ void	CGameObjectManager::setControlState(const bool on)
 /*======================================================*/
 // 적군 추가
 /*======================================================*/
-CGameUnitEnemy* CGameObjectManager::AddUnitEnemy(const OwnerType& owner,unsigned int unit_id, UnitTypes Unittype, 
+CGameUnitEnemy* CGameObjectManager::AddUnitEnemy(OwnerType owner,unsigned int unit_id, UnitTypes Unittype,
 												 const vector3df& pos, 
 												 vector3df& rot)
 {
@@ -261,7 +261,7 @@ CGameUnitEnemy* CGameObjectManager::AddUnitEnemy( const vector3df& pos , CEnemyG
 /*======================================================*/
 // 유닛 추가
 /*======================================================*/
-CGameUnit* CGameObjectManager::AddUnit(const OwnerType& owner, unsigned int unit_id, UnitTypes Unittype, 
+CGameUnit* CGameObjectManager::AddUnit(OwnerType owner, unsigned int unit_id, UnitTypes Unittype,
 									   const vector3df& pos,
 									   vector3df& rot)
 {
@@ -281,7 +281,7 @@ CGameUnit* CGameObjectManager::AddUnit(const OwnerType& owner, unsigned int unit
 /*======================================================*/
 // 아군 추가
 /*======================================================*/
-CGameUnitArmy* CGameObjectManager::AddUnitArmy(const OwnerType& owner, UnitTypes Unittype, const vector3df& pos, 
+CGameUnitArmy* CGameObjectManager::AddUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
 											   vector3df& rot)
 {
 
@@ -474,7 +474,7 @@ void CGameObjectManager::DispatchMsg( const Telegram& msg )
 /*======================================================*/
 // 신수방 추가하기
 /*======================================================*/
-CGameRoomGod* CGameObjectManager::AddGodRoom( const OwnerType& owner, const vector2di& tilePos )
+CGameRoomGod* CGameObjectManager::AddGodRoom( OwnerType owner, const vector2di& tilePos )
 {
 	CGameRoomGod* pGodRoom = 0;
 	
@@ -491,7 +491,7 @@ CGameRoomGod* CGameObjectManager::AddGodRoom( const OwnerType& owner, const vect
 /*======================================================*/
 //방 추가하기
 /*======================================================*/
-CGameRoom* CGameObjectManager::AddRoom( const OwnerType& owner, const BuildingTypes Roomtype, unsigned int RoomID , CGameUnit* pWorker )
+CGameRoom* CGameObjectManager::AddRoom( OwnerType owner, const BuildingTypes Roomtype, unsigned int RoomID , CGameUnit* pWorker )
 {
 
 	CGameRoom* room = NULL;
@@ -521,7 +521,7 @@ CGameRoom* CGameObjectManager::AddRoom( const OwnerType& owner, const BuildingTy
 /*======================================================*/
 // 방 특정 타일에 추가하기
 /*======================================================*/
-CGameRoom* CGameObjectManager::AddRoomOnTile( const OwnerType& owner, const BuildingTypes Roomtype, const vector2di& tile ,  unsigned int RoomID)
+CGameRoom* CGameObjectManager::AddRoomOnTile( OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile ,  unsigned int RoomID)
 {
 	CGameRoom* room = 0;
 

@@ -31,7 +31,7 @@ void CGameUnitGod::PrivateInitialize()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameUnitGod::update( const u32& timeMs )
+void CGameUnitGod::update( u32 timeMs )
 {
 	UpdateMoveMent(timeMs);
 
@@ -67,7 +67,7 @@ void CGameUnitGod::enter_control()
 
 
 
-CGameUnitGod::CGameUnitGod(const OwnerType& owner, unsigned int obj_id, unsigned int objtype, 
+CGameUnitGod::CGameUnitGod(OwnerType owner, unsigned int obj_id, unsigned int objtype,
 						   const UNIT_RESOURCE* resource, 
 						   const GAMEUNIT_ATTRIBUTE* attribute, 
 						   UnitTypes unittype, 

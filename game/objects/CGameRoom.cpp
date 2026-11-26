@@ -27,7 +27,7 @@
 #include "../God_Game.h"
 
 
-CGameRoom::CGameRoom(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res, 
+CGameRoom::CGameRoom(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res,
 					 const vector3df& pos, 
 					 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ ) : 
@@ -40,7 +40,7 @@ m_pBuildingStep(0),m_NodeIndex(-1),m_bBuildingFinished(false), m_uTotalRoomHp(10
 
 }
 
-CGameRoom::CGameRoom(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
+CGameRoom::CGameRoom(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
 :CGameObject(owner, objtype), room_type(btype), m_rResource(res) 
 ,m_uWidth_cells(res->m_iWidth_cells), m_uHeight_cells(res->m_iHeight_cells),
 

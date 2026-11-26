@@ -56,23 +56,23 @@ public :
 
 	static	CGameResourceManager*	GetInstance() {return m_pInstance;};
 
-	void				update(const u32& timeMs);
+	void				update(u32 timeMs);
 	void				IncreaseStatusCycle();	
 	void				DecreaseStatusCycle();
 	bool				IsAllResourcesSetting() const;
 
 	
-	void				AddPlayerExp(const u32& exp);	
-	void				IncreaseExp( const u32& exp);
+	void				AddPlayerExp(u32 exp);
+	void				IncreaseExp( u32 exp);
 	const u32			getCurrentLevel() { return m_uCurrentPlayerLevel; }
 	
 	void				addUnitCounts(); 
 	void				SubstractUnitCounts();
 	const u32			getUnitCounts() { return m_uUnitCounts; }
 	const u32			getTotalUnitCounts() { return m_uTotalUnitCounts; }
-	u32					getMaxPlayerExp(const u32& level) ;
+	u32					getMaxPlayerExp(u32 level) ;
 
-	inline void AddAllResources(const int& g, const int& l, const int& s)
+	inline void AddAllResources(int g, int l, int s)
 	{ 
 		GlobalResource temp;
 		temp.crop = g;
@@ -81,21 +81,21 @@ public :
 	}
 
 	
-	inline void AddCropResource(const unsigned int& crop)
+	inline void AddCropResource(unsigned int crop)
 	{
 		GlobalResource temp;
 		temp.crop  = crop;		
 		
 	}
 
-	inline void AddLumberResource(const unsigned int& lum)
+	inline void AddLumberResource(unsigned int lum)
 	{
 		GlobalResource temp;
 		temp.lumber  = lum;
 		
 	}
 
-	inline void AddStoneResource(const unsigned int& stone)
+	inline void AddStoneResource(unsigned int stone)
 	{
 		GlobalResource temp;
 		temp.stone  = stone;
@@ -106,8 +106,8 @@ public :
 
 public :
 
-	void	OnNetworkSetResources(const unsigned int& crop, 
-		const unsigned int& woods,  const unsigned int& gold );
+	void	OnNetworkSetResources(unsigned int crop,
+		unsigned int woods,  unsigned int gold );
 
 
 

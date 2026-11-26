@@ -28,10 +28,10 @@ class CGameUnitProduct
 
 public :
 
-	void				BeginProcessing(const UnitTypes& Type);
-	void				UpdateProcessing(const u32& Ms);
+	void				BeginProcessing(UnitTypes Type);
+	void				UpdateProcessing(u32 Ms);
 	void				CancelProcessing();
-	const f32&		getPercentage() { return m_fPercentage; }
+	f32		getPercentage() { return m_fPercentage; }
 
 	bool				isOnProcessing() { return (m_uDestinationTime > 0); }
 	
@@ -44,7 +44,7 @@ public :
 /*======================================================*/
 // 유닛 생성시 처리
 /*======================================================*/
-inline void CGameUnitProduct::BeginProcessing( const UnitTypes& Type )
+inline void CGameUnitProduct::BeginProcessing( UnitTypes Type )
 {
 	m_CurrentUnitType = Type;
 	
@@ -57,7 +57,7 @@ inline void CGameUnitProduct::BeginProcessing( const UnitTypes& Type )
 /*======================================================*/
 // 유닛 생성과정 업데이트
 /*======================================================*/
-inline void CGameUnitProduct::UpdateProcessing( const u32& currentTime )
+inline void CGameUnitProduct::UpdateProcessing( u32 currentTime )
 {
 	if(m_uDestinationTime > 0)
 	{

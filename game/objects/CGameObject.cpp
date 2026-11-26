@@ -25,7 +25,7 @@
 
 unsigned int	CGameObject::m_iNextValidID = 1;
 
-CGameObject::CGameObject(const OwnerType& owner, unsigned int objtype, 
+CGameObject::CGameObject(OwnerType owner, unsigned int objtype,
 						 vector3df pos,
 						 vector3df rot,
 						 vector3df scale) :
@@ -41,7 +41,7 @@ CGameObject::CGameObject(const OwnerType& owner, unsigned int objtype,
 
 }
 
-CGameObject::CGameObject(const OwnerType& owner,  unsigned int obj_id, 
+CGameObject::CGameObject(OwnerType owner,  unsigned int obj_id,
 						 unsigned int objtype, 
 						 vector3df pos, 
 						 vector3df rot, 
@@ -125,7 +125,7 @@ vector3df CGameObject::getHeightPos()
 /*======================================================*/
 // 명령 타입 설정하기
 /*======================================================*/
-void CGameObject::setCommandType( const Command_Type& type )
+void CGameObject::setCommandType( Command_Type type )
 {
 	m_CommandType = type; 
 }

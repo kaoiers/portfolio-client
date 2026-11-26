@@ -15,7 +15,7 @@
 #include "../interfaces/CControllerGUI.h"
 
 
-CGameRoomJail::CGameRoomJail(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res, 
+CGameRoomJail::CGameRoomJail(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res,
 							 const vector3df& pos, 
 							 const vector3df& rot, 
 							 const vector3df& scale)
@@ -24,7 +24,7 @@ CGameRoomJail::CGameRoomJail(const OwnerType& owner, unsigned int objtype, unsig
 
 }
 
-CGameRoomJail::CGameRoomJail(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
+CGameRoomJail::CGameRoomJail(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
  : CGameRoom(owner, objtype, btype, res)
 {
 

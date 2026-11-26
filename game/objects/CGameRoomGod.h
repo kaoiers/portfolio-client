@@ -21,7 +21,7 @@ class CGameRoomGod : public CGameRoom
 
 public :
 
-	CGameRoomGod(const OwnerType& owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res, const vector2di& TilePos,
+	CGameRoomGod(OwnerType owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res, const vector2di& TilePos,
 		const vector3df& pos,
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));
@@ -34,7 +34,7 @@ public :
 	void						extra_node_setting(){};
 
 
-	CGameRoomGod(const OwnerType& owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res, const vector2di& TilePos);
+	CGameRoomGod(OwnerType owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res, const vector2di& TilePos);
 
 	virtual		bool						HandleMessage(const Telegram& msg) {return true;}
 

@@ -102,7 +102,7 @@ public :
 		
 	void					RegisterElement( IGUIObject *pGui );
 
-	IGUIObject*				FindElementByID(const s32& eid);
+	IGUIObject*				FindElementByID(s32 eid);
 
 	position2d<s32>			GetPosition() const  { return  m_abolutePosition; }
 	
@@ -113,13 +113,13 @@ public :
 
 	bool					isNeedOwner() const { return m_bNeedOwner; }
 
-	bool					PostEvent(const SEvent& event) { return true; };
+	bool					PostEvent(SEvent event) { return true; };
 
 public :
 
-	CButtonGUI*				addButton(const position2d<s32> Position, const char* defaultImage, const s32& mID = -1 ,std::wstring text = L"");
+	CButtonGUI*				addButton(const position2d<s32> Position, const char* defaultImage, s32 mID = -1 ,std::wstring text = L"");
 	
-	CImageGUI*				addImage(const position2d<s32> Position, const char* defaultImage , const s32& mID = -1);	
+	CImageGUI*				addImage(const position2d<s32> Position, const char* defaultImage , s32 mID = -1);
 	
 	position2d<s32> GetRelativePosition( const position2d<s32> pos ) const;
 	

@@ -15,7 +15,7 @@
 #include "../ai/God_Messages.h"
 
 
-CGameUnitTiger::CGameUnitTiger(const OwnerType& owner,unsigned int obj_id, 
+CGameUnitTiger::CGameUnitTiger(OwnerType owner,unsigned int obj_id,
 								   unsigned int objtype, 
 								   const UNIT_RESOURCE* resource, 
 								   const GAMEUNIT_ATTRIBUTE* attribute,
@@ -29,7 +29,7 @@ CGameUnitArmy(owner, obj_id, objtype, resource, attribute ,unittype, pos, rot, s
 
 }
 
-CGameUnitTiger::CGameUnitTiger(const OwnerType& owner, unsigned int objtype, const UNIT_RESOURCE* resource, 
+CGameUnitTiger::CGameUnitTiger(OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
 							   const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 							   const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 							   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 

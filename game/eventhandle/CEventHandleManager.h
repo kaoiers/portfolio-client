@@ -97,7 +97,7 @@ public :
 		return tempOffset; 	
 	}
 
-	const position2d<s32>&		getMousePosition() const {return MousePosition; }
+	position2d<s32>		getMousePosition() const {return MousePosition; }
 	const position2d<s32>		getWindowMousePos() const;
 
 	const position2d<f32>&		getRelativeMousePosition() const {return MouseRelativePosition; }

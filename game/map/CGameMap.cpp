@@ -446,7 +446,7 @@ bool CGameMap::AddNodeAndLinkEdgesForDoor( const int x, const int y, const vecto
 /*======================================================*/
 bool CGameMap::isPathObstructed(const vector3df& A,
                                  const vector3df& B,
-								 const f32&    BoundingRadius) const
+								 f32    BoundingRadius) const
 {
  
 

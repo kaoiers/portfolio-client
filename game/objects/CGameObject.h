@@ -71,13 +71,13 @@ public:
 	void         UnTag(){m_bTag = false;}
 	
 	
-	CGameObject(const OwnerType& owner , unsigned int objtype,  
+	CGameObject(OwnerType owner , unsigned int objtype,
 				vector3df pos = vector3df(0.0f, 0.0f, 0.0f),
 				vector3df rot = vector3df(0.0f, 0.0f, 0.0f),
 				vector3df scale = vector3df(1.0f, 1.0f, 1.0f));
 
 
-	CGameObject(const OwnerType& owner , unsigned int obj_id, unsigned int objtype,  
+	CGameObject(OwnerType owner , unsigned int obj_id, unsigned int objtype,
 		vector3df pos = vector3df(0.0f, 0.0f, 0.0f),
 		vector3df rot = vector3df(0.0f, 0.0f, 0.0f),
 		vector3df scale = vector3df(1.0f, 1.0f, 1.0f));
@@ -85,13 +85,13 @@ public:
 
 	virtual						~CGameObject();
 
-	void						setOwnerType(const OwnerType& owner) { m_eOwnerType = owner; }
-	const OwnerType&			getOwnerType() { return m_eOwnerType; }
+	void						setOwnerType(OwnerType owner) { m_eOwnerType = owner; }
+	OwnerType			getOwnerType() { return m_eOwnerType; }
 
 
 
 	CGameAnimationMgr*			GetAnimationMgr() { return m_pAnimgr; }	
-	void						SetID(const int& cid) { m_uid = cid; }
+	void						SetID(int cid) { m_uid = cid; }
 	u32							GetID() {return m_uid;}
 	bool						isPossessed();
 	CGameObjectManager*			getObjectManager() const { return m_pObjectManager; }
@@ -102,8 +102,8 @@ public:
 	CMainGameGUI*				getMainGameGUI();
 	CGameGUI*			getOwnedGUI();
 
-	void						setCommandType(const Command_Type& type);
-	const	Command_Type&		getCommandType() const { return m_CommandType; }
+	void						setCommandType(Command_Type type);
+	Command_Type		getCommandType() const { return m_CommandType; }
 
 	void						SetIDFromValidTest();
 	bool						SendMessageToAllObjects( double delay, int sender, int msg, void* ExtraInfo );

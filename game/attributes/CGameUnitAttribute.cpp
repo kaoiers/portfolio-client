@@ -48,7 +48,7 @@ void CGameUnitAttribute::Levelup()
 /*======================================================*/
 // 공격 당했을 HP수치 처리하기
 /*======================================================*/
-u32 CGameUnitAttribute::CalAttacked( const u32& att )
+u32 CGameUnitAttribute::CalAttacked( u32 att )
 {
 	s32 attack = att - m_uDefence;
 	

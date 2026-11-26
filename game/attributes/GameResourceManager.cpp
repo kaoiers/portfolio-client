@@ -50,7 +50,7 @@ void CGameResourceManager::Init()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameResourceManager::update(const u32& timeMs )
+void CGameResourceManager::update(u32 timeMs )
 {
 	if(!IsAllResourcesSetting())
 	{
@@ -127,7 +127,7 @@ bool CGameResourceManager::IsAllResourcesSetting() const
 /*======================================================*/
 // 경험치 추가하기
 /*======================================================*/
-void CGameResourceManager::AddPlayerExp( const u32& exp )
+void CGameResourceManager::AddPlayerExp( u32 exp )
 {
 	if(CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_game ||
 		CAppContext::GetGodGame()->getCurrentGameState() == God_Game::on_intro
@@ -145,7 +145,7 @@ void CGameResourceManager::AddPlayerExp( const u32& exp )
 /*======================================================*/
 // 경험치 추가하기
 /*======================================================*/
-void CGameResourceManager::IncreaseExp( const u32& exp )
+void CGameResourceManager::IncreaseExp( u32 exp )
 {
 	u32 maxExp =  getMaxPlayerExp(m_uCurrentPlayerLevel);
 
@@ -172,7 +172,7 @@ void CGameResourceManager::IncreaseExp( const u32& exp )
 /*======================================================*/
 // 현제래벨 경험치 최대치 가져오기
 /*======================================================*/
-u32 CGameResourceManager::getMaxPlayerExp(const u32& level)
+u32 CGameResourceManager::getMaxPlayerExp(u32 level)
 {
 	if(level == 0)
 		return 0;
@@ -185,9 +185,9 @@ u32 CGameResourceManager::getMaxPlayerExp(const u32& level)
 /*======================================================*/
 // 네트워크용 
 /*======================================================*/
-void CGameResourceManager::OnNetworkSetResources(const unsigned int& crop, 
-												 const unsigned int& woods, 
-												 const unsigned int& gold )
+void CGameResourceManager::OnNetworkSetResources(unsigned int crop,
+												 unsigned int woods,
+												 unsigned int gold )
 {
 	GlobalResource temp;
 	temp.crop = crop;

@@ -33,7 +33,7 @@ public :
 
 	virtual		void		OnCommand() {};
 
-	virtual		void		update(const u32& timeMs);
+	virtual		void		update(u32 timeMs);
 
 	virtual		bool		short_attack(CGameUnit* pTarget); 
 
@@ -50,7 +50,7 @@ public :
 
 	void					Arbitrate();
 
-	CGameUnitGod(const OwnerType& owner, unsigned int obj_id, unsigned int objtype, 
+	CGameUnitGod(OwnerType owner, unsigned int obj_id, unsigned int objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 

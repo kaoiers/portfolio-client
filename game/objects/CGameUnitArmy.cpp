@@ -24,7 +24,7 @@
 #include "CGameRoom.h"
 
 
-CGameUnitArmy::CGameUnitArmy(const OwnerType& owner, unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource,
+CGameUnitArmy::CGameUnitArmy(OwnerType owner, unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource,
 							 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 							 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 							 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -36,7 +36,7 @@ CGameUnitArmy::CGameUnitArmy(const OwnerType& owner, unsigned int obj_id, unsign
 	CGameResourceManager::GetInstance()->addUnitCounts();	
 }
 
-CGameUnitArmy::CGameUnitArmy(const OwnerType& owner, unsigned int objtype, const UNIT_RESOURCE* resource, 
+CGameUnitArmy::CGameUnitArmy(OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
 							 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype, 
 							 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 							 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -119,7 +119,7 @@ void CGameUnitArmy::exit_control()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameUnitArmy::update( const u32& timeMs )
+void CGameUnitArmy::update( u32 timeMs )
 {
 	UpdateMoveMent(timeMs);
 

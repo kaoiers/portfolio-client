@@ -82,7 +82,7 @@ public :
 
 	void										InitWeapon();
 
-	void										UpdateMoveMent(const u32& timeMs);
+	void										UpdateMoveMent(u32 timeMs);
 
 	bool										HandleMessage(const Telegram& msg);
 
@@ -99,13 +99,13 @@ public :
 
 
 	const UNIT_RESOURCE* 						getUnitResource()  { return m_rUnitResource; }
-	const unsigned	int&						getUnitType() {return m_unit_type;}
-	const AllianceType&							getAllyType() const { return m_eAlly; }
+	unsigned	int						getUnitType() {return m_unit_type;}
+	AllianceType							getAllyType() const { return m_eAlly; }
 	virtual	bool								isAttackSuccess(CGameObject* opponent );
 
 	void										setCurrentAni(const unsigned int atype, const bool bLoop);
 	CGameUnit*									getTarget() const;
-	bool										isInHitDistance(const vector3df& pos, const f32& bRadius);
+	bool										isInHitDistance(const vector3df& pos, f32 bRadius);
 	vector3df									getApproachPosition(const vector3df& pos);
 
 	
@@ -134,14 +134,14 @@ public :
 	void										updateHpBar();
 	
 	
-	CGameUnit(const OwnerType& owner,unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute,
-		UnitTypes unittype,const AllianceType& m_bAlly, 
+	CGameUnit(OwnerType owner,unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute,
+		UnitTypes unittype,AllianceType m_bAlly,
 		const vector3df& pos = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
-	CGameUnit(const OwnerType& owner,unsigned int objtype, const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute,
-		UnitTypes unittype,const AllianceType& m_bAlly, 
+	CGameUnit(OwnerType owner,unsigned int objtype, const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute,
+		UnitTypes unittype,AllianceType m_bAlly,
 		const vector3df& pos = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));

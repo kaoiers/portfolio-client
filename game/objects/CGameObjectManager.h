@@ -123,28 +123,28 @@ public:
 public:
 
 
-	CGameUnitEnemy*		AddUnitEnemy(const OwnerType& owner, unsigned int unit_id, UnitTypes Unittype,
+	CGameUnitEnemy*		AddUnitEnemy(OwnerType owner, unsigned int unit_id, UnitTypes Unittype,
 		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 	CGameUnitEnemy*		AddUnitEnemy(const vector3df& pos, CEnemyGenerator* pGenerator);
 
 
-	CGameUnit*			AddUnit(const OwnerType& owner, unsigned int unit_id, UnitTypes Unittype,
+	CGameUnit*			AddUnit(OwnerType owner, unsigned int unit_id, UnitTypes Unittype,
 		const vector3df& pos, vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
-	CGameUnitArmy*		AddUnitArmy(const OwnerType& owner, UnitTypes Unittype, const vector3df& pos,
+	CGameUnitArmy*		AddUnitArmy(OwnerType owner, UnitTypes Unittype, const vector3df& pos,
 		vector3df& rot = vector3df(0.0f, 0.0f, 0.0f));
 
 
-	CGameRoom*			AddRoom(const OwnerType& owner, const BuildingTypes Roomtype, unsigned int RoomID = 0, CGameUnit* pWorker = 0);
+	CGameRoom*			AddRoom(OwnerType owner, const BuildingTypes Roomtype, unsigned int RoomID = 0, CGameUnit* pWorker = 0);
 
-	CGameRoom*			AddRoomOnTile(const OwnerType& owner, const BuildingTypes Roomtype, const vector2di& tile, unsigned int RoomID = 0);
+	CGameRoom*			AddRoomOnTile(OwnerType owner, const BuildingTypes Roomtype, const vector2di& tile, unsigned int RoomID = 0);
 
 
 
-	CGameRoomGod*		AddGodRoom(const OwnerType& owner, const vector2di& tilePos);
+	CGameRoomGod*		AddGodRoom(OwnerType owner, const vector2di& tilePos);
 
-	CTerrainObject*		AddTerrainMap(const OwnerType& owner, const int& cx, const int& cz, const float& sx, const float& sz) { return nullptr; };
+	CTerrainObject*		AddTerrainMap(OwnerType owner, int cx, int cz, float sx, float sz) { return nullptr; };
 
 
 public :

@@ -12,7 +12,7 @@
 #include "CGameRoomStock.h"
 #include "../interfaces/CControllerGUI.h"
 
-CGameRoomStock::CGameRoomStock(const OwnerType& owner, unsigned int objtype, unsigned int btype, 
+CGameRoomStock::CGameRoomStock(OwnerType owner, unsigned int objtype, unsigned int btype,
 							   const ROOM_RESOURCE* res, 
 							   const vector3df& pos, 
 							   const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
@@ -22,7 +22,7 @@ CGameRoomStock::CGameRoomStock(const OwnerType& owner, unsigned int objtype, uns
 
 }
 
-CGameRoomStock::CGameRoomStock(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
+CGameRoomStock::CGameRoomStock(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res )
 : CGameRoom(owner, objtype, btype, res)
 {
 

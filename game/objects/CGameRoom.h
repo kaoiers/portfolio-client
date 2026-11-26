@@ -42,7 +42,7 @@ protected :
 
 public :
 
-	const	unsigned int&					getRoomType() { return room_type; }
+	unsigned int					getRoomType() { return room_type; }
 
 	CGameResourceManager*					getGameResource();
 	bool									isProductRoom();
@@ -63,13 +63,13 @@ public :
 
 public :
 
-	CGameRoom(const OwnerType& owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res, 
+	CGameRoom(OwnerType owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res,
 		const vector3df& pos,
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
 
-	CGameRoom(const OwnerType& owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res);
+	CGameRoom(OwnerType owner, unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res);
 	virtual		~CGameRoom();
 
 

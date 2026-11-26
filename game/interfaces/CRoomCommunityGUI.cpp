@@ -130,7 +130,7 @@ void CRoomCommunityGUI::SetOwner( CGameObject *obj )
 /*======================================================*/
 // 프렌드 리스트 추가
 /*======================================================*/
-void CRoomCommunityGUI::addFriendList( const char* friend_name, const unsigned int& friend_id, const char* friend_picture_file /*= 0 */ )
+void CRoomCommunityGUI::addFriendList( const char* friend_name, unsigned int friend_id, const char* friend_picture_file /*= 0 */ )
 {
 	friend_button_id++;
 

@@ -29,7 +29,7 @@ public :
 	virtual		void		OnCommand();
 
 
-	CGameUnitBunny(const OwnerType& owner,unsigned int obj_id, unsigned int objtype, 
+	CGameUnitBunny(OwnerType owner,unsigned int obj_id, unsigned int objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 
@@ -37,7 +37,7 @@ public :
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));	
 
-	CGameUnitBunny(const OwnerType& owner,unsigned int objtype, 
+	CGameUnitBunny(OwnerType owner,unsigned int objtype,
 		const UNIT_RESOURCE* resource, 
 		const GAMEUNIT_ATTRIBUTE* attribute, 
 		UnitTypes unittype, 

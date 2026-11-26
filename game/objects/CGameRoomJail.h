@@ -18,7 +18,7 @@ class CGameRoomJail : public CGameRoom
 
 public :
 
-	CGameRoomJail(const OwnerType& owner,unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res, 
+	CGameRoomJail(OwnerType owner,unsigned int objtype,  unsigned int btype, const ROOM_RESOURCE* res,
 		const vector3df& pos,
 		const vector3df& rot  = vector3df(0.0f, 0.0f, 0.0f),
 		const vector3df& scale  = vector3df(1.0f, 1.0f, 1.0f));
@@ -32,7 +32,7 @@ public :
 	bool						HandleMessage(const Telegram& msg) {return true;}
 
 
-	CGameRoomJail(const OwnerType& owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res);
+	CGameRoomJail(OwnerType owner, unsigned int objtype, unsigned int btype, const ROOM_RESOURCE* res);
 
 	virtual ~CGameRoomJail(){};
 };

@@ -44,7 +44,7 @@ protected:
 
 public:
 
-	MovingEntity(const OwnerType& owner,int objtype,			   
+	MovingEntity(OwnerType owner,int objtype,
 		f32   max_speed ,
 		f32   mass ,
 		f32   turn_rate ,
@@ -65,7 +65,7 @@ public:
     	
   }
 
-MovingEntity(const OwnerType& owner,unsigned int obj_id,
+MovingEntity(OwnerType owner,unsigned int obj_id,
 			 int		objtype,			   
 			 f32   max_speed ,
 			 f32   mass ,
@@ -97,7 +97,7 @@ MovingEntity(const OwnerType& owner,unsigned int obj_id,
 
   virtual	void				OnCommand(){};
 
-  virtual	void				update(const u32& timeMs){};
+  virtual	void				update(u32 timeMs){};
 
  
   //accessors

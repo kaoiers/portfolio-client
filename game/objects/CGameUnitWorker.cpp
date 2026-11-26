@@ -47,7 +47,7 @@ bool CGameUnitWorker::short_attack( CGameUnit* pTarget )
 	return false;
 }
 
-CGameUnitWorker::CGameUnitWorker(const OwnerType& owner, unsigned int obj_id, unsigned int objtype, 
+CGameUnitWorker::CGameUnitWorker(OwnerType owner, unsigned int obj_id, unsigned int objtype,
 								 const UNIT_RESOURCE* resource, const GAMEUNIT_ATTRIBUTE* attribute, 
 								 UnitTypes unittype, const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/
 								 , const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/
@@ -218,7 +218,7 @@ void CGameUnitWorker::BuildingControl( CEventHandler* pReceiver )
 /*======================================================*/
 // 빌딩 추가하기
 /*======================================================*/
-void CGameUnitWorker::AddBuilding( const BuildingTypes& roomType )
+void CGameUnitWorker::AddBuilding( BuildingTypes roomType )
 {
 	if(!m_pControlRoom && !m_pBuildRoom)
 	{
@@ -267,7 +267,7 @@ void CGameUnitWorker::PushControlCompletedRoom()
 /*======================================================*/
 // 업데이트
 /*======================================================*/
-void CGameUnitWorker::update(const u32& timeMs)
+void CGameUnitWorker::update(u32 timeMs)
 {
 	UpdateMoveMent(timeMs);
 
@@ -334,7 +334,7 @@ void CGameUnitWorker::OnNetWorkBuildCommand()
 /*======================================================*/
 // 네트워크용
 /*======================================================*/
-void CGameUnitWorker::OnNetWorkBuildStartCommand(const unsigned int& seconds)
+void CGameUnitWorker::OnNetWorkBuildStartCommand(unsigned int seconds)
 {
 	m_pBuildRoom->BuildingStart(seconds);
 }

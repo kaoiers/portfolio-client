@@ -72,7 +72,7 @@ public :
 	static CGameMap*					GetInstance();
 	CBoundaryManager*					getBoundaryManager() {return m_pBoundaryManager; }
 	bool								isPathObstructed(const vector3df& A, 
-		const vector3df& B, const f32& BoundingRadius) const;
+		const vector3df& B, f32 BoundingRadius) const;
 	bool								isInBoundaries(const vector3df& point, int return_idx);
 	bool								isWalkableWall(const unsigned int idx) { return true; };
 	
@@ -85,10 +85,10 @@ public :
 
 	void								addExplosion(const vector3df& pos, const f32 scl);
 	
-	const int&							getNumCellsX() const	{return m_iCellsX;}
-	const int&							getNumCellsZ() const	{return m_iCellsZ;}
-	const float&						getCellWidth() const	{ return m_dCellWidth; }
-	const float&						getCellHeight() const   { return m_dCellHeight; }
+	int							getNumCellsX() const	{return m_iCellsX;}
+	int							getNumCellsZ() const	{return m_iCellsZ;}
+	float						getCellWidth() const	{ return m_dCellWidth; }
+	float						getCellHeight() const   { return m_dCellHeight; }
 
 	const double&						GetCellSpaceNeighborhoodRange() {return m_dCellSpaceNeighborhoodRange;}
 

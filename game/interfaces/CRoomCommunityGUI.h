@@ -68,7 +68,7 @@ public :
 	   virtual void	SetOwner(CGameObject *obj);
 
 
-	   void			addFriendList(const char* friend_name , const unsigned int& friend_id,  const char* friend_picture_file = "none" );
+	   void			addFriendList(const char* friend_name , unsigned int friend_id,  const char* friend_picture_file = "none" );
 
 	   void			setFriendPicture( unsigned int friend_id, size_t stream_size, char* pStream );
 

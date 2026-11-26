@@ -152,7 +152,7 @@ bool CGameGUI::control( CEventHandler* m_pReceiver )
 /*======================================================*/
 // 아이디로 오브젝트 찾기
 /*======================================================*/
-IGUIObject* CGameGUI::FindElementByID( const s32& eid )
+IGUIObject* CGameGUI::FindElementByID( s32 eid )
 {
 	GuiElementsList::iterator it;
 		
@@ -167,7 +167,7 @@ IGUIObject* CGameGUI::FindElementByID( const s32& eid )
 /*======================================================*/
 // 버튼 추가
 /*======================================================*/
-CButtonGUI*CGameGUI::addButton( const position2d<s32> Position, const char* defaultImage, const s32& mID /*= -1 */,std::wstring text /*= 0*/ )
+CButtonGUI*CGameGUI::addButton( const position2d<s32> Position, const char* defaultImage, s32 mID /*= -1 */,std::wstring text /*= 0*/ )
 {
 
 	return nullptr;

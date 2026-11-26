@@ -26,10 +26,10 @@
 #include "../interfaces/CMainGameGUI.h"
 
 
-CGameUnit::CGameUnit(const OwnerType& owner,unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource, 
+CGameUnit::CGameUnit(OwnerType owner,unsigned int obj_id, unsigned int objtype, const UNIT_RESOURCE* resource,
 					const GAMEUNIT_ATTRIBUTE* attribute,
 					 UnitTypes unittype,
-					 const AllianceType& Ally,
+					 AllianceType Ally,
 				   const vector3df& pos, 
 				   const vector3df& rot , 
 				   const vector3df& scale ) :
@@ -54,8 +54,8 @@ MovingEntity(owner, obj_id, objtype,
 	m_pBrain = new Goal_Think(this);
 }
 
-CGameUnit::CGameUnit(const OwnerType& owner, unsigned int objtype, const UNIT_RESOURCE* resource, 
-					 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype,const AllianceType& Ally,
+CGameUnit::CGameUnit(OwnerType owner, unsigned int objtype, const UNIT_RESOURCE* resource,
+					 const GAMEUNIT_ATTRIBUTE* attribute, UnitTypes unittype,AllianceType Ally,
 					 const vector3df& pos /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& rot /*= vector3df(0.0f, 0.0f, 0.0f)*/, 
 					 const vector3df& scale /*= vector3df(1.0f, 1.0f, 1.0f)*/ ) :
@@ -247,7 +247,7 @@ void CGameUnit::setCurrentAni( const unsigned int atype, const bool bLoop )
 /*======================================================*/
 // 이동 업데이트
 /*======================================================*/
-void CGameUnit::UpdateMoveMent(const u32& timeMs)
+void CGameUnit::UpdateMoveMent(u32 timeMs)
 {
 	
 }
@@ -267,7 +267,7 @@ CGameUnit* CGameUnit::getTarget() const
 /*======================================================*/
 // 공격범위에 들어왔는지
 /*======================================================*/
-bool CGameUnit::isInHitDistance( const vector3df& pos, const f32& bRadius)
+bool CGameUnit::isInHitDistance( const vector3df& pos, f32 bRadius)
 {
 	vector3df distance = pos - Pos();
 	

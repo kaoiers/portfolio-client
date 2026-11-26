@@ -97,14 +97,14 @@ public :
 	const bool			isAlive() {return m_bAlive; }
 
 
-	const ATTACK_TYPE&	getAttackType ()  { return m_eAttackType; }
+	ATTACK_TYPE	getAttackType ()  { return m_eAttackType; }
 
 	
 	
 	
 	void				Levelup();
 
-	u32			CalAttacked(const u32& att);
+	u32			CalAttacked(u32 att);
 };
 
 

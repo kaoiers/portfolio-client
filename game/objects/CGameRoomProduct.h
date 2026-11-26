@@ -71,11 +71,11 @@ public :
 	void					setProduced(const bool pro) { m_bProduced = pro; } 
 
 	f32						ProductProcessing();
-	void					setProductToProcessing(const ProductTypes& type) { m_ProductType = type; }
+	void					setProductToProcessing(ProductTypes type) { m_ProductType = type; }
 
 	bool					isOnProduct() {	return		(m_uProductCompletedTime != 0); }
 
-	void					TurnOnProcessing(const ProductTypes& type, const u32 sec);
+	void					TurnOnProcessing(ProductTypes type, const u32 sec);
 	void					CompleteProcessing();
 	void					CancelProcessing();
 
@@ -105,7 +105,7 @@ inline f32 CGameRoomProduct::ProductProcessing()
 /*======================================================*/
 // 자원 생산 설정하기
 /*======================================================*/
-inline void CGameRoomProduct::TurnOnProcessing( const ProductTypes& type, const u32 sec  )
+inline void CGameRoomProduct::TurnOnProcessing( ProductTypes type, const u32 sec  )
 {
 	setProductToProcessing(type);
 
