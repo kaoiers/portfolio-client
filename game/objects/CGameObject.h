@@ -37,6 +37,7 @@ class CGameObjectManager;
 struct Telegram;
 class CEventHandler;
 
+/// 게임 객체의 ID, 소유 관리자, 명령 상태 및 관찰용 수명 토큰을 관리한다.
 class CGameObject : public IGameObject
 {
     std::shared_ptr<const int> m_lifetime = std::make_shared<const int>(0);

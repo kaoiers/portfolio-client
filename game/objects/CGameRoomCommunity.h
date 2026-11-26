@@ -13,6 +13,7 @@
 
 #include "CGameRoom.h"
 
+/// 통신방의 건물 상태와 제어 동작을 표현한다.
 class CGameRoomCommunity : public CGameRoom
 {
 public:

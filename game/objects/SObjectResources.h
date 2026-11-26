@@ -17,11 +17,13 @@ struct CAnimation_Info;
 #include <vector>
 #include <list>
 
+/// 오브젝트에 연결되는 공통 애니메이션 자원 정보를 표현한다.
 struct BASIC_OBJECT_RESOURCE
 {
     std::vector<CAnimation_Info *> m_animations;
 };
 
+/// 건물 크기, 출입구, 건설 시간 및 필요 자원 정보를 표현한다.
 struct ROOM_RESOURCE : BASIC_OBJECT_RESOURCE
 {
     u32 m_width_cells;
@@ -33,6 +35,7 @@ struct ROOM_RESOURCE : BASIC_OBJECT_RESOURCE
     s16 need_wood;
 };
 
+/// 유닛의 이동, 공격 및 무기 관련 자원 설정을 표현한다.
 struct UNIT_RESOURCE : BASIC_OBJECT_RESOURCE
 {
     f32 m_max_speed;

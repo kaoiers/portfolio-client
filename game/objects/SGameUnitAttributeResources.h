@@ -11,6 +11,7 @@
 #ifndef GAME_UNIT_ATT_RESOURCE
 #define GAME_UNIT_ATT_RESOURCE
 
+/// 유닛의 초기 능력치 및 성장 관련 설정 데이터를 보관한다.
 struct GAMEUNIT_ATTRIBUTE
 {
     u32 m_default_level;

@@ -46,6 +46,7 @@ class MessageDispatcher;
 class CObjectController;
 class ISelectionView;
 
+/// 게임 객체를 단독 소유하며 등록, 조회, 삭제 요청 및 메시지 전달을 관리한다.
 class CGameObjectManager
 {
 using ObjectMap = std::map<u32, std::unique_ptr<CGameObject>>;

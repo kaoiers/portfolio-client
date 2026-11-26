@@ -13,6 +13,7 @@
 
 #include "CRoomGUI.h"
 
+/// 감옥 View의 버튼 입력을 건물 ViewModel 명령으로 연결한다.
 class CRoomJailGUI : public CRoomGUI
 {
     virtual bool interfaceControl(CEventHandler* p_receiver);

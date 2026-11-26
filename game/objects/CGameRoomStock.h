@@ -13,6 +13,7 @@
 
 #include "CGameRoom.h"
 
+/// 창고 건물의 제어 및 갱신 동작을 표현한다.
 class CGameRoomStock : public CGameRoom
 {
 public:

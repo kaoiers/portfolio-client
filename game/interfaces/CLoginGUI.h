@@ -30,6 +30,7 @@ enum eLoginWindow_GUI
     GUI_JOIN_EDIT_NEWPASSWORD_CONFIRM
 };
 
+/// 로그인과 가입 화면의 인터페이스 상태 전환을 담당한다.
 class CLoginGUI : public CGameGUI
 {
     void showLoginWindow(const bool bshow);

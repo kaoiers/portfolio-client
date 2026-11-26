@@ -18,6 +18,7 @@ class CEnemyTargetingSystem;
 class CGameRoom;
 class CEnemyGenerator;
 
+/// 적 유닛의 공통 행동 및 제어 상태를 표현하는 기반 클래스이다.
 class CGameUnitEnemy : public CGameUnit
 {
 protected:

@@ -26,6 +26,7 @@ class CExplosionSystem;
 #include <memory>
 #include "../common/UncopyableUtil.h"
 
+/// 타일 좌표 변환, 탐색 가능 영역 및 경로 탐색 서비스의 수명을 관리한다.
 class CGameMap : private UnCopyable
 {
     NavigationGrid m_navigation_grid;

@@ -19,6 +19,7 @@ void require(bool condition, const char* message)
         throw std::runtime_error(message);
 }
 
+/// 유닛 ViewModel의 바인딩 및 명령을 검증하는 테스트용 전사이다.
 class TestArmy final : public CGameUnitArmy
 {
 public:

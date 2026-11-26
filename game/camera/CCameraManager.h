@@ -12,6 +12,7 @@
 
 class CAppContext;
 
+/// 카메라 위치와 이동 설정 인터페이스를 제공하며 엔진 의존 구현은 일부 생략되어 있다.
 class CCameraManager : private UnCopyable
 {
 public:

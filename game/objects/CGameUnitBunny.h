@@ -14,6 +14,7 @@
 #include "CGameUnitArmy.h"
 #include "../attributes/CGameUnitAttribute.h"
 
+/// 토끼 전사 유형에 대응하는 유닛 모델이다.
 class CGameUnitBunny : public CGameUnitArmy
 {
     virtual void privateInitialize();

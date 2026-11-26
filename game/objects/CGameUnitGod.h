@@ -16,6 +16,7 @@
 
 class Regulator;
 
+/// 신수 유닛의 명령과 갱신을 담당하는 모델이다.
 class CGameUnitGod : public CGameUnit
 {
     virtual void privateInitialize();

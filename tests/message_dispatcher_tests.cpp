@@ -14,6 +14,7 @@ void require(bool condition, const char* message)
         throw std::runtime_error(message);
 }
 
+/// 메시지 전달 결과를 기록하는 테스트용 수신 객체이다.
 class Receiver final : public CGameObject
 {
 public:

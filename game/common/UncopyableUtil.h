@@ -11,6 +11,7 @@
 #ifndef UNCOPYABLE_UTIL
 #define UNCOPYABLE_UTIL
 
+/// 복사 및 대입을 제한하기 위한 기반 타입이다.
 struct UnCopyable
 {
 protected:

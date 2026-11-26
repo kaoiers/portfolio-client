@@ -15,6 +15,7 @@
 #include <list>
 #include <utility>
 
+/// 하위 목표를 단독 소유하고 앞쪽 목표부터 순서대로 실행하는 복합체이다.
 template <class entity_type>
 class Goal_Composite : public Goal<entity_type>
 {

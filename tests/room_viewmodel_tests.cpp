@@ -15,6 +15,7 @@ void require(bool condition, const char* message)
     if (!condition) throw std::runtime_error(message);
 }
 
+/// 건물 ViewModel과 선택 제어 검증을 위한 테스트용 건물이다.
 class TestRoom final : public CGameRoomJail
 {
 public:

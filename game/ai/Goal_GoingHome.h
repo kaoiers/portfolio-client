@@ -17,6 +17,7 @@
 
 class CGameUnit;
 
+/// 복귀 목적지로 이동하는 하위 목표와 복귀 완료 처리를 관리한다.
 class Goal_GoingHome : public Goal_Composite<CGameUnit>
 {
 private:

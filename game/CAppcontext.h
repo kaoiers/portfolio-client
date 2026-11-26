@@ -15,6 +15,7 @@
 class CGodOption;
 class God_Game;
 
+/// 기존 게임 시스템 접근점을 제공하는 컨텍스트 어댑터이다.
 class CAppContext : public UnCopyable
 {
 public:

@@ -7,6 +7,7 @@ class CGameObjectManager;
 class CGameObject;
 class God_Game;
 
+/// 메인 UI에 필요한 자원, 레벨, 경험치 및 선택 상태의 값 스냅샷이다.
 struct MainGameViewState
 {
     u32 crop = 0;
@@ -22,6 +23,7 @@ struct MainGameViewState
     bool selection_available = true;
 };
 
+/// 게임 모델에서 메인 UI 표시 정보를 읽고 선택 및 웨이브 명령을 전달한다.
 class MainGameViewModel
 {
 public:

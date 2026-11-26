@@ -21,6 +21,7 @@ class CGameResourceManager;
 class CGameUnitArmy;
 class CGameUnit;
 
+/// 건물의 체력, 건설 상태, 자원 및 타일 관련 인터페이스를 제공하는 모델이다.
 class CGameRoom : public CGameObject, public IBaseController
 {
     const ROOM_RESOURCE* m_resource;

@@ -24,6 +24,7 @@ typedef unsigned int u32;
 template<typename T>
 using vector_length_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
 
+/// 2차원 벡터의 성분과 기본 산술, 길이, 정규화 연산을 제공한다.
 template<typename T>
 class vector2d
 {
@@ -61,6 +62,7 @@ constexpr vector2d<T> operator*(T scale, const vector2d<T>& value)
     return value * scale;
 }
 
+/// 3차원 벡터의 산술, 내적, 외적 및 거리 계산을 제공한다.
 template<typename T>
 class vector3d
 {
@@ -107,6 +109,7 @@ constexpr vector3d<T> operator*(T scale, const vector3d<T>& value)
     return value * scale;
 }
 
+/// 화면 또는 평면 좌표의 두 성분을 보관하는 값 타입이다.
 template<typename T>
 class position2d
 {
@@ -117,6 +120,7 @@ public:
     T X{}, Y{};
 };
 
+/// 공간 좌표의 세 성분을 보관하는 값 타입이다.
 template<typename T>
 class position3d
 {
@@ -127,6 +131,7 @@ public:
     T X{}, Y{}, Z{};
 };
 
+/// 2차원 선분의 양 끝점과 길이 계산을 제공한다.
 template<typename T>
 class line2d
 {
@@ -140,6 +145,7 @@ public:
     }
 };
 
+/// 3차원 선분의 양 끝점과 길이 계산을 제공한다.
 template<typename T>
 class line3d
 {
@@ -154,6 +160,7 @@ public:
     }
 };
 
+/// 기본 이벤트 데이터를 보관하는 공통 구조체이다.
 struct SEvent
 {
     s32 a;

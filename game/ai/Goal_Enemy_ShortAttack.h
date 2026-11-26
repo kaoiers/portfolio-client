@@ -18,6 +18,7 @@
 class CGameUnit;
 class CGameUnitEnemy;
 
+/// 적 유닛의 근거리 공격 목표 상태를 표현한다.
 class Goal_Enemy_ShortAttack : public Goal<CGameUnit>
 {
 private:

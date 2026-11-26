@@ -13,6 +13,7 @@
 
 #include "CGameUnitEnemy.h"
 
+/// 적 병사 유형의 갱신 및 근거리 공격 행동을 표현한다.
 class CGameUnitEnemySoldier : public CGameUnitEnemy
 {
 private:

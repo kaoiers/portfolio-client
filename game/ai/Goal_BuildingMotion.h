@@ -18,6 +18,7 @@
 class CGameUnit;
 class CGameUnitWorker;
 
+/// 건설 작업 중 모션에 대응하는 단일 목표이다.
 class Goal_BuildingMotion : public Goal<CGameUnit>
 {
 private:

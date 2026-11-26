@@ -21,6 +21,7 @@ typedef enum
 
 }ATTACK_TYPE;
 
+/// 유닛의 HP, 경험치, 레벨 및 전투 속성을 관리하는 모델이다.
 class CGameUnitAttribute
 {
     const GAMEUNIT_ATTRIBUTE* m_game_attribute;

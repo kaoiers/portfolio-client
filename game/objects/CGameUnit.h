@@ -36,6 +36,7 @@ typedef enum
 
 }AllianceType;
 
+/// 이동 상태와 유닛 속성, AI 목표 및 제어 인터페이스를 결합하는 기본 모델이다.
 class CGameUnit : public IBaseGameUnit, public MovingEntity, public CGameUnitAttribute, public IBaseController
 {
 protected:

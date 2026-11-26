@@ -3,6 +3,7 @@
 struct Telegram;
 class CEventHandler;
 
+/// 게임 객체의 입력, 명령 및 메시지 처리 계약을 정의한다.
 class IGameObject
 {
 public:

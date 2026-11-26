@@ -13,6 +13,7 @@
 
 #include "../common/UncopyableUtil.h"
 
+/// 사운드, 셰이더, 그림자 및 화면 옵션 상태를 관리한다.
 class CGodOption : private UnCopyable
 {
     bool m_use_sound; //	사운드

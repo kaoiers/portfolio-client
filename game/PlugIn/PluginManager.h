@@ -15,8 +15,10 @@ class IPlugin;
 class God_Game;
 class CSoundManager;
 
+/// 플러그인 DLL 로딩, 등록, 조회 및 해제를 관리한다.
 class PluginManager
 {
+    /// 로드된 DLL 핸들과 플러그인 인스턴스의 연결 정보를 보관한다.
     struct PluginInfo
     {
         IPlugin * p_plugin;

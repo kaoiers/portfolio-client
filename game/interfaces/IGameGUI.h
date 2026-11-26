@@ -24,6 +24,7 @@ class CEditBoxGUI;
 class CEventHandler;
 class CGUIManager;
 
+/// 공통 GUI 요소, 그룹, 표시 여부와 입력 처리 인터페이스를 관리한다.
 class CGameGUI : public IBaseGameGUI
 {
     u32 m_gid;

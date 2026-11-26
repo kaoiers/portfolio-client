@@ -5,6 +5,7 @@
 class CGameObject;
 class CEventHandler;
 
+/// GUI 초기화, 소유 객체 바인딩, 입력 및 상태 갱신 계약을 정의한다.
 class IBaseGameGUI
 {
 public:

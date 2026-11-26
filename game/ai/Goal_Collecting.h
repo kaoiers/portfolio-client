@@ -18,6 +18,7 @@
 class CGameUnit;
 class CGameUnitWorker;
 
+/// 자원 채집에 필요한 이동 등 하위 목표를 관리한다.
 class Goal_Collecting : public Goal_Composite<CGameUnit>
 {
 private:

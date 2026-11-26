@@ -18,6 +18,7 @@ class CGameUnit;
 class CGameUnitEnemy;
 class Regulator;
 
+/// 유닛 대상 공격의 하위 행동 및 목표 상태를 관리한다.
 class Goal_AttackUnitTarget : public Goal_Composite<CGameUnit>
 {
     Regulator* m_attack_regulator;

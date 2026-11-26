@@ -17,12 +17,14 @@ class CGUIManager;
 class God_Game;
 class IGUIObject;
 
+/// GUI 이벤트의 식별 정보를 담는 이벤트 타입이다.
 struct SGuiEvent : public SEvent
 {
     s16 GUI_ID;
     s16 getGuid() const { return GUI_ID; }
 };
 
+/// 키 입력 처리에 필요한 파라미터를 보관한다.
 struct KeyEventParam
 {
     char key;
@@ -42,6 +44,7 @@ struct KeyEventParam
     }
 };
 
+/// 마우스 및 키 입력 상태를 수집하고 프레임별 입력 조회를 제공한다.
 class CEventHandler
 {
     enum {

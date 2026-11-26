@@ -17,6 +17,7 @@
 
 class CGameUnit;
 
+/// 유닛 사망 시 처리하는 단일 목표이다.
 class Goal_Dead : public Goal<CGameUnit>
 {
 private:

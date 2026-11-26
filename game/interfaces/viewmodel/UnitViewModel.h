@@ -10,6 +10,7 @@ class CGameUnit;
 
 enum class UnitViewRole { Army, God, Worker };
 
+/// 유닛 식별 정보, 성장 상태 및 현재 명령을 담는 값 스냅샷이다.
 struct UnitViewState
 {
     bool bound = false;
@@ -24,6 +25,7 @@ struct UnitViewState
 };
 
 // Main-thread binding. The model owns its lifetime; the view model never owns the unit.
+/// 유닛의 역할별 명령과 표시 상태를 중재하며 모델 수명을 소유하지 않는다.
 class UnitViewModel
 {
 public:

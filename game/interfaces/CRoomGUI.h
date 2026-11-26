@@ -2,6 +2,7 @@
 #include "IGameGUI.h"
 #include "viewmodel/RoomViewModel.h"
 
+/// 건물 ViewModel의 바인딩과 표시 상태 캐시를 제공하는 공통 View이다.
 class CRoomGUI : public CGameGUI
 {
 public:

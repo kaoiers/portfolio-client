@@ -19,6 +19,7 @@ void require(bool condition, const char* message)
     if (!condition) throw std::runtime_error(message);
 }
 
+/// 비동기 경로 탐색 목표를 검증하는 테스트용 유닛이다.
 class TestUnit final : public CGameUnit
 {
 public:
@@ -33,6 +34,7 @@ public:
     void exitControl() override {}
 };
 
+/// 테스트에서 이동 목표에 경유점 하위 목표가 설치되었는지 확인한다.
 class InspectableMove final : public Goal_MoveToPosition
 {
 public:

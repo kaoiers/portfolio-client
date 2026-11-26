@@ -34,6 +34,7 @@ enum
     COMMAND_BUILDING_ARROWR
 };
 
+/// 일꾼 View의 채집 및 건설 입력을 ViewModel 명령으로 연결한다.
 class CUnitWorkerGUI : public CUnitGUI
 {
     virtual bool interfaceControl(CEventHandler* p_receiver);

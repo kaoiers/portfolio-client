@@ -8,12 +8,14 @@
 
 enum class PathStatus { Found, Unreachable, InvalidEndpoint };
 
+/// 탐색 상태와 복원된 타일 경로를 담는 값 타입이다.
 struct PathResult
 {
     PathStatus status = PathStatus::InvalidEndpoint;
     std::vector<GridPoint> points; // Includes both start and goal when found.
 };
 
+/// 4방향 타일 그래프에서 Manhattan 휴리스틱으로 최단 경로를 탐색한다.
 class AStar
 {
 public:
@@ -22,7 +24,9 @@ public:
         if (!grid.walkable(start) || !grid.walkable(goal))
             return {PathStatus::InvalidEndpoint, {}};
 
+        /// 우선순위 큐에 등록된 노드 인덱스와 누적 비용 및 휴리스틱을 보관한다.
         struct OpenEntry { int index, cost, heuristic; };
+        /// 예상 총비용, 휴리스틱 및 인덱스 기준으로 탐색 후보 순서를 정한다.
         struct Compare
         {
             bool operator()(const OpenEntry& lhs, const OpenEntry& rhs) const

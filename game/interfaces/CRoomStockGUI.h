@@ -13,6 +13,7 @@
 
 #include "CRoomGUI.h"
 
+/// 창고 View의 입력 및 건물 상태 표시를 담당한다.
 class CRoomStockGUI : public CRoomGUI
 {
     CTextGUI* m_damage_text;

@@ -2,6 +2,7 @@
 
 #include <string>
 
+/// DLL 플러그인이 구현해야 하는 초기화, 종료 및 내보내기 계약을 정의한다.
 class IPlugin
 {
 public:

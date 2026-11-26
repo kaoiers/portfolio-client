@@ -29,6 +29,7 @@ class CGameResourceManager;
 
 struct PACKET_ACCOUNT_LOGIN_CL_LN_REQ;
 
+/// 게임 시스템의 생성과 소유권, 프레임 갱신 순서를 조율하는 최상위 구성 객체이다.
 class God_Game : private UnCopyable
 {
 public:

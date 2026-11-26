@@ -17,6 +17,7 @@ void require(bool condition, const char* message)
         throw std::runtime_error(message);
 }
 
+/// 등록, 삭제 및 선택 제어 테스트용 게임 객체이다.
 class TestObject final : public CGameObject, public IBaseController
 {
 public:

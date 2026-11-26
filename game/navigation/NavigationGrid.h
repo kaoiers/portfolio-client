@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <vector>
 
+/// 타일 그리드의 정수 좌표를 표현하는 값 타입이다.
 struct GridPoint
 {
     int x = 0;
@@ -12,6 +13,7 @@ struct GridPoint
 };
 
 // A value-type snapshot; worker threads read their own immutable copy.
+/// 타일의 유효 범위와 장애물 상태를 보관하는 복사 가능한 탐색 데이터이다.
 class NavigationGrid
 {
 public:

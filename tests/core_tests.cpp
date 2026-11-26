@@ -14,7 +14,9 @@ void require(bool condition, const char* message)
         throw std::runtime_error(message);
 }
 
+/// 목표 테스트에서 사용하는 최소 모델 타입이다.
 struct Owner {};
+/// 목표의 활성화, 종료 및 소멸 횟수를 추적한다.
 struct Counters
 {
     int activated = 0;
@@ -22,6 +24,7 @@ struct Counters
     int destroyed = 0;
 };
 
+/// 상태 전환과 소유권 검증을 위한 테스트용 단일 목표이다.
 class TestGoal final : public Goal<Owner>
 {
 public:
@@ -50,6 +53,7 @@ private:
     s32 next_state_;
 };
 
+/// 복합 목표 실행 순서를 검증하는 테스트용 구현이다.
 class TestComposite final : public Goal_Composite<Owner>
 {
 public:

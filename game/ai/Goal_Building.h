@@ -17,6 +17,7 @@
 
 class CGameUnit;
 
+/// 건설 행동의 이동과 작업 모션 목표를 조합한다.
 class Goal_Building : public Goal_Composite<CGameUnit>
 {
 private:

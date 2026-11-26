@@ -13,6 +13,7 @@
 
 #include "../CAppcontext.h"
 
+/// 유닛 생산에 필요한 처리 상태를 관리하는 클래스이다.
 class CGameUnitProduct
 {
     CGameRoomWaiting* m_waiting_room;

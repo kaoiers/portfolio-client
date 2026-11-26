@@ -17,6 +17,7 @@
 class CGameRoom;
 class CGameRoomProductBase;
 
+/// 일꾼의 건설, 채집 및 제어 상태를 관리한다.
 class CGameUnitWorker : public CGameUnit
 {
     virtual void privateInitialize();

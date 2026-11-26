@@ -13,6 +13,7 @@
 
 #include "CUnitGUI.h"
 
+/// 전사 View의 입력을 역할별 ViewModel 명령으로 연결한다.
 class CUnitArmyGUI : public CUnitGUI
 {
     virtual bool interfaceControl(CEventHandler* p_receiver);

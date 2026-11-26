@@ -5,6 +5,7 @@
 #include <future>
 #include <utility>
 
+/// 탐색에 사용한 맵 revision과 결과를 함께 반환한다.
 struct AsyncPathResult
 {
     std::uint64_t revision;
@@ -12,6 +13,7 @@ struct AsyncPathResult
 };
 
 // No worker accesses a live map, game object or UI. Futures transfer values back to the caller.
+/// 스레드 풀에서 독립적인 맵 스냅샷을 탐색하고 future로 결과를 전달한다.
 class AsyncPathfinder
 {
 public:

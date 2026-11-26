@@ -15,6 +15,7 @@
 
 // Fixed-size worker pool. Destruction drains accepted work and joins all workers.
 // The owning thread must destroy the pool; tasks must not destroy their pool.
+/// 고정 워커와 동기화된 작업 큐를 관리하고 종료 시 작업을 완료한 뒤 워커를 합류시킨다.
 class ThreadPool
 {
 public:

@@ -13,6 +13,7 @@
 
 class CEventHandler;
 
+/// 객체 선택 진입, 입력 갱신, 선택 종료 및 명령 처리 계약을 정의한다.
 class IBaseController
 {
 public:

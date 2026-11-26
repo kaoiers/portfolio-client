@@ -18,6 +18,7 @@ class CGameUnit;
 class CGameUnitEnemy;
 class Regulator;
 
+/// 현재 대상 추적 행동을 구성하는 복합 목표이다.
 class Goal_HuntTarget : public Goal_Composite<CGameUnit>
 {
 private:

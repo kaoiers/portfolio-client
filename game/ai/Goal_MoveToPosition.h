@@ -18,6 +18,7 @@
 class CGameUnit;
 class CGameMap;
 
+/// 비동기 경로 요청을 기다리고 결과를 경유점 이동 목표로 연결한다.
 class Goal_MoveToPosition : public Goal_Composite<CGameUnit>
 {
 private:

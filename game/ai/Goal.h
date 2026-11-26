@@ -52,6 +52,7 @@ enum
     goal_short_attack_building
 };
 
+/// 단일 AI 목표의 상태와 수행 및 종료 인터페이스를 정의한다.
 template <class entity_type>
 class Goal
 {

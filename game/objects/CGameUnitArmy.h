@@ -16,6 +16,7 @@
 class CGameRoomWaiting;
 class CGameRoom;
 
+/// 전사 계열 유닛의 이동, 방어 요청 및 제어 동작을 제공한다.
 class CGameUnitArmy : public CGameUnit
 {
     CGameRoom* m_guard_room;

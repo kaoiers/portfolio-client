@@ -16,6 +16,7 @@
 #include "../attributes/GameResourceManager.h"
 #include "../shader/CLightEffectManager.h"
 
+/// 생산형 건물이 사용하는 생산 상태 및 처리용 클래스이다.
 class CGameRoomProduct
 {
     CGameRoomProductBase* m_room;

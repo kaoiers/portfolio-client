@@ -32,6 +32,7 @@ class CPopUpGUI;
 class CControllerGUI;
 class CWebDialog;
 
+/// GUI 객체와 선택 View의 소유권 및 입력 갱신을 관리한다.
 class CGUIManager
 {
     std::unique_ptr<CFontManager> m_font_manager;

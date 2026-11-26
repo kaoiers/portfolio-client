@@ -16,6 +16,7 @@
 
 class CGameUnit;
 
+/// 유닛의 상위 AI 목표 선택과 하위 목표 실행을 조율한다.
 class Goal_Think : public Goal_Composite<CGameUnit >
 {
 public:

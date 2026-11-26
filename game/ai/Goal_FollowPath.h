@@ -17,6 +17,7 @@
 
 class CGameUnit;
 
+/// 경유점을 순서대로 실행할 이동 하위 목표로 구성한다.
 class Goal_FollowPath : public Goal_Composite<CGameUnit>
 {
 private:

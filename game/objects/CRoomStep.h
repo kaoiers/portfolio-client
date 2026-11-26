@@ -14,6 +14,7 @@
 #include "../CAppcontext.h"
 #include "../shader/CLightEffectManager.h"
 
+/// 건물 건설 단계 및 진행 상태를 관리한다.
 class CRoomStep
 {
     u32 m_all_steps;

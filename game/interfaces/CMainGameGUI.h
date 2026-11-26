@@ -51,6 +51,7 @@ class CGameResourceManager;
 class God_Game;
 class WebBrowserView;
 
+/// 메인 게임 ViewModel의 자원 및 진행 상태를 표시용 스냅샷으로 받아 관리한다.
 class CMainGameGUI : public CGameGUI
 {
     MainGameViewModel m_view_model;

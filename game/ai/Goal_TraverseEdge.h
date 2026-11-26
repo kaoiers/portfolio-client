@@ -17,6 +17,7 @@
 class CGameUnit;
 class Regulator;
 
+/// 경로의 개별 간선에 해당하는 이동 목표를 표현한다.
 class Goal_TraverseEdge : public Goal<CGameUnit>
 {
 private:

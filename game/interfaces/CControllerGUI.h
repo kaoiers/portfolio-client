@@ -38,6 +38,7 @@ class CGameUnitWorker;
 
 class CGameObject;
 
+/// 선택된 게임 객체에 맞는 유닛 또는 건물 View를 연결하고 해제한다.
 class CControllerGUI : public ISelectionView
 {
     CGameGUI* m_current_gui;

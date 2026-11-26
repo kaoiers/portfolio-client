@@ -18,6 +18,7 @@ class CGameUnit;
 class CGameUnitEnemy;
 class Regulator;
 
+/// 대상 공격을 위한 하위 목표를 조합하는 복합 AI 목표이다.
 class Goal_AttackTarget : public Goal_Composite<CGameUnit>
 {
     Regulator* m_attack_regulator;

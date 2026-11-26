@@ -51,6 +51,7 @@ void testVectors()
     require(near(line3df{}.getLength(), 0), "degenerate line");
 }
 
+/// 이동 수학 연산을 검증하기 위한 테스트용 이동 객체이다.
 class TestMover final : public MovingEntity
 {
 public:

@@ -25,6 +25,7 @@
 class CGameUnit;
 class Regulator;
 
+/// 유닛 추적 행동의 목표와 하위 목표를 관리한다.
 class Goal_UnitHuntTarget : public Goal_Composite<CGameUnit>
 {
 private:

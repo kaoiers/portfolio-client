@@ -14,6 +14,7 @@
 class CGameMap;
 class CGameUnitEnemy;
 
+/// 적 생성 위치와 웨이브 관련 설정을 관리하며 생성 팩토리는 일부 생략되어 있다.
 class CEnemyGenerator
 {
     u32 m_enemy_generate_period;

@@ -13,6 +13,7 @@
 
 #include "CRoomGUI.h"
 
+/// 업그레이드 타워의 화면 표시와 입력 인터페이스를 담당한다.
 class CRoomUpTowerGUI : public CRoomGUI
 {
     virtual bool interfaceControl(CEventHandler* p_receiver);

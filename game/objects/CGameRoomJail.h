@@ -12,6 +12,7 @@
 #define CGAME_ROOM_JAIL_H
 #include "CGameRoom.h"
 
+/// 감옥 건물의 제어 및 갱신 동작을 표현한다.
 class CGameRoomJail : public CGameRoom
 {
 public:

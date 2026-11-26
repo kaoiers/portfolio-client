@@ -12,6 +12,7 @@
 
 #include "../../basicType.h"
 
+/// GUI에 사용할 폰트 종류와 폰트 자원 참조를 관리한다.
 class CFontManager
 {
 public:

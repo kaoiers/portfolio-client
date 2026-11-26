@@ -16,6 +16,7 @@
 #include <ostream>
 #include <tuple>
 
+/// 송신자, 수신자, 메시지 종류, 전달 시간과 비소유 부가 데이터를 표현한다.
 struct Telegram
 {
     //the entity that sent this telegram

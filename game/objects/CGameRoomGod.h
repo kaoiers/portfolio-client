@@ -12,6 +12,7 @@
 #define CGAME_ROOM_GOD_H
 #include "CGameRoom.h"
 
+/// 신수방 건물에 해당하는 모델이다.
 class CGameRoomGod : public CGameRoom
 {
     void initialize(const vector2di& tile_pos);

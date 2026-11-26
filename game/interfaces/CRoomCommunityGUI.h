@@ -13,8 +13,10 @@
 
 #include "CRoomGUI.h"
 
+/// 통신방 View의 입력 및 친구 목록 표시 인터페이스를 담당한다.
 class CRoomCommunityGUI : public CRoomGUI
 {
+    /// 친구 목록의 표시 이름, 이미지 및 버튼 식별 정보를 보관한다.
     typedef struct
     {
         u32 friend_id;

@@ -8,6 +8,7 @@
 class CGameObject;
 class CGameRoom;
 
+/// 건물 식별 정보와 체력 상태를 View로 전달하는 값 스냅샷이다.
 struct RoomViewState
 {
     bool bound = false;
@@ -18,6 +19,7 @@ struct RoomViewState
     bool alive = false;
 };
 
+/// 건물의 표시 상태 변경과 삭제 명령을 중재하며 모델을 소유하지 않는다.
 class RoomViewModel
 {
 public:

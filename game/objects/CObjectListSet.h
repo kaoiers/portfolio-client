@@ -13,6 +13,7 @@
 
 #include <list>
 
+/// 중복 없이 요소를 등록하는 리스트 기반 집합 컨테이너이다.
 template <typename entity_type>
 class CObjectListSet
 {

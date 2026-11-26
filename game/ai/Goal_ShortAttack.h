@@ -17,6 +17,7 @@
 
 class CGameUnit;
 
+/// 유닛의 근거리 공격 행동 목표를 관리한다.
 class Goal_ShortAttack : public Goal<CGameUnit>
 {
 private:

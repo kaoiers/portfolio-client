@@ -19,6 +19,7 @@ class CGameObject;
 class ISelectionView;
 class CParticleManager;
 
+/// 선택 객체에 입력을 전달하고 선택 View의 변경을 조율한다.
 class CObjectController : public UnCopyable
 {
     IBaseController* m_controller;

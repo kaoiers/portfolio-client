@@ -18,6 +18,7 @@
 class CGameUnit;
 class Regulator;
 
+/// 목표 위치 도착 여부와 이동 종료 상태를 검사하는 단일 목표이다.
 class Goal_SeekToPosition : public Goal<CGameUnit>
 {
 private:

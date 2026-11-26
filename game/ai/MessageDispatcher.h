@@ -21,6 +21,7 @@ inline constexpr s32 NO_ADDITIONAL_INFO = 0;
 inline constexpr s32 SENDER_ID_IRRELEVANT = -1;
 
 // One dispatcher per object manager. Delay is in seconds; frame updates are in milliseconds.
+/// 관리자별 즉시 메시지 및 시간 순서가 보장되는 지연 메시지를 전달한다.
 class MessageDispatcher
 {
 public:

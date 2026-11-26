@@ -17,6 +17,7 @@
 #define GameResource CGameResourceManager::getInstance()
 
 
+/// 현재 자원 수량을 전달하는 값 타입이다.
 struct GlobalResource
 {
     u32 crop;
@@ -24,6 +25,7 @@ struct GlobalResource
     u32 stone;
 };
 
+/// 플레이어 자원, 레벨, 경험치 및 유닛 수를 관리하는 모델이다.
 class CGameResourceManager
 {
     std::unique_ptr<GlobalResource> m_game_global_resource;
