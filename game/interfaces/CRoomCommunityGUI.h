@@ -11,11 +11,9 @@
 #ifndef CROOM_COMMUNITY_GUI_H
 #define CROOM_COMMUNITY_GUI_H
 
-#include "IGameGUI.h"
+#include "CRoomGUI.h"
 
-class CGameRoomCommunity;
-
-class CRoomCommunityGUI : public CGameGUI
+class CRoomCommunityGUI : public CRoomGUI
 {
     typedef struct
     {
@@ -25,8 +23,6 @@ class CRoomCommunityGUI : public CGameGUI
         s32 friend_button_id;
 
     }FriendInfo;
-
-    CGameRoomCommunity* m_owner;
 
     enum
     {

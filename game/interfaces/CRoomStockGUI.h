@@ -11,27 +11,22 @@
 #ifndef CROOM_STOCK_GUI_H
 #define CROOM_STOCK_GUI_H
 
-#include "IGameGUI.h"
+#include "CRoomGUI.h"
 
-class CGameRoomStock;
-
-class CRoomStockGUI : public CGameGUI
+class CRoomStockGUI : public CRoomGUI
 {
-    CGameRoomStock* m_owner;
-
     CTextGUI* m_damage_text;
 
     virtual bool interfaceControl(CEventHandler* p_receiver);
 
 public:
     CRoomStockGUI(position2d<s16> rect = position2di(0, 0)) :
-    CGameGUI(rect) {}
+    CRoomGUI(BUILDING_WAREHOUSE, rect) {}
 
     virtual ~CRoomStockGUI() {};
 
     virtual void guiInitialize();
 
-    virtual void setOwner(CGameObject *obj);
 };
 
 #endif

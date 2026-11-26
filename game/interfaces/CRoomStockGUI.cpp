@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CRoomStockGUI.h"
-#include "../objects/CGameRoomStock.h"
 #include "../eventhandle/CEventHandleManager.h"
 
 enum
@@ -32,24 +31,19 @@ void CRoomStockGUI::guiInitialize()
 {
 }
 
-/*======================================================*/
-// 주인 오브젝트 설정
-/*======================================================*/
-void CRoomStockGUI::setOwner( CGameObject *obj)
-{
-    m_owner = dynamic_cast<CGameRoomStock* >(obj);
-}
 
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
 bool CRoomStockGUI::interfaceControl( CEventHandler* p_receiver)
 {
+    refreshView();
+    if (!p_receiver || !getViewState().bound)
+        return false;
+
     if (p_receiver->isClickedButtonID(COMMAND_WAREHOUSE_DESTROY_BUTTON))
     {
-        m_owner->explosion();
-
-        m_owner->deleteRoom();
+        m_view_model.requestDestroy();
     }
 
     return true;

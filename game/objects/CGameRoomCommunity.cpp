@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CGameRoomCommunity.h"
-#include "../interfaces/CControllerGUI.h"
 #include <map>
 #include "../shader/CLightEffectManager.h"
 
@@ -33,7 +32,6 @@ CGameRoomCommunity::CGameRoomCommunity(OwnerType owner, u32 objtype, u32 btype, 
 /*======================================================*/
 void CGameRoomCommunity::enterControl()
 {
-    CControllerGUI::instance()->setCurrentControlGUI(this);
 }
 
 /*======================================================*/

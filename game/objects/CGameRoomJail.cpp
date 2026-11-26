@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CGameRoomJail.h"
-#include "../interfaces/CControllerGUI.h"
 
 CGameRoomJail::CGameRoomJail(OwnerType owner, u32 objtype, u32 btype, const ROOM_RESOURCE* res,
     const vector3df& pos,
@@ -30,7 +29,6 @@ CGameRoomJail::CGameRoomJail(OwnerType owner, u32 objtype, u32 btype, const ROOM
 /*======================================================*/
 void CGameRoomJail::enterControl()
 {
-    CControllerGUI::instance()->setCurrentControlGUI(this);
 }
 
 /*======================================================*/

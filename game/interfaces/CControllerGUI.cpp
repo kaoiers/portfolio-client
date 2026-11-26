@@ -35,12 +35,20 @@ CControllerGUI::CControllerGUI() :
     m_current_gui(nullptr),
     m_unit_god_gui(std::make_unique<CUnitGodGUI>()),
     m_unit_worker_gui(std::make_unique<CUnitWorkerGUI>()),
-    m_unit_army_gui(std::make_unique<CUnitArmyGUI>())
+    m_unit_army_gui(std::make_unique<CUnitArmyGUI>()),
+    m_room_jail_gui(std::make_unique<CRoomJailGUI>()),
+    m_room_community_gui(std::make_unique<CRoomCommunityGUI>()),
+    m_room_stock_gui(std::make_unique<CRoomStockGUI>()),
+    m_room_up_tower_gui(std::make_unique<CRoomUpTowerGUI>())
 {
     p_instance = this;
     m_unit_god_gui->hide();
     m_unit_worker_gui->hide();
     m_unit_army_gui->hide();
+    m_room_jail_gui->hide();
+    m_room_community_gui->hide();
+    m_room_stock_gui->hide();
+    m_room_up_tower_gui->hide();
 }
 
 CControllerGUI::~CControllerGUI()
@@ -130,6 +138,21 @@ CGameGUI* CControllerGUI::setCurrentControlGUI(CGameObject* obj)
         setWorkerGUI(worker);
     else if (auto* army = dynamic_cast<CGameUnitArmy*>(obj))
         setArmyGUI(army);
+    else if (auto* room = dynamic_cast<CGameRoom*>(obj))
+    {
+        CGameGUI* view = nullptr;
+        switch (room->getRoomType())
+        {
+        case BUILDING_JAIL: view = m_room_jail_gui.get(); break;
+        case BUILDING_FRIEND: view = m_room_community_gui.get(); break;
+        case BUILDING_WAREHOUSE: view = m_room_stock_gui.get(); break;
+        case BUILDING_TOWER: view = m_room_up_tower_gui.get(); break;
+        default: break;
+        }
+        if (view)
+            view->setOwner(room);
+        setGuiController(view);
+    }
     else
         disableGui();
     return m_current_gui;

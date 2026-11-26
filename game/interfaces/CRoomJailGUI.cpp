@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CRoomJailGUI.h"
-#include "../objects/CGameRoomJail.h"
 #include "../eventhandle/CEventHandleManager.h"
 enum
 {
@@ -24,28 +23,23 @@ enum
     COMMAND_BUIDING_DAMAGE_TEXT
 };
 
-/*======================================================*/
-// 주인 오브젝트 설정
-/*======================================================*/
-void CRoomJailGUI::setOwner( CGameObject *obj)
-{
-    m_owner = dynamic_cast<CGameRoomJail *>(obj);
-}
 
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
 bool CRoomJailGUI::interfaceControl( CEventHandler* p_receiver)
 {
+    refreshView();
+    if (!p_receiver || !getViewState().bound)
+        return false;
+
     if (p_receiver->isClickedButtonID(COMMAND_PRISON_FREE_BUTTON))
     {
     }
 
     else if (p_receiver->isClickedButtonID(COMMAND_DESTROY_BUTTON))
     {
-        m_owner->explosion();
-
-        m_owner->deleteRoom();
+        m_view_model.requestDestroy();
     }
 
     return true;

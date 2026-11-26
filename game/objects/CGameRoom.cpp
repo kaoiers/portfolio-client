@@ -79,9 +79,8 @@ void CGameRoom::buildingUpdate()
 /*======================================================*/
 void CGameRoom::explosion()
 {
-    CGameMap *p_map = CGameMap::getInstance();
-
-    this->getMainGameGUI()->playSound2D( "explosion");
+    if (auto* manager = getObjectManager())
+        manager->requestSound("explosion");
 }
 
 /*======================================================*/
@@ -332,7 +331,6 @@ bool CGameRoom::isBuildable(const vector3df& mouse_pos)
         {
             this->getObjectManager()->setController(nullptr);
 
-            CControllerGUI::instance()->disableGui();
     }
 }
 

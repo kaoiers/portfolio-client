@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CGameRoomStock.h"
-#include "../interfaces/CControllerGUI.h"
 
 CGameRoomStock::CGameRoomStock(OwnerType owner, u32 objtype, u32 btype,
     const ROOM_RESOURCE* res,
@@ -31,7 +30,6 @@ CGameRoomStock::CGameRoomStock(OwnerType owner, u32 objtype, u32 btype, const RO
 /*======================================================*/
 void CGameRoomStock::enterControl()
 {
-    CControllerGUI::instance()->setCurrentControlGUI(this);
 }
 
 /*======================================================*/

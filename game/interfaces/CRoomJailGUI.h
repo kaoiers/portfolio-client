@@ -11,25 +11,20 @@
 #ifndef CROOM_JAIL_GUI_H
 #define CROOM_JAIL_GUI_H
 
-#include "IGameGUI.h"
+#include "CRoomGUI.h"
 
-class CGameRoomJail;
-
-class CRoomJailGUI : public CGameGUI
+class CRoomJailGUI : public CRoomGUI
 {
-    CGameRoomJail* m_owner;
-
     virtual bool interfaceControl(CEventHandler* p_receiver);
 
 public:
     CRoomJailGUI(position2d<s16> rect = position2di(0, 0)) :
-    CGameGUI(rect) {}
+    CRoomGUI(BUILDING_JAIL, rect) {}
 
     virtual ~CRoomJailGUI() {};
 
     virtual void guiInitialize();
 
-    virtual void setOwner(CGameObject *obj);
 };
 
 #endif

@@ -44,17 +44,17 @@ class CControllerGUI
     std::unique_ptr<CUnitWorkerGUI> m_unit_worker_gui;
     std::unique_ptr<CUnitArmyGUI> m_unit_army_gui;
 
-    CRoomJailGUI* m_room_jail_gui;
+    std::unique_ptr<CRoomJailGUI> m_room_jail_gui;
     CRoomWaitingGUI* m_room_waiting_gui;
     CRoomFarmGUI* m_room_farm_gui;
     CRoomMineGUI* m_room_mine_gui;
 
     CRoomWoodGUI* m_room_wood_gui;
 
-    CRoomCommunityGUI* m_room_community_gui;
-    CRoomStockGUI* m_room_stock_gui;
+    std::unique_ptr<CRoomCommunityGUI> m_room_community_gui;
+    std::unique_ptr<CRoomStockGUI> m_room_stock_gui;
     CRoomTowerGUI* m_room_tower_gui;
-    CRoomUpTowerGUI* m_room_up_tower_gui;
+    std::unique_ptr<CRoomUpTowerGUI> m_room_up_tower_gui;
 
     void setGuiController(CGameGUI* p_gui);
 
@@ -77,7 +77,7 @@ public:
 
     CGameGUI* getCurrentControlGUI() { return m_current_gui; }
 
-    CRoomCommunityGUI* getCommunityGUI() { return m_room_community_gui; }
+    CRoomCommunityGUI* getCommunityGUI() { return m_room_community_gui.get(); }
 
     void disableGui();
 };

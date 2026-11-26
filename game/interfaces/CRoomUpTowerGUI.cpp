@@ -28,6 +28,10 @@ enum {
 /*======================================================*/
 bool CRoomUpTowerGUI::interfaceControl( CEventHandler* p_receiver)
 {
+    refreshView();
+    if (!p_receiver || !getViewState().bound)
+        return false;
+
     if (p_receiver->isClickedButtonID(COMMAND_BUILDING_CANCEL))
     {
     }
@@ -42,9 +46,3 @@ void CRoomUpTowerGUI::guiInitialize()
 {
 }
 
-/*======================================================*/
-// 주인 오브젝트 설정
-/*======================================================*/
-void CRoomUpTowerGUI::setOwner( CGameObject *obj)
-{
-}

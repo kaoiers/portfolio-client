@@ -120,6 +120,12 @@
     <ClInclude Include="game\interfaces\CRoomCommunityGUI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="game\interfaces\CRoomGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\viewmodel\RoomViewModel.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
     <ClInclude Include="game\interfaces\CRoomJailGUI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
@@ -366,6 +372,9 @@
       <Filter>Source Files\AI</Filter>
     </ClCompile>
     <ClCompile Include="game\interfaces\CRoomCommunityGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\viewmodel\RoomViewModel.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="game\interfaces\CRoomJailGUI.cpp">

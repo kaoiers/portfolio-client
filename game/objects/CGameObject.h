@@ -36,8 +36,6 @@ class CGameAnimationMgr;
 class CGameObjectManager;
 struct Telegram;
 class CEventHandler;
-class CMainGameGUI;
-class CGameGUI;
 
 class CGameObject : public IGameObject
 {
@@ -96,7 +94,6 @@ public:
     void setObjectType(const s32 i_type) { m_obj_type = i_type; }
     bool removeSceneNode();
 
-    CMainGameGUI* getMainGameGUI();
 
     void setCommandType(Command_Type type);
     Command_Type getCommandType() const { return m_command_type; }

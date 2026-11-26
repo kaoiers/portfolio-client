@@ -57,6 +57,7 @@ bool God_Game::gameLoading()
     m_gui_manager = std::make_unique<CGUIManager>();
     m_event_handler = std::make_unique<CEventHandler>();
     m_object_manager = std::make_unique<CGameObjectManager>(m_gui_manager->getUnitController());
+    m_object_manager->setSoundSink([this](const char* name, bool loop) { playSound(name, loop); });
     m_gui_manager->gameLoading();
     m_camera_manager = std::make_unique<CCameraManager>();
     m_camera_manager->init();

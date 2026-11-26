@@ -191,6 +191,8 @@
     <ClInclude Include="game\interfaces\CLoginGUI.h" />
     <ClInclude Include="game\interfaces\CMainGameGUI.h" />
     <ClInclude Include="game\interfaces\CRoomCommunityGUI.h" />
+    <ClInclude Include="game\interfaces\CRoomGUI.h" />
+    <ClInclude Include="game\interfaces\viewmodel\RoomViewModel.h" />
     <ClInclude Include="game\interfaces\CRoomJailGUI.h" />
     <ClInclude Include="game\interfaces\CRoomStockGUI.h" />
     <ClInclude Include="game\interfaces\CRoomUpTowerGUI.h" />
@@ -272,6 +274,7 @@
     <ClCompile Include="game\interfaces\CLoginGUI.cpp" />
     <ClCompile Include="game\interfaces\CMainGameGUI.cpp" />
     <ClCompile Include="game\interfaces\CRoomCommunityGUI.cpp" />
+    <ClCompile Include="game\interfaces\viewmodel\RoomViewModel.cpp" />
     <ClCompile Include="game\interfaces\CRoomJailGUI.cpp" />
     <ClCompile Include="game\interfaces\CRoomStockGUI.cpp" />
     <ClCompile Include="game\interfaces\CRoomUpTowerGUI.cpp" />

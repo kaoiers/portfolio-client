@@ -11,25 +11,20 @@
 #ifndef CROOM_UP_TOWER_GUI_H
 #define CROOM_UP_TOWER_GUI_H
 
-#include "IGameGUI.h"
+#include "CRoomGUI.h"
 
-class CGameRoomTower;
-
-class CRoomUpTowerGUI : public CGameGUI
+class CRoomUpTowerGUI : public CRoomGUI
 {
-    CGameRoomTower* m_owner;
-
     virtual bool interfaceControl(CEventHandler* p_receiver);
 
 public:
     CRoomUpTowerGUI(position2d<s16> rect = position2di(0, 0)) :
-    CGameGUI(rect) {}
+    CRoomGUI(BUILDING_TOWER, rect) {}
 
     virtual ~CRoomUpTowerGUI() {};
 
     virtual void guiInitialize();
 
-    virtual void setOwner(CGameObject *obj);
 };
 
 #endif

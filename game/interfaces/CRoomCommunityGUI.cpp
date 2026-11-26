@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CRoomCommunityGUI.h"
-#include "../objects/CGameRoomCommunity.h"
 #include "../eventhandle/CEventHandleManager.h"
 #include "CGUIManager.h"
 
@@ -44,13 +43,15 @@ void CRoomCommunityGUI::resetFriendsList()
 /*======================================================*/
 bool CRoomCommunityGUI::interfaceControl( CEventHandler* p_receiver)
 {
+    refreshView();
+    if (!p_receiver || !getViewState().bound)
+        return false;
+
     //m_pFriendName[0]->getPosition();
 
     if (p_receiver->isClickedButtonID(COMMAND_BUILDING_CANCEL))
     {
-        m_owner->explosion();
-
-        m_owner->deleteRoom();
+        m_view_model.requestDestroy();
     }
 
     return true;
@@ -83,9 +84,7 @@ void CRoomCommunityGUI::guiInitialize()
 /*======================================================*/
 void CRoomCommunityGUI::setOwner( CGameObject *obj)
 {
-    m_owner = dynamic_cast<CGameRoomCommunity* >(obj);
-
-    setDamage( m_owner->getRoomHp(), m_owner->getTotalRoomHP());
+    CRoomGUI::setOwner(obj);
 
     resetFriendsList();
 }
@@ -113,4 +112,4 @@ void CRoomCommunityGUI::setFriendPicture( u32 friend_id, size_t stream_size, cha
 }
 
 CRoomCommunityGUI::CRoomCommunityGUI( position2d<s16> rect /*= position2di(0,0)*/) :
-    CGameGUI(rect), friend_button_id(COMMAND_BUIDING_DAMAGE_TEXT+1), m_current_page(1) {}
+    CRoomGUI(BUILDING_FRIEND, rect), friend_button_id(COMMAND_BUIDING_DAMAGE_TEXT+1), m_current_page(1) {}

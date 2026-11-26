@@ -15,6 +15,8 @@
 #include <map>
 #include <list>
 #include <vector>
+#include <functional>
+#include <utility>
 
 #include "CObjectListSet.h"
 #include "EnumObjectType.h"
@@ -57,11 +59,15 @@ using ObjectMap = std::map<u32, std::unique_ptr<CGameObject>>;
 
     std::unique_ptr<CObjectController> m_object_controller;
     std::unique_ptr<MessageDispatcher> m_dispatcher;
+    std::function<void(const char*, bool)> m_sound_sink;
 
 public:
     explicit CGameObjectManager(CControllerGUI* selection_view = nullptr);
 
     ~CGameObjectManager();
+
+    void setSoundSink(std::function<void(const char*, bool)> sink) { m_sound_sink = std::move(sink); }
+    void requestSound(const char* name, bool loop = false) { if (m_sound_sink) m_sound_sink(name, loop); }
 
     bool removeObject(u32 cid);
 

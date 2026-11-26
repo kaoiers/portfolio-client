@@ -113,11 +113,3 @@ void CGameObject::setCommandType( Command_Type type)
 {
     m_command_type = type;
 }
-
-/*======================================================*/
-// 메인 게임 GUI 인스턴스
-/*======================================================*/
-CMainGameGUI* CGameObject::getMainGameGUI()
-{
-    return CMainGameGUI::getInstance();
-}
