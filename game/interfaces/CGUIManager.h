@@ -60,7 +60,7 @@ public :
 
 	bool				IsPressed();
 
-	bool				PostEvent(SEvent event);
+	bool				PostEvent(const SEvent& event);
 
 	void				Interface_Init(CGameGUI* BaseGUI);
 

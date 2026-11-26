@@ -166,7 +166,7 @@ bool CGUIManager::IsPressed()
 /*======================================================*/
 // 이벤트 전 
 /*======================================================*/
-bool CGUIManager::PostEvent( SEvent event )
+bool CGUIManager::PostEvent( const SEvent& event )
 {
 	GUIMap::iterator itr;
 

@@ -113,7 +113,7 @@ public :
 
 	bool					isNeedOwner() const { return m_bNeedOwner; }
 
-	bool					PostEvent(SEvent event) { return true; };
+	bool					PostEvent(const SEvent& event) { return true; };
 
 public :
 
