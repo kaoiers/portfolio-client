@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CUnitGodGUI.h"
-#include "../objects/CGameUnitGod.h"
 #include "../eventhandle/CEventHandleManager.h"
 
 enum
@@ -25,22 +24,19 @@ enum
     COMMAND_BUILDING_CANCEL
 };
 
-/*======================================================*/
-// 주인 오브젝트 설정
-/*======================================================*/
-void CUnitGodGUI::setOwner( CGameObject *obj)
-{
-    m_owner = dynamic_cast<CGameUnitGod *>(obj);
-}
 
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
 bool CUnitGodGUI::interfaceControl( CEventHandler* p_receiver)
 {
+    refreshView();
+    if (!p_receiver || !getViewState().bound)
+        return false;
+
     if (p_receiver->isClickedButtonID(COMMAND_ATTACK_BUTTON))
     {
-        m_owner->setCommandType(com_attack);
+        m_view_model.requestAttack();
     }
 
     return true;

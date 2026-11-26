@@ -10,7 +10,6 @@
 
 #include <stdafx.h>
 #include "CUnitArmyGUI.h"
-#include "../objects/CGameUnitArmy.h"
 #include "../eventhandle/CEventHandleManager.h"
 
 enum
@@ -29,9 +28,13 @@ enum
 /*======================================================*/
 bool CUnitArmyGUI::interfaceControl( CEventHandler* p_receiver)
 {
+    refreshView();
+    if (!p_receiver || !getViewState().bound)
+        return false;
+
     if (p_receiver->isClickedButtonID(COMMAND_ARMY_BUILDING_DEFENCE_BUTTON))
     {
-        m_owner->setCommandType(com_room_guard);
+        m_view_model.requestGuard();
     }
 
     return true;
@@ -43,10 +46,3 @@ void CUnitArmyGUI::guiInitialize()
 {
 }
 
-/*======================================================*/
-// 주인 오브젝트 설정
-/*======================================================*/
-void CUnitArmyGUI::setOwner( CGameObject *obj)
-{
-    m_owner = dynamic_cast<CGameUnitArmy *>(obj);
-}

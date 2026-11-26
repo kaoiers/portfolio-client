@@ -85,6 +85,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -99,6 +100,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -115,6 +117,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -133,6 +136,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -190,6 +194,8 @@
     <ClInclude Include="game\interfaces\CRoomJailGUI.h" />
     <ClInclude Include="game\interfaces\CRoomStockGUI.h" />
     <ClInclude Include="game\interfaces\CRoomUpTowerGUI.h" />
+    <ClInclude Include="game\interfaces\CUnitGUI.h" />
+    <ClInclude Include="game\interfaces\viewmodel\UnitViewModel.h" />
     <ClInclude Include="game\interfaces\CUnitArmyGUI.h" />
     <ClInclude Include="game\interfaces\CUnitGodGUI.h" />
     <ClInclude Include="game\interfaces\CUnitWorkerGUI.h" />
@@ -269,6 +275,7 @@
     <ClCompile Include="game\interfaces\CRoomJailGUI.cpp" />
     <ClCompile Include="game\interfaces\CRoomStockGUI.cpp" />
     <ClCompile Include="game\interfaces\CRoomUpTowerGUI.cpp" />
+    <ClCompile Include="game\interfaces\viewmodel\UnitViewModel.cpp" />
     <ClCompile Include="game\interfaces\CUnitArmyGUI.cpp" />
     <ClCompile Include="game\interfaces\CUnitGodGUI.cpp" />
     <ClCompile Include="game\interfaces\CUnitWorkerGUI.cpp" />

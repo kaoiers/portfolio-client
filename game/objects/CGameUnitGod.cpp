@@ -52,7 +52,6 @@ bool CGameUnitGod::shortAttack( CGameUnit* p_target)
 /*======================================================*/
 void CGameUnitGod::enterControl()
 {
-    CControllerGUI::instance()->setGodGUI(this);
 }
 
 CGameUnitGod::CGameUnitGod(OwnerType owner, u32 obj_id, u32 objtype,

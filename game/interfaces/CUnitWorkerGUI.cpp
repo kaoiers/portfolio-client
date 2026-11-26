@@ -10,24 +10,18 @@
 
 #include <stdafx.h>
 #include "CUnitWorkerGUI.h"
-#include "../objects/CGameUnitWorker.h"
 #include "../eventhandle/CEventHandleManager.h"
-#include "../objects/CGameObjectManager.h"
-#include "../objects/CGameRoom.h"
 
-/*======================================================*/
-// 주인 오브젝트 설정
-/*======================================================*/
-void CUnitWorkerGUI::setOwner( CGameObject *obj)
-{
-    m_owner = dynamic_cast<CGameUnitWorker *>(obj);
-}
 
 /*======================================================*/
 // 컨트롤
 /*======================================================*/
 bool CUnitWorkerGUI::interfaceControl( CEventHandler* p_receiver)
 {
+    refreshView();
+    if (!p_receiver || !getViewState().bound)
+        return false;
+
     if (p_receiver->isClickedButtonID(COMMAND_BUILDING_BUTTON))
     {
         this->showGroup("building_main", true);
@@ -46,12 +40,12 @@ bool CUnitWorkerGUI::interfaceControl( CEventHandler* p_receiver)
 
     else if (p_receiver->isClickedButtonID(COMMAND_WORKING_BUTTON))
     {
-        m_owner->setCommandType(com_collection);
+        m_view_model.requestCollect();
 
     }
     else if (p_receiver->isClickedButtonID(COMMAND_ATTACK_BUTTON))
     {
-        m_owner->setCommandType(com_none);
+        m_view_model.requestIdle();
     }
 
     if (p_receiver->isClickedButtonID(COMMAND_BUILDING_ARROWL))
@@ -67,55 +61,47 @@ bool CUnitWorkerGUI::interfaceControl( CEventHandler* p_receiver)
 
     if (p_receiver->isClickedButtonID(COMMAND_BUILDING_JAIL))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_JAIL);
+        m_view_model.requestBuild(BUILDING_JAIL);
     }
 
     else if (p_receiver->isClickedButtonID(COMMAND_BUILDING_WAREHOUSE))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_WAREHOUSE);
+        m_view_model.requestBuild(BUILDING_WAREHOUSE);
     }
 
     else if (p_receiver->isClickedButtonID(COMMAND_BUILDING_WAITING))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_WAITINGROOM);
+        m_view_model.requestBuild(BUILDING_WAITINGROOM);
     }
 
     else if (p_receiver->isClickedButtonID(COMMAND_BUILDING_TOWER))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_TOWER);
+        m_view_model.requestBuild(BUILDING_TOWER);
     }
 
     if (p_receiver->isClickedButtonID(COMMAND_BUILDING_CANCEL))
     {
-        m_owner->cancelBuilding();
+        m_view_model.requestCancelBuilding();
     }
 
     if (p_receiver->isClickedButtonID(COMMAND_BUILDING_FARM))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_FARM);
+        m_view_model.requestBuild(BUILDING_FARM);
     }
 
     else if (p_receiver->isClickedButtonID(COMMAND_BUILDING_WOOD))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_WOOD);
+        m_view_model.requestBuild(BUILDING_WOOD);
     }
 
     else if (p_receiver->isClickedButtonID(COMMAND_BUILDING_GOLD))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_GOLD);
+        m_view_model.requestBuild(BUILDING_GOLD);
     }
 
     else if (p_receiver->isClickedButtonID(COMMAND_BUILDING_FRIEND))
     {
-        m_owner->cancelControl();
-        m_owner->addBuilding(BUILDING_FRIEND);
+        m_view_model.requestBuild(BUILDING_FRIEND);
     }
 
     return true;

@@ -32,12 +32,22 @@
 CControllerGUI* CControllerGUI::p_instance = nullptr;
 
 CControllerGUI::CControllerGUI() :
-    m_current_gui(0)
+    m_current_gui(nullptr),
+    m_unit_god_gui(std::make_unique<CUnitGodGUI>()),
+    m_unit_worker_gui(std::make_unique<CUnitWorkerGUI>()),
+    m_unit_army_gui(std::make_unique<CUnitArmyGUI>())
 {
     p_instance = this;
+    m_unit_god_gui->hide();
+    m_unit_worker_gui->hide();
+    m_unit_army_gui->hide();
 }
 
-CControllerGUI::~CControllerGUI() {}
+CControllerGUI::~CControllerGUI()
+{
+    if (p_instance == this)
+        p_instance = nullptr;
+}
 
 /*======================================================*/
 // 신수GUI 컨트롤 지정
@@ -45,7 +55,7 @@ CControllerGUI::~CControllerGUI() {}
 void CControllerGUI::setGodGUI( CGameUnitGod* p_god)
 {
     m_unit_god_gui->setOwner(p_god);
-    setGuiController(m_unit_god_gui);
+    setGuiController(m_unit_god_gui.get());
 }
 
 /*======================================================*/
@@ -54,7 +64,7 @@ void CControllerGUI::setGodGUI( CGameUnitGod* p_god)
 void CControllerGUI::setWorkerGUI( CGameUnitWorker* p_worker)
 {
     m_unit_worker_gui->setOwner(p_worker);
-    setGuiController(m_unit_worker_gui);
+    setGuiController(m_unit_worker_gui.get());
     m_unit_worker_gui->showGroup("building_main", false);
     m_unit_worker_gui->showGroup("building1", false);
     m_unit_worker_gui->showGroup("building2", false);
@@ -67,7 +77,7 @@ void CControllerGUI::setWorkerGUI( CGameUnitWorker* p_worker)
 void CControllerGUI::setArmyGUI( CGameUnitArmy* p_army)
 {
     m_unit_army_gui->setOwner(p_army);
-    setGuiController(m_unit_army_gui);
+    setGuiController(m_unit_army_gui.get());
 }
 
 /*======================================================*/
@@ -75,14 +85,16 @@ void CControllerGUI::setArmyGUI( CGameUnitArmy* p_army)
 /*======================================================*/
 void CControllerGUI::setGuiController( CGameGUI* p_gui)
 {
-    if (m_current_gui)
+    if (m_current_gui && m_current_gui != p_gui)
     {
+        m_current_gui->setOwner(nullptr);
         m_current_gui->hide();
     }
 
     m_current_gui = p_gui;
 
-    m_current_gui->show();
+    if (m_current_gui)
+        m_current_gui->show();
 }
 
 /*======================================================*/
@@ -100,16 +112,25 @@ void CControllerGUI::disableGui()
 {
     if (m_current_gui)
     {
+        m_current_gui->setOwner(nullptr);
         m_current_gui->hide();
     }
 
-    m_current_gui = 0;
+    m_current_gui = nullptr;
 }
 
 /*======================================================*/
 // 현재 컨트롤 GUI
 /*======================================================*/
-CGameGUI* CControllerGUI::setCurrentControlGUI( CGameObject * obj)
+CGameGUI* CControllerGUI::setCurrentControlGUI(CGameObject* obj)
 {
-    return nullptr;
+    if (auto* god = dynamic_cast<CGameUnitGod*>(obj))
+        setGodGUI(god);
+    else if (auto* worker = dynamic_cast<CGameUnitWorker*>(obj))
+        setWorkerGUI(worker);
+    else if (auto* army = dynamic_cast<CGameUnitArmy*>(obj))
+        setArmyGUI(army);
+    else
+        disableGui();
+    return m_current_gui;
 }

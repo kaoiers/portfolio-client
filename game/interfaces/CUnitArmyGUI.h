@@ -11,25 +11,20 @@
 #ifndef CUNIT_ARMY_H
 #define CUNIT_ARMY_H
 
-#include "IGameGUI.h"
+#include "CUnitGUI.h"
 
-class CGameUnitArmy;
-
-class CUnitArmyGUI : public CGameGUI
+class CUnitArmyGUI : public CUnitGUI
 {
-    CGameUnitArmy* m_owner;
-
     virtual bool interfaceControl(CEventHandler* p_receiver);
 
 public:
     CUnitArmyGUI(position2d<s16> rect = position2di(0, 0)) :
-    CGameGUI(rect) {}
+    CUnitGUI(UnitViewRole::Army, rect) {}
 
     virtual ~CUnitArmyGUI() {};
 
     virtual void guiInitialize();
 
-    virtual void setOwner(CGameObject *obj);
 };
 
 #endif

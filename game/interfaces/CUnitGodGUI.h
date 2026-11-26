@@ -11,25 +11,20 @@
 #ifndef CUNIT_GOD_H
 #define CUNIT_GOD_H
 
-#include "IGameGUI.h"
+#include "CUnitGUI.h"
 
-class CGameUnitGod;
-
-class CUnitGodGUI : public CGameGUI
+class CUnitGodGUI : public CUnitGUI
 {
-    CGameUnitGod* m_owner;
-
     virtual bool interfaceControl(CEventHandler* p_receiver);
 
 public:
     CUnitGodGUI(position2d<s16> rect = position2di(0, 0)) :
-    CGameGUI(rect) {}
+    CUnitGUI(UnitViewRole::God, rect) {}
 
     virtual ~CUnitGodGUI() {};
 
     virtual void guiInitialize() {}
 
-    virtual void setOwner(CGameObject *obj);
 };
 
 #endif

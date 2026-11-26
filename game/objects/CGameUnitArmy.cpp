@@ -52,7 +52,6 @@ CGameUnitArmy::~CGameUnitArmy()
 /*======================================================*/
 void CGameUnitArmy::enterControl()
 {
-    CControllerGUI::instance()->setArmyGUI(this);
 }
 
 /*======================================================*/
@@ -92,7 +91,6 @@ void CGameUnitArmy::arbitrate()
 /*======================================================*/
 void CGameUnitArmy::exitControl()
 {
-    CControllerGUI::instance()->disableGui();
 }
 
 /*======================================================*/

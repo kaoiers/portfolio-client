@@ -44,6 +44,7 @@ God_Game::God_Game()
 
 God_Game::~God_Game()
 {
+    m_object_manager.reset();
 }
 
 /*======================================================*/
@@ -51,9 +52,11 @@ God_Game::~God_Game()
 /*======================================================*/
 bool God_Game::gameLoading()
 {
+    m_object_manager.reset();
+    m_game_map.reset();
     m_gui_manager = std::make_unique<CGUIManager>();
     m_event_handler = std::make_unique<CEventHandler>();
-    m_object_manager = std::make_unique<CGameObjectManager>();
+    m_object_manager = std::make_unique<CGameObjectManager>(m_gui_manager->getUnitController());
     m_gui_manager->gameLoading();
     m_camera_manager = std::make_unique<CCameraManager>();
     m_camera_manager->init();

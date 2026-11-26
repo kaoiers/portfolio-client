@@ -37,7 +37,7 @@ class CGUIManager
     CMouseCursorGUI* m_mouse_cursor_gui;
     CLoginGUI* m_login_gui;
     CDialogBox* m_dialog_box_gui;
-    CControllerGUI* m_controller_gui;
+    std::unique_ptr<CControllerGUI> m_controller_gui;
     CGameIntroGUI* m_game_intro_gui;
     CPopUpGUI* m_pop_up_gui;
     CWebDialog* m_web_dialog;
@@ -77,9 +77,9 @@ public:
     CMouseCursorGUI* getMouseCursorGUI() const { return m_mouse_cursor_gui; }
     CLoginGUI* getLoginGUI() const { return m_login_gui; }
     CDialogBox* getDialogGui() const { return m_dialog_box_gui; }
-    CControllerGUI* getUnitController() const { return m_controller_gui; }
+    CControllerGUI* getUnitController() const { return m_controller_gui.get(); }
     CGameIntroGUI* getGameIntroGUI() const { return m_game_intro_gui; }
-    CControllerGUI* getControllerGUI() const { return m_controller_gui; }
+    CControllerGUI* getControllerGUI() const { return m_controller_gui.get(); }
     CPopUpGUI* getPopUpGUI() const { return m_pop_up_gui; }
     CWebDialog* getWebDialog() const { return m_web_dialog; }
 

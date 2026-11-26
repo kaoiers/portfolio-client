@@ -29,6 +29,7 @@ CGUIManager::CGUIManager()
     m_instance = this;
 
     m_font_manager = std::make_unique<CFontManager>();
+    m_controller_gui = std::make_unique<CControllerGUI>();
 }
 
 CGUIManager::~CGUIManager()
@@ -40,7 +41,10 @@ CGUIManager::~CGUIManager()
 
     m_guis.clear();
 
+    m_controller_gui.reset();
     m_font_manager.reset();
+    if (m_instance == this)
+        m_instance = nullptr;
 }
 
 /*======================================================*/
@@ -56,6 +60,9 @@ bool CGUIManager::control( CEventHandler* p_receiver)
 
         (itr->second)->control(p_receiver);
     }
+
+    if (auto* selected = m_controller_gui->getCurrentControlGUI(); selected && selected->isEnable())
+        selected->control(p_receiver);
 
     return true;
 }

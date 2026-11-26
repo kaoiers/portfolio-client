@@ -11,7 +11,7 @@
 #ifndef CUNIT_WOKRER_H
 #define CUNIT_WORKER_H
 
-#include "IGameGUI.h"
+#include "CUnitGUI.h"
 
 enum
 {
@@ -34,23 +34,18 @@ enum
     COMMAND_BUILDING_ARROWR
 };
 
-class CGameUnitWorker;
-
-class CUnitWorkerGUI : public CGameGUI
+class CUnitWorkerGUI : public CUnitGUI
 {
-    CGameUnitWorker* m_owner;
-
     virtual bool interfaceControl(CEventHandler* p_receiver);
 
 public:
     CUnitWorkerGUI(position2d<s16> rect = position2di(0, 0)) :
-    CGameGUI(rect) {}
+    CUnitGUI(UnitViewRole::Worker, rect) {}
 
     virtual ~CUnitWorkerGUI() {};
 
     virtual void guiInitialize() {}
 
-    virtual void setOwner(CGameObject *obj);
 };
 
 #endif

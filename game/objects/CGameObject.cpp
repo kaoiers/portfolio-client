@@ -121,11 +121,3 @@ CMainGameGUI* CGameObject::getMainGameGUI()
 {
     return CMainGameGUI::getInstance();
 }
-
-/*======================================================*/
-// 오브젝트 전용 GUI 인스턴스
-/*======================================================*/
-CGameGUI* CGameObject::getOwnedGUI()
-{
-    return CGUIManager::getInstance()->getUnitController()->getCurrentControlGUI();
-}

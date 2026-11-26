@@ -129,6 +129,12 @@
     <ClInclude Include="game\interfaces\CRoomUpTowerGUI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="game\interfaces\CUnitGUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game\interfaces\viewmodel\UnitViewModel.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
     <ClInclude Include="game\interfaces\CUnitArmyGUI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
@@ -369,6 +375,9 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="game\interfaces\CRoomUpTowerGUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game\interfaces\viewmodel\UnitViewModel.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="game\interfaces\CUnitArmyGUI.cpp">

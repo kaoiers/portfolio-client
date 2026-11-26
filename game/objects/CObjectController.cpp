@@ -23,7 +23,7 @@
 #include "../interfaces/CControllerGUI.h"
 #include "CGameUnit.h"
 
-CObjectController::CObjectController() : m_controller(0), m_owner(0), m_control_state(0), m_plug_in_particle(0)
+CObjectController::CObjectController(CControllerGUI* selection_view) : m_controller(0), m_selection_view(selection_view), m_owner(0), m_control_state(0), m_plug_in_particle(0)
 {
 }
 
@@ -37,7 +37,7 @@ void CObjectController::setController( IBaseController * p_controller)
         if (m_controller)
         {
             m_controller->exitControl();
-            if (auto* gui = CControllerGUI::instance())
+            if (auto* gui = m_selection_view)
                 gui->disableGui();
         }
 
@@ -48,6 +48,8 @@ void CObjectController::setController( IBaseController * p_controller)
         m_owner = dynamic_cast<CGameObject *>(m_controller);
 
         commonEnterControlForType(m_owner->getObjectType());
+        if (m_selection_view)
+            m_selection_view->setCurrentControlGUI(m_owner);
 
         m_control_state = false;
     }
@@ -145,7 +147,7 @@ void CObjectController::nullifyController()
         m_owner = 0;
     }
 
-    if (auto* gui = CControllerGUI::instance())
+    if (auto* gui = m_selection_view)
         gui->disableGui();
 
     m_controller = nullptr;

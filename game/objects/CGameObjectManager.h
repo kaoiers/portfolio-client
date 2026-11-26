@@ -42,6 +42,7 @@ struct Telegram;
 class MessageDispatcher;
 
 class CObjectController;
+class CControllerGUI;
 
 class CGameObjectManager
 {
@@ -58,7 +59,7 @@ using ObjectMap = std::map<u32, std::unique_ptr<CGameObject>>;
     std::unique_ptr<MessageDispatcher> m_dispatcher;
 
 public:
-    CGameObjectManager();
+    explicit CGameObjectManager(CControllerGUI* selection_view = nullptr);
 
     ~CGameObjectManager();
 

@@ -36,7 +36,7 @@ flowchart TD
 ## 빌드 및 검증
 
 - Visual Studio에서 `demi_god.vcxproj`를 열고 C++ 데스크톱 개발 워크로드와 Windows SDK를 설치합니다. 프로젝트의 도구 집합은 v145로 설정되어 있습니다. 해당 도구 집합이 있는 환경에서 Debug 또는 Release 구성을 선택하여 빌드합니다.
-- 현재 검증은 GCC C++17과 로컬 Windows API 검사 전용 대체 헤더로 61개 소스의 컴파일과 링크를 확인한 것입니다. 대체 헤더는 저장소에 포함되지 않으며 Windows 네이티브 빌드나 게임 실행을 보증하지 않습니다.
+- 현재 검증은 GCC C++17과 로컬 Windows API 검사 전용 대체 헤더로 62개 소스의 컴파일과 링크를 확인한 것입니다. 대체 헤더는 저장소에 포함되지 않으며 Windows 네이티브 빌드나 게임 실행을 보증하지 않습니다.
 - 독립 테스트는 렌더링 엔진과 Windows SDK 없이 실행할 수 있습니다.
 
 ### 독립 테스트 실행
@@ -49,6 +49,28 @@ g++ -std=c++17 -Wall -Wextra -I. tests/core_tests.cpp -o core_tests
 ```
 
 테스트 범위: Goal 합성 및 소유권, Telegram 비교와 페이로드, 오브젝트 집합의 중복 방지 및 삭제.
+
+## UI 아키텍처 (MVC + MVVM)
+
+유닛 UI는 MVC의 선택/입력 제어와 MVVM의 표시 상태/명령으로 구분했습니다.
+
+- Model: CGameUnit / CGameUnitAttribute
+- Controller: CObjectController / CGameObjectManager (선택과 입력 처리)
+- ViewModel: UnitViewModel (HP 비율, 레벨, 경험치, 현재 명령의 스냅샷; 역할별 명령)
+- View: CUnitGUI 및 전사·신수·일꾼 UI
+
+```mermaid
+flowchart TD
+    Input[Input Controller] --> Unit[Unit model]
+    Input --> Selection[Controller GUI]
+    Selection --> View[Unit GUI]
+    View -->|Command| VM[Unit ViewModel]
+    VM --> Unit
+    Unit -->|State read| VM
+    VM -->|Changed snapshot| View
+```
+
+ViewModel은 메인 스레드의 프레임 갱신 시 변경된 값만 알립니다. 객체 수명 토큰을 통해 삭제된 유닛에 대한 참조를 무효화하며 모델을 공동 소유하지 않습니다. 엔진 렌더러가 없는 상태에서도 표시 데이터 및 명령 전달을 테스트할 수 있습니다. 건물 UI와 메인 게임 UI의 기존 직접 의존성은 아직 남아 있습니다.
 
 ## 외부 참고 코드 및 출처
 

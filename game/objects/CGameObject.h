@@ -11,6 +11,7 @@
 #pragma  once
 
 #include "IGameObject.h"
+#include <memory>
 #include "EnumObjectType.h"
 #include "../controller/EnumPickingType.h"
 #include "SObjectResources.h"
@@ -40,6 +41,7 @@ class CGameGUI;
 
 class CGameObject : public IGameObject
 {
+    std::shared_ptr<const int> m_lifetime = std::make_shared<const int>(0);
     friend class CGameObjectManager;
     CGameObjectManager* m_object_manager;
 
@@ -78,6 +80,9 @@ public:
         vector3df scale = vector3df(1.0f, 1.0f, 1.0f));
 
     virtual ~CGameObject();
+    CGameObject(const CGameObject&) = delete;
+    CGameObject& operator=(const CGameObject&) = delete;
+    std::weak_ptr<const int> getLifetimeToken() const { return m_lifetime; }
 
     void setOwnerType(OwnerType owner) { m_owner_type = owner; }
     OwnerType getOwnerType() const { return m_owner_type; }
@@ -92,7 +97,6 @@ public:
     bool removeSceneNode();
 
     CMainGameGUI* getMainGameGUI();
-    CGameGUI* getOwnedGUI();
 
     void setCommandType(Command_Type type);
     Command_Type getCommandType() const { return m_command_type; }

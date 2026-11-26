@@ -84,7 +84,6 @@ void CGameUnitWorker::buildingStart()
 /*======================================================*/
 void CGameUnitWorker::exitControl()
 {
-    CControllerGUI::instance()->disableGui();
 }
 
 /*======================================================*/
@@ -92,7 +91,6 @@ void CGameUnitWorker::exitControl()
 /*======================================================*/
 void CGameUnitWorker::enterControl()
 {
-    CControllerGUI::instance()->setWorkerGUI(this);
 }
 
 /*======================================================*/

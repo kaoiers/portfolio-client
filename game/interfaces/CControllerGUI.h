@@ -11,6 +11,8 @@
 #ifndef CUNIT_CONTROLLER_GUI_H
 #define CUNIT_CONTROLLER_GUI_H
 
+#include <memory>
+
 class CGameGUI;
 class CUnitGodGUI;
 class CUnitWorkerGUI;
@@ -38,9 +40,9 @@ class CGameObject;
 class CControllerGUI
 {
     CGameGUI* m_current_gui;
-    CUnitGodGUI* m_unit_god_gui;
-    CUnitWorkerGUI* m_unit_worker_gui;
-    CUnitArmyGUI* m_unit_army_gui;
+    std::unique_ptr<CUnitGodGUI> m_unit_god_gui;
+    std::unique_ptr<CUnitWorkerGUI> m_unit_worker_gui;
+    std::unique_ptr<CUnitArmyGUI> m_unit_army_gui;
 
     CRoomJailGUI* m_room_jail_gui;
     CRoomWaitingGUI* m_room_waiting_gui;
