@@ -21,7 +21,6 @@ enum { clockwise = 1, anticlockwise = -1 };
 /// 이동 객체의 위치, 속도, 방향과 관련 수학 연산을 관리한다.
 class MovingEntity :public CGameObject
 {
-#define Node getSceneNode()
 
 protected:
     vector3df m_velocity;
