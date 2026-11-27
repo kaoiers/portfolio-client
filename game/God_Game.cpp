@@ -62,16 +62,20 @@ bool God_Game::gameLoading()
     m_event_handler = std::make_unique<CEventHandler>();
     m_object_manager = std::make_unique<CGameObjectManager>(m_gui_manager->getUnitController());
     m_object_manager->setSoundSink([this](const char* name, bool loop) { playSound(name, loop); });
-    m_gui_manager->gameLoading(*m_resources, *m_object_manager, *this);
+    if (!m_gui_manager->gameLoading(*m_resources, *m_object_manager, *this))
+        return false;
     m_camera_manager = std::make_unique<CCameraManager>();
-    m_camera_manager->init();
+    if (!m_camera_manager->init())
+        return false;
     m_game_map = std::make_unique<CGameMap>(*m_object_manager, *m_camera_manager);
 
-    setGameState(God_Game::GameState::on_game);
+    if (!m_game_map->init(INITIAL_MAP_CELLS_X, INITIAL_MAP_CELLS_Z,
+        INITIAL_MAP_PARTITION_X, INITIAL_MAP_PARTITION_Z))
+        return false;
+    if (!m_gui_manager->gameLoadingComplete())
+        return false;
 
-    m_game_map->init(INITIAL_MAP_CELLS_X, INITIAL_MAP_CELLS_Z,
-        INITIAL_MAP_PARTITION_X, INITIAL_MAP_PARTITION_Z);
-    m_gui_manager->gameLoadingComplete();
+    setGameState(God_Game::GameState::on_game);
 
     return true;
 }
@@ -89,9 +93,7 @@ bool God_Game::gameReset()
 /*======================================================*/
 bool God_Game::initialize()
 {
-    gameLoading();
-
-    return true;
+    return gameLoading();
 }
 
 /*======================================================*/

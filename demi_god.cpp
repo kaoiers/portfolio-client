@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "game/God_Game.h"
 #include <chrono>
+#include <cstdlib>
 #include <thread>
 
 int main()
@@ -12,7 +13,7 @@ int main()
 
     if (!god_game->initialize())
     {
-        return false;
+        return EXIT_FAILURE;
     }
 
     constexpr auto frame_interval = std::chrono::milliseconds(16);
@@ -33,5 +34,5 @@ int main()
 
     god_game->gameReset();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
