@@ -46,6 +46,22 @@ Thread pool tests passed
 A* tests passed
 ```
 
+### Doxygen API 문서
+
+[Doxyfile](Doxyfile)은 소스 주석에서 클래스와 함수의 HTML 문서를 생성합니다. Doxygen을 설치한 뒤 저장소 루트에서 PowerShell로 실행합니다.
+
+```powershell
+New-Item -ItemType Directory -Force .\build\doxygen | Out-Null
+doxygen .\Doxyfile
+Invoke-Item .\build\doxygen\html\index.html
+```
+
+클래스 관계 그래프를 생성하려면 Graphviz의 `dot`이 PATH에 있어야 합니다. Graphviz 없이 HTML 문서를 생성하려면 `Doxyfile`에서 `HAVE_DOT = NO`로 설정합니다.
+
+VS Code에서는 [Doxygen Runner](https://marketplace.visualstudio.com/items?itemName=betwo.vscode-doxygen-runner)를 설치한 후 `Doxyfile`을 열고, 명령 팔레트에서 **Generate Doxygen documentation**, **View Doxygen documentation**을 차례로 실행합니다. 확장이 Doxygen을 찾지 못하면 `doxygen_runner.doxygen_command`에 `doxygen.exe`의 전체 경로를 지정합니다.
+
+생성된 문서는 `build/doxygen/`에 저장되며 Git 추적에서 제외됩니다.
+
 ## 개발 이력 및 범위
 
 | 시기 | 내용 |
@@ -53,7 +69,7 @@ A* tests passed
 | 2011년 | Demi God 게임 클라이언트 개발. 유닛·건물 관리, Goal 기반 AI, 맵 및 GUI 제어 구조 작성 |
 | 2026년 11월 | 기존 소스의 포트폴리오용 정리 및 C++17 기반 리팩토링. 메모리 관리, MVC/MVVM, 메시지 전달, 수학 연산, 스레드 풀 및 비동기 A* 경로 탐색 개선 |
 
-2026년 개선 작업은 기존 코드와 외부 참고 코드의 출처를 보존하면서 AI 개발 도구를 활용해 진행했으며, 변경 범위는 GitHub 커밋 이력에서 확인할 수 있습니다.
+2026년 리팩터링에서는 AI 도구를 코드 리뷰, 수정안 작성, 빌드 오류 진단에 활용했습니다. 기존 코드와 외부 참고 코드의 출처 표기를 보존했으며, 주요 변경과 검증 범위는 커밋 이력과 테스트에서 확인할 수 있습니다.
 
 ## 핵심 개선 요약
 
