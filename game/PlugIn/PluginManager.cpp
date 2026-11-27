@@ -20,6 +20,11 @@
 
 using namespace std;
 
+void PluginManager::ModuleDeleter::operator()(HMODULE module) const noexcept
+{
+    ::FreeLibrary(module);
+}
+
 PluginManager * PluginManager::getInstance()
 {
     static std::unique_ptr<PluginManager> instance = std::make_unique<PluginManager >();
@@ -54,6 +59,8 @@ void PluginManager::getFilenames ( const string & dir,
 
     struct _finddata_t fileinfo;
     intptr_t handle = ::_findfirst(mask.c_str(), &fileinfo);
+    if (handle == -1)
+        return;
     intptr_t file = handle;
 
     while (file >= 0)
@@ -70,8 +77,8 @@ void PluginManager::getFilenames ( const string & dir,
 /*======================================================*/
 bool PluginManager::loadPlugin ( const string & filename)
 {
-    HMODULE h_dll = ::LoadLibraryA (filename.c_str());
-    if ( h_dll == nullptr)
+    Module module(::LoadLibraryA(filename.c_str()));
+    if (!module)
     {
         LPSTR lp_msg_buf = nullptr;
         ::FormatMessageA(
@@ -92,21 +99,29 @@ bool PluginManager::loadPlugin ( const string & filename)
         return false;
     }
 
-    CREATEPLUGIN p_func = (CREATEPLUGIN)::GetProcAddress (h_dll, "CreatePlugin");
+    auto p_func = reinterpret_cast<CREATEPLUGIN>(::GetProcAddress(module.get(), "CreatePlugin"));
     if ( p_func == nullptr)
         return false;
 
-    IPlugin * p_plugin = p_func(*this);
-    if ( p_plugin == nullptr)
+    std::unique_ptr<IPlugin> plugin(p_func(*this));
+    if (!plugin)
         return false;
 
-    PluginInfo info;
-    info.p_plugin = p_plugin;
-    info.h_dll = h_dll;
+    const auto name = plugin->GetName();
+    if (m_map_plugins.find(name) != m_map_plugins.end())
+        return false;
 
-    m_map_plugins[p_plugin->GetName()] = p_plugin;
-
-    m_plugins.push_back(info);
+    auto* instance = plugin.get();
+    m_plugins.push_back({std::move(module), std::move(plugin)});
+    try
+    {
+        m_map_plugins.emplace(name, instance);
+    }
+    catch (...)
+    {
+        m_plugins.pop_back();
+        throw;
+    }
 
     return true;
 }
@@ -116,17 +131,8 @@ bool PluginManager::loadPlugin ( const string & filename)
 /*======================================================*/
 void PluginManager::unloadAll ( void)
 {
-    std::vector<PluginInfo>::iterator it;
-    for (it=m_plugins.begin(); it!=m_plugins.end(); ++it)
-    {
-        PluginInfo & info = *it;
-
-        SAFE_DELETE(info.p_plugin);
-        ::FreeLibrary (info.h_dll);
-    }
-
-    m_plugins.clear();
     m_map_plugins.clear();
+    m_plugins.clear();
 }
 
 /*======================================================*/
@@ -145,7 +151,7 @@ IPlugin * PluginManager::getPlugin ( s32 n_index)
     if ( n_index < 0 || n_index >= getNumPlugins())
         return nullptr;
 
-    return m_plugins[n_index].p_plugin;
+    return m_plugins[n_index].plugin.get();
 }
 
 /*======================================================*/

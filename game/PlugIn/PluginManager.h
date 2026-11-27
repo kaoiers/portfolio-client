@@ -11,18 +11,33 @@
 #ifndef PLUGINMANAGER_H_
 #define PLUGINMANAGER_H_
 
-class IPlugin;
+#include "../../basicType.h"
+#include "IPlugin.h"
+#include <windows.h>
+#include <map>
+#include <memory>
+#include <type_traits>
+#include <vector>
+
 class God_Game;
 class CSoundManager;
 
 /// 플러그인 DLL 로딩, 등록, 조회 및 해제를 관리한다.
 class PluginManager
 {
+    struct ModuleDeleter
+    {
+        void operator()(HMODULE module) const noexcept;
+    };
+
+    using Module = std::unique_ptr<std::remove_pointer_t<HMODULE>, ModuleDeleter>;
+
     /// 로드된 DLL 핸들과 플러그인 인스턴스의 연결 정보를 보관한다.
     struct PluginInfo
     {
-        IPlugin * p_plugin;
-        HMODULE h_dll;
+        // Members are destroyed in reverse order, so the DLL outlives its plugin.
+        Module module;
+        std::unique_ptr<IPlugin> plugin;
     };
 
     typedef std::map< std::string, IPlugin * > PluginMap;
