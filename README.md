@@ -1,8 +1,50 @@
-# Demi God — C++ 클라이언트 포트폴리오
+# Demi God — 레거시 C++ 게임 클라이언트 리팩터링
 
-2011년에 작성한 게임 클라이언트 코드의 일부를 포트폴리오용으로 정리한 프로젝트입니다. 기존 구조를 유지하면서 C++17 기준으로 명명, 소유권, 인터페이스, 헤더 의존성과 테스트 가능성을 개선했습니다.
+2011년에 작성한 게임 클라이언트 코드의 일부를 C++17 기반 포트폴리오로 정리했습니다. 핵심 개선은 객체 소유권과 삭제 처리, UI와 모델 분리, 맵 변경에 대응하는 비동기 A* 경로 탐색입니다.
 
-> 현재 저장소는 그래픽 엔진, 리소스, 서버 및 일부 플랫폼 의존 기능이 제거된 소스 코드 중심의 샘플입니다. 실행 가능한 완성 게임이 아니며, 일부 메서드와 수학 연산은 스텁 상태입니다.
+그래픽 엔진과 게임 리소스, 서버를 제외한 소스 중심 샘플입니다. 콘솔 데모는 초기화와 프레임 루프를 실행합니다. 경로 탐색 통합 테스트는 경유점 처리와 재탐색을 검증하며 실제 유닛 이동 갱신은 구현 범위 밖입니다.
+
+| 살펴볼 부분 | 코드와 검증 |
+| --- | --- |
+| 객체 수명 관리 | [객체 관리자](game/objects/CGameObjectManager.cpp) · [등록·삭제 및 참조 무효화 테스트](tests/object_lifecycle_tests.cpp) |
+| UI와 모델 분리 | [유닛 ViewModel](game/interfaces/viewmodel/UnitViewModel.h) · [선택·상태·명령 전달 테스트](tests/unit_viewmodel_tests.cpp) |
+| 비동기 A* | [이동 Goal](game/ai/Goal_MoveToPosition.cpp) · [맵 스냅샷과 재탐색 테스트](tests/async_path_tests.cpp) |
+
+## 빌드 및 검증
+
+Windows에서 MSVC v145와 Windows SDK를 사용한 Debug x64 빌드, 콘솔 데모 정상 종료, 수학·좌표 테스트를 확인했습니다. MSVC의 소스 인코딩 경고 `C4819`는 남아 있습니다.
+
+Visual Studio의 **x64 Native Tools Command Prompt**에서 저장소 루트로 이동해 실행합니다.
+
+```bat
+msbuild demi_god.vcxproj /t:Build /p:Configuration=Debug /p:Platform=x64 /p:IntDir=artifacts\obj\ /p:OutDir=artifacts\demo\
+artifacts\demo\demi_god.exe
+echo %ERRORLEVEL%
+```
+
+데모는 약 1초 동안 최대 60프레임을 실행합니다. 정상 종료 시 콘솔 출력 없이 종료 코드 `0`을 반환합니다.
+
+### 대표 독립 테스트
+
+같은 프롬프트에서 Goal·메시지 데이터, 스레드 풀, A*를 각각 검증합니다.
+
+```bat
+if not exist artifacts mkdir artifacts
+cl /nologo /EHsc /std:c++17 /utf-8 /I. /Fo:artifacts\core_tests.obj /Fe:artifacts\core_tests.exe tests\core_tests.cpp
+artifacts\core_tests.exe
+cl /nologo /EHsc /std:c++17 /utf-8 /Fo:artifacts\thread_pool_tests.obj /Fe:artifacts\thread_pool_tests.exe tests\thread_pool_tests.cpp
+artifacts\thread_pool_tests.exe
+cl /nologo /EHsc /std:c++17 /utf-8 /Fo:artifacts\astar_tests.obj /Fe:artifacts\astar_tests.exe tests\astar_tests.cpp
+artifacts\astar_tests.exe
+```
+
+예상 출력
+
+```text
+3 core tests passed
+Thread pool tests passed
+A* tests passed
+```
 
 ## 개발 이력 및 범위
 
@@ -54,23 +96,6 @@ flowchart TD
 | game/attributes | 유닛 속성 및 자원 관리 |
 | game/PlugIn | DLL 로딩과 외부 인터페이스 |
 
-## 빌드 및 검증
-
-- Visual Studio에서 `demi_god.vcxproj`를 열고 C++ 데스크톱 개발 워크로드와 Windows SDK를 설치합니다. 프로젝트의 도구 집합은 v145로 설정되어 있습니다. 해당 도구 집합이 있는 환경에서 Debug 또는 Release 구성을 선택하여 빌드합니다.
-- 현재 검증은 GCC C++17과 로컬 Windows API 검사 전용 대체 헤더로 64개 소스의 컴파일과 링크를 확인한 것입니다. 대체 헤더는 저장소에 포함되지 않으며 Windows 네이티브 빌드나 게임 실행을 보증하지 않습니다.
-- 독립 테스트는 렌더링 엔진과 Windows SDK 없이 실행할 수 있습니다.
-
-### 독립 테스트 실행
-
-저장소 루트에서 C++17 컴파일러로 실행합니다.
-
-```sh
-g++ -std=c++17 -Wall -Wextra -I. tests/core_tests.cpp -o core_tests
-./core_tests
-```
-
-테스트 범위: Goal 합성 및 소유권, Telegram 비교와 페이로드, 오브젝트 집합의 중복 방지 및 삭제.
-
 ## UI 아키텍처 (MVC + MVVM)
 
 유닛·건물·메인 게임 UI는 MVC의 선택/입력 제어와 MVVM의 표시 상태/명령으로 구분했습니다.
@@ -111,15 +136,6 @@ flowchart TD
 ```
 
 작업 스레드는 유닛·GUI·실시간 맵 객체에 접근하지 않습니다. 경로 요청 및 결과 적용은 메인 스레드에서 이루어집니다. 실제 엔진의 이동/충돌/렌더링은 제거된 상태이므로 통합 테스트는 좌표를 직접 변경하여 경유점 순서와 완료 상태를 검증합니다. 기본 워커 수는 2개이며, 작업 큐는 아직 별도의 용량 제한이나 우선순위를 두지 않습니다.
-
-독립 테스트 실행:
-
-```sh
-g++ -std=c++17 -pthread tests/thread_pool_tests.cpp -o thread_pool_tests
-./thread_pool_tests
-g++ -std=c++17 tests/astar_tests.cpp -o astar_tests
-./astar_tests
-```
 
 ## 외부 참고 코드 및 출처
 
