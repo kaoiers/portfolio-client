@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "game/God_Game.h"
 #include <chrono>
+#include <thread>
 
 int main()
 {
@@ -14,9 +15,12 @@ int main()
         return false;
     }
 
+    constexpr auto frame_interval = std::chrono::milliseconds(16);
+    constexpr int demo_frame_count = 60;
     auto previous = std::chrono::steady_clock::now();
-    while (god_game->isRunning())
+    for (int frame = 0; frame < demo_frame_count && god_game->isRunning(); ++frame)
     {
+        std::this_thread::sleep_until(previous + frame_interval);
         god_game->control();
 
         const auto now = std::chrono::steady_clock::now();
